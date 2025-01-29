@@ -31,12 +31,14 @@ export const initWebcore = (routes: Route[]): void => {
   }
 
   interval.loop('render', () => stage.render(screen.render))
-  document.addEventListener('resize', () => {
+  window.onresize = () => {
     stage.resize()
     screen.resize()
-  })
+  }
 
   screen.mount()
+
+  window.userNavigate = screen.navigate
 }
 
 export const useWebcore = (opts?: WebcoreOpts): Webcore => {

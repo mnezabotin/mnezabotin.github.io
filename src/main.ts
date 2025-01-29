@@ -1,4 +1,4 @@
-import { Opening } from '@/screens'
+import { Opening, Devs } from '@/screens'
 
 import { initWebcore } from '@/webcore'
 
@@ -8,6 +8,10 @@ const routes: Route[] = [
   {
     name: 'opening',
     ctor: Opening
+  },
+  {
+    name: 'devs',
+    ctor: Devs
   }
 ]
 

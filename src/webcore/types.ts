@@ -28,6 +28,11 @@ export type Screen = {
 
 export type Random = (min: number, max: number) => number
 
+export type Point = {
+  x: number
+  y: number
+}
+
 export type WebcoreOpts = {
   seed?: number
 }

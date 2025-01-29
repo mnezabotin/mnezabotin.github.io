@@ -23,7 +23,7 @@ export function Screen(routes: Route[]): Screen {
       instance.resizeEvents.push(event)
     },
     navigate: (name: string) => {
-      window.location.search = `${SCREEN_KEY}=${name}`
+      // window.location.search = `${SCREEN_KEY}=${name}`
       instance.resizeEvents = []
       instance.render = getRender(name)
     },
@@ -31,6 +31,10 @@ export function Screen(routes: Route[]): Screen {
     mount: () => {
       instance.render = getRender()
     }
+  }
+
+  window.onpopstate = () => {
+    instance.render = getRender()
   }
 
   return instance
