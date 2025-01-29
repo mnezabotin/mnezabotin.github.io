@@ -1,26 +1,6 @@
-import type { StageEntity } from '@/webcore'
+import type { Render } from '@/webcore/types'
 
-export function Opening(): StageEntity {
-  const resize = () => {
-
-  }
-
-  const start = () => {
-
-  }
-
-  const stop = () => {
-
-  }
-
-  const render = () => {
-
-  }
-
-  return {
-    resize,
-    start,
-    stop,
-    render,
+export function Opening(): Render {
+  return () => {
   }
 }

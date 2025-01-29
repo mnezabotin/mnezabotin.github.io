@@ -1,6 +1,7 @@
 import { randInt, RandChain } from '@/webcore/random'
 import { Interval } from '@/webcore/interval'
 import { Stage } from '@/webcore/stage'
+import { Screen } from '@/webcore/screen'
 
 import type {
   Route,
@@ -17,15 +18,22 @@ export const initWebcore = (routes: Route[]): void => {
 
   const interval = Interval()
   const stage = Stage()
+  const screen = Screen(routes)
   const randChain = RandChain()
 
-  interval.loop('render', stage.render)
+  interval.loop('render', () => stage.render(screen.render))
+  document.addEventListener('resize', () => {
+    stage.resize()
+    screen.resize()
+  })
 
   webcore = {
+    ctx: stage.ctx,
+    navigate: screen.navigate,
     interval,
     randInt,
     randChain,
-    stage,
+    addResizeEvent: screen.addResizeEvent
   }
 }
 
