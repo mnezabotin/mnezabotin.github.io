@@ -3,12 +3,12 @@ export type Interval = {
   stop: (key: string) => void
 }
 
-export type Render = () => void
+export type Render = Function
 
 export type Stage = {
   ctx: CanvasRenderingContext2D
   render: (draw: Render) => void
-  resize: Render
+  resize: Function
 }
 
 export type Route = {
@@ -20,10 +20,10 @@ export type Route = {
 export type Screen = {
   render: Render
   navigate: (name: string) => void
-  resizeEvents: Render[]
-  resizeEvent: (event: Render) => void
-  resize: Render
-  mount: Render
+  resizeEvents: Function[]
+  resizeEvent: (event: Function) => void
+  resize: Function
+  mount: Function
 }
 
 export type Random = (min: number, max: number) => number

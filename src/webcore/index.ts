@@ -37,8 +37,6 @@ export const initWebcore = (routes: Route[]): void => {
   }
 
   screen.mount()
-
-  window.userNavigate = screen.navigate
 }
 
 export const useWebcore = (opts?: WebcoreOpts): Webcore => {

@@ -19,7 +19,7 @@ export function Screen(routes: Route[]): Screen {
   const instance: Screen = {
     render: () => {},
     resizeEvents: [],
-    resizeEvent: (event: Render) => {
+    resizeEvent: (event: Function) => {
       instance.resizeEvents.push(event)
     },
     navigate: (name: string) => {

@@ -16,21 +16,22 @@ export function Opening(): Render {
   }
   resize()
   resizeEvent(resize)
-  interval.loop('opening', () => {
-    point.x += 10 * dx
-    point.y += 30 * dy
-    if (point.x <= 0 || point.x + w >= innerWidth) {
-      dx *= -1
-    }
-    if (point.y <= 0 || point.y + w >= innerHeight) {
-      dy *= -1
-    }
+  // interval.loop('opening', () => {
+  //   point.x += 2 * dx
+  //   point.y += 3 * dy
+  //   dx *= -1
+  //   dy *= -1
 
-  })
+  // })
   return () => {
+    ctx.save();
+    var dx = Math.random() * 2;
+    var dy = Math.random() * 3;
+    ctx.translate(dx, dy);  
     ctx.beginPath()
     ctx.fillStyle = 'red'
     ctx.rect(point.x, point.y, w, w)
     ctx.fill()
+    ctx.restore();
   }
 }
