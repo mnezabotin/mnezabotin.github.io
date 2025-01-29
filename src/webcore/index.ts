@@ -21,20 +21,22 @@ export const initWebcore = (routes: Route[]): void => {
   const screen = Screen(routes)
   const randChain = RandChain()
 
+  webcore = {
+    ctx: stage.ctx,
+    interval,
+    navigate: screen.navigate,
+    randInt,
+    randChain,
+    resizeEvent: screen.resizeEvent
+  }
+
   interval.loop('render', () => stage.render(screen.render))
   document.addEventListener('resize', () => {
     stage.resize()
     screen.resize()
   })
 
-  webcore = {
-    ctx: stage.ctx,
-    navigate: screen.navigate,
-    interval,
-    randInt,
-    randChain,
-    addResizeEvent: screen.addResizeEvent
-  }
+  screen.mount()
 }
 
 export const useWebcore = (opts?: WebcoreOpts): Webcore => {

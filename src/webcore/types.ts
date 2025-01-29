@@ -21,8 +21,9 @@ export type Screen = {
   render: Render
   navigate: (name: string) => void
   resizeEvents: Render[]
-  addResizeEvent: (event: Render) => void
+  resizeEvent: (event: Render) => void
   resize: Render
+  mount: Render
 }
 
 export type Random = (min: number, max: number) => number
@@ -37,5 +38,5 @@ export type Webcore = {
   navigate: (name: string) => void
   randChain: Random
   randInt: Random
-  addResizeEvent: (event: Render) => void
+  resizeEvent: (event: Render) => void
 }

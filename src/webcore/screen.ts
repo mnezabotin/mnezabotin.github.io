@@ -17,9 +17,9 @@ export function Screen(routes: Route[]): Screen {
   }
 
   const instance: Screen = {
-    render: getRender(),
+    render: () => {},
     resizeEvents: [],
-    addResizeEvent: (event: Render) => {
+    resizeEvent: (event: Render) => {
       instance.resizeEvents.push(event)
     },
     navigate: (name: string) => {
@@ -27,7 +27,10 @@ export function Screen(routes: Route[]): Screen {
       instance.resizeEvents = []
       instance.render = getRender(name)
     },
-    resize: () => instance.resizeEvents.forEach(e => e())
+    resize: () => instance.resizeEvents.forEach(e => e()),
+    mount: () => {
+      instance.render = getRender()
+    }
   }
 
   return instance
