@@ -1,6 +1,6 @@
 import type { Render, Stage } from '@/webcore/types'
 
-export function Stage(): Stage {
+export function useStage(): Stage {
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
 

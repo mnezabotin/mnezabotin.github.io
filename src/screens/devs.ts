@@ -2,7 +2,7 @@ import { useWebcore } from '@/webcore'
 import type { Render } from '@/webcore/types'
 
 export function Devs(): Render {
-  const { ctx, interval, resizeEvent } = useWebcore()
+  const { ctx, loop, addEventResize } = useWebcore()
   const point = { x: 40, y: 100}
   let dx = 1
   let dy = 1
@@ -15,8 +15,8 @@ export function Devs(): Render {
     )
   }
   resize()
-  resizeEvent(resize)
-  interval.loop('devs', () => {
+  addEventResize(resize)
+  loop(() => {
     point.x += 11 * dx
     point.y += 13 * dy
     if (point.x <= 0 || point.x + w >= innerWidth) {

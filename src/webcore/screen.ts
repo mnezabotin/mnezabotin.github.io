@@ -1,8 +1,8 @@
-import type { Route, Screen, Render } from '@/webcore/types'
+import type { Route, Screen } from '@/webcore/types'
 
 const SCREEN_KEY = 'screen'
 
-export function Screen(routes: Route[]): Screen {
+export function useScreen(routes: Route[]): Screen {
   const getRoute = (name?: string): Route | undefined => routes.find(r => r.name === name)
 
   const getRender = (name?: string) => {
@@ -31,10 +31,6 @@ export function Screen(routes: Route[]): Screen {
     mount: () => {
       instance.render = getRender()
     }
-  }
-
-  window.onpopstate = () => {
-    instance.render = getRender()
   }
 
   return instance

@@ -1,7 +1,7 @@
-import { randInt, RandChain } from '@/webcore/random'
-import { Interval } from '@/webcore/interval'
-import { Stage } from '@/webcore/stage'
-import { Screen } from '@/webcore/screen'
+import { useStage } from '@/webcore/stage'
+import { useScreen } from '@/webcore/screen'
+import { useInterval } from '@/webcore/interval'
+import { rand, useRandChain } from '@/webcore/random'
 
 import type {
   Route,
@@ -16,21 +16,33 @@ export const initWebcore = (routes: Route[]): void => {
     throw new Error('Webcore already specified')
   }
 
-  const interval = Interval()
-  const stage = Stage()
-  const screen = Screen(routes)
-  const randChain = RandChain()
+  const stage = useStage()
+
+  const screen = useScreen(routes)
+
+  const { loop, stop, stopAll } = useInterval()
+
+  const randChain = useRandChain()
 
   webcore = {
     ctx: stage.ctx,
-    interval,
-    navigate: screen.navigate,
-    randInt,
+
+    navigate: (name: string) => {
+      stopAll()
+      new Promise(() => screen.navigate(name))
+    },
+
+    loop,
+    loopStop: stop,
+
+    rand,
     randChain,
-    resizeEvent: screen.resizeEvent
+
+    addEventResize: screen.resizeEvent
   }
 
-  interval.loop('render', () => stage.render(screen.render))
+  loop(() => stage.render(screen.render), 'draw')
+
   window.onresize = () => {
     stage.resize()
     screen.resize()
@@ -46,6 +58,6 @@ export const useWebcore = (opts?: WebcoreOpts): Webcore => {
 
   return {
     ...webcore,
-    randChain: opts?.seed ? RandChain(opts?.seed) : webcore.randChain,
+    randChain: opts?.seed ? useRandChain(opts?.seed) : webcore.randChain,
   }
 }

@@ -1,6 +1,7 @@
 export type Interval = {
-  loop: (key: string, callback: () => void) => void
-  stop: (key: string) => void
+  loop: (func: Function, key?: string) => void
+  stop: (key: string | Function) => void
+  stopAll: Function
 }
 
 export type Render = Function
@@ -39,9 +40,14 @@ export type WebcoreOpts = {
 
 export type Webcore = {
   ctx: CanvasRenderingContext2D
-  interval: Interval
+
   navigate: (name: string) => void
+
+  loop: (func: Function, key?: string) => void
+  loopStop: (key: string | Function) => void
+
   randChain: Random
-  randInt: Random
-  resizeEvent: (event: Render) => void
+  rand: Random
+
+  addEventResize: (event: Function) => void
 }

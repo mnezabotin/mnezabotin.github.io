@@ -2,7 +2,7 @@ import { useWebcore } from '@/webcore'
 import type { Render } from '@/webcore/types'
 
 export function Opening(): Render {
-  const { ctx, interval, resizeEvent } = useWebcore()
+  const { ctx, addEventResize, loop } = useWebcore()
   const point = { x: 40, y: 100}
   let dx = 1
   let dy = 1
@@ -15,14 +15,13 @@ export function Opening(): Render {
     )
   }
   resize()
-  resizeEvent(resize)
-  // interval.loop('opening', () => {
-  //   point.x += 2 * dx
-  //   point.y += 3 * dy
-  //   dx *= -1
-  //   dy *= -1
-
-  // })
+  addEventResize(resize)
+  loop(() => {
+    point.x += 2 * dx
+    point.y += 3 * dy
+    dx *= -1
+    dy *= -1
+  })
   return () => {
     ctx.save();
     var dx = Math.random() * 2;
