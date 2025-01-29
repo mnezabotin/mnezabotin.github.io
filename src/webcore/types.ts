@@ -29,9 +29,10 @@ export type Screen = {
 
 export type Random = (min: number, max: number) => number
 
-export type Point = {
-  x: number
-  y: number
+export type Event = {
+  addEventResize: (func: Function) => void
+  onResizeEvents: Function
+  removeAllEvents: Function
 }
 
 export type WebcoreOpts = {

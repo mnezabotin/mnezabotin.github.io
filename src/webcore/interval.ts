@@ -1,6 +1,6 @@
 import type { Interval } from '@/webcore/types'
 
-export function useInterval(): Interval {
+export const useInterval = (): Interval => {
   const animation = requestAnimationFrame || ((func) => setTimeout(func, 1000 / 60))
 
   const keys: string[] = []
