@@ -23,9 +23,49 @@ export const useStage = (): Stage => {
   resize()
   document.body.appendChild(canvas)
 
+  const shade = (color: string, percent: number): string => {
+    color = color.substring(1)
+    const num = parseInt(color, 16),
+      amt = Math.round(2.55 * percent),
+      R = (num >> 16) + amt, 
+      G = (num >> 8 & 0x00FF) + amt,
+      B = (num & 0x0000FF) + amt
+
+    return '#' + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 + (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 + (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1)
+  }
+
+  const shape = (
+    draw: (ctx: CanvasRenderingContext2D) => void,
+    x: number,
+    y: number,
+    w: number,
+    h: number
+  ): Render => {
+    const canvas = document.createElement('canvas')
+    const context = canvas.getContext('2d')
+
+    if (!context) {
+      throw new Error('CanvasRenderingContext2D is null')
+    }
+
+    canvas.width = w * devicePixelRatio
+    canvas.height = h * devicePixelRatio
+    context.scale(devicePixelRatio, devicePixelRatio)
+
+    context.clearRect(0, 0, innerWidth, innerHeight)
+    draw(context)
+
+    return () => {
+      ctx.drawImage(canvas, x, y, w, h)
+    }
+  };
+
   return {
     ctx,
     render,
     resize,
+
+    shade,
+    shape,
   }
 }

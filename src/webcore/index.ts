@@ -12,7 +12,7 @@ import type {
 
 let webcore: Webcore
 
-export const initWebcore = (routes: Route[]): void => {
+export const initWebcore = (routes: Route[]) => {
   if (webcore) {
     throw new Error('Webcore already specified')
   }
@@ -31,8 +31,26 @@ export const initWebcore = (routes: Route[]): void => {
     removeAllEvents
   } = useEvent()
 
+  let cx = innerWidth / 2
+  let cy = innerHeight / 2
+  let m = Math.ceil(
+    Math.sqrt(
+      innerWidth * innerWidth + innerHeight * innerHeight
+    ) / 144
+  )
+
+  const useMeasure = () => ({
+    cx,
+    cy,
+    m,
+  })
+
   webcore = {
     ctx: stage.ctx,
+    shade: stage.shade,
+    shape: stage.shape,
+
+    useMeasure,
 
     navigate: (name: string) => {
       stopAll()
@@ -52,6 +70,14 @@ export const initWebcore = (routes: Route[]): void => {
   loop(() => stage.render(router.render), 'draw')
 
   window.onresize = () => {
+    cx = innerWidth / 2
+    cy = innerHeight / 2
+    m = Math.ceil(
+      Math.sqrt(
+        innerWidth * innerWidth + innerHeight * innerHeight
+      ) / 144
+    )
+
     stage.resize()
     onResizeEvents()
   }

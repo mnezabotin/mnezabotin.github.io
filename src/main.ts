@@ -1,4 +1,4 @@
-import { Opening, Main } from '@/screens'
+import { Opening, Main, Game, Score, Devs } from '@/screens'
 
 import { initWebcore } from '@/webcore'
 
@@ -12,7 +12,19 @@ const routes: Route[] = [
   {
     name: 'main',
     ctor: Main
-  }
+  },
+  {
+    name: 'game',
+    ctor: Game
+  },
+  {
+    name: 'score',
+    ctor: Score
+  },
+  {
+    name: 'devs',
+    ctor: Devs
+  },
 ]
 
 initWebcore(routes)

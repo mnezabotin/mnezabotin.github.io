@@ -10,6 +10,15 @@ export type Stage = {
   ctx: CanvasRenderingContext2D
   render: (draw: Render) => void
   resize: Function
+
+  shade: (color: string, percent: number) => string
+  shape: (
+    draw: (ctx: CanvasRenderingContext2D) => void,
+    x: number,
+    y: number,
+    w: number,
+    h: number
+  ) => Render,
 }
 
 export type Route = {
@@ -38,14 +47,22 @@ export type WebcoreOpts = {
 
 export type Webcore = {
   ctx: CanvasRenderingContext2D
+  shade: Stage['shade']
+  shape: Stage['shape']
 
-  navigate: (name: string) => void
+  useMeasure: () => {
+    cx: number
+    cy: number
+    m: number
+  }
 
-  loop: (func: Function, key?: string) => void
-  loopStop: (key: string | Function) => void
+  navigate: Router['navigate']
+
+  loop: Interval['loop']
+  loopStop: Interval['stop']
 
   randChain: Random
   rand: Random
 
-  addEventResize: (event: Function) => void
+  addEventResize: Event['addEventResize']
 }
