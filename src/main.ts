@@ -1,4 +1,4 @@
-import { Opening, Devs, Main } from '@/screens'
+import { Opening, Main } from '@/screens'
 
 import { initWebcore } from '@/webcore'
 

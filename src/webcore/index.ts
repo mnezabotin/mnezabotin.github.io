@@ -1,5 +1,5 @@
 import { useStage } from '@/webcore/stage'
-import { useScreen } from '@/webcore/screen'
+import { useRouter } from '@/webcore/router'
 import { useInterval } from '@/webcore/interval'
 import { rand, useRandChain } from '@/webcore/random'
 import { useEvent } from '@/webcore/event'
@@ -19,7 +19,7 @@ export const initWebcore = (routes: Route[]): void => {
 
   const stage = useStage()
 
-  const screen = useScreen(routes)
+  const router = useRouter(routes)
 
   const { loop, stop, stopAll } = useInterval()
 
@@ -37,7 +37,7 @@ export const initWebcore = (routes: Route[]): void => {
     navigate: (name: string) => {
       stopAll()
       removeAllEvents()
-      new Promise(() => screen.navigate(name))
+      new Promise(() => router.navigate(name))
     },
 
     loop,
@@ -49,14 +49,14 @@ export const initWebcore = (routes: Route[]): void => {
     addEventResize,
   }
 
-  loop(() => stage.render(screen.render), 'draw')
+  loop(() => stage.render(router.render), 'draw')
 
   window.onresize = () => {
     stage.resize()
     onResizeEvents()
   }
 
-  screen.mount()
+  router.mount()
 }
 
 export const useWebcore = (opts?: WebcoreOpts): Webcore => {

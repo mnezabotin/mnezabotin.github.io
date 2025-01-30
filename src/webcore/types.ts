@@ -18,7 +18,7 @@ export type Route = {
   meta?: object
 }
 
-export type Screen = {
+export type Router = {
   render: Render
   navigate: (name: string) => void
   mount: Function
