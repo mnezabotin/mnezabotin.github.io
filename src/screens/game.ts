@@ -1,6 +1,7 @@
 import type { Render } from '@/webcore/types'
 
-export function Game(): Render {
+export const Game = (): Render => {
   return () => {
+
   }
 }

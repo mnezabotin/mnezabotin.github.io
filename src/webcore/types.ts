@@ -4,7 +4,7 @@ export type Interval = {
   stopAll: Function
 }
 
-export type Render = Function
+export type Render = (ctx?: CanvasRenderingContext2D) => void
 
 export type Stage = {
   ctx: CanvasRenderingContext2D
@@ -12,13 +12,13 @@ export type Stage = {
   resize: Function
 
   shade: (color: string, percent: number) => string
-  shape: (
-    draw: (ctx: CanvasRenderingContext2D) => void,
-    x: number,
-    y: number,
-    w: number,
-    h: number
-  ) => Render,
+  // shape: (
+  //   draw: (ctx: CanvasRenderingContext2D) => void,
+  //   x: number,
+  //   y: number,
+  //   w: number,
+  //   h?: number
+  // ) => Render,
 }
 
 export type Route = {
@@ -48,11 +48,12 @@ export type WebcoreOpts = {
 export type Webcore = {
   ctx: CanvasRenderingContext2D
   shade: Stage['shade']
-  shape: Stage['shape']
+  // shape: Stage['shape']
 
   useMeasure: () => {
     cx: number
     cy: number
+    s: number
     m: number
   }
 
@@ -65,4 +66,6 @@ export type Webcore = {
   rand: Random
 
   addEventResize: Event['addEventResize']
+
+  font: string
 }

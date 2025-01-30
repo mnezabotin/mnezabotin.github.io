@@ -1,7 +1,7 @@
 import { useWebcore } from '@/webcore'
 import type { Render } from '@/webcore/types'
 
-export function Devs(): Render {
+export const Devs = (): Render => {
   const { ctx, addEventResize, loop } = useWebcore()
   const point = { x: 40, y: 100}
   let dx = 1
@@ -22,6 +22,7 @@ export function Devs(): Render {
     dx *= -1
     dy *= -1
   })
+
   return () => {
     ctx.save();
     var dx = Math.random() * 2;

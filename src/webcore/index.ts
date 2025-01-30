@@ -33,22 +33,20 @@ export const initWebcore = (routes: Route[]) => {
 
   let cx = innerWidth / 2
   let cy = innerHeight / 2
+  let s = innerWidth < innerHeight ?  innerWidth : innerHeight
   let m = Math.ceil(
     Math.sqrt(
       innerWidth * innerWidth + innerHeight * innerHeight
     ) / 144
   )
+  
 
-  const useMeasure = () => ({
-    cx,
-    cy,
-    m,
-  })
+  const useMeasure = () => ({ cx, cy, s, m })
 
   webcore = {
     ctx: stage.ctx,
     shade: stage.shade,
-    shape: stage.shape,
+    // shape: stage.shape,
 
     useMeasure,
 
@@ -65,6 +63,8 @@ export const initWebcore = (routes: Route[]) => {
     randChain,
 
     addEventResize,
+
+    font: 'Tijuf'
   }
 
   loop(() => stage.render(router.render), 'draw')
@@ -72,6 +72,7 @@ export const initWebcore = (routes: Route[]) => {
   window.onresize = () => {
     cx = innerWidth / 2
     cy = innerHeight / 2
+    s = innerWidth < innerHeight ?  innerWidth : innerHeight
     m = Math.ceil(
       Math.sqrt(
         innerWidth * innerWidth + innerHeight * innerHeight

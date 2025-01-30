@@ -34,31 +34,31 @@ export const useStage = (): Stage => {
     return '#' + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 + (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 + (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1)
   }
 
-  const shape = (
-    draw: (ctx: CanvasRenderingContext2D) => void,
-    x: number,
-    y: number,
-    w: number,
-    h: number
-  ): Render => {
-    const canvas = document.createElement('canvas')
-    const context = canvas.getContext('2d')
+  // const shape = (
+  //   draw: (ctx: CanvasRenderingContext2D) => void,
+  //   x: number,
+  //   y: number,
+  //   w: number,
+  //   h = w
+  // ): Render => {
+  //   const canvas = document.createElement('canvas')
+  //   const context = canvas.getContext('2d')
 
-    if (!context) {
-      throw new Error('CanvasRenderingContext2D is null')
-    }
+  //   if (!context) {
+  //     throw new Error('CanvasRenderingContext2D is null')
+  //   }
 
-    canvas.width = w * devicePixelRatio
-    canvas.height = h * devicePixelRatio
-    context.scale(devicePixelRatio, devicePixelRatio)
+  //   canvas.width = w * devicePixelRatio
+  //   canvas.height = h * devicePixelRatio
+  //   context.scale(devicePixelRatio, devicePixelRatio)
 
-    context.clearRect(0, 0, innerWidth, innerHeight)
-    draw(context)
+  //   context.clearRect(0, 0, innerWidth, innerHeight)
+  //   draw(context)
 
-    return () => {
-      ctx.drawImage(canvas, x, y, w, h)
-    }
-  };
+  //   return () => {
+  //     ctx.drawImage(canvas, x, y, w, h)
+  //   }
+  // }
 
   return {
     ctx,
@@ -66,6 +66,6 @@ export const useStage = (): Stage => {
     resize,
 
     shade,
-    shape,
+    // shape,
   }
 }

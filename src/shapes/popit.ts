@@ -1,25 +1,27 @@
 import { useWebcore } from '@/webcore'
-import { Render } from '@/webcore/types'
+import type { Render } from '@/webcore/types'
 
-type Props = {
-  x: number
-  y: number
+export type Props = {
+  x?: number
+  y?: number
   r: number
   c: string
   p?: boolean
 }
 
-export const Popit = ({
-  x,
-  y,
-  r,
-  c,
-  p,
-}: Props): Render => {
-  const { shape, shade } = useWebcore()
+export const Popit = (props: Props): Render => {
+  const { shade, ctx: mainCtx } = useWebcore()
 
-  return shape((ctx) => {
-    const gradient = ctx.createRadialGradient(r, r, r, r, r, r / 5)
+  return (ctx = mainCtx) => {
+    const {
+      r,
+      c,
+      x = r,
+      y = r,
+      p,
+    } = props
+
+    const gradient = ctx.createRadialGradient(x, y, r, x, y, r / 5)
 
     gradient.addColorStop(0, shade(c, 0))
     gradient.addColorStop(0.01, shade(c, 0))
@@ -46,14 +48,14 @@ export const Popit = ({
 
     ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'
     ctx.beginPath()
-    ctx.arc(r, r, r, 0, 2 * Math.PI)
+    ctx.arc(x, y, r, 0, 2 * Math.PI)
     ctx.closePath()
     ctx.fill()
 
     ctx.fillStyle = gradient
     ctx.beginPath()
-    ctx.arc(r, r, r * 0.99, 0, 2 * Math.PI)
+    ctx.arc(x, y, r * 0.99, 0, 2 * Math.PI)
     ctx.closePath()
     ctx.fill()
-  }, x - r, y - r, 2 * r, 2 * r)
+  }
 }

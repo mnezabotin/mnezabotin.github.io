@@ -1,6 +1,6 @@
 import type { Render } from '@/webcore/types'
 
-export function Main(): Render {
+export const Main = (): Render => {
   return () => {
 
   }
