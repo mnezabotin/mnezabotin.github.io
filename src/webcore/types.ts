@@ -12,6 +12,7 @@ export type Stage = {
   resize: Function
 
   shade: (color: string, percent: number) => string
+  rotate: (draw: Render, x: number, y: number, angle: number) => void
   // shape: (
   //   draw: (ctx: CanvasRenderingContext2D) => void,
   //   x: number,
@@ -48,6 +49,7 @@ export type WebcoreOpts = {
 export type Webcore = {
   ctx: CanvasRenderingContext2D
   shade: Stage['shade']
+  rotate: Stage['rotate']
   // shape: Stage['shape']
 
   useMeasure: () => {

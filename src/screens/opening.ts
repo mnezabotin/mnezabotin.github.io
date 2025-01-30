@@ -1,4 +1,4 @@
-import { Popit } from '@/shapes/popit'
+import { Popit, type Props as PopitProps } from '@/shapes/popit'
 import { Img } from '@/shapes/img'
 import { TextCircle } from '@/shapes/textCircle'
 import { useWebcore } from '@/webcore'
@@ -6,30 +6,36 @@ import type { Render } from '@/webcore/types'
 
 export const Opening = (): Render => {
   const {
-    ctx,
+    rotate,
     loop,
+    navigate,
     addEventResize,
     useMeasure,
   } = useWebcore()
+
+  let pptProps: PopitProps
 
   let popit: Render
   let sloth: Render
   let nezabotin: Render
   let production: Render
 
-  let rotate = 0
+  let tic = 0
+  let rAnglText = 0
 
   addEventResize(() => {
     const { cx, cy, s } = useMeasure()
 
-    const r = Math.round(s * 0.20)
+    const r = Math.round(s * 0.2)
 
-    popit = Popit({
+    pptProps = {
       c: '#ff5722',
       x: cx,
       y: cy,
       r,
-    })
+      p: false
+    }
+    popit = Popit(pptProps)
 
     sloth = Img({
       x: cx - r + Math.round(r * 0.35),
@@ -56,21 +62,34 @@ export const Opening = (): Render => {
   })
 
   loop(() => {
-    rotate += 0.01 
+    tic += 0.01
+    rAnglText = tic > 1 ? 1 : tic
+    if (tic > 1.4) {
+      pptProps.p = true
+    }
+    if (tic > 2.2) {
+      pptProps.c = '#f86a9a'
+    }
+
+    if (tic > 2.6) {
+      navigate('devs')
+    }
   })
 
   return () => {
     const { cx, cy } = useMeasure()
 
     popit()
-    sloth()
     
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.rotate(Math.PI * rotate);
-    ctx.translate(-cx, -cy)
-    nezabotin()
-    production()
-    ctx.restore()
+    if (tic <= 1.4) {
+      sloth()
+    }
+
+    if (tic <= 1.8) {
+      rotate(() => {
+        nezabotin()
+        production()
+      }, cx, cy, rAnglText)
+    }
   }
 }

@@ -34,6 +34,17 @@ export const useStage = (): Stage => {
     return '#' + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 + (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 + (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1)
   }
 
+  const rotate = (draw: Render, x: number, y: number, angle: number) => {
+    ctx.save();
+    ctx.translate(x, y)
+    ctx.rotate(Math.PI * angle)
+    ctx.translate(-x, -y)
+
+    draw()
+
+    ctx.restore()
+  }
+
   // const shape = (
   //   draw: (ctx: CanvasRenderingContext2D) => void,
   //   x: number,
@@ -66,6 +77,7 @@ export const useStage = (): Stage => {
     resize,
 
     shade,
+    rotate,
     // shape,
   }
 }
