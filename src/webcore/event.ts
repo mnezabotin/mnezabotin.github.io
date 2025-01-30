@@ -4,6 +4,7 @@ export const useEvent = (): Event => {
   const resizeEvents: Function[] = []
 
   const addEventResize = (func: Function) => {
+    func()
     resizeEvents.push(func)
   }
 

@@ -21,9 +21,6 @@ export type Route = {
 export type Screen = {
   render: Render
   navigate: (name: string) => void
-  resizeEvents: Function[]
-  resizeEvent: (event: Function) => void
-  resize: Function
   mount: Function
 }
 

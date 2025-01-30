@@ -14,7 +14,7 @@ export const useInterval = (): Interval => {
       Object.entries(loops).find(([_, f]) => f === func) ||
       (key && loops[key])
     ) {
-      throw new Error(`Loop already specified`)
+      throw new Error(`Loop${key ? ' ' + key : ''} already specified`)
     }
 
     if (key) {
