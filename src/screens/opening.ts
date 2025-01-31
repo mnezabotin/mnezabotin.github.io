@@ -65,7 +65,7 @@ export const Opening = (): Render => {
   loop(() => {
     tic += 0.01
     rAnglText = tic >= 1 ? 1 : tic
-    if (tic >= 1.4) {
+    if (tic >= 1.8) {
       pptProps.p = true
     }
     if (tic >= 2.2) {
@@ -78,25 +78,12 @@ export const Opening = (): Render => {
   })
 
   addEventClick(() => {
-    if (tic < 1) {
-      tic = 1
-      return
-    }
-
-    if (tic < 1.4) {
-      tic = 1.4
-      return
-    }
-
-    if (tic < 2.2) {
-      tic = 2.2
-      return
-    }
-
-    if (tic < 2.6) {
-      tic = 2.6
-      return
-    }
+    [1, 1.4, 1.8, 2.2, 2.6].some((num) => {
+      if (tic < num) {
+        tic = num
+        return true
+      }
+    })
   })
 
   return () => {
@@ -104,11 +91,11 @@ export const Opening = (): Render => {
 
     popit()
     
-    if (tic < 1.4) {
+    if (tic < 1.8) {
       sloth()
     }
 
-    if (tic < 1.8) {
+    if (tic < 1.4) {
       rotate(() => {
         nezabotin()
         production()
