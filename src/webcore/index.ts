@@ -28,6 +28,10 @@ export const initWebcore = (routes: Route[]) => {
   const {
     addEventResize,
     onResizeEvents,
+
+    addEventClick,
+    onClickEvents,
+
     removeAllEvents
   } = useEvent()
 
@@ -39,7 +43,6 @@ export const initWebcore = (routes: Route[]) => {
       innerWidth * innerWidth + innerHeight * innerHeight
     ) / 144
   )
-  
 
   const useMeasure = () => ({ cx, cy, s, m })
 
@@ -64,6 +67,7 @@ export const initWebcore = (routes: Route[]) => {
     randChain,
 
     addEventResize,
+    addEventClick,
 
     font: 'Tijuf'
   }
@@ -82,6 +86,17 @@ export const initWebcore = (routes: Route[]) => {
 
     stage.resize()
     onResizeEvents()
+  }
+
+  document.ontouchstart = (e: TouchEvent) => {
+    const touches = e.touches || []
+    for (const t of touches) {
+      onClickEvents(t.clientX, t.clientY)
+    }
+  }
+
+  document.onmousedown = (e: MouseEvent) => {
+    onClickEvents(e.clientX, e.clientY)
   }
 
   router.mount()

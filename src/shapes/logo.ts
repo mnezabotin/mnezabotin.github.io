@@ -5,6 +5,6 @@ export const Logo = (): Render => {
   const { ctx: mainCtx } = useWebcore()
 
   return (ctx = mainCtx) => {
-
+    ctx.arc(0, 0, 0, 0, 0)
   }
 }

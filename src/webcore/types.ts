@@ -36,9 +36,15 @@ export type Router = {
 
 export type Random = (min: number, max: number) => number
 
+type AddEvent = (func: Function) => void
+
 export type Event = {
-  addEventResize: (func: Function) => void
+  addEventResize: AddEvent
   onResizeEvents: Function
+
+  addEventClick: AddEvent
+  onClickEvents: (x: number, y: number) => void
+
   removeAllEvents: Function
 }
 
@@ -68,6 +74,7 @@ export type Webcore = {
   rand: Random
 
   addEventResize: Event['addEventResize']
+  addEventClick: Event['addEventClick']
 
   font: string
 }
