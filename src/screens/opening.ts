@@ -21,7 +21,7 @@ export const Opening = (): Render => {
   let nezabotin: Render
   let production: Render
 
-  let tic = 0
+  let tic = -0.2
   let rAnglText = 0
 
   addEventResize(() => {
