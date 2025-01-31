@@ -36,13 +36,11 @@ export type Router = {
 
 export type Random = (min: number, max: number) => number
 
-type AddEvent = (func: Function) => void
-
 export type Event = {
-  addEventResize: AddEvent
+  addEventResize: (func: Function) => void
   onResizeEvents: Function
 
-  addEventClick: AddEvent
+  addEventClick: (func: (x?: number, y?: number) => void) => void
   onClickEvents: (x: number, y: number) => void
 
   removeAllEvents: Function

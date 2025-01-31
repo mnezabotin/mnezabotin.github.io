@@ -6,11 +6,12 @@ import type { Render } from '@/webcore/types'
 
 export const Opening = (): Render => {
   const {
-    rotate,
     loop,
+    rotate,
     navigate,
-    addEventResize,
     useMeasure,
+    addEventClick,
+    addEventResize,
   } = useWebcore()
 
   let pptProps: PopitProps
@@ -63,16 +64,38 @@ export const Opening = (): Render => {
 
   loop(() => {
     tic += 0.01
-    rAnglText = tic > 1 ? 1 : tic
-    if (tic > 1.4) {
+    rAnglText = tic >= 1 ? 1 : tic
+    if (tic >= 1.4) {
       pptProps.p = true
     }
-    if (tic > 2.2) {
+    if (tic >= 2.2) {
       pptProps.c = '#f86a9a'
     }
 
-    if (tic > 2.6) {
-      navigate('devs')
+    if (tic >= 2.6) {
+      navigate('opening')
+    }
+  })
+
+  addEventClick(() => {
+    if (tic < 1) {
+      tic = 1
+      return
+    }
+
+    if (tic < 1.4) {
+      tic = 1.4
+      return
+    }
+
+    if (tic < 2.2) {
+      tic = 2.2
+      return
+    }
+
+    if (tic < 2.6) {
+      tic = 2.6
+      return
     }
   })
 
@@ -81,11 +104,11 @@ export const Opening = (): Render => {
 
     popit()
     
-    if (tic <= 1.4) {
+    if (tic < 1.4) {
       sloth()
     }
 
-    if (tic <= 1.8) {
+    if (tic < 1.8) {
       rotate(() => {
         nezabotin()
         production()
