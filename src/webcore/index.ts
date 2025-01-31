@@ -50,7 +50,7 @@ export const initWebcore = (routes: Route[]) => {
     ctx: stage.ctx,
     shade: stage.shade,
     rotate: stage.rotate,
-    // shape: stage.shape,
+    shape: stage.shape,
 
     useMeasure,
 

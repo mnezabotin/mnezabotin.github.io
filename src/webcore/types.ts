@@ -6,6 +6,21 @@ export type Interval = {
 
 export type Render = (ctx?: CanvasRenderingContext2D) => void
 
+export type ShapeProps = {
+  draw: Render
+  x: number
+  y: number
+  w: number
+  h?: number
+  img?: HTMLCanvasElement
+}
+
+export type Shape = {
+  render: Render
+  update: Render
+  img: HTMLCanvasElement
+}
+
 export type Stage = {
   ctx: CanvasRenderingContext2D
   render: (draw: Render) => void
@@ -13,13 +28,7 @@ export type Stage = {
 
   shade: (color: string, percent: number) => string
   rotate: (draw: Render, x: number, y: number, angle: number) => void
-  // shape: (
-  //   draw: (ctx: CanvasRenderingContext2D) => void,
-  //   x: number,
-  //   y: number,
-  //   w: number,
-  //   h?: number
-  // ) => Render,
+  shape: (props: ShapeProps) => Shape
 }
 
 export type Route = {
@@ -54,7 +63,7 @@ export type Webcore = {
   ctx: CanvasRenderingContext2D
   shade: Stage['shade']
   rotate: Stage['rotate']
-  // shape: Stage['shape']
+  shape: Stage['shape']
 
   useMeasure: () => {
     cx: number

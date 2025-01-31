@@ -1,4 +1,4 @@
-import type { Render, Stage } from '@/webcore/types'
+import type { Render, Stage, ShapeProps, Shape } from '@/webcore/types'
 
 export const useStage = (): Stage => {
   const canvas = document.createElement('canvas')
@@ -45,39 +45,47 @@ export const useStage = (): Stage => {
     ctx.restore()
   }
 
-  // const shape = (
-  //   draw: (ctx: CanvasRenderingContext2D) => void,
-  //   x: number,
-  //   y: number,
-  //   w: number,
-  //   h = w
-  // ): Render => {
-  //   const canvas = document.createElement('canvas')
-  //   const context = canvas.getContext('2d')
+  const shape = ({
+    draw,
+    x,
+    y,
+    w,
+    h = w,
+    img,
+  }: ShapeProps): Shape => {
+    img = img || document.createElement('canvas')
+    const context = img.getContext('2d')
 
-  //   if (!context) {
-  //     throw new Error('CanvasRenderingContext2D is null')
-  //   }
+    if (!context) {
+      throw new Error('CanvasRenderingContext2D is null')
+    }
 
-  //   canvas.width = w * devicePixelRatio
-  //   canvas.height = h * devicePixelRatio
-  //   context.scale(devicePixelRatio, devicePixelRatio)
+    const update = () => {
+      img.width = w * devicePixelRatio
+      img.height = h * devicePixelRatio
+      context.scale(devicePixelRatio, devicePixelRatio)
+      context.clearRect(0, 0, innerWidth, innerHeight)
 
-  //   context.clearRect(0, 0, innerWidth, innerHeight)
-  //   draw(context)
+      draw(context)
+    }
+    update()
 
-  //   return () => {
-  //     ctx.drawImage(canvas, x, y, w, h)
-  //   }
-  // }
+    const render = () => ctx.drawImage(img, x, y, w, h)
+
+    return {
+      img,
+      update,
+      render,
+    }
+  }
 
   return {
     ctx,
     render,
     resize,
 
-    shade,
     rotate,
-    // shape,
+    shade,
+    shape,
   }
 }
