@@ -73,12 +73,12 @@ export const Opening = (): Render => {
     }
 
     if (tic >= 2.6) {
-      navigate('opening')
+      navigate('main')
     }
   })
 
   addEventClick(() => {
-    [1, 1.4, 1.8, 2.2, 2.6].some((num) => {
+    [1.4, 1.8, 2.2, 2.6].some((num) => {
       if (tic < num) {
         tic = num
         return true

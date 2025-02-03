@@ -4,8 +4,8 @@ import type { Render } from '@/webcore/types'
 export type Props = {
   x?: number
   y?: number
-  r: number
-  c: string
+  r?: number
+  c?: string
   p?: boolean
 }
 
@@ -14,8 +14,8 @@ export const Popit = (props: Props): Render => {
 
   return (ctx = mainCtx) => {
     const {
-      r,
-      c,
+      r = 0,
+      c = '#fff',
       x = r,
       y = r,
       p,

@@ -1,6 +1,7 @@
 import { useStage } from '@/webcore/stage'
 import { useRouter } from '@/webcore/router'
 import { useInterval } from '@/webcore/interval'
+import { useTimer } from '@/webcore/timer'
 import { rand, useRandChain } from '@/webcore/random'
 import { useEvent } from '@/webcore/event'
 
@@ -53,6 +54,7 @@ export const initWebcore = (routes: Route[]) => {
     shape: stage.shape,
 
     useMeasure,
+    useTimer,
 
     navigate: (name: string) => {
       stopAll()

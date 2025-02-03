@@ -1,0 +1,30 @@
+import { Timer } from '@/webcore/types'
+
+export const useTimer = (callback: Function, delay: number): Timer => {
+  let start: Date = new Date()
+  let remaining = delay
+  let id: number = setTimeout(callback, remaining)
+
+  const pause = () => {
+    clearTimeout(id)
+    const now: any  = new Date()
+    const strt : any = start
+    remaining -= now - strt
+  }
+
+  const resume = () => {
+    start = new Date()
+    clearTimeout(id)
+    id = setTimeout(callback, remaining)
+  }
+
+  const stop = () => {
+    clearTimeout(id)
+  }
+
+  return {
+    pause,
+    resume,
+    stop,
+  }
+}

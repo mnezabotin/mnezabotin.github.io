@@ -4,6 +4,12 @@ export type Interval = {
   stopAll: Function
 }
 
+export type Timer = {
+  resume: Function
+  pause: Function
+  stop: Function
+}
+
 export type Render = (ctx?: CanvasRenderingContext2D) => void
 
 export type ShapeProps = {
@@ -71,6 +77,7 @@ export type Webcore = {
     s: number
     m: number
   }
+  useTimer: (callback: Function, delay: number) => Timer
 
   navigate: Router['navigate']
 
