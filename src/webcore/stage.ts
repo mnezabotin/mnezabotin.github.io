@@ -79,6 +79,8 @@ export const useStage = (): Stage => {
     }
   }
 
+  const setBackground = (color: string) => document.body.style.background = color
+
   return {
     ctx,
     render,
@@ -87,5 +89,6 @@ export const useStage = (): Stage => {
     rotate,
     shade,
     shape,
+    setBackground,
   }
 }

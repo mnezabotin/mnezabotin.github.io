@@ -35,6 +35,7 @@ export type Stage = {
   shade: (color: string, percent: number) => string
   rotate: (draw: Render, x: number, y: number, angle: number) => void
   shape: (props: ShapeProps) => Shape
+  setBackground: (color: string) => void
 }
 
 export type Route = {
@@ -70,6 +71,7 @@ export type Webcore = {
   shade: Stage['shade']
   rotate: Stage['rotate']
   shape: Stage['shape']
+  setBackground: Stage['setBackground']
 
   useMeasure: () => {
     cx: number
