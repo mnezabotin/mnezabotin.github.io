@@ -12,6 +12,7 @@ export const Opening = (): Render => {
     useMeasure,
     addEventClick,
     addEventResize,
+    setBackground,
   } = useWebcore()
 
   let pptProps: PopitProps
@@ -74,6 +75,7 @@ export const Opening = (): Render => {
 
     if (tic >= 2.6) {
       navigate('main')
+      setBackground('#00dcfe')
     }
   })
 

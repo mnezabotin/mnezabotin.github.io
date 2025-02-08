@@ -1,3 +1,4 @@
+import { Play } from '@/shapes/play'
 import { Popit, type Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import type { Render } from '@/webcore/types'
@@ -11,12 +12,16 @@ export const Main = (): Render => {
     useTimer,
     // addEventClick,
     addEventResize,
+    setBackground,
   } = useWebcore()
+
+  setBackground('#00dcfe')
 
   let pptMainProps: PopitProps = { c: '#f86a9a', p: true }
 
   let popitMain: Render
   let popitPlay: Render
+  let play: Render
 
   addEventResize(() => {
     const { cx, cy, s, m } = useMeasure()
@@ -31,11 +36,23 @@ export const Main = (): Render => {
     }
     popitMain = Popit(pptMainProps)
 
+    const playX = cx + r + m
+    const playY = cy + r + m
+    const playR = Math.round(r * 0.4)
+    const playC = '#bef181'
+
     popitPlay = Popit({
-      c: '#bef181',
-      x: cx + r + m,
-      y: cy + r + m,
-      r: Math.round(r * 0.4),
+      c: playC,
+      x: playX,
+      y: playY,
+      r: playR,
+    })
+
+    play = Play({
+      x: playX,
+      y: playY,
+      r: playR,
+      c: playC,
     })
   })
 
@@ -44,5 +61,6 @@ export const Main = (): Render => {
   return () => {
     popitMain()
     popitPlay()
+    play()
   }
 }

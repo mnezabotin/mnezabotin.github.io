@@ -15,7 +15,7 @@ export const Popit = (props: Props): Render => {
   return (ctx = mainCtx) => {
     const {
       r = 0,
-      c = '#fff',
+      c = '#ffffff',
       x = r,
       y = r,
       p,
@@ -46,15 +46,15 @@ export const Popit = (props: Props): Render => {
       gradient.addColorStop(1, shade(c, 10))
     }
 
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'
-    ctx.beginPath()
-    ctx.arc(x, y, r, 0, 2 * Math.PI)
-    ctx.closePath()
-    ctx.fill()
+    // ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'
+    // ctx.beginPath()
+    // ctx.arc(x, y, r, 0, 2 * Math.PI)
+    // ctx.closePath()
+    // ctx.fill()
 
     ctx.fillStyle = gradient
     ctx.beginPath()
-    ctx.arc(x, y, r * 0.99, 0, 2 * Math.PI)
+    ctx.arc(x, y, r, 0, 2 * Math.PI)
     ctx.closePath()
     ctx.fill()
   }

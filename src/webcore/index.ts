@@ -48,6 +48,8 @@ export const initWebcore = (routes: Route[]) => {
   const useMeasure = () => ({ cx, cy, s, m })
 
   webcore = {
+    font: 'Tijuf',
+
     ctx: stage.ctx,
     shade: stage.shade,
     rotate: stage.rotate,
@@ -58,6 +60,10 @@ export const initWebcore = (routes: Route[]) => {
     useTimer,
 
     navigate: (name: string) => {
+      if (!routes.some(r => r.name === name)) {
+        throw new Error(`Screen ${name} not specified`)
+      }
+
       stopAll()
       removeAllEvents()
       new Promise(() => router.navigate(name))
@@ -71,8 +77,6 @@ export const initWebcore = (routes: Route[]) => {
 
     addEventResize,
     addEventClick,
-
-    font: 'Tijuf'
   }
 
   loop(() => stage.render(router.render), 'draw')
