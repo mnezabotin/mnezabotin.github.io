@@ -14,8 +14,8 @@ export const usePlay = (): Render => {
 
     const r = Math.round(s * 0.2)
 
-    const playX = cx + r + m
-    const playY = cy + r + m
+    const playX = cx + r + 4 * m
+    const playY = cy + r - m
     const playR = Math.round(r * 0.4)
     const playC = '#bef181'
 
