@@ -7,7 +7,10 @@ export const usePlay = (): Render => {
   const {
     addEventResize,
     useMeasure,
-    useTimer
+    useTimer,
+    addEventClick,
+    intersect,
+    navigate,
   } = useWebcore()
 
   let props: PopitProps
@@ -34,6 +37,15 @@ export const usePlay = (): Render => {
 
   useTimer(() => {
     props.p = false
+  })
+
+  addEventClick((x, y) => {
+    if (intersect({ x, y }, props)) {
+      props.p = true
+      useTimer(() => {
+        navigate('game')
+      })
+    }
   })
 
   return () => {

@@ -4,11 +4,13 @@ import { useInterval } from '@/webcore/interval'
 import { useTimer } from '@/webcore/timer'
 import { rand, useRandChain } from '@/webcore/random'
 import { useEvent } from '@/webcore/event'
+import { intersect } from '@/webcore/intersect'
 
 import type {
   Route,
   Webcore,
 } from '@/webcore/types'
+
 
 let webcore: Webcore
 
@@ -54,7 +56,6 @@ export const initWebcore = (routes: Route[]) => {
     setBackground: stage.setBackground,
 
     useMeasure,
-    useTimer,
 
     navigate: (name: string) => {
       if (!routes.some(r => r.name === name)) {
@@ -68,9 +69,12 @@ export const initWebcore = (routes: Route[]) => {
 
     loop,
     loopStop: stop,
+    useTimer,
 
     rand,
     useRandChain,
+
+    intersect,
 
     addEventResize,
     addEventClick,

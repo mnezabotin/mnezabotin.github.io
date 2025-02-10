@@ -21,6 +21,12 @@ export type ShapeProps = {
   img?: HTMLCanvasElement
 }
 
+export type Point = {
+  x?: number
+  y?: number
+  r?: number
+}
+
 export type Shape = {
   render: Render
   update: Render
@@ -56,7 +62,7 @@ export type Event = {
   addEventResize: (func: Function) => void
   onResizeEvents: Function
 
-  addEventClick: (func: (x?: number, y?: number) => void) => void
+  addEventClick: (func: (x: number, y: number) => void) => void
   onClickEvents: (x: number, y: number) => void
 
   removeAllEvents: Function
@@ -75,15 +81,17 @@ export type Webcore = {
     s: number
     m: number
   }
-  useTimer: (callback: Function, delay?: number) => Timer
 
   navigate: Router['navigate']
 
   loop: Interval['loop']
   loopStop: Interval['stop']
+  useTimer: (callback: Function, delay?: number) => Timer
 
-  useRandChain: (seed?: number) => Random
   rand: Random
+  useRandChain: (seed?: number) => Random
+
+  intersect: (a: Point, b: Point) => boolean
 
   addEventResize: Event['addEventResize']
   addEventClick: Event['addEventClick']

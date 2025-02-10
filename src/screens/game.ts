@@ -1,7 +1,10 @@
+import { usePopits } from '@/hooks'
 import type { Render } from '@/webcore/types'
 
 export const Game = (): Render => {
-  return () => {
+  const popits = usePopits()
 
+  return () => {
+    popits()
   }
 }

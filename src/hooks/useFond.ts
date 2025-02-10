@@ -10,8 +10,8 @@ export const useFond = (): Render => {
     useTimer
   } = useWebcore()
 
-  let popits: Render[] = []
   let pptProps: PopitProps[] = []
+  let popits: Render[] = []
 
   addEventResize(() => {
     const { cx, cy, s, m } = useMeasure()
