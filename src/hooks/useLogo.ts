@@ -1,4 +1,5 @@
 import { Popit, type Props as PopitProps } from '@/shapes/popit'
+import { Text } from '@/shapes/text'
 import { useWebcore } from '@/webcore'
 import { Render } from '@/webcore/types'
 
@@ -7,22 +8,48 @@ export const useLogo = (): Render => {
 
   let pptProps: PopitProps = { c: '#f86a9a', p: true }
   let logo: Render
+  let yola: Render
+  let popit: Render
 
   addEventResize(() => {
     const { cx, cy, s } = useMeasure()
+
+    const r = Math.round(s * 0.2)
 
     pptProps = {
       ...pptProps,
       x: cx,
       y: cy,
-      r: Math.round(s * 0.2),
+      r,
     }
     logo = Popit(pptProps)
+
+    yola = Text({
+      text: 'Yola',
+      c: '#f1f1f1',
+      x: cx,
+      y: cy - r + Math.round(r * 0.9),
+      fs: Math.round(r / 2.6),
+      mw: r * 2,
+    })
+
+    popit = Text({
+      text: 'PopiT',
+      c: '#ffeb3b',
+      x: cx,
+      y: cy - r + Math.round(r * 1.3),
+      fs: Math.round(r / 2.3),
+      mw: r * 2,
+    })
   })
 
   useTimer(() => pptProps.p = false, 400)
 
   return () => {
     logo()
+    if (!pptProps.p) {
+      yola()
+      popit()
+    }
   }
 }

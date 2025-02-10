@@ -22,24 +22,23 @@ export const useRandChain = (seed = Math.floor(Math.random() * MAX_INT)): Random
     return num
   }
 
-  const nextRand = (min: number, max: number): number => {
+  const nextRand = (min: number, max?: number): number => {
+    if (max === undefined) {
+      max = min
+      min = 0
+    }
+
     return Math.floor(nextFloat() * (max - min + 1)) + min
   }
 
   return nextRand
 }
 
-export const rand = (min?: number, max?: number): number => {
-  if (min !== undefined && max !== undefined) {
-    return Math.floor(Math.random() * (max - min + 1)) + min
-  }
-
-  if (min !== undefined && max === undefined) {
+export const rand = (min: number, max?: number): number => {
+  if (max === undefined) {
     max = min
     min = 0
-
-    return Math.floor(Math.random() * (max - min + 1)) + min
   }
 
-  return Math.random()
+  return Math.floor(Math.random() * (max - min + 1)) + min
 }

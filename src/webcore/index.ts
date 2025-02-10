@@ -8,7 +8,6 @@ import { useEvent } from '@/webcore/event'
 import type {
   Route,
   Webcore,
-  WebcoreOpts,
 } from '@/webcore/types'
 
 let webcore: Webcore
@@ -23,8 +22,6 @@ export const initWebcore = (routes: Route[]) => {
   const router = useRouter(routes)
 
   const { loop, stop, stopAll } = useInterval()
-
-  const randChain = useRandChain()
 
   const {
     addEventResize,
@@ -73,7 +70,7 @@ export const initWebcore = (routes: Route[]) => {
     loopStop: stop,
 
     rand,
-    randChain,
+    useRandChain,
 
     addEventResize,
     addEventClick,
@@ -109,13 +106,12 @@ export const initWebcore = (routes: Route[]) => {
   router.mount()
 }
 
-export const useWebcore = (opts?: WebcoreOpts): Webcore => {
+export const useWebcore = (): Webcore => {
   if (!webcore) {
     throw new Error('Webcore not specified')
   }
 
   return {
     ...webcore,
-    randChain: opts?.seed ? useRandChain(opts?.seed) : webcore.randChain,
   }
 }

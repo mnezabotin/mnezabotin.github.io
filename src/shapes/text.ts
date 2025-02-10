@@ -3,15 +3,15 @@ import { Render } from '@/webcore/types'
 
 export type Props = {
   text: string
+  c: string
   x: number
   y: number
-  r: number
-  fs?: number
-  c: string
   a?: CanvasTextAlign
+  fs: number
+  mw?: number
 }
 
-export const TextCircle = (props: Props): Render => {
+export const Text = (props: Props): Render => {
   const { font, ctx: mainCtx } = useWebcore()
 
   return (ctx = mainCtx) => {
@@ -22,12 +22,13 @@ export const TextCircle = (props: Props): Render => {
       y,
       fs,
       a = 'center',
+      mw,
     } = props
 
 
     ctx.textAlign = a
     ctx.fillStyle = c
     ctx.font = `${fs}px ${font}`
-    ctx.fillText(text, x, y)
+    ctx.fillText(text, x, y, mw)
   }
 }

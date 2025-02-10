@@ -50,7 +50,7 @@ export type Router = {
   mount: Function
 }
 
-export type Random = (min: number, max: number) => number
+export type Random = (min: number, max?: number) => number
 
 export type Event = {
   addEventResize: (func: Function) => void
@@ -60,10 +60,6 @@ export type Event = {
   onClickEvents: (x: number, y: number) => void
 
   removeAllEvents: Function
-}
-
-export type WebcoreOpts = {
-  seed?: number
 }
 
 export type Webcore = {
@@ -86,7 +82,7 @@ export type Webcore = {
   loop: Interval['loop']
   loopStop: Interval['stop']
 
-  randChain: Random
+  useRandChain: (seed?: number) => Random
   rand: Random
 
   addEventResize: Event['addEventResize']
