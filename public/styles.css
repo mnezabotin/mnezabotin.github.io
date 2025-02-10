@@ -8,7 +8,8 @@ body {
   height: 100vh;
   overflow: hidden;
   font-family: Tijuf;
-  background-color: #040404; }
+  background-color: #040404;
+  cursor: url('./cursor.svg') 20 20, move; }
 
 canvas {
   width: 100vw;

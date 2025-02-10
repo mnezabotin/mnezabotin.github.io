@@ -2,7 +2,7 @@ import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Render } from '@/webcore/types'
 
-const RAD_DIFF = 0.08
+const RAD_DIFF = 0.1
 const PALETTE = ['#f86a9a', '#C69FEE', '#5bb2f7', '#92E6E6', '#7ceab2', '#bef181', '#EFCD74', '#fd8059']
 
 export const usePopits = (): Render => {
@@ -66,7 +66,7 @@ export const usePopits = (): Render => {
           y: hs + r + i * r * 2 + hs * i,
           r,
           c: PALETTE[pind],
-          p: rand(1) > 0,
+          p: true// p: rand(1) > 0,
         })
 
         pind++
