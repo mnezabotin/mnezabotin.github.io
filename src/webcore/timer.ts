@@ -1,6 +1,6 @@
 import { Timer } from '@/webcore/types'
 
-export const useTimer = (callback: Function, delay: number): Timer => {
+export const useTimer = (callback: Function, delay = 400): Timer => {
   let start: Date = new Date()
   let remaining = delay
   let id: number = setTimeout(callback, remaining)

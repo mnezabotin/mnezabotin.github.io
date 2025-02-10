@@ -4,7 +4,7 @@ import type { Render } from '@/webcore/types'
 export type Props = {
   x?: number
   y?: number
-  r?: number
+  r: number
   c?: string
   p?: boolean
 }

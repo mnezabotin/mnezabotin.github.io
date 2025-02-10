@@ -5,7 +5,7 @@ export type Props = {
   x?: number,
   y?: number,
   r: number
-  c: string
+  c?: string
 }
 
 export const Play = (props: Props): Render => {
@@ -26,7 +26,7 @@ export const Play = (props: Props): Render => {
   return (ctx = mainCtx) => {
     const {
       r,
-      c,
+      c = 'blue',
       x = r,
       y = r,
     } = props

@@ -75,7 +75,7 @@ export type Webcore = {
     s: number
     m: number
   }
-  useTimer: (callback: Function, delay: number) => Timer
+  useTimer: (callback: Function, delay?: number) => Timer
 
   navigate: Router['navigate']
 

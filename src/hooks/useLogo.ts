@@ -6,7 +6,7 @@ import { Render } from '@/webcore/types'
 export const useLogo = (): Render => {
   const { addEventResize, useMeasure, useTimer } = useWebcore()
 
-  let pptProps: PopitProps = { c: '#f86a9a', p: true }
+  let pptProps: PopitProps = { c: '#f86a9a', p: true, r: 0 } //ba68c8
   let logo: Render
   let yola: Render
   let popit: Render
@@ -43,7 +43,7 @@ export const useLogo = (): Render => {
     })
   })
 
-  useTimer(() => pptProps.p = false, 400)
+  useTimer(() => pptProps.p = false)
 
   return () => {
     logo()

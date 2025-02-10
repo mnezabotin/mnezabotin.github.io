@@ -7,7 +7,6 @@ export const useFond = (): Render => {
     addEventResize,
     useMeasure,
     rand,
-    // useRandChain,
     useTimer
   } = useWebcore()
 
@@ -18,8 +17,6 @@ export const useFond = (): Render => {
     const { cx, cy, s, m } = useMeasure()
 
     const props = []
-
-    // const rand = useRandChain(9)
 
     const r = Math.round(s * 0.05)
 
@@ -37,7 +34,7 @@ export const useFond = (): Render => {
             y: hs + r + i * r * 2 + hs * i,
             r,
             c: '#00dcfe',
-            p: rand(1) > 0,
+            p: true,
           })
         }
       }
@@ -63,10 +60,13 @@ export const useFond = (): Render => {
       const i = rand(pptProps.length - 1)
       pptProps[i].p = !pptProps[i].p
       tic()
-    }, 400)
+    })
   }
 
-  tic()
+  useTimer(() => {
+    pptProps.forEach(r => r.p = rand(1) > 0)
+    tic()
+  })
 
   return () => {
     popits.forEach(r => r())
