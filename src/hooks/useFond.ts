@@ -44,14 +44,12 @@ export const useFond = (): Render => {
     const mmRad = mRad * 0.4
 
     pptProps = props
-      .filter(({ r, x, y }) =>
-        !(Math.abs(x - cx) < (mRad + r) &&
-        Math.abs(y - cy) < (mRad + r))
-      )
-      .filter(({ r, x, y }) =>
-        !(Math.abs(x - (cx + mRad + m)) < (mmRad + r) &&
-          Math.abs(y - (cy + mRad + m)) < (mmRad + r))
-      )
+      .filter(({ r, x, y }) => !(
+        Math.pow(Math.abs(x - cx), 2) + Math.pow(Math.abs(y - cy), 2) < Math.pow(mRad + r, 2)
+      ))
+      .filter(({ r, x, y }) => !(
+        Math.pow(Math.abs(x - (cx + mRad + m)), 2) + Math.pow(Math.abs(y - (cy + mRad + m)), 2) < Math.pow(mmRad + r, 2)
+      ))
 
     popits = pptProps
       .map(p => Popit(p))
