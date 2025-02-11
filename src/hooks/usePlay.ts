@@ -44,7 +44,7 @@ export const usePlay = (): Render => {
       props.p = true
       useTimer(() => {
         navigate('game')
-      })
+      }, 100)
     }
   })
 
