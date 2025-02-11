@@ -7,7 +7,7 @@ export const intersect = (a: Point, b: Point): boolean => {
   const ax = a.x || 0
   const ay = a.y || 0
 
-  const bx = a.x || 0
+  const bx = b.x || 0
   const by = b.y || 0
 
   const xd = Math.pow(Math.abs(ax - bx), 2)
