@@ -9,7 +9,7 @@ body {
   overflow: hidden;
   font-family: Tijuf;
   background-color: #040404;
-  cursor: url('./cursor.svg') 20 20, move; }
+  cursor: url('./cursor.svg') 10 10, move; }
 
 canvas {
   width: 100vw;
@@ -19,13 +19,3 @@ canvas {
   right: 0;
   bottom: 0;
   position: fixed; }
-
-i {
-  position: fixed;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1em;
-  left: -10000rem;
-  top: -10000rem;
-  z-index: -1;
-  opacity: 0; }

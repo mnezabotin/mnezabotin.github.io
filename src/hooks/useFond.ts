@@ -7,8 +7,13 @@ export const useFond = (): Render => {
     addEventResize,
     useMeasure,
     rand,
-    useTimer
+    useTimer,
+    setBackground,
   } = useWebcore()
+
+  const color = '#00dcfe'
+
+  setBackground(color)
 
   let pptProps: PopitProps[] = []
   let popits: Render[] = []
@@ -28,12 +33,12 @@ export const useFond = (): Render => {
 
     for (let i = 0; i < counth; i++) {
       for (let j = 0; j < countw; j++) {
-        if (rand(2) < 1) {
+        if (rand(rand(9)) < 1) {
           props.push({
             x: ws + r + j * r * 2 + ws * j,
             y: hs + r + i * r * 2 + hs * i,
             r,
-            c: '#00dcfe',
+            c: color,
             p: true,
           })
         }
@@ -48,7 +53,7 @@ export const useFond = (): Render => {
         Math.pow(Math.abs(x - cx), 2) + Math.pow(Math.abs(y - cy), 2) < Math.pow(mRad + r, 2)
       ))
       .filter(({ r, x, y }) => !(
-        Math.pow(Math.abs(x - (cx + mRad + 4 * m)), 2) + Math.pow(Math.abs(y - (cy + mRad - m)), 2) < Math.pow(mmRad + r, 2)
+        Math.pow(Math.abs(x - (cx + mRad + 4 * m)), 2) + Math.pow(Math.abs(y - (cy + mRad - m)), 2) < Math.pow(mmRad * 1.1 + r, 2)
       ))
 
     popits = pptProps
