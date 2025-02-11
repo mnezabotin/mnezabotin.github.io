@@ -1,4 +1,5 @@
 export * from './useFond'
+export * from './useGradient'
 export * from './useLogo'
 export * from './usePlay'
 export * from './usePopits'

@@ -1,9 +1,7 @@
 import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Render } from '@/webcore/types'
-
-const RAD_DIFF = 0.11
-const PALETTE = ['#f86a9a', '#C69FEE', '#5bb2f7', '#92E6E6', '#7ceab2', '#bef181', '#EFCD74', '#fd8059']
+import { PALETTE, RAD_DIFF } from '@/consts'
 
 export const usePopits = (): Render => {
   const {
@@ -11,36 +9,12 @@ export const usePopits = (): Render => {
     useMeasure,
     rand,
     useTimer,
-    setBackground,
   } = useWebcore()
 
   let pptProps: PopitProps[] = []
   let popits: Render[] = []
 
-  const initBackground = () => {
-    const { s } = useMeasure()
-
-    const r = Math.round(s * RAD_DIFF)
-    
-    const countw = Math.round(innerWidth / r / 2) - 1
-    const ws = (innerWidth - (2 * r * countw)) / (countw + 1)
-
-    let pind = 0
-    const colorStops = []
-
-    for (let j = 0; j < countw; j++) {
-      if (!PALETTE[pind]) {
-        pind = 0
-      }
-
-      colorStops.push(`${PALETTE[pind]} ${(ws + r + j * r * 2 + ws * j) / innerWidth * 100}%`)
-      pind++
-    }
-
-    setBackground(`linear-gradient(to right, ${colorStops.join(', ')})`)
-  }
-
-  const initPopits = () => {
+  addEventResize(() => {
     const { s } = useMeasure()
 
     pptProps = []
@@ -76,11 +50,6 @@ export const usePopits = (): Render => {
 
     popits = pptProps
       .map(p => Popit(p))
-  }
-
-  addEventResize(() => {
-    initBackground()
-    initPopits()
   })
 
   const tic = () => {
