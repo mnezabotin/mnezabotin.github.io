@@ -2,7 +2,7 @@ import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Render } from '@/webcore/types'
 
-export const useFond = (): Render => {
+export const useFond = (color = '#00dcfe'): Render => {
   const {
     addEventResize,
     useMeasure,
@@ -10,8 +10,6 @@ export const useFond = (): Render => {
     useTimer,
     setBackground,
   } = useWebcore()
-
-  const color = '#00dcfe'
 
   setBackground(color)
 
@@ -23,7 +21,7 @@ export const useFond = (): Render => {
 
     const props = []
 
-    const r = Math.round(s * 0.05)
+    const r = Math.round(s * 0.054)
 
     const countw = Math.round(innerWidth / r / 2) - 1
     const ws = (innerWidth - (2 * r * countw)) / (countw + 1)
