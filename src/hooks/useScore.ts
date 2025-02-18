@@ -19,7 +19,7 @@ export const useScore = (): Render => {
   const canvas = document.createElement('canvas')
   const context = canvas.getContext('2d')
   var img = new Image();
-  img.src = './donut.png'
+  img.src = './cat.png'
 
   const count = 100
   canvas.width = count
@@ -54,7 +54,7 @@ export const useScore = (): Render => {
             y: hs + i * w + w,
             w,
             c: cols[j][i],
-            // c: rand(16) < 1 ? '#000000' : cols[j][i]
+            // c: i > 43 && j > 29 ? '#000000' : cols[j][i]
           }))
         }
       }
