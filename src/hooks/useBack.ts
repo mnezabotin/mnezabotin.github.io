@@ -1,9 +1,8 @@
-import { Img } from '@/shapes/img'
 import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Render } from '@/webcore/types'
 
-export const useScore = (): Render => {
+export const useBack = (): Render => {
   const {
     addEventResize,
     useMeasure,
@@ -15,48 +14,33 @@ export const useScore = (): Render => {
 
   let props: PopitProps
   let popit: Render
-  let star: Render
 
   addEventResize(() => {
-    const { cx, cy, s, m } = useMeasure()
+    const { s, m } = useMeasure()
 
-    const r = Math.round(s * 0.2)
+    const r = Math.round(s * 0.054)
 
     props = {
-      c: '#ffeb3b',
+      c: '#00dcfe',
       r: Math.round(s * 0.054),
-      x: cx - r - 1 * m,
-      y: cy - r + 1 * m,
-      p: !props,
+      x: r + 2 * m,
+      y: r + 2 * m,
+      p: false
     }
 
     popit = Popit(props)
-
-    star = Img({
-      x: Number(props.x) - props.r + Math.round(props.r * 0.5),
-      y: Number(props.y) - props.r + Math.round(props.r * 0.5),
-      w: props.r * 2 - Math.round(props.r * 1.0),
-      src: '/star1.svg'
-    })
-  })
-
-  useTimer(() => {
-    props.p = false
   })
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, props)) {
       props.p = true
       useTimer(() => {
-        navigate('score')
+        navigate('main')
       }, 100)
     }
   })
 
   return () => {
     popit()
-    if (!props.p) {
-      star()
-    }
   }
 }

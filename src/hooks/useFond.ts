@@ -2,7 +2,12 @@ import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Render } from '@/webcore/types'
 
-export const useFond = (color = '#00dcfe'): Render => {
+type Fond = {
+  render: Render
+  setIntersections: () => void
+}
+
+export const useFond = (color = '#00dcfe'): Fond => {
   const {
     addEventResize,
     useMeasure,
@@ -71,7 +76,16 @@ export const useFond = (color = '#00dcfe'): Render => {
     tic()
   })
 
-  return () => {
+  const render = () => {
     popits.forEach(r => r())
+  }
+
+  const setIntersections = () => {
+
+  }
+
+  return {
+    render,
+    setIntersections
   }
 }
