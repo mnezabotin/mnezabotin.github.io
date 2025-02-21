@@ -1,7 +1,7 @@
 import { Pixel } from '@/shapes/pixel'
 import { Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
-import { Render } from '@/webcore/types'
+import { Render, Shape } from '@/webcore/types'
 
 function rgba2hex(orig: Uint8ClampedArray<ArrayBufferLike> | undefined) {
   const R = orig?.[0] || 0
@@ -11,7 +11,13 @@ function rgba2hex(orig: Uint8ClampedArray<ArrayBufferLike> | undefined) {
 }
 
 export const useProgress = (): Render => {
-  const { addEventResize, useMeasure, rand, useTimer } = useWebcore()
+  const {
+    addEventResize,
+    useMeasure,
+    rand,
+    useTimer,
+    shape
+  } = useWebcore()
 
   let popits: Render[] = []
   let popits1: Render[] = []
@@ -27,10 +33,10 @@ export const useProgress = (): Render => {
   canvas.width = count
   canvas.height = count
 
-  // let progress: Shape
+  let progressShape: Shape
 
   img.onload = () => {
-    const progress = 7890
+    const progress = 5001
     context?.drawImage(img, 0, 0)
     const cols: string[][] = []
     const diff = 100 / count
@@ -50,14 +56,14 @@ export const useProgress = (): Render => {
       popitsProps = []
       const w = Math.round((s * 0.86) / count)
 
-      const ws = Math.round(cx - w * (count / 2))
-      const hs = Math.round(cy - w * (count / 2))
+      const ws = Math.round(cx - w * (count / 2)) - 2
+      const hs = Math.round(cy - w * (count / 2)) - 2
 
       for (let i = 0; i < count; i++) {
         for (let j = 0; j < count; j++) {
           const props = {
-            x: ws + j * w,
-            y: hs + i * w,
+            x: 2 + j * w,
+            y: 2 + i * w,
             r: w / 2,
             c: i * 100 + j >= progress ? '#222' : cols[j][i]
             // c: rand(99) < 1 ? cols[j][i] : '#222'
@@ -81,6 +87,17 @@ export const useProgress = (): Render => {
         ...p,
         p: true
       }))
+
+      progressShape = shape({
+        draw: (ctx) => {
+          popits.forEach((p) => p(ctx))
+          popits1.forEach((p) => p(ctx))
+        },
+        x: ws,
+        y: hs,
+        w: w * count + 4,
+        img: progressShape?.img,
+      })
     })
   }
 
@@ -99,11 +116,9 @@ export const useProgress = (): Render => {
   // tic()
 
   return () => {
-    // progress?.render()
+    progressShape?.render()
     // for (let i = popits.length - 1; i > -1; i--) {
     //   popits[i]()
     // }
-    popits.forEach((p) => p())
-    popits1.forEach((p) => p())
   }
 }

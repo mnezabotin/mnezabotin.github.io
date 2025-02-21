@@ -1,3 +1,4 @@
+import { Img } from '@/shapes/img'
 import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Render } from '@/webcore/types'
@@ -10,10 +11,14 @@ export const useBack = (): Render => {
     addEventClick,
     intersect,
     navigate,
+    shade
   } = useWebcore()
 
   let props: PopitProps
   let popit: Render
+  let back: Render
+
+  console.log(shade('#ff6347', - 3))
 
   addEventResize(() => {
     const { s, m } = useMeasure()
@@ -29,6 +34,13 @@ export const useBack = (): Render => {
     }
 
     popit = Popit(props)
+
+    back = Img({
+      x: Number(props.x) - props.r + Math.round(props.r * 0.35),
+      y: Number(props.y) - props.r + Math.round(props.r * 0.35),
+      w: props.r * 2 - Math.round(props.r * 0.7),
+      src: '/back.svg'
+    })
   })
 
   addEventClick((x, y) => {
@@ -42,5 +54,6 @@ export const useBack = (): Render => {
 
   return () => {
     popit()
+    back()
   }
 }
