@@ -21,7 +21,7 @@ export const useBack = (): Render => {
     const r = Math.round(s * 0.054)
 
     props = {
-      c: '#00dcfe',
+      c: '#ff6347',
       r: Math.round(s * 0.054),
       x: r + 2 * m,
       y: r + 2 * m,

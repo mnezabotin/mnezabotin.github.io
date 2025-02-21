@@ -23,7 +23,7 @@ export const useScore = (): Render => {
     const r = Math.round(s * 0.2)
 
     props = {
-      c: '#ffeb3b',
+      c: '#ba68c8',
       r: Math.round(s * 0.054),
       x: cx - r - 1 * m,
       y: cy - r + 1 * m,

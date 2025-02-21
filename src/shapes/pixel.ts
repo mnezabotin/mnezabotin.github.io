@@ -4,29 +4,38 @@ import type { Render } from '@/webcore/types'
 export type Props = {
   x?: number
   y?: number
-  w: number
+  r: number
   c?: string
+  p?: boolean
 }
 
 export const Pixel = (props: Props): Render => {
-  const { ctx: mainCtx } = useWebcore()
+  const { ctx: mainCtx, shade } = useWebcore()
 
   return (ctx = mainCtx) => {
     const {
-      w = 0,
+      r = 0,
       c = '#ffffff',
       x = 0,
       y = 0,
+      p,
     } = props
 
-    ctx.fillStyle = c
-    ctx.beginPath()
-    ctx.rect(
-      x,
-      y,
-      w,
-      w,
-    );
-    ctx.fill()
+    if (p) {
+      ctx.fillStyle = shade(c, 5)
+      ctx.beginPath()
+      ctx.arc(x + r, y + r, r, 0, Math.PI * 2)
+      ctx.closePath()
+      ctx.fill()
+    } else {
+      ctx.fillStyle = c
+      ctx.beginPath()
+      ctx.arc(x + r, y + r, r + 2, 0, Math.PI * 2)
+      ctx.closePath()
+      ctx.fill()
+  
+
+    }
+
   }
 }
