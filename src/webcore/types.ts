@@ -22,8 +22,8 @@ export type ShapeProps = {
 }
 
 export type Point = {
-  x?: number
-  y?: number
+  x: number
+  y: number
   r?: number
 }
 

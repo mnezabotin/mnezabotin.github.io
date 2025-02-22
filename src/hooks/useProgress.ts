@@ -36,7 +36,7 @@ export const useProgress = (): Render => {
   let progressShape: Shape
 
   img.onload = () => {
-    // const progress = 7001
+    const progress = 8543
     context?.drawImage(img, 0, 0)
     const cols: string[][] = []
     const diff = 100 / count
@@ -65,8 +65,8 @@ export const useProgress = (): Render => {
             x: 2 + j * w,
             y: 2 + i * w,
             r: w / 2,
-            // c: i * 100 + j >= progress ? '#222' : cols[j][i]
-            c: rand(3) < 1 ? cols[j][i] : '#222'
+            c: i * 100 + j >= progress ? '#222' : cols[j][i]
+            // c: rand(rand(20)) < 1 ? cols[j][i] : '#222'
           }
           
           popitsProps.push(props)

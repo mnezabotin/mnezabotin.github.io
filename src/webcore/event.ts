@@ -2,7 +2,7 @@ import type { Event } from '@/webcore/types'
 
 export const useEvent = (): Event => {
   const resizeEvents: Function[] = []
-  const clickEvents: ((x?: number, y?: number) => void)[] = []
+  const clickEvents: ((x: number, y: number) => void)[] = []
 
   const addEventResize = (func: Function) => {
     func()
@@ -11,7 +11,7 @@ export const useEvent = (): Event => {
 
   const onResizeEvents = () => resizeEvents.forEach(f => f())
 
-  const addEventClick = (func: (x?: number, y?: number) => void) => {
+  const addEventClick = (func: (x: number, y: number) => void) => {
     clickEvents.push(func)
   }
 

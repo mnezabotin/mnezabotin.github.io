@@ -2,14 +2,17 @@ import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Render } from '@/webcore/types'
 
+type FondIntersection = (condition: (x: number, y: number, r: number) => boolean) => void
+
 type Fond = {
   render: Render
-  setIntersections: () => void
+  setIntersections: FondIntersection
 }
 
 export const useFond = (color = '#00dcfe'): Fond => {
   const {
     addEventResize,
+    useRandChain,
     useMeasure,
     rand,
     useTimer,
@@ -18,13 +21,16 @@ export const useFond = (color = '#00dcfe'): Fond => {
 
   setBackground(color)
 
+  const randSeed = rand(0, 999)
+
   let pptProps: PopitProps[] = []
   let popits: Render[] = []
 
   addEventResize(() => {
-    const { cx, cy, s, m } = useMeasure()
+    const rand = useRandChain(randSeed)
+    const { s } = useMeasure()
 
-    const props = []
+    pptProps = []
 
     const r = Math.round(s * 0.054)
 
@@ -37,7 +43,7 @@ export const useFond = (color = '#00dcfe'): Fond => {
     for (let i = 0; i < counth; i++) {
       for (let j = 0; j < countw; j++) {
         if (rand(rand(9)) < 1) {
-          props.push({
+          pptProps.push({
             x: ws + r + j * r * 2 + ws * j,
             y: hs + r + i * r * 2 + hs * i,
             r,
@@ -48,16 +54,13 @@ export const useFond = (color = '#00dcfe'): Fond => {
       }
     }
 
-    const mRad = Math.round(s * 0.2)
-    const mmRad = mRad * 0.4
-
-    pptProps = props
-      .filter(({ r, x, y }) => !(
-        Math.pow(Math.abs(x - cx), 2) + Math.pow(Math.abs(y - cy), 2) < Math.pow(mRad + r, 2)
-      ))
-      .filter(({ r, x, y }) => !(
-        Math.pow(Math.abs(x - (cx + mRad + 4 * m)), 2) + Math.pow(Math.abs(y - (cy + mRad - m)), 2) < Math.pow(mmRad * 1.1 + r, 2)
-      ))
+    // pptProps = props
+    //   .filter(({ r, x, y }) => !(
+    //     Math.pow(Math.abs(x - cx), 2) + Math.pow(Math.abs(y - cy), 2) < Math.pow(mRad + r, 2)
+    //   ))
+    //   .filter(({ r, x, y }) => !(
+    //     Math.pow(Math.abs(x - (cx + mRad + 4 * m)), 2) + Math.pow(Math.abs(y - (cy + mRad - m)), 2) < Math.pow(mmRad * 1.1 + r, 2)
+    //   ))
 
     popits = pptProps
       .map(p => Popit(p))
@@ -80,8 +83,10 @@ export const useFond = (color = '#00dcfe'): Fond => {
     popits.forEach(r => r())
   }
 
-  const setIntersections = () => {
-
+  const setIntersections: FondIntersection = (condition) => {
+    popits = pptProps
+      .filter(({ x, y, r}) => !condition(x, y, r))
+      .map(p => Popit(p))
   }
 
   return {
