@@ -23,15 +23,15 @@ export const useBack = (): Back => {
   let back: Render
 
   addEventResize(() => {
-    const { s, m } = useMeasure()
+    const { s } = useMeasure()
 
     const r = Math.round(s * 0.055)
 
     props = {
       c: '#ff6347',
       r,
-      x: r + 3 * m,
-      y: r + 3 * m,
+      x: Math.round(1.6 * r),
+      y: Math.round(1.6 * r),
       p: false
     }
 

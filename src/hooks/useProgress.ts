@@ -20,12 +20,15 @@ export const useProgress = (): Progress => {
   const {
     addEventResize,
     useMeasure,
-    shape
+    shape,
+    shade,
+    ctx
   } = useWebcore()
 
   let popits: Render[] = []
   let popits1: Render[] = []
   let popitsProps: PopitProps[] = []
+  let border: Render
 
   const canvas = document.createElement('canvas')
   const context = canvas.getContext('2d')
@@ -53,11 +56,11 @@ export const useProgress = (): Progress => {
     }
 
     addEventResize(() => {
-      const { s, cx, cy } = useMeasure()
+      const { s, cx, cy, m } = useMeasure()
 
       // popits = []
       popitsProps = []
-      const w = Math.round((s * 0.86) / count)
+      const w = (s * 0.88 - 4) / count // Math.round((s * 0.86) / count)
 
       const ws = Math.round(cx - w * (count / 2)) - 2
       const hs = Math.round(cy - w * (count / 2)) - 2
@@ -100,17 +103,33 @@ export const useProgress = (): Progress => {
         w: w * count + 4,
         img: progressShape?.img,
       })
+
+      border = () => {
+        ctx.strokeStyle = shade('#ffeb3b', - 10)
+        ctx.lineCap = 'round'
+        ctx.lineWidth = 2 * m
+
+        ctx.beginPath()
+        ctx.moveTo(ws, hs)
+        ctx.lineTo(ws + w * count + 4, hs)
+        ctx.lineTo(ws + w * count + 4, hs + w * count + 4)
+        ctx.lineTo(ws, hs + w * count + 4)
+        ctx.lineTo(ws, hs)
+        ctx.stroke()
+      }
     })
   }
 
   const render = () => {
+    // border?.()
     progressShape?.render()
+    
   }
 
   const point = () => {
     const { s, cx, cy } = useMeasure()
     const count = 100
-    const w = Math.round((s * 0.86) / count)
+    const w = (s * 0.88 - 4) / count
 
     const ws = Math.round(cx - w * (count / 2)) - 2
     const hs = Math.round(cy - w * (count / 2)) - 2
