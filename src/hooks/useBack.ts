@@ -25,11 +25,11 @@ export const useBack = (): Back => {
   addEventResize(() => {
     const { s, m } = useMeasure()
 
-    const r = Math.round(s * 0.054)
+    const r = Math.round(s * 0.06)
 
     props = {
       c: '#ff6347',
-      r: Math.round(s * 0.054),
+      r,
       x: r + 3 * m,
       y: r + 3 * m,
       p: false
@@ -38,9 +38,9 @@ export const useBack = (): Back => {
     popit = Popit(props)
 
     back = Img({
-      x: Number(props.x) - props.r + Math.round(props.r * 0.4),
-      y: Number(props.y) - props.r + Math.round(props.r * 0.4),
-      w: props.r * 2 - Math.round(props.r * 0.8),
+      x: Number(props.x) - r + Math.round(r * 0.4),
+      y: Number(props.y) - r + Math.round(r * 0.4),
+      w: r * 2 - Math.round(r * 0.8),
       src: '/back.svg'
     })
   })

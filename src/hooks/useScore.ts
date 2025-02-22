@@ -29,7 +29,7 @@ export const useScore = (): Score => {
 
     props = {
       c: '#ba68c8',
-      r: Math.round(s * 0.054),
+      r: Math.round(s * 0.055),
       x: cx - r - 1 * m,
       y: cy - r + 1 * m,
       p: !props,
