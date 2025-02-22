@@ -25,7 +25,7 @@ export const useBack = (): Back => {
   addEventResize(() => {
     const { s, m } = useMeasure()
 
-    const r = Math.round(s * 0.06)
+    const r = Math.round(s * 0.055)
 
     props = {
       c: '#ff6347',
