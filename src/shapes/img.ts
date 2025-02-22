@@ -1,6 +1,8 @@
 import { useWebcore } from '@/webcore'
 import type { Render } from '@/webcore/types'
 
+const IMAGES: Record<string, HTMLImageElement> = {}
+
 export type Props = {
   x?: number
   y?: number
@@ -11,8 +13,17 @@ export type Props = {
 
 export const Img = (props: Props): Render => {
   const { ctx: mainCtx } = useWebcore()
-  const img = new Image
-  img.src = props.src
+
+  let img: HTMLImageElement
+  if (IMAGES[props.src]) {
+    img = IMAGES[props.src]
+  } else {
+    img = new Image
+    img.src = props.src
+    img.onload = () => {
+      IMAGES[props.src] = img
+    }
+  }
 
   return (ctx = mainCtx) => {
     const {
