@@ -35,6 +35,7 @@ export const usePopits = (): Render => {
     const counth = Math.round(innerHeight / r / 2) - 1
     const hs = (innerHeight - (2 * r * counth)) / (counth + 1)
 
+    const dirIsRght= innerWidth >= innerHeight
     let pind = 0
 
     for (let i = 0; i < counth; i++) {
@@ -59,9 +60,9 @@ export const usePopits = (): Render => {
           pptProps.push(props)
         }
 
-        pind++
+        pind += dirIsRght ? 1 : 0
       }
-      pind = 0
+      pind = dirIsRght ? 0 : pind + 1
     }
 
     popits = pptProps

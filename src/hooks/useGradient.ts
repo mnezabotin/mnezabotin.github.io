@@ -16,18 +16,29 @@ export const useGradient = () => {
     const countw = Math.round(innerWidth / r / 2) - 1
     const ws = (innerWidth - (2 * r * countw)) / (countw + 1)
 
+    const counth = Math.round(innerHeight / r / 2) - 1
+    const hs = (innerHeight - (2 * r * counth)) / (counth + 1)
+
+    const dirIsRght= innerWidth >= innerHeight
+    const count = dirIsRght ? countw : counth
+
+    const start = dirIsRght ? ws : hs
+    const size = dirIsRght ? innerWidth : innerHeight
+
     let pind = 0
     const colorStops = []
 
-    for (let j = 0; j < countw; j++) {
+    for (let j = 0; j < count; j++) {
       if (!PALETTE[pind]) {
         pind = 0
       }
 
-      colorStops.push(`${PALETTE[pind]} ${(ws + r + j * r * 2 + ws * j) / innerWidth * 100}%`)
+      colorStops.push(`${PALETTE[pind]} ${(start + r + j * r * 2 + start * j) / size * 100}%`)
       pind++
     }
 
-    setBackground(`linear-gradient(to right, ${colorStops.join(', ')})`)
+    const direction = dirIsRght ? 'to right' : 'to bottom'
+
+    setBackground(`linear-gradient(${direction}, ${colorStops.join(', ')})`)
   })
 }
