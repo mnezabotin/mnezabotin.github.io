@@ -1,6 +1,7 @@
 import { Pixel } from '@/shapes/pixel'
 import { Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
+import { rand } from '@/webcore/random'
 import { Point, Render, Shape } from '@/webcore/types'
 
 function rgba2hex(orig: Uint8ClampedArray<ArrayBufferLike> | undefined) {
@@ -38,7 +39,7 @@ export const useProgress = (): Progress => {
   let progressShape: Shape
 
   img.onload = () => {
-    const progress = 8543
+    const progress = rand(10000)
     context?.drawImage(img, 0, 0)
     const cols: string[][] = []
     const diff = 100 / count
