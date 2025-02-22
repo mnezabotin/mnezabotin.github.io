@@ -84,8 +84,9 @@ export const useFond = (color = '#00dcfe'): Fond => {
   }
 
   const setIntersections: FondIntersection = (condition) => {
+    pptProps = pptProps
+      .filter(({ x, y, r}) => condition(x, y, r))
     popits = pptProps
-      .filter(({ x, y, r}) => !condition(x, y, r))
       .map(p => Popit(p))
   }
 

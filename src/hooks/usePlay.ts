@@ -1,9 +1,14 @@
 import { Play } from '@/shapes/play'
 import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
-import { Render } from '@/webcore/types'
+import { Point, Render } from '@/webcore/types'
 
-export const usePlay = (): Render => {
+type Play = {
+  render: Render,
+  point: () => Point
+}
+
+export const usePlay = (): Play => {
   const {
     addEventResize,
     useMeasure,
@@ -48,10 +53,21 @@ export const usePlay = (): Render => {
     }
   })
 
-  return () => {
+  const render = () => {
     popitPlay()
     if (!props.p) {
       play()
     }
+  }
+
+  const point = (): Point => ({
+    x: props.x,
+    y: props.y,
+    r: props.r
+  })
+
+  return {
+    render,
+    point
   }
 }

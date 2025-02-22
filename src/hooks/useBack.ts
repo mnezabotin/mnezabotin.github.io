@@ -1,9 +1,14 @@
 import { Img } from '@/shapes/img'
 import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
-import { Render } from '@/webcore/types'
+import { Point, Render } from '@/webcore/types'
 
-export const useBack = (): Render => {
+type Back = {
+  render: Render
+  point: () => Point
+}
+
+export const useBack = (): Back => {
   const {
     addEventResize,
     useMeasure,
@@ -28,17 +33,17 @@ export const useBack = (): Render => {
     props = {
       c: '#ff6347',
       r: Math.round(s * 0.054),
-      x: r + 2 * m,
-      y: r + 2 * m,
+      x: r + 3 * m,
+      y: r + 3 * m,
       p: false
     }
 
     popit = Popit(props)
 
     back = Img({
-      x: Number(props.x) - props.r + Math.round(props.r * 0.35),
-      y: Number(props.y) - props.r + Math.round(props.r * 0.35),
-      w: props.r * 2 - Math.round(props.r * 0.7),
+      x: Number(props.x) - props.r + Math.round(props.r * 0.4),
+      y: Number(props.y) - props.r + Math.round(props.r * 0.4),
+      w: props.r * 2 - Math.round(props.r * 0.8),
       src: '/back.svg'
     })
   })
@@ -52,8 +57,19 @@ export const useBack = (): Render => {
     }
   })
 
-  return () => {
+  const render = () => {
     popit()
     back()
+  }
+
+  const point = (): Point => ({
+    x: props.x,
+    y: props.y,
+    r: props.r
+  })
+
+  return {
+    render,
+    point
   }
 }

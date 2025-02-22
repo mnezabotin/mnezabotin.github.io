@@ -2,14 +2,14 @@ import { Img } from '@/shapes/img'
 import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { intersectArc } from '@/webcore/intersect'
-import { Render } from '@/webcore/types'
+import { Point, Render } from '@/webcore/types'
 
-// type Score = {
-//   render: Render
-//   point: Point
-// }
+type Score = {
+  render: Render
+  point: () => Point
+}
 
-export const useScore = (): Render => {
+export const useScore = (): Score => {
   const {
     addEventResize,
     useMeasure,
@@ -58,10 +58,21 @@ export const useScore = (): Render => {
     }
   })
 
-  return () => {
+  const render = () => {
     popit()
     if (!props.p) {
       star()
     }
+  }
+
+  const point = (): Point => ({
+    x: props.x,
+    y: props.y,
+    r: props.r
+  })
+
+  return {
+    render,
+    point
   }
 }

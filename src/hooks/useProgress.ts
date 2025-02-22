@@ -1,7 +1,7 @@
 import { Pixel } from '@/shapes/pixel'
 import { Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
-import { Render, Shape } from '@/webcore/types'
+import { Point, Render, Shape } from '@/webcore/types'
 
 function rgba2hex(orig: Uint8ClampedArray<ArrayBufferLike> | undefined) {
   const R = orig?.[0] || 0
@@ -10,19 +10,21 @@ function rgba2hex(orig: Uint8ClampedArray<ArrayBufferLike> | undefined) {
   return '#' + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 + (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 + (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1)
 }
 
-export const useProgress = (): Render => {
+type Progress = {
+  render: Render
+  point: () => Point
+}
+
+export const useProgress = (): Progress => {
   const {
     addEventResize,
     useMeasure,
-    rand,
-    useTimer,
     shape
   } = useWebcore()
 
   let popits: Render[] = []
   let popits1: Render[] = []
   let popitsProps: PopitProps[] = []
-  // let back: Render
 
   const canvas = document.createElement('canvas')
   const context = canvas.getContext('2d')
@@ -70,7 +72,6 @@ export const useProgress = (): Render => {
           }
           
           popitsProps.push(props)
-          // popits.push(Pixel(props))
         }
       }
 
@@ -101,24 +102,27 @@ export const useProgress = (): Render => {
     })
   }
 
-  const tic = () => {
-    useTimer(() => {
-      const count = rand(50, 500)
-      for (let i = 0; i < count; i++) {
-        const i = rand(popitsProps.length - 1)
-        popitsProps[i].p = !popitsProps[i].p
-      }
-      
-      tic()
-    })
+  const render = () => {
+    progressShape?.render()
   }
 
-  // tic()
+  const point = () => {
+    const { s, cx, cy } = useMeasure()
+    const count = 100
+    const w = Math.round((s * 0.86) / count)
 
-  return () => {
-    progressShape?.render()
-    // for (let i = popits.length - 1; i > -1; i--) {
-    //   popits[i]()
-    // }
+    const ws = Math.round(cx - w * (count / 2)) - 2
+    const hs = Math.round(cy - w * (count / 2)) - 2
+    const r = (w * count + 4) / 2
+    return {
+      x: ws + r,
+      y: hs + r,
+      r
+    }
+  }
+
+  return {
+    render,
+    point
   }
 }

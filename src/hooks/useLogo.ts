@@ -1,9 +1,14 @@
 import { Popit, type Props as PopitProps } from '@/shapes/popit'
 import { Text } from '@/shapes/text'
 import { useWebcore } from '@/webcore'
-import { Render } from '@/webcore/types'
+import { Point, Render } from '@/webcore/types'
 
-export const useLogo = (): Render => {
+type Logo = {
+  render: Render
+  point: () => Point
+}
+
+export const useLogo = (): Logo => {
   const { addEventResize, useMeasure, useTimer } = useWebcore()
 
   let pptProps: PopitProps = { x: 0, y: 0, r: 0, c: '#f86a9a', p: true } //ba68c8
@@ -45,11 +50,22 @@ export const useLogo = (): Render => {
 
   useTimer(() => pptProps.p = false)
 
-  return () => {
+  const point = () => ({
+    x: pptProps.x,
+    y: pptProps.y,
+    r: pptProps.r
+  })
+
+  const render = () => {
     logo()
     if (!pptProps.p) {
       yola()
       popit()
     }
+  }
+
+  return {
+    render,
+    point
   }
 }

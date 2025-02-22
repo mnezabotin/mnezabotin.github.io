@@ -31,5 +31,6 @@ export const intersectArc = (a: Point, b: Point): boolean => {
 export const intersectRect = (a: Point, b: Point): boolean => {
   const ar = a.r || 0
   const br = b.r || 0
-  return Math.abs(a.x - b.x) <= ar + br && Math.abs(a.y - b.y) <= ar + br
+
+  return Math.abs(a.x - b.x) <= (ar + br) && Math.abs(a.y - b.y) <= (ar + br)
 }
