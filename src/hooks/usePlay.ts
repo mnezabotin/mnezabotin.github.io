@@ -29,8 +29,8 @@ export const usePlay = (): Play => {
 
     props = {
       c: '#bef181',
-      r: Math.round(r * 0.4),
-      x: cx + r + 4 * m,
+      r: Math.round(r * 0.35),
+      x: cx + r + 3 * m,
       y: cy + r - m,
       p: !props,
     }

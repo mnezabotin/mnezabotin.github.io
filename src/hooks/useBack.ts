@@ -16,14 +16,11 @@ export const useBack = (): Back => {
     addEventClick,
     intersect,
     navigate,
-    shade
   } = useWebcore()
 
   let props: PopitProps
   let popit: Render
   let back: Render
-
-  console.log(shade('#ff6347', - 3))
 
   addEventResize(() => {
     const { s, m } = useMeasure()

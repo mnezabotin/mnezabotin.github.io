@@ -33,7 +33,7 @@ export const Opening = (): Render => {
     const r = Math.round(s * 0.2)
 
     pptProps = {
-      c: '#ff5722',
+      c: '#ff6347',
       x: cx,
       y: cy,
       r,
