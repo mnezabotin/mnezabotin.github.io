@@ -33,8 +33,6 @@ export const Pixel = (props: Props): Render => {
       ctx.arc(x + r, y + r, r + 2, 0, Math.PI * 2)
       ctx.closePath()
       ctx.fill()
-  
-
     }
 
   }

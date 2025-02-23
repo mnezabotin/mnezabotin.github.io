@@ -35,10 +35,10 @@ export const useFond = (color = '#00dcfe'): Fond => {
     const r = Math.round(s * 0.054)
 
     const countw = Math.round(innerWidth / r / 2) - 1
-    const ws = (innerWidth - (2 * r * countw)) / (countw + 1)
+    const ws = Math.round((innerWidth - (2 * r * countw)) / (countw + 1))
 
     const counth = Math.round(innerHeight / r / 2) - 1
-    const hs = (innerHeight - (2 * r * counth)) / (counth + 1)
+    const hs = Math.round((innerHeight - (2 * r * counth)) / (counth + 1))
 
     for (let i = 0; i < counth; i++) {
       for (let j = 0; j < countw; j++) {
@@ -53,14 +53,6 @@ export const useFond = (color = '#00dcfe'): Fond => {
         }
       }
     }
-
-    // pptProps = props
-    //   .filter(({ r, x, y }) => !(
-    //     Math.pow(Math.abs(x - cx), 2) + Math.pow(Math.abs(y - cy), 2) < Math.pow(mRad + r, 2)
-    //   ))
-    //   .filter(({ r, x, y }) => !(
-    //     Math.pow(Math.abs(x - (cx + mRad + 4 * m)), 2) + Math.pow(Math.abs(y - (cy + mRad - m)), 2) < Math.pow(mmRad * 1.1 + r, 2)
-    //   ))
 
     popits = pptProps
       .map(p => Popit(p))

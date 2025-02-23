@@ -21,19 +21,16 @@ export const useProgress = (): Progress => {
     addEventResize,
     useMeasure,
     shape,
-    shade,
-    ctx
   } = useWebcore()
 
   let popits: Render[] = []
   let popits1: Render[] = []
   let popitsProps: PopitProps[] = []
-  let border: Render
 
   const canvas = document.createElement('canvas')
   const context = canvas.getContext('2d')
   var img = new Image();
-  img.src = './cat.png'
+  img.src = rand(1) < 1 ? './iron.png' : './cat.png'
 
   const count = 100
   canvas.width = count
@@ -42,7 +39,7 @@ export const useProgress = (): Progress => {
   let progressShape: Shape
 
   img.onload = () => {
-    const progress = rand(10000)
+    const progress = 10000 // rand(10000)
     context?.drawImage(img, 0, 0)
     const cols: string[][] = []
     const diff = 100 / count
@@ -60,7 +57,7 @@ export const useProgress = (): Progress => {
 
       // popits = []
       popitsProps = []
-      const w = (s * 0.88 - 4) / count // Math.round((s * 0.86) / count)
+      const w = (s * 0.7 - 4) / count // Math.round((s * 0.86) / count)
 
       const ws = Math.round(cx - w * (count / 2)) - 2
       const hs = Math.round(cy - w * (count / 2)) - 2
@@ -103,41 +100,21 @@ export const useProgress = (): Progress => {
         w: w * count + 4,
         img: progressShape?.img,
       })
-
-      border = () => {
-        ctx.strokeStyle = shade('#ffeb3b', - 10)
-        ctx.lineCap = 'round'
-        ctx.lineWidth = 2 * m
-
-        ctx.beginPath()
-        ctx.moveTo(ws, hs)
-        ctx.lineTo(ws + w * count + 4, hs)
-        ctx.lineTo(ws + w * count + 4, hs + w * count + 4)
-        ctx.lineTo(ws, hs + w * count + 4)
-        ctx.lineTo(ws, hs)
-        ctx.stroke()
-      }
     })
   }
 
   const render = () => {
-    // border?.()
     progressShape?.render()
     
   }
 
   const point = () => {
     const { s, cx, cy } = useMeasure()
-    const count = 100
-    const w = (s * 0.88 - 4) / count
 
-    const ws = Math.round(cx - w * (count / 2)) - 2
-    const hs = Math.round(cy - w * (count / 2)) - 2
-    const r = (w * count + 4) / 2
     return {
-      x: ws + r,
-      y: hs + r,
-      r
+      x: cx,
+      y: cy,
+      r: s / 2
     }
   }
 
