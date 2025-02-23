@@ -45,6 +45,23 @@ export const useStage = (): Stage => {
     ctx.restore()
   }
 
+  const createImg = (draw: Render, w: number, h = w): HTMLCanvasElement => {
+    const img = document.createElement('canvas')
+    const context = img.getContext('2d')
+
+    if (!context) {
+      throw new Error('CanvasRenderingContext2D is null')
+    }
+
+    img.width = w * devicePixelRatio
+    img.height = h * devicePixelRatio
+    context.scale(devicePixelRatio, devicePixelRatio)
+
+    draw(context)
+
+    return img
+  }
+
   const shape = ({
     draw,
     x,
@@ -90,5 +107,6 @@ export const useStage = (): Stage => {
     shade,
     shape,
     setBackground,
+    createImg,
   }
 }

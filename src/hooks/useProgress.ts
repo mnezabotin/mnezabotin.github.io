@@ -39,7 +39,7 @@ export const useProgress = (): Progress => {
   let progressShape: Shape
 
   img.onload = () => {
-    const progress = 10000 // rand(10000)
+    const progress = rand(10000)
     context?.drawImage(img, 0, 0)
     const cols: string[][] = []
     const diff = 100 / count
@@ -111,10 +111,12 @@ export const useProgress = (): Progress => {
   const point = () => {
     const { s, cx, cy } = useMeasure()
 
+    const w = (s * 0.7 - 4) / count
+
     return {
       x: cx,
       y: cy,
-      r: s / 2
+      r: w * count / 2
     }
   }
 

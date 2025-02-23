@@ -1,7 +1,7 @@
 import { useWebcore } from '@/webcore'
 import type { Render } from '@/webcore/types'
 
-const GRADIENTS: Record<string, CanvasGradient>  = {}
+const STORE: Record<string, HTMLCanvasElement>  = {}
 
 export type Props = {
   x: number
@@ -12,24 +12,16 @@ export type Props = {
 }
 
 export const Popit = (props: Props): Render => {
-  const { shade, ctx: mainCtx } = useWebcore()
+  const { shade, ctx: mainCtx, createImg } = useWebcore()
 
   const getGradient = (): CanvasGradient => {
     const {
       r,
       c = '#ffffff',
-      x,
-      y,
       p,
     } = props
 
-    const gkey = `${c}_${x}_${y}_${r}_${p ? 'push' : 'pop'}`
-
-    if (GRADIENTS[gkey]) {
-      return GRADIENTS[gkey]
-    }
-
-    const gradient = mainCtx.createRadialGradient(x, y, r, x, y, r / 5)
+    const gradient = mainCtx.createRadialGradient(r, r, r, r, r, r / 5)
 
     gradient.addColorStop(0, shade(c, 0))
     gradient.addColorStop(0.01, shade(c, 0))
@@ -54,26 +46,41 @@ export const Popit = (props: Props): Render => {
       gradient.addColorStop(1, shade(c, 10))
     }
 
-    GRADIENTS[gkey] = gradient
-
-    console.log(GRADIENTS)
-
     return gradient
   }
 
-  return (ctx = mainCtx) => {
+  const getImg = () => {
     const {
       r,
-      x,
-      y,
+      c = '#ffffff',
+      p,
     } = props
 
-    const gradient = getGradient()
+    const ikey = `${c}_${p ? 'push' : 'pop'}_${r}`
 
-    ctx.fillStyle = gradient
-    ctx.beginPath()
-    ctx.arc(x, y, r, 0, 2 * Math.PI)
-    ctx.closePath()
-    ctx.fill()
+    if (STORE[ikey]) {
+      return STORE[ikey]
+    }
+
+    const img = createImg((ctx = mainCtx) => {
+      const gradient = getGradient()
+      ctx.fillStyle = gradient
+      ctx.beginPath()
+      ctx.arc(r, r, r, 0, 2 * Math.PI)
+      ctx.closePath()
+      ctx.fill()
+    }, 2 * r)
+
+    STORE[ikey] = img
+    console.log(STORE)
+
+    return img
+  }
+
+  return () => {
+    const { x, y, r } = props
+
+    const img = getImg()
+    mainCtx.drawImage(img, x - r, y - r, 2 * r, 2 * r)
   }
 }

@@ -42,6 +42,7 @@ export type Stage = {
   rotate: (draw: Render, x: number, y: number, angle: number) => void
   shape: (props: ShapeProps) => Shape
   setBackground: (color: string) => void
+  createImg: (draw: Render, w: number, h?: number) => HTMLCanvasElement
 }
 
 export type Route = {
@@ -74,6 +75,7 @@ export type Webcore = {
   rotate: Stage['rotate']
   shape: Stage['shape']
   setBackground: Stage['setBackground']
+  createImg: Stage['createImg']
 
   useMeasure: () => {
     cx: number
