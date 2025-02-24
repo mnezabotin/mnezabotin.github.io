@@ -1,7 +1,7 @@
 import { useWebcore } from '@/webcore'
 import type { Render } from '@/webcore/types'
 
-const STORE: Record<string, HTMLCanvasElement>  = {}
+const IMAGES: Record<string, HTMLCanvasElement>  = {}
 
 export type Props = {
   x: number
@@ -58,8 +58,8 @@ export const Popit = (props: Props): Render => {
 
     const ikey = `${c}_${p ? 'push' : 'pop'}_${r}`
 
-    if (STORE[ikey]) {
-      return STORE[ikey]
+    if (IMAGES[ikey]) {
+      return IMAGES[ikey]
     }
 
     const img = createImg((ctx = mainCtx) => {
@@ -71,8 +71,7 @@ export const Popit = (props: Props): Render => {
       ctx.fill()
     }, 2 * r)
 
-    STORE[ikey] = img
-    console.log(STORE)
+    IMAGES[ikey] = img
 
     return img
   }

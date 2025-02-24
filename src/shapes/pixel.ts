@@ -34,6 +34,5 @@ export const Pixel = (props: Props): Render => {
       ctx.closePath()
       ctx.fill()
     }
-
   }
 }

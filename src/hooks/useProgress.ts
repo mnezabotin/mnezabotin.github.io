@@ -30,7 +30,8 @@ export const useProgress = (): Progress => {
   const canvas = document.createElement('canvas')
   const context = canvas.getContext('2d')
   var img = new Image();
-  img.src = rand(1) < 1 ? './iron.png' : './cat.png'
+  const imgs = ['./iron.png', './cat.png', './wolf.png', './girl.png', './irr.png']
+  img.src = imgs[rand(imgs.length - 1)]
 
   const count = 100
   canvas.width = count
@@ -39,7 +40,7 @@ export const useProgress = (): Progress => {
   let progressShape: Shape
 
   img.onload = () => {
-    const progress = rand(10000)
+    const progress = 10000 // rand(10000)
     context?.drawImage(img, 0, 0)
     const cols: string[][] = []
     const diff = 100 / count
@@ -53,7 +54,7 @@ export const useProgress = (): Progress => {
     }
 
     addEventResize(() => {
-      const { s, cx, cy, m } = useMeasure()
+      const { s, cx, cy } = useMeasure()
 
       // popits = []
       popitsProps = []
