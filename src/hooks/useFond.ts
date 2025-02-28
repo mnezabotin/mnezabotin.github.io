@@ -32,7 +32,7 @@ export const useFond = (color = '#00dcfe'): Fond => {
 
     pptProps = []
 
-    const r = Math.round(s * 0.054)
+    const r = Math.round(s * 0.044)
 
     const countw = Math.round(innerWidth / r / 2) - 1
     const ws = Math.round((innerWidth - (2 * r * countw)) / (countw + 1))
