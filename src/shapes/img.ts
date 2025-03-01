@@ -20,9 +20,7 @@ export const Img = (props: Props): Render => {
   } else {
     img = new Image
     img.src = props.src
-    img.onload = () => {
-      IMAGES[props.src] = img
-    }
+    IMAGES[props.src] = img
   }
 
   return (ctx = mainCtx) => {

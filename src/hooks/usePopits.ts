@@ -13,7 +13,9 @@ export const usePopits = (): Render => {
     rand,
     useTimer,
     intersect,
+    useScreenMeta,
   } = useWebcore()
+  const { from } = useScreenMeta()
 
   let pptProps: PopitProps[] = []
   let popits: Render[] = []
@@ -53,7 +55,7 @@ export const usePopits = (): Render => {
         }
         
         if (i === 0 && j === countw - 1) {
-          pausePptProps = { ...props, p: !pausePptProps }
+          pausePptProps = { ...props, p: from === 'main' && !pausePptProps }
           pausePopit = Popit(pausePptProps)
           pause = Pause(props)
         } else {
