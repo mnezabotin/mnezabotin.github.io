@@ -9,9 +9,10 @@ type Logo = {
 }
 
 export const useLogo = (): Logo => {
-  const { addEventResize, useMeasure, useTimer } = useWebcore()
+  const { addEventResize, useMeasure, useTimer, useScreenMeta } = useWebcore()
+  const { from } = useScreenMeta()
 
-  let pptProps: PopitProps = { x: 0, y: 0, r: 0, c: '#f86a9a', p: true } //ba68c8
+  let props: PopitProps //ba68c8
   let logo: Render
   let yola: Render
   let popit: Render
@@ -21,13 +22,14 @@ export const useLogo = (): Logo => {
 
     const r = Math.round(s * 0.2)
 
-    pptProps = {
-      ...pptProps,
+    props = {
+      c: '#f86a9a',
       x: cx,
       y: cy,
       r,
+      p: from === 'opening' && !props,
     }
-    logo = Popit(pptProps)
+    logo = Popit(props)
 
     yola = Text({
       text: 'Yola',
@@ -48,17 +50,17 @@ export const useLogo = (): Logo => {
     })
   })
 
-  useTimer(() => pptProps.p = false)
+  useTimer(() => props.p = false)
 
   const point = () => ({
-    x: pptProps.x,
-    y: pptProps.y,
-    r: pptProps.r
+    x: props.x,
+    y: props.y,
+    r: props.r
   })
 
   const render = () => {
     logo()
-    if (!pptProps.p) {
+    if (!props.p) {
       yola()
       popit()
     }

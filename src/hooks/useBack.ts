@@ -16,7 +16,9 @@ export const useBack = (): Back => {
     addEventClick,
     intersect,
     navigate,
+    useScreenMeta,
   } = useWebcore()
+  const { from } = useScreenMeta()
 
   let props: PopitProps
   let popit: Render
@@ -32,7 +34,7 @@ export const useBack = (): Back => {
       r,
       x: Math.round(1.6 * r),
       y: Math.round(1.6 * r),
-      p: false
+      p: from === 'main'
     }
 
     popit = Popit(props)
@@ -43,6 +45,11 @@ export const useBack = (): Back => {
       w: r * 2 - Math.round(r * 0.8),
       src: '/back.svg'
     })
+  })
+
+  
+  useTimer(() => {
+    props.p = false
   })
 
   addEventClick((x, y) => {

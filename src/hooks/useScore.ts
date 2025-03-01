@@ -16,7 +16,9 @@ export const useScore = (): Score => {
     useTimer,
     addEventClick,
     navigate,
+    useScreenMeta,
   } = useWebcore()
+  const { from } = useScreenMeta()
 
   let props: PopitProps
   let popit: Render
@@ -32,7 +34,7 @@ export const useScore = (): Score => {
       r: Math.round(s * 0.055),
       x: cx - r - 1 * m,
       y: cy - r + 1 * m,
-      p: !props,
+      p: (from === 'score' || from === 'opening') && !props,
     }
 
     popit = Popit(props)

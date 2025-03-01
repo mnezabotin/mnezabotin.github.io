@@ -17,7 +17,9 @@ export const useFond = (color = '#00dcfe'): Fond => {
     rand,
     useTimer,
     setBackground,
+    useScreenMeta,
   } = useWebcore()
+  const { from } = useScreenMeta()
 
   setBackground(color)
 
@@ -42,13 +44,13 @@ export const useFond = (color = '#00dcfe'): Fond => {
 
     for (let i = 0; i < counth; i++) {
       for (let j = 0; j < countw; j++) {
-        if (rand(rand(9)) < 1) {
+        if (rand(rand(20)) < 1) {
           pptProps.push({
             x: ws + r + j * r * 2 + ws * j,
             y: hs + r + i * r * 2 + hs * i,
             r,
             c: color,
-            p: true,
+            p: from === 'opening' ? true : rand(1) > 0,
           })
         }
       }
@@ -66,10 +68,14 @@ export const useFond = (color = '#00dcfe'): Fond => {
     })
   }
 
-  useTimer(() => {
-    pptProps.forEach(r => r.p = rand(1) > 0)
+  if (from === 'opening') {
+    useTimer(() => {
+      pptProps.forEach(r => r.p = rand(1) > 0)
+      tic()
+    })
+  } else {
     tic()
-  })
+  }
 
   const render = () => {
     popits.forEach(r => r())

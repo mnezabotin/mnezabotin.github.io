@@ -51,10 +51,16 @@ export type Route = {
   meta?: object
 }
 
+export type ScreenMeta = {
+  from: string
+  to: string
+  data: any
+}
+
 export type Router = {
   render: Render
-  navigate: (name: string) => void
-  mount: Function
+  navigate: (name?: string, data?: any) => void
+  useScreenMeta: () => ScreenMeta
 }
 
 export type Random = (min: number, max?: number) => number
@@ -85,6 +91,7 @@ export type Webcore = {
   }
 
   navigate: Router['navigate']
+  useScreenMeta: Router['useScreenMeta'] 
 
   loop: Interval['loop']
   loopStop: Interval['stop']

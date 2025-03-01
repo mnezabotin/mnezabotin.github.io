@@ -53,7 +53,7 @@ export const usePopits = (): Render => {
         }
         
         if (i === 0 && j === countw - 1) {
-          pausePptProps = { ...props, p: false }
+          pausePptProps = { ...props, p: !pausePptProps }
           pausePopit = Popit(pausePptProps)
           pause = Pause(props)
         } else {
@@ -67,6 +67,10 @@ export const usePopits = (): Render => {
 
     popits = pptProps
       .map(p => Popit(p))
+  })
+
+  useTimer(() => {
+    pausePptProps.p = false
   })
 
   addEventClick((x, y) => {

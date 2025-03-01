@@ -16,7 +16,9 @@ export const usePlay = (): Play => {
     addEventClick,
     intersect,
     navigate,
+    useScreenMeta,
   } = useWebcore()
+  const { from } = useScreenMeta()
 
   let props: PopitProps
   let popitPlay: Render
@@ -32,7 +34,7 @@ export const usePlay = (): Play => {
       r: Math.round(r * 0.35),
       x: cx + r + 3 * m,
       y: cy + r - m,
-      p: !props,
+      p: (from === 'game' || from === 'opening') && !props,
     }
 
     popitPlay = Popit(props)

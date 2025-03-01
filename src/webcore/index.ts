@@ -58,14 +58,15 @@ export const initWebcore = (routes: Route[]) => {
 
     useMeasure,
 
-    navigate: (name: string) => {
+    useScreenMeta: router.useScreenMeta,
+    navigate: (name?: string, data?: any) => {
       if (!routes.some(r => r.name === name)) {
         throw new Error(`Screen ${name} not specified`)
       }
 
       stopAll()
       removeAllEvents()
-      new Promise(() => router.navigate(name))
+      new Promise(() => router.navigate(name, data))
     },
 
     loop,
@@ -108,7 +109,7 @@ export const initWebcore = (routes: Route[]) => {
     onClickEvents(e.clientX, e.clientY)
   }
 
-  router.mount()
+  router.navigate()
 }
 
 export const useWebcore = (): Webcore => {
