@@ -34,7 +34,7 @@ export const useBack = (): Back => {
       r,
       x: Math.round(1.6 * r),
       y: Math.round(1.6 * r),
-      p: from === 'main'
+      p: from === 'main' && !props
     }
 
     popit = Popit(props)

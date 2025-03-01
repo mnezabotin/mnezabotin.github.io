@@ -1,7 +1,7 @@
 import { useStage } from '@/webcore/stage'
 import { useRouter } from '@/webcore/router'
 import { useInterval } from '@/webcore/interval'
-import { useTimer } from '@/webcore/timer'
+import { stopTimers, useTimer } from '@/webcore/timer'
 import { rand, useRandChain } from '@/webcore/random'
 import { useEvent } from '@/webcore/event'
 import { intersect } from '@/webcore/intersect'
@@ -65,6 +65,7 @@ export const initWebcore = (routes: Route[]) => {
       }
 
       stopAll()
+      stopTimers()
       removeAllEvents()
       new Promise(() => router.navigate(name, data))
     },

@@ -1,9 +1,19 @@
 import { Timer } from '@/webcore/types'
 
+let timerIds: number[] = []
+
+export const stopTimers = () => {
+  for (const id of timerIds) {
+    clearTimeout(id)
+  }
+  timerIds = []
+}
+
 export const useTimer = (callback: Function, delay = 400): Timer => {
   let start: Date = new Date()
   let remaining = delay
   let id: number = setTimeout(callback, remaining)
+  timerIds.push(id)
 
   const pause = () => {
     clearTimeout(id)
@@ -16,6 +26,7 @@ export const useTimer = (callback: Function, delay = 400): Timer => {
     start = new Date()
     clearTimeout(id)
     id = setTimeout(callback, remaining)
+    timerIds.push(id)
   }
 
   const stop = () => {
