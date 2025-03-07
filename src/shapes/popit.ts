@@ -76,10 +76,10 @@ export const Popit = (props: Props): Render => {
     return img
   }
 
-  return () => {
+  return (ctx = mainCtx) => {
     const { x, y, r } = props
 
     const img = getImg()
-    mainCtx.drawImage(img, x - r, y - r, 2 * r, 2 * r)
+    ctx.drawImage(img, x - r, y - r, 2 * r, 2 * r)
   }
 }

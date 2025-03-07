@@ -52,7 +52,6 @@ export const initWebcore = (routes: Route[]) => {
     ctx: stage.ctx,
     shade: stage.shade,
     rotate: stage.rotate,
-    shape: stage.shape,
     setBackground: stage.setBackground,
     createImg: stage.createImg,
 
