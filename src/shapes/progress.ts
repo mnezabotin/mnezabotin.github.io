@@ -21,17 +21,20 @@ const rgbToHex = (orig: Uint8ClampedArray<ArrayBufferLike> | undefined) => {
   return '#' + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 + (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 + (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1)
 }
 
-const promiseGetImageData = (i: number, j: number, context: CanvasRenderingContext2D | null): Promise<Uint8ClampedArray<ArrayBufferLike> | undefined> =>
-  new Promise(resolve => {
-    setTimeout(() => {
-      resolve(context?.getImageData(i, j, 1, 1)?.data)
-    }, 0)
-})
+// const promiseGetImageData = (i: number, j: number, context: CanvasRenderingContext2D | null): Promise<Uint8ClampedArray<ArrayBufferLike> | undefined> =>
+//   new Promise(resolve => {
+//     setTimeout(() => {
+//       resolve(context?.getImageData(i, j, 1, 1)?.data)
+//     }, 0)
+// })
 
 type ImageValue = {
+  drawImg: HTMLCanvasElement | null
   img: HTMLImageElement
   cols: string[][]
   isFilled: boolean
+  r: number
+  score: number
 }
 
 const IMAGES: Record<string, ImageValue> = {}
@@ -47,14 +50,16 @@ export type Props = {
 export const Progress = (props: Props): Render => {
   const { ctx: mainCtx, shade, createImg } = useWebcore()
 
-  let drawImg: HTMLCanvasElement
   let imageValue: ImageValue
 
   if (!IMAGES[props.imgSrc]) {
     imageValue = IMAGES[props.imgSrc] = {
       img: new Image(),
       cols: [],
-      isFilled: false
+      isFilled: false,
+      r: props.r,
+      drawImg: null,
+      score: props.score
     }
     imageValue.img.src = props.imgSrc
   } else {
@@ -104,7 +109,7 @@ export const Progress = (props: Props): Render => {
   const onFilled = () => {
     const pxsProps = getPixelProps()
 
-    drawImg = createImg((ctx = mainCtx) => {
+    imageValue.drawImg = createImg((ctx = mainCtx) => {
       pxsProps.filter(p => p.c === DARK_COL).forEach(p => drawPixel(p, ctx))
       pxsProps.filter(p => p.c !== DARK_COL).forEach(p => drawPixel(p, ctx))
       pxsProps.filter(p => p.c !== DARK_COL).forEach(p => drawPixel({ ...p, p: true }, ctx))
@@ -135,15 +140,15 @@ export const Progress = (props: Props): Render => {
 
   if (!imageValue.isFilled) {
     imageValue.img.onload = onLoadImg
-  } else {
+  } else if (imageValue.r !== props.r || imageValue.score !== props.score) {
     onFilled()
   }
 
   return (ctx = mainCtx) => {
     const { x, y, r } = props
 
-    if (drawImg) {
-      ctx.drawImage(drawImg, x - r, y - r, 2 * r, 2 * r)
+    if (imageValue.drawImg) {
+      ctx.drawImage(imageValue.drawImg, x - r, y - r, 2 * r, 2 * r)
     }
   }
 }

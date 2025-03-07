@@ -22,7 +22,8 @@ export const useProgress = (): Progress => {
     progressTabs = []
 
     const origImgs = ['/cat.png', '/city.png', '/man.png']
-    const r = s * 0.35
+    const r = (s - 2 * s * 0.055 * 1.6) / 2
+    // const r = s * 0.4
     const mr = s * 0.05
 
     for (let i = 0; i < origImgs.length; i++) {
@@ -31,7 +32,7 @@ export const useProgress = (): Progress => {
       progressTabs.push(
         Progress({
           x: cx,
-          y: cy - r * 2 - mr + i * r * 2 + i * mr,
+          y: cy + i * r * 2 + i * mr,
           r,
           score,
           imgSrc
