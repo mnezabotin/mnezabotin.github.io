@@ -6,6 +6,7 @@ import type { Render } from '@/webcore/types'
 
 export const Opening = (): Render => {
   const {
+    ctx,
     loop,
     rotate,
     navigate,
@@ -16,6 +17,8 @@ export const Opening = (): Render => {
   } = useWebcore()
 
   setBackground('#040404')
+
+  let isFontLoaded = false
 
   let pptProps: PopitProps
 
@@ -65,7 +68,7 @@ export const Opening = (): Render => {
     })
   })
 
-  loop(() => {
+  const tiktak = () => {
     tic += 0.01
     rAnglText = tic >= 1 ? 1 : tic
     if (tic >= 1.8) {
@@ -78,7 +81,7 @@ export const Opening = (): Render => {
     if (tic >= 2.6) {
       navigate('main')
     }
-  })
+  }
 
   addEventClick(() => {
     [1.4, 1.8, 2.2, 2.6].some((num) => {
@@ -89,8 +92,21 @@ export const Opening = (): Render => {
     })
   })
 
+  const onFontLoaded = () => {
+    loop(tiktak)
+    isFontLoaded = true
+  }
+
+  if (document?.fonts?.ready) {
+    document?.fonts?.ready.then(onFontLoaded)
+  } else {
+    onFontLoaded()
+  }
+
   return () => {
     const { cx, cy } = useMeasure()
+
+    ctx.globalAlpha = isFontLoaded ? 1 : 0
 
     popit()
     
@@ -104,5 +120,7 @@ export const Opening = (): Render => {
         production()
       }, cx, cy, rAnglText)
     }
+
+    ctx.globalAlpha = 1
   }
 }

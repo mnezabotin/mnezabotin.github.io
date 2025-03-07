@@ -1,7 +1,9 @@
 import { Progress } from '@/shapes/progress'
 import { useWebcore } from '@/webcore'
-// import { rand } from '@/webcore/random'
+import { rand } from '@/webcore/random'
 import { Rectangle, Render } from '@/webcore/types'
+
+const MAX_IMG_POINTS = 10000
 
 type Progress = {
   up: () => void
@@ -21,21 +23,23 @@ export const useProgress = (): Progress => {
     '/cat.png',
     '/city.png',
     '/man.png',
-    '/baba.png',
-    '/donut.png',
-    '/girl.png',
-    '/home.png',
-    '/iron.png',
+    // '/baba.png',
+    // '/donut.png',
+    // '/girl.png',
+    // '/home.png',
+    // '/iron.png',
     // '/irr.png',
-    '/win.png',
-    '/wolf.png',
+    // '/win.png',
+    // '/wolf.png',
   ]
+
+  const score = rand(origImgs.length * MAX_IMG_POINTS)
   
   let progressTabs: Render[]
   let pgsRad = 0
   let margin = 0
 
-  let curInd = 0
+  let curInd = Math.floor(score / MAX_IMG_POINTS)
 
   addEventResize(() => {
     const { cx, cy, s } = useMeasure()
@@ -47,13 +51,12 @@ export const useProgress = (): Progress => {
 
     for (let i = 0; i < origImgs.length; i++) {
       const imgSrc = origImgs[i]
-      const score = 10000
       progressTabs.push(
         Progress({
           x: cx,
           y: cy + i * pgsRad * 2 + i * margin,
           r: pgsRad,
-          score,
+          score: score - i * MAX_IMG_POINTS < 0 ? 0 : score - i * MAX_IMG_POINTS,
           imgSrc
         })
       )
