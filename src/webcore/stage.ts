@@ -45,6 +45,15 @@ export const useStage = (): Stage => {
     ctx.restore()
   }
 
+  const translate = (draw: Render, x: number, y: number) => {
+    ctx.save();
+    ctx.translate(x, y)
+
+    draw()
+
+    ctx.restore()
+  }
+
   const createImg = (draw: Render, w: number, h = w): HTMLCanvasElement => {
     const img = document.createElement('canvas')
     const context = img.getContext('2d')
@@ -70,6 +79,7 @@ export const useStage = (): Stage => {
     resize,
 
     rotate,
+    translate,
     shade,
     setBackground,
     createImg,

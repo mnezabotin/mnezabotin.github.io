@@ -27,6 +27,13 @@ export type Point = {
   r?: number
 }
 
+export type Rectangle = {
+  x: number
+  y: number
+  w?: number
+  h?: number
+}
+
 export type Stage = {
   ctx: CanvasRenderingContext2D
   render: (draw: Render) => void
@@ -34,6 +41,7 @@ export type Stage = {
 
   shade: (color: string, percent: number) => string
   rotate: (draw: Render, x: number, y: number, angle: number) => void
+  translate: (draw: Render, x: number, y: number) => void
   setBackground: (color: string) => void
   createImg: (draw: Render, w: number, h?: number) => HTMLCanvasElement
 }
@@ -72,6 +80,7 @@ export type Webcore = {
   ctx: CanvasRenderingContext2D
   shade: Stage['shade']
   rotate: Stage['rotate']
+  translate: Stage['translate']
   setBackground: Stage['setBackground']
   createImg: Stage['createImg']
 

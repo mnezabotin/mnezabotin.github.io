@@ -8,14 +8,13 @@ type Back = {
   point: () => Point
 }
 
-export const useDown = (): Back => {
+export const useDown = (onClick: () => void): Back => {
   const {
     addEventResize,
     useMeasure,
     useTimer,
     addEventClick,
     intersect,
-    navigate,
     rotate,
   } = useWebcore()
 
@@ -49,17 +48,20 @@ export const useDown = (): Back => {
   addEventClick((x, y) => {
     if (intersect({ x, y }, props)) {
       props.p = true
+      onClick()
       useTimer(() => {
-        navigate('main')
+        props.p = false
       }, 100)
     }
   })
 
   const render = () => {
     popit()
-    rotate(() => {
-      back()
-    }, props.x, props.y, -0.5)
+    if (!props.p) {
+      rotate(() => {
+        back()
+      }, props.x, props.y, -0.5)
+    }
   }
 
   const point = (): Point => ({

@@ -63,7 +63,9 @@ export const useBack = (): Back => {
 
   const render = () => {
     popit()
-    back()
+    if (!props.p) {
+      back()
+    }
   }
 
   const point = (): Point => ({

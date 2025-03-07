@@ -21,13 +21,6 @@ const rgbToHex = (orig: Uint8ClampedArray<ArrayBufferLike> | undefined) => {
   return '#' + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 + (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 + (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1)
 }
 
-// const promiseGetImageData = (i: number, j: number, context: CanvasRenderingContext2D | null): Promise<Uint8ClampedArray<ArrayBufferLike> | undefined> =>
-//   new Promise(resolve => {
-//     setTimeout(() => {
-//       resolve(context?.getImageData(i, j, 1, 1)?.data)
-//     }, 0)
-// })
-
 type ImageValue = {
   drawImg: HTMLCanvasElement | null
   img: HTMLImageElement
@@ -121,13 +114,12 @@ export const Progress = (props: Props): Render => {
     canvas.width = COUNT_PX
     canvas.height = COUNT_PX
 
-    const context = canvas.getContext('2d')
+    const context = canvas.getContext("2d", { willReadFrequently: true })
     context?.drawImage(imageValue.img, 0, 0)
 
     for (let i = 0; i < COUNT_PX; i++) {
       const arr = []
       for (let j = 0; j < COUNT_PX; j++) {
-        // const data = await promiseGetImageData(i, j, context)
         const data = context?.getImageData(i, j, 1, 1)?.data
         arr.push(rgbToHex(data))
       }
