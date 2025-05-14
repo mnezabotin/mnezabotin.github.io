@@ -1,7 +1,7 @@
 {
   "short_name": "YolaPopit",
   "name": "Your's last Pop it",
-  "display": "standalone",
+  "display": "fullscreen",
   "orientation": "landscape",
   "icons": [
     {
