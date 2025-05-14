@@ -14,7 +14,7 @@ type PixelProps = {
 }
 
 
-const rgbToHex = (orig: Uint8ClampedArray<ArrayBufferLike> | undefined) => {
+const rgbToHex = (orig: Uint8ClampedArray | undefined) => {
   const R = orig?.[0] || 0
   const G = orig?.[1] || 0
   const B = orig?.[2] || 0
