@@ -1,6 +1,7 @@
 {
   "short_name": "YolaPopit",
   "name": "Your's last Pop it",
+  "display": "standalone",
   "icons": [
     {
       "src": "/star1.svg",
