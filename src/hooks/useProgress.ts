@@ -21,16 +21,16 @@ export const useProgress = (): Progress => {
 
   const origImgs = [
     '/cat.png',
+    '/wolf.png',
     '/city.png',
     '/man.png',
-    // '/baba.png',
-    // '/donut.png',
-    // '/girl.png',
-    // '/home.png',
-    // '/iron.png',
-    // '/irr.png',
-    // '/win.png',
-    // '/wolf.png',
+    '/baba.png',
+    '/donut.png',
+    '/girl.png',
+    '/home.png',
+    '/iron.png',
+    '/irr.png',
+    '/win.png',
   ]
 
   const score = rand(origImgs.length * MAX_IMG_POINTS)
