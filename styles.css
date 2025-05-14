@@ -1,0 +1,21 @@
+@font-face {
+  font-family: 'Tijuf';
+  src: local('Tijuf'), url('./Tijuf.otf') format('opentype'); }
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Tijuf;
+  background-color: #040404;
+  cursor: url('./cursor.svg') 10 10, move; }
+
+canvas {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed; }
