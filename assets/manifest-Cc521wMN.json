@@ -1,0 +1,13 @@
+{
+  "short_name": "YolaPopit",
+  "name": "Your's last Pop it",
+  "display": "standalone",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "star1.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ]
+}
