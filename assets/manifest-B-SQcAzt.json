@@ -2,7 +2,7 @@
   "short_name": "YolaPopit",
   "name": "Your's last Pop it",
   "display": "fullscreen",
-  "orientation": "landscape",
+  "orientation": "landscape-primary",
   "icons": [
     {
       "src": "star1.svg",
