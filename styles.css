@@ -9,7 +9,7 @@ body {
   overflow: hidden;
   font-family: Tijuf;
   background-color: #040404;
-  cursor: url('./cursor.svg') 10 10, move; }
+  cursor: url('./media/cursor.svg') 10 10, move; }
 
 canvas {
   width: 100vw;
