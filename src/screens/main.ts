@@ -1,4 +1,4 @@
-import { useFond, useLogo, usePlay, useScore } from '@/hooks'
+import { useFond, useLogo, usePlayButton, useScoreButton } from '@/hooks'
 import { useWebcore } from '@/webcore'
 import { intersectArc } from '@/webcore/intersect'
 import type { Render } from '@/webcore/types'
@@ -9,8 +9,8 @@ export const Main = (): Render => {
   const { render: fond, setIntersections } = useFond()
 
   const { render: logo, point: useLogoPoint } = useLogo()
-  const { render: play, point: usePlayPoint } = usePlay()
-  const { render: score, point: useScorePoint } = useScore()
+  const { render: play, point: usePlayPoint } = usePlayButton()
+  const { render: score, point: useScorePoint } = useScoreButton()
 
   addEventResize(() => {
     const scorePoint = useScorePoint()

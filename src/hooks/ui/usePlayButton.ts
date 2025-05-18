@@ -8,7 +8,7 @@ type Play = {
   point: () => Point
 }
 
-export const usePlay = (): Play => {
+export const usePlayButton = (): Play => {
   const {
     addEventResize,
     useMeasure,

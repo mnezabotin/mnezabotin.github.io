@@ -1,20 +1,20 @@
 import { Img } from '@/shapes/img'
 import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
+import { intersectArc } from '@/webcore/intersect'
 import { Point, Render } from '@/webcore/types'
 
-type Back = {
+type Score = {
   render: Render
   point: () => Point
 }
 
-export const useBack = (): Back => {
+export const useScoreButton = (): Score => {
   const {
     addEventResize,
     useMeasure,
     useTimer,
     addEventClick,
-    intersect,
     navigate,
     useScreenMeta,
   } = useWebcore()
@@ -22,41 +22,40 @@ export const useBack = (): Back => {
 
   let props: PopitProps
   let popit: Render
-  let back: Render
+  let star: Render
 
   addEventResize(() => {
-    const { s } = useMeasure()
+    const { cx, cy, s, m } = useMeasure()
 
-    const r = Math.round(s * 0.055)
+    const r = Math.round(s * 0.2)
 
     props = {
-      c: '#ff6347',
-      r,
-      x: Math.round(1.6 * r),
-      y: Math.round(1.6 * r),
-      p: from === 'main' && !props
+      c: '#ba68c8',
+      r: Math.round(s * 0.055),
+      x: cx - r - 1 * m,
+      y: cy - r + 1 * m,
+      p: (from === 'score' || from === 'opening') && !props,
     }
 
     popit = Popit(props)
 
-    back = Img({
-      x: Number(props.x) - r + Math.round(r * 0.4),
-      y: Number(props.y) - r + Math.round(r * 0.4),
-      w: r * 2 - Math.round(r * 0.8),
-      src: '/media/back.svg'
+    star = Img({
+      x: Number(props.x) - props.r + Math.round(props.r * 0.5),
+      y: Number(props.y) - props.r + Math.round(props.r * 0.5),
+      w: props.r * 2 - Math.round(props.r * 1.0),
+      src: '/media/star.svg'
     })
   })
 
-  
   useTimer(() => {
     props.p = false
   })
 
   addEventClick((x, y) => {
-    if (intersect({ x, y }, props)) {
+    if (intersectArc({ x, y }, props)) {
       props.p = true
       useTimer(() => {
-        navigate('main')
+        navigate('score')
       }, 100)
     }
   })
@@ -64,7 +63,7 @@ export const useBack = (): Back => {
   const render = () => {
     popit()
     if (!props.p) {
-      back()
+      star()
     }
   }
 

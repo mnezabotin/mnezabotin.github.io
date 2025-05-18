@@ -1,4 +1,4 @@
-import { useBack, useFond, useProgress, useDown, useUp } from '@/hooks'
+import { useBackButton, useFond, useProgress, useDownButton, useUpButton } from '@/hooks'
 import { useWebcore } from '@/webcore'
 import { intersectArc, intersectRect } from '@/webcore/intersect'
 import type { Render } from '@/webcore/types'
@@ -17,15 +17,15 @@ export const Score = (): Render => {
   const {
     render: back,
     point: useBackPoint
-  } = useBack()
+  } = useBackButton()
   const {
     // render: down,
     point: useDownPoint
-  } = useDown(onUp)
+  } = useDownButton(onUp)
   const {
     // render: up,
     point: useUpPoint
-  } = useUp(onDown)
+  } = useUpButton(onDown)
 
   addEventResize(() => {
     const backPoint = useBackPoint()
