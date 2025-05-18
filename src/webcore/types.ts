@@ -42,7 +42,7 @@ export type Stage = {
   shade: (color: string, percent: number) => string
   rotate: (draw: Render, x: number, y: number, angle: number) => void
   translate: (draw: Render, x: number, y: number) => void
-  setBackground: (color: string) => void
+  setBackground: (color: string, pureColor?: string) => void
   createImg: (draw: Render, w: number, h?: number) => HTMLCanvasElement
 }
 

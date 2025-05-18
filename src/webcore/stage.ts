@@ -71,7 +71,10 @@ export const useStage = (): Stage => {
     return img
   }
 
-  const setBackground = (color: string) => document.body.style.background = color
+  const setBackground = (color: string, pureColor?: string) => {
+    document.body.style.background = color
+    document.body.style.backgroundColor = pureColor || color
+  }
 
   return {
     ctx,
