@@ -74,6 +74,7 @@ export const useStage = (): Stage => {
   const setBackground = (color: string, pureColor?: string) => {
     document.body.style.background = color
     document.body.style.backgroundColor = pureColor || color
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', pureColor || color);
   }
 
   return {
