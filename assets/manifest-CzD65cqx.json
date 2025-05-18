@@ -4,7 +4,7 @@
   "display": "fullscreen",
   "orientation": "landscape-primary",
   "icons": [{
-    "src": "../star1.svg",
+    "src": "/star1.svg",
     "sizes": "any"
   }]
 }
