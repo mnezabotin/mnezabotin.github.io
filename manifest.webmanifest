@@ -1,7 +1,10 @@
 {
   "short_name": "Yola Popit",
   "name": "Your's last Pop it",
+  "description": "Popit arcade",
   "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
   "orientation": "landscape-primary",
   "icons": [
     {
