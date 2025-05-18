@@ -43,7 +43,7 @@ export const useScore = (): Score => {
       x: Number(props.x) - props.r + Math.round(props.r * 0.5),
       y: Number(props.y) - props.r + Math.round(props.r * 0.5),
       w: props.r * 2 - Math.round(props.r * 1.0),
-      src: '/star1.svg'
+      src: '/media/star.svg'
     })
   })
 

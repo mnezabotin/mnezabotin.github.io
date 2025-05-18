@@ -20,17 +20,7 @@ export const useProgress = (): Progress => {
   } = useWebcore()
 
   const origImgs = [
-    '/cat.png',
-    '/wolf.png',
-    '/city.png',
-    '/man.png',
-    '/baba.png',
-    '/donut.png',
-    '/girl.png',
-    '/home.png',
-    '/iron.png',
-    '/irr.png',
-    '/win.png',
+    '/media/cat.png',
   ]
 
   const score = rand(origImgs.length * MAX_IMG_POINTS)

@@ -19,11 +19,11 @@ export const Score = (): Render => {
     point: useBackPoint
   } = useBack()
   const {
-    render: down,
+    // render: down,
     point: useDownPoint
   } = useDown(onUp)
   const {
-    render: up,
+    // render: up,
     point: useUpPoint
   } = useUp(onDown)
 
@@ -44,7 +44,7 @@ export const Score = (): Render => {
     fond()
     progress()
     back()
-    down()
-    up()
+    // down()
+    // up()
   }
 }

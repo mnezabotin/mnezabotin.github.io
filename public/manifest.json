@@ -1,0 +1,16 @@
+{
+  "short_name": "YolaPopit",
+  "name": "Your's last Pop it",
+  "display": "fullscreen",
+  "orientation": "landscape-primary",
+  "icons": [
+    {
+      "src": "media/star.svg",
+      "sizes": "72x72 96x96 128x128 256x256"
+    },
+    {
+      "src": "media/star.svg",
+      "sizes": "any"
+    }
+  ]
+}
