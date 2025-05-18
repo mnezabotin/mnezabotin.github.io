@@ -5,11 +5,11 @@
   "orientation": "landscape-primary",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "media/star.svg",
       "sizes": "72x72 96x96 128x128 256x256"
     },
     {
-      "src": "star1.svg",
+      "src": "media/star.svg",
       "sizes": "any"
     }
   ]
