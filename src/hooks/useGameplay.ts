@@ -19,12 +19,12 @@ export const useGameplay = (popits: PopitProps[]) => {
     const pptsLen = popits.length
     const count = rand(
       Math.round(pptsLen * 0.5),
-      Math.round(pptsLen * 0.75)
+      Math.round(pptsLen * 0.8)
     )
 
     const pptsBox = [...popits]
     while (count > 0 && !!pptsBox.length) {
-      const i = rand(pptsBox.length)
+      const i = rand(pptsBox.length - 1)
       const popit = pptsBox[i]
       popit.p = false
       activePpts.push(popit)
@@ -34,6 +34,7 @@ export const useGameplay = (popits: PopitProps[]) => {
   }
 
   const onPop = (popit: PopitProps) => {
+    navigator.vibrate(70)
     popit.p = true
     const i = activePpts.indexOf(popit)
     activePpts.splice(i, 1)
