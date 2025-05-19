@@ -5,6 +5,7 @@ import { stopTimers, useTimer } from '@/webcore/timer'
 import { rand, useRandChain } from '@/webcore/random'
 import { useEvent } from '@/webcore/event'
 import { intersect } from '@/webcore/intersect'
+import { useAudio } from '@/webcore/audio'
 
 import type {
   Route,
@@ -13,7 +14,7 @@ import type {
 
 let webcore: Webcore
 
-export const initWebcore = (routes: Route[]) => {
+export const initWebcore = (routes: Route[], audioPaths?: string[]) => {
   if (webcore) {
     throw new Error('Webcore already specified')
   }
@@ -44,6 +45,8 @@ export const initWebcore = (routes: Route[]) => {
   )
 
   const useMeasure = () => ({ cx, cy, s, m })
+
+  const playAudio = useAudio(audioPaths || [])
 
   webcore = {
     font: 'Tijuf',
@@ -80,6 +83,8 @@ export const initWebcore = (routes: Route[]) => {
 
     addEventResize,
     addEventClick,
+
+    playAudio,
   }
 
   loop(() => stage.render(router.render), 'draw')

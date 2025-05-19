@@ -7,7 +7,8 @@ export const useGameplay = (popits: PopitProps[]) => {
     rand,
     addEventClick,
     addEventResize,
-    intersect
+    intersect,
+    playAudio
   } = useWebcore()
 
   // let rounds = 0
@@ -34,6 +35,7 @@ export const useGameplay = (popits: PopitProps[]) => {
   }
 
   const onPop = (popit: PopitProps) => {
+    playAudio('tap')
     window?.navigator?.vibrate(70)
     popit.p = true
     const i = activePpts.indexOf(popit)

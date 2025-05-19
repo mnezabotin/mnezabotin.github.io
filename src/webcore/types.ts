@@ -106,5 +106,7 @@ export type Webcore = {
   addEventResize: Event['addEventResize']
   addEventClick: Event['addEventClick']
 
+  playAudio: (name: string) => void
+
   font: string
 }
