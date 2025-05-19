@@ -19,6 +19,7 @@ export const usePopits = (): Popits => {
     useTimer,
     intersect,
     useScreenMeta,
+    playAudio,
   } = useWebcore()
   const { from } = useScreenMeta()
 
@@ -82,6 +83,7 @@ export const usePopits = (): Popits => {
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, pausePptProps)) {
+      playAudio('tap')
       pausePptProps.p = true
       useTimer(() => {
         navigate('main')
