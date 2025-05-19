@@ -34,7 +34,7 @@ export const useGameplay = (popits: PopitProps[]) => {
   }
 
   const onPop = (popit: PopitProps) => {
-    navigator.vibrate(70)
+    window?.navigator?.vibrate(70)
     popit.p = true
     const i = activePpts.indexOf(popit)
     activePpts.splice(i, 1)
