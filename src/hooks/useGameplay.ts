@@ -15,7 +15,7 @@ export const useGameplay = (popits: PopitProps[]) => {
 
   let activePpts: PopitProps[] = []
 
-  const onRound = () => {
+  const onRound = (lastPopit?: PopitProps) => {
     activePpts = []
     const size = popits.length
     let count = rand(
@@ -27,12 +27,14 @@ export const useGameplay = (popits: PopitProps[]) => {
     while (count > 0 && !!pptsBox.length) {
       const i = rand(pptsBox.length - 1)
       const popit = pptsBox[i]
-      popit.p = false
-      activePpts.push(popit)
+      if (lastPopit !== popit) {
+        popit.p = false
+        activePpts.push(popit)
 
-      pptsBox.splice(i, 1)
+        pptsBox.splice(i, 1)
 
-      count--
+        count--
+      }
     }
   }
 
@@ -46,7 +48,7 @@ export const useGameplay = (popits: PopitProps[]) => {
     if (activePpts.length <= 0) {
       // rounds--
       // if (rounds > 0) {
-        onRound()
+        onRound(popit)
       // } else {
 
       // }
