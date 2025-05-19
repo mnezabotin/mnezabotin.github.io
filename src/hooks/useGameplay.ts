@@ -13,10 +13,10 @@ export const useGameplay = (popits: PopitProps[]) => {
 
   // let rounds = 0
 
-  const activePpts: PopitProps[] = []
+  let activePpts: PopitProps[] = []
 
   const onRound = () => {
-    activePpts.splice(0)
+    activePpts = []
     const size = popits.length
     const count = rand(
       Math.round(size * 0.5),
@@ -37,10 +37,11 @@ export const useGameplay = (popits: PopitProps[]) => {
   const onPop = (popit: PopitProps) => {
     playAudio('tap')
     window?.navigator?.vibrate?.(70)
+
     popit.p = true
     const i = activePpts.indexOf(popit)
     activePpts.splice(i, 1)
-    if (!activePpts.length) {
+    if (activePpts.length <= 0) {
       // rounds--
       // if (rounds > 0) {
         onRound()
