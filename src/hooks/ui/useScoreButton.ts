@@ -27,11 +27,11 @@ export const useScoreButton = (): Score => {
   addEventResize(() => {
     const { cx, cy, s, m } = useMeasure()
 
-    const r = Math.round(s * 0.2)
+    const r = Math.round(s * 0.25)
 
     props = {
       c: '#ba68c8',
-      r: Math.round(s * 0.055),
+      r: Math.round(s * 0.08),
       x: cx - r - 1 * m,
       y: cy - r + 1 * m,
       p: (from === 'score' || from === 'opening') && !props,

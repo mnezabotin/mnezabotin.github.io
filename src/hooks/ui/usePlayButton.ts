@@ -27,13 +27,13 @@ export const usePlayButton = (): Play => {
   addEventResize(() => {
     const { cx, cy, s, m } = useMeasure()
 
-    const r = Math.round(s * 0.2)
+    const r = Math.round(s * 0.25)
 
     props = {
       c: '#bef181',
-      r: Math.round(r * 0.35),
-      x: cx + r + 3 * m,
-      y: cy + r - m,
+      r: Math.round(s * 0.1),
+      x: cx + r + 2 * m,
+      y: cy + r,
       p: (from === 'game' || from === 'opening') && !props,
     }
 

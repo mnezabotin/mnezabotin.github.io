@@ -33,7 +33,7 @@ export const Opening = (): Render => {
   addEventResize(() => {
     const { cx, cy, s } = useMeasure()
 
-    const r = Math.round(s * 0.2)
+    const r = Math.round(s * 0.25)
 
     pptProps = {
       c: '#ff6347',

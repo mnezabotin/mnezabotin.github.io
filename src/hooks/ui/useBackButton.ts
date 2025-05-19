@@ -27,7 +27,7 @@ export const useBackButton = (): Back => {
   addEventResize(() => {
     const { s } = useMeasure()
 
-    const r = Math.round(s * 0.055)
+    const r = Math.round(s * 0.08)
 
     props = {
       c: '#ff6347',

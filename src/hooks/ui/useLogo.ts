@@ -20,7 +20,7 @@ export const useLogo = (): Logo => {
   addEventResize(() => {
     const { cx, cy, s } = useMeasure()
 
-    const r = Math.round(s * 0.2)
+    const r = Math.round(s * 0.25)
 
     props = {
       c: '#f86a9a',

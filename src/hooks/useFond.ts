@@ -34,7 +34,7 @@ export const useFond = (color = '#00dcfe'): Fond => {
 
     pptProps = []
 
-    const r = Math.round(s * 0.044)
+    const r = Math.round(s * 0.05)
 
     const countw = Math.round(innerWidth / r / 2) - 1
     const ws = Math.round((innerWidth - (2 * r * countw)) / (countw + 1))
@@ -44,7 +44,7 @@ export const useFond = (color = '#00dcfe'): Fond => {
 
     for (let i = 0; i < counth; i++) {
       for (let j = 0; j < countw; j++) {
-        if (rand(rand(20)) < 1) {
+        if (rand(rand(25)) < 1) {
           pptProps.push({
             x: ws + r + j * r * 2 + ws * j,
             y: hs + r + i * r * 2 + hs * i,
