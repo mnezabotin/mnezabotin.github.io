@@ -16,10 +16,10 @@ export const useGameplay = (popits: PopitProps[]) => {
 
   const onRound = () => {
     activePpts.splice(0)
-    const pptsLen = popits.length
+    const size = popits.length
     const count = rand(
-      Math.round(pptsLen * 0.5),
-      Math.round(pptsLen * 0.8)
+      Math.round(size * 0.5),
+      Math.round(size * 0.7)
     )
 
     const pptsBox = [...popits]
