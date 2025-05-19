@@ -1,4 +1,4 @@
-import { useBackButton, useFond, useProgress, useDownButton, useUpButton } from '@/hooks'
+import { useBackButton, useFond, useScore, useDownButton, useUpButton } from '@/hooks'
 import { useWebcore } from '@/webcore'
 import { intersectArc, intersectRect } from '@/webcore/intersect'
 import type { Render } from '@/webcore/types'
@@ -13,7 +13,7 @@ export const Score = (): Render => {
     rect: useProgressRect,
     up: onUp,
     down: onDown
-  } = useProgress()
+  } = useScore()
   const {
     render: back,
     point: useBackPoint

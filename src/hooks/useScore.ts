@@ -1,7 +1,6 @@
 import { Progress } from '@/shapes/progress'
 import { useWebcore } from '@/webcore'
-import { rand } from '@/webcore/random'
-import { Rectangle, Render } from '@/webcore/types'
+import type { Rectangle, Render } from '@/webcore/types'
 
 const MAX_IMG_POINTS = 10000
 
@@ -12,11 +11,12 @@ type Progress = {
   rect: () => Rectangle
 }
 
-export const useProgress = (): Progress => {
+export const useScore = (): Progress => {
   const {
     addEventResize,
     useMeasure,
     translate,
+    rand,
   } = useWebcore()
 
   const origImgs = [

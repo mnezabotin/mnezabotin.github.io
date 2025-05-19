@@ -11,7 +11,6 @@ import type {
   Webcore,
 } from '@/webcore/types'
 
-
 let webcore: Webcore
 
 export const initWebcore = (routes: Route[]) => {

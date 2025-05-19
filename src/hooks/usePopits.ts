@@ -4,20 +4,25 @@ import { Render } from '@/webcore/types'
 import { PALETTE, RAD_DIFF } from '@/consts'
 import { Pause } from '@/shapes/pause'
 
-export const usePopits = (): Render => {
+type Popits = {
+  render: Render
+  popits: PopitProps[]
+}
+
+export const usePopits = (): Popits => {
   const {
     navigate,
     addEventResize,
     addEventClick,
     useMeasure,
-    rand,
+    // rand,
     useTimer,
     intersect,
     useScreenMeta,
   } = useWebcore()
   const { from } = useScreenMeta()
 
-  let pptProps: PopitProps[] = []
+  const pptProps: PopitProps[] = []
   let popits: Render[] = []
 
   let pausePptProps: PopitProps
@@ -27,7 +32,7 @@ export const usePopits = (): Render => {
   addEventResize(() => {
     const { s } = useMeasure()
 
-    pptProps = []
+    pptProps.splice(0)
 
     const r = Math.round(s * RAD_DIFF)
 
@@ -84,21 +89,26 @@ export const usePopits = (): Render => {
     }
   })
 
-  const tic = () => {
-    useTimer(() => {
-      const i = rand(pptProps.length - 1)
-      pptProps[i].p = !pptProps[i].p
-      tic()
-    })
-  }
+  // const tic = () => {
+  //   useTimer(() => {
+  //     const i = rand(pptProps.length - 1)
+  //     pptProps[i].p = !pptProps[i].p
+  //     tic()
+  //   })
+  // }
 
-  tic()
+  // tic()
 
-  return () => {
+  const render = () => {
     popits.forEach(r => r())
     pausePopit()
-    if (!pausePptProps.p) {
+    if (!pausePptProps?.p) {
       pause()
     }
+  }
+
+  return {
+    render,
+    popits: pptProps,
   }
 }
