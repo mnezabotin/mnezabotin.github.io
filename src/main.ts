@@ -27,10 +27,10 @@ const routes: Route[] = [
   },
 ]
 
-// const audioPaths = [
-//   '/sounds/tap.mp3'
-// ]
+const audioPaths = [
+  '/sounds/tap.wav'
+]
 
-initWebcore(routes)
+initWebcore(routes, audioPaths)
 
 document.title = 'Your\'s last Pop it'
