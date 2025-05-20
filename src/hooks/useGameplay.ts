@@ -25,7 +25,7 @@ export const useGameplay = (popits: PopitProps[]): GamePlay => {
   let repeatPpt: PopitProps = { x: 0, y: 0, r: 0 }
 
   const onRound = (lastPopit?: PopitProps) => {
-    rounds = rounds > 0 ? rounds : rand(1, 1)
+    rounds = rounds > 0 ? rounds : rand(3, 5)
     activePpts = []
     const size = popits.length
     let count = rand(
