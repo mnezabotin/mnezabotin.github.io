@@ -4,8 +4,6 @@
   "description": "Popit arcade",
   "display": "standalone",
   "start_url": "/",
-  "scope": "/",
-  "orientation": "landscape-primary",
   "theme_color": "#040404",
   "icons": [
     {

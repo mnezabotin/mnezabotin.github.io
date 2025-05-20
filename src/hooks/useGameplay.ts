@@ -105,7 +105,7 @@ export const useGameplay = (popits: PopitProps[], pausePopit: PopitProps, palett
 
   const onPopClick = (popit: PopitProps) => {
     playAudio('tap')
-    window?.navigator?.vibrate?.(50)
+    // window?.navigator?.vibrate?.(10)
 
     instance.score++
 

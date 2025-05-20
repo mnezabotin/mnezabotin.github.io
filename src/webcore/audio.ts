@@ -14,6 +14,7 @@ export const useAudio = (soundPaths: string[]): useAudioType => {
   const init = () => {
     for (const path of soundPaths) {
       const audio = new Audio(path)
+      audio.volume = 0.25
       audio.addEventListener(
         'ended',
         function () {
@@ -40,6 +41,7 @@ export const useAudio = (soundPaths: string[]): useAudioType => {
       audio.play()
     } else {
       var s = new Audio(path)
+      s.volume = 0.25
       s.play()
     }
   }
