@@ -94,9 +94,9 @@ export const useGameplay = (popits: PopitProps[], pausePopit: PopitProps, palett
       pptsBox.splice(index, 1)
     }
 
-    goTimer?.stop()
-    fillTimer?.stop()
     if (rounds <= 0) {
+      goTimer?.stop()
+      fillTimer?.stop()
       goTimer = useTimer(ticFillTimer, 3000)
     }
 
@@ -117,6 +117,8 @@ export const useGameplay = (popits: PopitProps[], pausePopit: PopitProps, palett
       if (rounds > 0) {
         onRound(popit)
       } else {
+        goTimer?.stop()
+        fillTimer?.stop()
         instance.state = 'results'
       }
     }
