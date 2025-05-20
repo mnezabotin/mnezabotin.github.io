@@ -54,12 +54,12 @@ export const useGameplay = (popits: PopitProps[]): GamePlay => {
     window?.navigator?.vibrate?.(50)
 
     instance.score++
-    rounds--
 
     popit.p = true
     const i = activePpts.indexOf(popit)
     activePpts.splice(i, 1)
     if (activePpts.length <= 0) {
+      rounds--
       if (rounds > 0) {
         onRound(popit)
       } else {
@@ -86,6 +86,7 @@ export const useGameplay = (popits: PopitProps[]): GamePlay => {
   const onResiltsClick = () => {
     instance.state = 'game'
     instance.score = 0
+    rounds = 0
     useTimer(() => {
       onRound()
     })

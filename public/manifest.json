@@ -6,6 +6,7 @@
   "start_url": "/",
   "scope": "/",
   "orientation": "landscape-primary",
+  "theme_color": "#040404",
   "icons": [
     {
       "src": "media/star.svg",
