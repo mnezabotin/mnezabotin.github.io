@@ -1,7 +1,14 @@
 import { type Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 
-export const useGameplay = (popits: PopitProps[]) => {
+type GamePlayState = 'gameover' | 'game' | 'results'
+
+type GamePlay = {
+  state: GamePlayState
+  score: number
+}
+
+export const useGameplay = (popits: PopitProps[]): GamePlay => {
   const {
     useTimer,
     rand,
@@ -11,11 +18,14 @@ export const useGameplay = (popits: PopitProps[]) => {
     playAudio
   } = useWebcore()
 
-  // let rounds = 0
+  const instance: GamePlay = { state: 'game', score: 0 }
+  let rounds = 0
 
   let activePpts: PopitProps[] = []
+  let repeatPpt: PopitProps = { x: 0, y: 0, r: 0 }
 
   const onRound = (lastPopit?: PopitProps) => {
+    rounds = rounds > 0 ? rounds : rand(1, 1)
     activePpts = []
     const size = popits.length
     let count = rand(
@@ -24,42 +34,73 @@ export const useGameplay = (popits: PopitProps[]) => {
     )
 
     const pptsBox = [...popits]
-    while (count > 0 && !!pptsBox.length) {
-      const i = rand(pptsBox.length - 1)
-      const popit = pptsBox[i]
-      if (lastPopit !== popit) {
-        popit.p = false
-        activePpts.push(popit)
+    if (lastPopit) {
+      const lastPptInd = pptsBox.indexOf(lastPopit)
+      pptsBox.splice(lastPptInd, 1)
+    }
 
-        pptsBox.splice(i, 1)
+    for (let i = count; i > 0; i--) {
+      const index = rand(pptsBox.length - 1)
+      const popit = pptsBox[index]
+      popit.p = false
+      activePpts.push(popit)
 
-        count--
-      }
+      pptsBox.splice(index, 1)
     }
   }
 
-  const onPop = (popit: PopitProps) => {
+  const onPopClick = (popit: PopitProps) => {
     playAudio('tap')
-    window?.navigator?.vibrate?.(70)
+    window?.navigator?.vibrate?.(50)
+
+    instance.score++
+    rounds--
 
     popit.p = true
     const i = activePpts.indexOf(popit)
     activePpts.splice(i, 1)
     if (activePpts.length <= 0) {
-      // rounds--
-      // if (rounds > 0) {
+      if (rounds > 0) {
         onRound(popit)
-      // } else {
-
-      // }
+      } else {
+        instance.state = 'results'
+      }
     }
   }
 
-  addEventClick((x, y) => {
+  const onGameClick = (x: number, y: number) => {
     for (const popit of activePpts) {
       if (intersect({ x, y }, popit)) {
-        onPop(popit)
+        onPopClick(popit)
       }
+    }
+  }
+
+  const onGameOverClick = (x: number, y: number) => {
+    if (intersect({ x, y }, repeatPpt)) {
+      rounds = 0
+      onRound(repeatPpt)
+    }
+  }
+
+  const onResiltsClick = () => {
+    instance.state = 'game'
+    instance.score = 0
+    useTimer(() => {
+      onRound()
+    })
+  }
+
+  addEventClick((x, y) => {
+    switch(instance.state) {
+      case 'game':
+        onGameClick(x, y)
+        break
+      case 'gameover':
+        onGameOverClick(x, y)
+        break
+      default:
+        onResiltsClick()
     }
   })
   
@@ -68,4 +109,6 @@ export const useGameplay = (popits: PopitProps[]) => {
       onRound()
     })
   })
+
+  return instance
 }

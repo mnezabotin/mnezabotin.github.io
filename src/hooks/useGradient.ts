@@ -1,7 +1,6 @@
 import { useWebcore } from '@/webcore'
-import { PALETTE, RAD_DIFF } from '@/consts'
 
-export const useGradient = () => {
+export const useGradient = (palette: string[]) => {
   const {
     addEventResize,
     useMeasure,
@@ -11,7 +10,7 @@ export const useGradient = () => {
   addEventResize(() => {
     const { s } = useMeasure()
 
-    const r = Math.round(s * RAD_DIFF)
+    const r = Math.round(s * 0.14)
     
     const countw = Math.round(innerWidth / r / 2) - 1
     const ws = (innerWidth - (2 * r * countw)) / (countw + 1)
@@ -29,16 +28,16 @@ export const useGradient = () => {
     const colorStops = []
 
     for (let j = 0; j < count; j++) {
-      if (!PALETTE[pind]) {
+      if (!palette[pind]) {
         pind = 0
       }
 
-      colorStops.push(`${PALETTE[pind]} ${(start + r + j * r * 2 + start * j) / size * 100}%`)
+      colorStops.push(`${palette[pind]} ${(start + r + j * r * 2 + start * j) / size * 100}%`)
       pind++
     }
 
     const direction = dirIsRght ? 'to right' : 'to bottom'
 
-    setBackground(`linear-gradient(${direction}, ${colorStops.join(', ')})`, PALETTE[0])
+    setBackground(`linear-gradient(${direction}, ${colorStops.join(', ')})`, palette[0])
   })
 }

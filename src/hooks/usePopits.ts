@@ -1,7 +1,6 @@
 import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Render } from '@/webcore/types'
-import { PALETTE, RAD_DIFF } from '@/consts'
 import { Pause } from '@/shapes/pause'
 
 type Popits = {
@@ -9,7 +8,7 @@ type Popits = {
   popits: PopitProps[]
 }
 
-export const usePopits = (): Popits => {
+export const usePopits = (palette: string[]): Popits => {
   const {
     navigate,
     addEventResize,
@@ -35,7 +34,7 @@ export const usePopits = (): Popits => {
 
     pptProps.splice(0)
 
-    const r = Math.round(s * RAD_DIFF)
+    const r = Math.round(s * 0.14)
 
     const countw = Math.round(innerWidth / r / 2) - 1
     const ws = (innerWidth - (2 * r * countw)) / (countw + 1)
@@ -48,7 +47,7 @@ export const usePopits = (): Popits => {
 
     for (let i = 0; i < counth; i++) {
       for (let j = 0; j < countw; j++) {
-        if (!PALETTE[pind]) {
+        if (!palette[pind]) {
           pind = 0
         }
 
@@ -56,7 +55,7 @@ export const usePopits = (): Popits => {
           x: ws + r + j * r * 2 + ws * j,
           y: hs + r + i * r * 2 + hs * i,
           r,
-          c: PALETTE[pind],
+          c: palette[pind],
           p: true
         }
         
