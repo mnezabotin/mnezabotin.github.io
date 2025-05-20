@@ -94,11 +94,10 @@ export const useGameplay = (popits: PopitProps[], pausePopit: PopitProps, palett
       pptsBox.splice(index, 1)
     }
 
-    if (rounds <= 0) {
-      goTimer?.stop()
-      fillTimer?.stop()
-      goTimer = useTimer(ticFillTimer, activePpts.length * 250)
-    }
+    
+    goTimer?.stop()
+    fillTimer?.stop()
+    goTimer = useTimer(ticFillTimer, activePpts.length * 300)
 
     rounds = rounds > 0 ? rounds : rand(3, 5)
   }
