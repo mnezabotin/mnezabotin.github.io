@@ -68,7 +68,7 @@ export const useGameplay = (popits: PopitProps[], pausePopit: PopitProps, palett
       }
 
       ticFillTimer()
-    })
+    }, 700)
   }
 
   const onRound = (lastPopit?: PopitProps) => {
@@ -97,7 +97,7 @@ export const useGameplay = (popits: PopitProps[], pausePopit: PopitProps, palett
     if (rounds <= 0) {
       goTimer?.stop()
       fillTimer?.stop()
-      goTimer = useTimer(ticFillTimer, 3000)
+      goTimer = useTimer(ticFillTimer, activePpts.length * 250)
     }
 
     rounds = rounds > 0 ? rounds : rand(3, 5)
