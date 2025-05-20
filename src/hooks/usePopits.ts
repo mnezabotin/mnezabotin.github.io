@@ -6,6 +6,7 @@ import { Pause } from '@/shapes/pause'
 type Popits = {
   render: Render
   popits: PopitProps[]
+  pausePopit: PopitProps
 }
 
 export const usePopits = (palette: string[]): Popits => {
@@ -25,7 +26,7 @@ export const usePopits = (palette: string[]): Popits => {
   const pptProps: PopitProps[] = []
   let popits: Render[] = []
 
-  let pausePptProps: PopitProps
+  let pausePptProps: PopitProps = { x: 0, y: 0, r: 0}
   let pausePopit: Render
   let pause: Render
 
@@ -60,9 +61,14 @@ export const usePopits = (palette: string[]): Popits => {
         }
         
         if (i === 0 && j === countw - 1) {
-          pausePptProps = { ...props, p: from === 'main' && !pausePptProps }
+          // pausePptProps = { ...props, p: from === 'main' && !pausePptProps }
+          pausePptProps.x = props.x
+          pausePptProps.y = props.y
+          pausePptProps.r = props.r
+          pausePptProps.c = props.c
+          pausePptProps.p = from === 'main' && !pausePptProps
           pausePopit = Popit(pausePptProps)
-          pause = Pause(props)
+          pause = Pause(pausePptProps)
         } else {
           pptProps.push(props)
         }
@@ -111,5 +117,6 @@ export const usePopits = (palette: string[]): Popits => {
   return {
     render,
     popits: pptProps,
+    pausePopit: pausePptProps
   }
 }

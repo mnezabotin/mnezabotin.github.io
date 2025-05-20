@@ -1,5 +1,9 @@
 import { type Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
+import { Timer } from '@/webcore/types'
+import { useGradient } from './useGradient'
+
+const TOMATE_COLOR = '#ff6347'
 
 type GamePlayState = 'gameover' | 'game' | 'results'
 
@@ -8,24 +12,66 @@ type GamePlay = {
   score: number
 }
 
-export const useGameplay = (popits: PopitProps[]): GamePlay => {
+export const useGameplay = (popits: PopitProps[], pausePopit: PopitProps, palette: string[]): GamePlay => {
   const {
     useTimer,
     rand,
     addEventClick,
-    addEventResize,
     intersect,
-    playAudio
+    playAudio,
+    setBackground
   } = useWebcore()
 
   const instance: GamePlay = { state: 'game', score: 0 }
-  let rounds = 0
 
+  let rounds = 0
   let activePpts: PopitProps[] = []
   let repeatPpt: PopitProps = { x: 0, y: 0, r: 0 }
+  let origPptCols: (string | undefined)[] = []
+  let origPausePptCol: string | undefined
+
+  let goTimer: Timer
+  let fillTimer: Timer
+
+  const ticFillTimer = () => {
+    fillTimer = useTimer(() => {
+      if (popits.length === activePpts.length) {
+        fillTimer.stop()
+        origPptCols = popits.map(p => p.c)
+        origPausePptCol = pausePopit.c
+        popits.forEach(p => {
+          p.c = TOMATE_COLOR
+        })
+        pausePopit.c = TOMATE_COLOR
+        setBackground(TOMATE_COLOR)
+        const index = rand(popits.length - 1)
+        repeatPpt = popits[index]
+        repeatPpt.p = false
+        instance.state = 'gameover'
+        useTimer(() => {
+          popits.forEach(p => {
+            p.p = true
+          })
+          const index = rand(popits.length - 1)
+          repeatPpt = popits[index]
+          repeatPpt.p = false
+        })
+        return
+      }
+
+      const unactivePpts = popits.filter(p => activePpts.indexOf(p) === -1)
+      const index = rand(unactivePpts.length - 1)
+      const popit = unactivePpts[index]
+      if (popit) {
+        popit.p = false
+        activePpts.push(unactivePpts[index])
+      }
+
+      ticFillTimer()
+    })
+  }
 
   const onRound = (lastPopit?: PopitProps) => {
-    rounds = rounds > 0 ? rounds : rand(3, 5)
     activePpts = []
     const size = popits.length
     let count = rand(
@@ -47,6 +93,14 @@ export const useGameplay = (popits: PopitProps[]): GamePlay => {
 
       pptsBox.splice(index, 1)
     }
+
+    goTimer?.stop()
+    fillTimer?.stop()
+    if (rounds <= 0) {
+      goTimer = useTimer(ticFillTimer, 3000)
+    }
+
+    rounds = rounds > 0 ? rounds : rand(3, 5)
   }
 
   const onPopClick = (popit: PopitProps) => {
@@ -78,8 +132,20 @@ export const useGameplay = (popits: PopitProps[]): GamePlay => {
 
   const onGameOverClick = (x: number, y: number) => {
     if (intersect({ x, y }, repeatPpt)) {
+      instance.state = 'game'
       rounds = 0
-      onRound(repeatPpt)
+      instance.score = 0
+      repeatPpt.p = true
+      useTimer(() => {
+        useGradient(palette)
+        pausePopit.c = origPausePptCol
+        popits.forEach((p, i) => {
+          p.c = origPptCols[i]
+        })
+        useTimer(() => {
+          onRound(repeatPpt)
+        }, 1000)
+      })
     }
   }
 
@@ -105,10 +171,8 @@ export const useGameplay = (popits: PopitProps[]): GamePlay => {
     }
   })
   
-  addEventResize(() => {
-    useTimer(() => {
-      onRound()
-    })
+  useTimer(() => {
+    onRound()
   })
 
   return instance

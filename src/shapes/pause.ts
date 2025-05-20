@@ -14,14 +14,14 @@ export const Pause = (props: Props): Render => {
   const lw = Math.round(props.r / 4)
   const line = Math.round(0.12 * props.r)
 
-  const color = shade(props.c || 'blue', -3)
-
   return (ctx = mainCtx) => {
     const {
       r,
       x = r,
       y = r,
     } = props
+
+    const color = shade(props.c || 'blue', -3)
 
     ctx.lineCap = 'round'
     ctx.strokeStyle = color
