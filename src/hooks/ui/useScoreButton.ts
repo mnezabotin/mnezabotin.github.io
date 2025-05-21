@@ -1,8 +1,8 @@
 import { Img } from '@/shapes/img'
 import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
-import { intersectArc } from '@/webcore/intersect'
 import { Point, Render } from '@/webcore/types'
+import { usePopitNavigate } from '../usePopitNavigate'
 
 type Score = {
   render: Render
@@ -14,13 +14,11 @@ export const useScoreButton = (): Score => {
     addEventResize,
     useMeasure,
     useTimer,
-    addEventClick,
-    navigate,
     useScreenMeta,
   } = useWebcore()
   const { from } = useScreenMeta()
 
-  let props: PopitProps
+  let props: PopitProps = { x: 0, y: 0, r: 0 }
   let popit: Render
   let star: Render
 
@@ -51,14 +49,7 @@ export const useScoreButton = (): Score => {
     props.p = false
   })
 
-  addEventClick((x, y) => {
-    if (intersectArc({ x, y }, props)) {
-      props.p = true
-      useTimer(() => {
-        navigate('score')
-      }, 100)
-    }
-  })
+  usePopitNavigate(props, 'score')
 
   const render = () => {
     popit()

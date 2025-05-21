@@ -1,22 +1,5 @@
 import { Point, Rectangle } from '@/webcore/types'
 
-export const intersect = (a: Point, b: Point): boolean => {
-  const ar = a.r || 0
-  const br = b.r || 0
-
-  const ax = a.x || 0
-  const ay = a.y || 0
-
-  const bx = b.x || 0
-  const by = b.y || 0
-
-  const xd = Math.pow(Math.abs(ax - bx), 2)
-  const yd = Math.pow(Math.abs(ay - by), 2)
-  const rd = Math.pow(ar + br, 2)
-
-  return xd + yd <= rd
-}
-
 export const intersectArc = (a: Point, b: Point): boolean => {
   const xd = Math.pow(Math.abs(a.x - b.x), 2)
   const yd = Math.pow(Math.abs(a.y - b.y), 2)
@@ -43,3 +26,5 @@ export const intersectRect = (a: Point, b: Rectangle): boolean => {
   return Math.abs(b.x + bw / 2 - a.x) <= bw / 2 + ar &&
     Math.abs(b.y + bh / 2 - a.y) <= bh / 2 + ar
 }
+
+export const intersect = (a: Point, b: Point): boolean => intersectArc(a, b)
