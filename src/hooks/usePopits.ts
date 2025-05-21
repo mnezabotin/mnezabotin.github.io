@@ -2,6 +2,7 @@ import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Render } from '@/webcore/types'
 import { Pause } from '@/shapes/pause'
+import { usePopitNavigate } from './usePopitNavigate'
 
 type Popits = {
   render: Render
@@ -94,6 +95,9 @@ export const usePopits = ({ palette, retry }: Props): Popits => {
 
     if (retry) {
       retryPopit = pptProps[rand(pptProps.length - 1)]
+      useTimer(() => {
+        retryPopit.p = false
+      })
     }
 
     popits = pptProps
@@ -105,10 +109,6 @@ export const usePopits = ({ palette, retry }: Props): Popits => {
   })
 
   if (retry) {
-    useTimer(() => {
-      retryPopit.p = false
-    })
-
     addEventClick((x, y) => {
       if (intersect({ x, y }, retryPopit)) {
         retryPopit.p = true
@@ -119,14 +119,7 @@ export const usePopits = ({ palette, retry }: Props): Popits => {
     })
   }
 
-  addEventClick((x, y) => {
-    if (intersect({ x, y }, pausePptProps)) {
-      pausePptProps.p = true
-      useTimer(() => {
-        navigate('main')
-      }, 100)
-    }
-  })
+  usePopitNavigate(pausePptProps, 'main')
 
   const render = () => {
     popits.forEach(r => r())
