@@ -24,7 +24,7 @@ const rgbToHex = (orig: Uint8ClampedArray | undefined) => {
 type ImageValue = {
   drawImg: HTMLCanvasElement | null
   img: HTMLImageElement
-  cols: string[][]
+  cols: string[]
   isFilled: boolean
   r: number
   score: number
@@ -41,7 +41,7 @@ export type Props = {
 }
 
 export const Progress = (props: Props): Render => {
-  const { ctx: mainCtx, shade, createImg } = useWebcore()
+  const { ctx: mainCtx, shade, createImg, useRandChain } = useWebcore()
 
   let imageValue: ImageValue
 
@@ -87,13 +87,27 @@ export const Progress = (props: Props): Render => {
           x: PIXEL_OFFSET + j * w,
           y: PIXEL_OFFSET + i * w,
           r: w / 2,
-          c: i * 100 + j >= props.score
-            ? DARK_COL
-            : imageValue.cols[j][i]
+          c: DARK_COL,
+          // c: i * 100 + j >= props.score
+          //   ? DARK_COL
+          //   : imageValue.cols[j * COUNT_PX + i]
         }
         
         pxsProps.push(pxProps)
       }
+    }
+
+    let score = props.score
+    const boxPxsProps = [...pxsProps]
+    const rand = useRandChain(0)
+  
+    for (let i = score; i > 0; i--) {
+      const randInd = rand(boxPxsProps.length - 1)
+      const px = boxPxsProps[randInd]
+      const origInd = pxsProps.indexOf(px)
+      px.c = imageValue.cols[origInd]
+
+      boxPxsProps.splice(randInd, 1)
     }
 
     return pxsProps
@@ -120,10 +134,10 @@ export const Progress = (props: Props): Render => {
     for (let i = 0; i < COUNT_PX; i++) {
       const arr = []
       for (let j = 0; j < COUNT_PX; j++) {
-        const data = context?.getImageData(i, j, 1, 1)?.data
+        const data = context?.getImageData(j, i, 1, 1)?.data
         arr.push(rgbToHex(data))
       }
-      imageValue.cols.push(arr)
+      imageValue.cols.push(...arr)
     }
 
     imageValue.isFilled = true
