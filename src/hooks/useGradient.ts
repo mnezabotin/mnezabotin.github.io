@@ -46,7 +46,9 @@ export const useGradient = (backoff = false): Gradient => {
 
     const direction = dirIsRght ? 'to right' : 'to bottom'
 
-    setBackground(`linear-gradient(${direction}, ${colorStops.join(', ')})`, palette[0])
+    setBackground(
+      `linear-gradient(${direction}, ${colorStops.join(', ')})`,
+      innerWidth < innerHeight ? palette[0] : '#040404')
   }
 
   if (!backoff) {
