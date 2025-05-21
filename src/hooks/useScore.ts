@@ -1,6 +1,7 @@
 import { Progress } from '@/shapes/progress'
 import { useWebcore } from '@/webcore'
 import type { Rectangle, Render } from '@/webcore/types'
+import { useStorage } from './useStorage'
 
 const MAX_IMG_POINTS = 10000
 
@@ -16,14 +17,15 @@ export const useScore = (): Score => {
     addEventResize,
     useMeasure,
     translate,
-    rand,
   } = useWebcore()
+
+  const { getScore } = useStorage()
 
   const origImgs = [
     '/media/cat.png',
   ]
 
-  const score = rand(origImgs.length * MAX_IMG_POINTS)
+  const score = getScore()
   
   let progressTabs: Render[]
   let pgsRad = 0

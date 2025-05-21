@@ -1,6 +1,7 @@
 import { type Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Timer } from '@/webcore/types'
+import { useStorage } from './useStorage'
 
 export const useGameplay = (popits: PopitProps[]) => {
   const {
@@ -10,6 +11,8 @@ export const useGameplay = (popits: PopitProps[]) => {
     intersect,
     navigate
   } = useWebcore()
+
+  const { addScore } = useStorage()
 
   let activePpts: PopitProps[] = []
 
@@ -70,7 +73,7 @@ export const useGameplay = (popits: PopitProps[]) => {
     
     goTimer?.stop()
     fillTimer?.stop()
-    goTimer = useTimer(ticFillTimer, activePpts.length * 250)
+    goTimer = useTimer(ticFillTimer, activePpts.length * 350)
 
     rounds = rounds > 0 ? rounds : rand(3, 5)
   }
@@ -86,6 +89,7 @@ export const useGameplay = (popits: PopitProps[]) => {
       if (rounds > 0) {
         onRound(popit)
       } else {
+        addScore(score)
         navigate('gamescore')
       }
     }
