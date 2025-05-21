@@ -42,8 +42,8 @@ export const useGameplay = (popits: PopitProps[]) => {
   }
 
   const ticFillTimer = () => {
-    addTic -= 10
     fillTimer = useTimer(() => {
+      addTic -= 10
       if (popits.length === activePpts.length) {
         stop = true
         fillTimer.stop()
@@ -56,7 +56,7 @@ export const useGameplay = (popits: PopitProps[]) => {
       addActivePopit()
 
       ticFillTimer()
-    }, Math.max(addTic, 200))
+    }, Math.max(addTic, 300))
   }
 
   const onRound = (lastPopit?: PopitProps) => {
