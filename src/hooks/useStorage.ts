@@ -3,7 +3,7 @@ const APP_KEY = 'ylp'
 const SCORE_KEY = 'score'
 
 const DIFFICULTY_LVL_KEY = 'difficulty'
-const DIFFICULTY_LVL_TICS = [900, 700, 500, 400, 350]
+const DIFFICULTY_LVL_TICS = [800, 750, 700, 650, 600, 550, 450, 400, 350]
 const DIFFICULTY_PPT_RAD = [0.15, 0.14, 0.11, 0.09, 0.075]
 
 type Storage = {
