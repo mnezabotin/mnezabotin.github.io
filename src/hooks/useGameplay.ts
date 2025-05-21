@@ -13,7 +13,10 @@ export const useGameplay = (popits: PopitProps[]) => {
     navigate
   } = useWebcore()
 
-  const { addScore } = useStorage()
+  const {
+    addScore,
+    getDifficultyTic,
+  } = useStorage()
 
   let activePpts: PopitProps[] = []
 
@@ -24,6 +27,8 @@ export const useGameplay = (popits: PopitProps[]) => {
 
   let rounds = 0
   let score = 0
+
+  const tickDelay = getDifficultyTic()
 
   const ticFillTimer = () => {
     fillTimer = useTimer(() => {
@@ -45,7 +50,7 @@ export const useGameplay = (popits: PopitProps[]) => {
       }
 
       ticFillTimer()
-    })
+    }, tickDelay)
   }
 
   const onRound = (lastPopit?: PopitProps) => {
@@ -71,10 +76,9 @@ export const useGameplay = (popits: PopitProps[]) => {
       pptsBox.splice(index, 1)
     }
 
-    
     goTimer?.stop()
     fillTimer?.stop()
-    goTimer = useTimer(ticFillTimer, activePpts.length * 350)
+    goTimer = useTimer(ticFillTimer, activePpts.length * tickDelay)
 
     rounds = rounds > 0 ? rounds : rand(3, 5)
   }

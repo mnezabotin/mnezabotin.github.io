@@ -2,6 +2,7 @@ import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Render } from '@/webcore/types'
 import { Pause } from '@/shapes/pause'
+import { useStorage } from './useStorage'
 
 type Popits = {
   render: Render
@@ -25,6 +26,7 @@ export const usePopits = ({ palette, retry }: Props): Popits => {
     intersect,
   } = useWebcore()
   const { from } = useScreenMeta()
+  const { getDifficultyRad } = useStorage()
 
   const pptProps: PopitProps[] = []
   let popits: Render[] = []
@@ -48,7 +50,8 @@ export const usePopits = ({ palette, retry }: Props): Popits => {
     pptProps.splice(0)
 
     // 0.15 0.14 0.11 0.09
-    const r = Math.round(s * 0.14)
+    const dr = getDifficultyRad()
+    const r = Math.round(s * dr)
 
     const countw = Math.round(innerWidth / r / 2) - 1
     const ws = (innerWidth - (2 * r * countw)) / (countw + 1)

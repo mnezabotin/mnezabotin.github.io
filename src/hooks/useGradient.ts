@@ -1,4 +1,5 @@
 import { useWebcore } from '@/webcore'
+import { useStorage } from './useStorage'
 
 type Gradient = string[]
 
@@ -10,12 +11,14 @@ export const useGradient = (backoff = false): Gradient => {
     useMeasure,
     setBackground,
   } = useWebcore()
+  const { getDifficultyRad } = useStorage()
 
   const onResizeEvent = () => {
     const { s } = useMeasure()
 
     // 0.15 0.14 0.11 0.09
-    const r = Math.round(s * 0.15)
+    const dr = getDifficultyRad()
+    const r = Math.round(s * dr)
     
     const countw = Math.round(innerWidth / r / 2) - 1
     const ws = (innerWidth - (2 * r * countw)) / (countw + 1)
