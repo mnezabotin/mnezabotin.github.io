@@ -4,14 +4,23 @@ import { useStorage } from './useStorage'
 type Gradient = string[]
 
 export const useGradient = (backoff = false): Gradient => {
-  const palette = ['#f86a9a', '#C69FEE', '#5bb2f7', '#92E6E6', '#7ceab2', '#bef181', '#EFCD74', '#fd8059']
+  let palette = ['#f86a9a', '#C69FEE', '#5bb2f7', '#92E6E6', '#7ceab2', '#bef181', '#EFCD74', '#fd8059']
 
   const {
     addEventResize,
     useMeasure,
     setBackground,
+    rand,
   } = useWebcore()
   const { getDifficultyRad } = useStorage()
+
+  palette = [
+    ...palette.splice(
+      rand(palette.length - 1),
+      palette.length
+    ),
+    ...palette
+  ]
 
   const onResizeEvent = () => {
     const { s } = useMeasure()
