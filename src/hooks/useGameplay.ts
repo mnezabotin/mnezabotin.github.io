@@ -70,7 +70,7 @@ export const useGameplay = (popits: PopitProps[]) => {
     
     goTimer?.stop()
     fillTimer?.stop()
-    goTimer = useTimer(ticFillTimer, activePpts.length * 350)
+    goTimer = useTimer(ticFillTimer, activePpts.length * 250)
 
     rounds = rounds > 0 ? rounds : rand(3, 5)
   }

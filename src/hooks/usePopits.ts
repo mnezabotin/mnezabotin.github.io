@@ -2,7 +2,6 @@ import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Render } from '@/webcore/types'
 import { Pause } from '@/shapes/pause'
-import { usePopitNavigate } from './usePopitNavigate'
 
 type Popits = {
   render: Render
@@ -21,6 +20,9 @@ export const usePopits = ({ palette, retry }: Props): Popits => {
     rand,
     useTimer,
     useScreenMeta,
+    navigate,
+    addEventClick,
+    intersect,
   } = useWebcore()
   const { from } = useScreenMeta()
 
@@ -29,8 +31,8 @@ export const usePopits = ({ palette, retry }: Props): Popits => {
 
   let pausePopit: Render
   let pause: Render
-  let retryPopit: PopitProps = { x: 0, y: 0, r: 0}
-  let pausePptProps: PopitProps = { x: 0, y: 0, r: 0}
+  let retryPopit: PopitProps
+  let pausePptProps: PopitProps
 
   const getFill = (i: number) => {
     if (Array.isArray(palette)) {
@@ -106,10 +108,24 @@ export const usePopits = ({ palette, retry }: Props): Popits => {
   })
 
   if (retry) {
-    usePopitNavigate(retryPopit, 'game')
+    addEventClick((x, y) => {
+      if (intersect({ x, y }, retryPopit)) {
+        retryPopit.p = true
+        useTimer(() => {
+          navigate('game')
+        }, 100)
+      }
+    })
   }
 
-  usePopitNavigate(pausePptProps, 'main')
+  addEventClick((x, y) => {
+    if (intersect({ x, y }, pausePptProps)) {
+      pausePptProps.p = true
+      useTimer(() => {
+        navigate('main')
+      }, 100)
+    }
+  })
 
   const render = () => {
     popits.forEach(r => r())
