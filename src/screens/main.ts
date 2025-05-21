@@ -6,7 +6,7 @@ import type { Render } from '@/webcore/types'
 export const Main = (): Render => {
   const { addEventResize } = useWebcore()
 
-  const { render: fond, setIntersections } = useFond()
+  const { render: fond, setIntersections } = useFond({})
 
   const { render: logo, point: useLogoPoint } = useLogo()
   const { render: play, point: usePlayPoint } = usePlayButton()

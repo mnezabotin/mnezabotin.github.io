@@ -6,7 +6,7 @@ import type { Render } from '@/webcore/types'
 export const Score = (): Render => {
   const { addEventResize } = useWebcore()
 
-  const { render: fond, setIntersections } = useFond('#ffeb3b')
+  const { render: fond, setIntersections } = useFond({ color: '#ffeb3b', frequency: 7 })
 
   const {
     render: progress,

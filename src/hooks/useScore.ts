@@ -60,13 +60,15 @@ export const useScore = (): Score => {
   }
 
   const rect = () => {
-    const { cx } = useMeasure()
+    const { cx, cy } = useMeasure()
+
+    const isLandscape = innerWidth > innerHeight
 
     return {
-      x: cx - pgsRad,
-      y: 0,
-      w: 2 * pgsRad,
-      h: innerHeight
+      x: isLandscape ? cx - pgsRad : 0,
+      y: isLandscape ? 0 : cy - pgsRad,
+      w: isLandscape ? 2 * pgsRad : innerWidth,
+      h: isLandscape ? innerHeight : 2 * pgsRad
     }
   }
 

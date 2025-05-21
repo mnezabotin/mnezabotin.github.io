@@ -9,7 +9,12 @@ type Fond = {
   setIntersections: FondIntersection
 }
 
-export const useFond = (color = '#00dcfe'): Fond => {
+type Props = {
+  color?: string
+  frequency?: number
+}
+
+export const useFond = ({ color = '#00dcfe', frequency = 25 }: Props): Fond => {
   const {
     addEventResize,
     useRandChain,
@@ -44,7 +49,7 @@ export const useFond = (color = '#00dcfe'): Fond => {
 
     for (let i = 0; i < counth; i++) {
       for (let j = 0; j < countw; j++) {
-        if (rand(rand(25)) < 1) {
+        if (rand(rand(frequency)) < 1) {
           pptProps.push({
             x: ws + r + j * r * 2 + ws * j,
             y: hs + r + i * r * 2 + hs * i,
@@ -67,7 +72,7 @@ export const useFond = (color = '#00dcfe'): Fond => {
         pptProps[i].p = !pptProps[i].p
       }
       tic()
-    })
+    }, 750)
   }
 
   if (from === 'opening') {
