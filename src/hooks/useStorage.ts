@@ -3,8 +3,8 @@ const APP_KEY = 'ylp'
 const SCORE_KEY = 'score'
 
 const DIFFICULTY_LVL_KEY = 'difficulty'
-const DIFFICULTY_LVL_TICS = [1000, 800, 500, 350, 250]
-const DIFFICULTY_PPT_RAD = [0.15, 0.14, 0.11, 0.09]
+const DIFFICULTY_LVL_TICS = [1000, 800, 500, 400, 350]
+const DIFFICULTY_PPT_RAD = [0.15, 0.14, 0.11, 0.09, 0.075]
 
 type Storage = {
   getScore: () => number
@@ -32,7 +32,7 @@ export const useStorage = (): Storage => {
   }
 
   const getDifficulty = (): number => {
-    const value = getValue(DIFFICULTY_LVL_KEY) || 5
+    const value = getValue(DIFFICULTY_LVL_KEY) || DIFFICULTY_LVL_TICS.length
 
     return +value
   }
@@ -44,7 +44,7 @@ export const useStorage = (): Storage => {
       DIFFICULTY_LVL_KEY,
       Math.min(
         Math.max(d + lvl, 0),
-        19
+        DIFFICULTY_PPT_RAD.length * DIFFICULTY_LVL_TICS.length - 1
       )
     )
   }
@@ -54,16 +54,16 @@ export const useStorage = (): Storage => {
 
   const getDifficultyRad = (): number => {
     const d = getDifficulty()
-    const i = Math.floor(d / 5)
+    const i = Math.floor(d / DIFFICULTY_LVL_TICS.length)
 
     return DIFFICULTY_PPT_RAD[i] || DIFFICULTY_PPT_RAD[1]
   }
 
   const getDifficultyTic = (): number => {
     const d = getDifficulty()
-    const w = Math.floor(d / 5)
+    const w = Math.floor(d / DIFFICULTY_LVL_TICS.length)
 
-    const i = d - w * 5
+    const i = d - w * DIFFICULTY_LVL_TICS.length
 
     return DIFFICULTY_LVL_TICS[i] ||
       DIFFICULTY_LVL_TICS[0]
