@@ -30,6 +30,16 @@ export const useGameplay = (popits: PopitProps[]) => {
 
   const tickDelay = getDifficultyTic()
 
+  const addActivePopit = () => {
+    const unactivePpts = popits.filter(p => activePpts.indexOf(p) === -1)
+    const index = rand(unactivePpts.length - 1)
+    const popit = unactivePpts[index]
+    if (popit) {
+      popit.p = false
+      activePpts.push(unactivePpts[index])
+    }
+  }
+
   const ticFillTimer = () => {
     fillTimer = useTimer(() => {
       if (popits.length === activePpts.length) {
@@ -41,13 +51,7 @@ export const useGameplay = (popits: PopitProps[]) => {
         return
       }
 
-      const unactivePpts = popits.filter(p => activePpts.indexOf(p) === -1)
-      const index = rand(unactivePpts.length - 1)
-      const popit = unactivePpts[index]
-      if (popit) {
-        popit.p = false
-        activePpts.push(unactivePpts[index])
-      }
+      addActivePopit()
 
       ticFillTimer()
     }, tickDelay)
@@ -100,7 +104,7 @@ export const useGameplay = (popits: PopitProps[]) => {
     }
   }
 
-  const onClickEvent = (x: number, y: number) => {
+  const onClickEvent = (x: number, y: number, isMove = false) => {
     if (stop) {
       return
     }
@@ -108,12 +112,17 @@ export const useGameplay = (popits: PopitProps[]) => {
     for (const popit of activePpts) {
       if (intersect({ x, y }, popit)) {
         onPopClick(popit)
+        return
       }
+    }
+
+    if (!isMove) {
+      addActivePopit()
     }
   }
 
   addEventClick(onClickEvent)
-  addEventMove(onClickEvent)
+  addEventMove((x, y) => onClickEvent(x, y, true))
   
   useTimer(() => {
     onRound()
