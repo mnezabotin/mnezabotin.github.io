@@ -8,6 +8,7 @@ export const useGameplay = (popits: PopitProps[]) => {
     useTimer,
     rand,
     addEventClick,
+    addEventMove,
     intersect,
     navigate
   } = useWebcore()
@@ -95,7 +96,7 @@ export const useGameplay = (popits: PopitProps[]) => {
     }
   }
 
-  addEventClick((x, y) => {
+  const onClickEvent = (x: number, y: number) => {
     if (stop) {
       return
     }
@@ -105,7 +106,10 @@ export const useGameplay = (popits: PopitProps[]) => {
         onPopClick(popit)
       }
     }
-  })
+  }
+
+  addEventClick(onClickEvent)
+  addEventMove(onClickEvent)
   
   useTimer(() => {
     onRound()

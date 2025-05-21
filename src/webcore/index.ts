@@ -32,6 +32,9 @@ export const initWebcore = (routes: Route[], audioPaths?: string[]) => {
     addEventClick,
     onClickEvents,
 
+    addEventMove,
+    onMoveEvents,
+
     removeAllEvents
   } = useEvent()
 
@@ -83,6 +86,7 @@ export const initWebcore = (routes: Route[], audioPaths?: string[]) => {
 
     addEventResize,
     addEventClick,
+    addEventMove,
 
     playAudio,
   }
@@ -116,6 +120,10 @@ export const initWebcore = (routes: Route[], audioPaths?: string[]) => {
 
   document.onpointerdown = (e: PointerEvent) => {
     onClickEvents(e.clientX, e.clientY)
+  }
+
+  document.onmousemove = (e: MouseEvent) => {
+    onMoveEvents(e.clientX, e.clientY)
   }
 
   router.navigate()

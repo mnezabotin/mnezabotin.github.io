@@ -14,7 +14,8 @@ export const useGradient = (backoff = false): Gradient => {
   const onResizeEvent = () => {
     const { s } = useMeasure()
 
-    const r = Math.round(s * 0.14)
+    // 0.15 0.14 0.11 0.09
+    const r = Math.round(s * 0.15)
     
     const countw = Math.round(innerWidth / r / 2) - 1
     const ws = (innerWidth - (2 * r * countw)) / (countw + 1)

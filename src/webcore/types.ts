@@ -73,6 +73,9 @@ export type Event = {
   addEventClick: (func: (x: number, y: number) => void) => void
   onClickEvents: (x: number, y: number) => void
 
+  addEventMove: (func: (x: number, y: number) => void) => void
+  onMoveEvents: (x: number, y: number) => void
+
   removeAllEvents: Function
 }
 
@@ -105,6 +108,7 @@ export type Webcore = {
 
   addEventResize: Event['addEventResize']
   addEventClick: Event['addEventClick']
+  addEventMove: Event['addEventMove']
 
   playAudio: (name: string) => void
 

@@ -47,6 +47,7 @@ export const usePopits = ({ palette, retry }: Props): Popits => {
 
     pptProps.splice(0)
 
+    // 0.15 0.14 0.11 0.09
     const r = Math.round(s * 0.14)
 
     const countw = Math.round(innerWidth / r / 2) - 1
