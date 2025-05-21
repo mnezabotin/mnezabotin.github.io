@@ -17,7 +17,6 @@ export const useBackButton = (): Back => {
     intersect,
     navigate,
     useScreenMeta,
-    playAudio,
   } = useWebcore()
   const { from } = useScreenMeta()
 
@@ -55,7 +54,6 @@ export const useBackButton = (): Back => {
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, props)) {
-      playAudio('tap')
       props.p = true
       useTimer(() => {
         navigate('main')

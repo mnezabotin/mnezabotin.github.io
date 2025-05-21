@@ -17,7 +17,6 @@ export const useScoreButton = (): Score => {
     addEventClick,
     navigate,
     useScreenMeta,
-    playAudio,
   } = useWebcore()
   const { from } = useScreenMeta()
 
@@ -54,7 +53,6 @@ export const useScoreButton = (): Score => {
 
   addEventClick((x, y) => {
     if (intersectArc({ x, y }, props)) {
-      playAudio('tap')
       props.p = true
       useTimer(() => {
         navigate('score')

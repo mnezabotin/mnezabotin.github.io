@@ -23,7 +23,6 @@ export const usePopits = ({ palette, retry }: Props): Popits => {
     useTimer,
     intersect,
     useScreenMeta,
-    playAudio,
   } = useWebcore()
   const { from } = useScreenMeta()
 
@@ -112,7 +111,6 @@ export const usePopits = ({ palette, retry }: Props): Popits => {
 
     addEventClick((x, y) => {
       if (intersect({ x, y }, retryPopit)) {
-        playAudio('tap')
         retryPopit.p = true
         useTimer(() => {
           navigate('game')
@@ -123,7 +121,6 @@ export const usePopits = ({ palette, retry }: Props): Popits => {
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, pausePptProps)) {
-      playAudio('tap')
       pausePptProps.p = true
       useTimer(() => {
         navigate('main')

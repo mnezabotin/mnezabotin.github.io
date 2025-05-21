@@ -17,7 +17,6 @@ export const usePlayButton = (): Play => {
     intersect,
     navigate,
     useScreenMeta,
-    playAudio,
   } = useWebcore()
   const { from } = useScreenMeta()
 
@@ -49,7 +48,6 @@ export const usePlayButton = (): Play => {
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, props)) {
-      playAudio('tap')
       props.p = true
       useTimer(() => {
         navigate('game')
