@@ -27,6 +27,7 @@ export const useGameplay = (popits: PopitProps[]) => {
 
   let rounds = 0
   let score = 0
+  let addTic = 0
 
   const tickDelay = getDifficultyTic()
 
@@ -41,6 +42,7 @@ export const useGameplay = (popits: PopitProps[]) => {
   }
 
   const ticFillTimer = () => {
+    addTic -= 50
     fillTimer = useTimer(() => {
       if (popits.length === activePpts.length) {
         stop = true
@@ -54,10 +56,11 @@ export const useGameplay = (popits: PopitProps[]) => {
       addActivePopit()
 
       ticFillTimer()
-    }, tickDelay)
+    }, Math.max(addTic, 100))
   }
 
   const onRound = (lastPopit?: PopitProps) => {
+    addTic = tickDelay
     activePpts = []
     const size = popits.length
     let count = rand(
