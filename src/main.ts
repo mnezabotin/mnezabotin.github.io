@@ -37,4 +37,4 @@ const routes: Route[] = [
 
 initWebcore(routes)
 
-document.title = 'Your\'s last PopiT'
+document.title = 'Your\'s last Popit'
