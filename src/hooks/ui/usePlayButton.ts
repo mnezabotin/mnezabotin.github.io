@@ -2,6 +2,7 @@ import { Play } from '@/shapes/play'
 import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Point, Render } from '@/webcore/types'
+import { usePopitNavigate } from '../usePopitNavigate'
 
 type Play = {
   render: Render,
@@ -13,14 +14,11 @@ export const usePlayButton = (): Play => {
     addEventResize,
     useMeasure,
     useTimer,
-    addEventClick,
-    intersect,
-    navigate,
     useScreenMeta,
   } = useWebcore()
   const { from } = useScreenMeta()
 
-  let props: PopitProps
+  let props: PopitProps = { x: 0, y: 0, r: 0 }
   let popitPlay: Render
   let play: Render
 
@@ -46,14 +44,7 @@ export const usePlayButton = (): Play => {
     props.p = false
   })
 
-  addEventClick((x, y) => {
-    if (intersect({ x, y }, props)) {
-      props.p = true
-      useTimer(() => {
-        navigate('game')
-      }, 100)
-    }
-  })
+  usePopitNavigate(props, 'game')
 
   const render = () => {
     popitPlay()

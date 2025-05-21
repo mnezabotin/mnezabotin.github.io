@@ -16,13 +16,10 @@ type Props = {
 
 export const usePopits = ({ palette, retry }: Props): Popits => {
   const {
-    navigate,
     addEventResize,
-    addEventClick,
     useMeasure,
     rand,
     useTimer,
-    intersect,
     useScreenMeta,
   } = useWebcore()
   const { from } = useScreenMeta()
@@ -30,10 +27,10 @@ export const usePopits = ({ palette, retry }: Props): Popits => {
   const pptProps: PopitProps[] = []
   let popits: Render[] = []
 
-  let pausePptProps: PopitProps = { x: 0, y: 0, r: 0}
   let pausePopit: Render
   let pause: Render
-  let retryPopit: PopitProps
+  let retryPopit: PopitProps = { x: 0, y: 0, r: 0}
+  let pausePptProps: PopitProps = { x: 0, y: 0, r: 0}
 
   const getFill = (i: number) => {
     if (Array.isArray(palette)) {
@@ -109,14 +106,7 @@ export const usePopits = ({ palette, retry }: Props): Popits => {
   })
 
   if (retry) {
-    addEventClick((x, y) => {
-      if (intersect({ x, y }, retryPopit)) {
-        retryPopit.p = true
-        useTimer(() => {
-          navigate('game')
-        }, 100)
-      }
-    })
+    usePopitNavigate(retryPopit, 'game')
   }
 
   usePopitNavigate(pausePptProps, 'main')

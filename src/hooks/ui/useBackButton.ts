@@ -2,6 +2,7 @@ import { Img } from '@/shapes/img'
 import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Point, Render } from '@/webcore/types'
+import { usePopitNavigate } from '../usePopitNavigate'
 
 type Back = {
   render: Render
@@ -13,14 +14,11 @@ export const useBackButton = (): Back => {
     addEventResize,
     useMeasure,
     useTimer,
-    addEventClick,
-    intersect,
-    navigate,
     useScreenMeta,
   } = useWebcore()
   const { from } = useScreenMeta()
 
-  let props: PopitProps
+  let props: PopitProps = { x: 0, y: 0, r: 0 }
   let popit: Render
   let back: Render
 
@@ -52,14 +50,7 @@ export const useBackButton = (): Back => {
     props.p = false
   })
 
-  addEventClick((x, y) => {
-    if (intersect({ x, y }, props)) {
-      props.p = true
-      useTimer(() => {
-        navigate('main')
-      }, 100)
-    }
-  })
+  usePopitNavigate(props, 'main')
 
   const render = () => {
     popit()
