@@ -1,4 +1,4 @@
-import { Opening, Main, Game, Score, Devs } from '@/screens'
+import { Opening, Main, Game, Gameover, GameScore, Score, Devs } from '@/screens'
 
 import { initWebcore } from '@/webcore'
 
@@ -18,6 +18,14 @@ const routes: Route[] = [
     ctor: Game
   },
   {
+    name: 'gameover',
+    ctor: Gameover
+  },
+  {
+    name: 'gamescore',
+    ctor: GameScore
+  },
+  {
     name: 'score',
     ctor: Score
   },
@@ -26,10 +34,6 @@ const routes: Route[] = [
     ctor: Devs
   },
 ]
-
-// const audioPaths = [
-//   '/sounds/tap.wav'
-// ]
 
 initWebcore(routes)
 

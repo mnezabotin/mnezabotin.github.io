@@ -1,60 +1,33 @@
 import { type Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Timer } from '@/webcore/types'
-import { useGradient } from './useGradient'
 
-const TOMATE_COLOR = '#ff6347'
-
-type GamePlayState = 'gameover' | 'game' | 'results'
-
-type GamePlay = {
-  state: GamePlayState
-  score: number
-}
-
-export const useGameplay = (popits: PopitProps[], pausePopit: PopitProps, palette: string[]): GamePlay => {
+export const useGameplay = (popits: PopitProps[]) => {
   const {
     useTimer,
     rand,
     addEventClick,
     intersect,
-    playAudio,
-    setBackground
+    navigate
   } = useWebcore()
 
-  const instance: GamePlay = { state: 'game', score: 0 }
-
-  let rounds = 0
   let activePpts: PopitProps[] = []
-  let repeatPpt: PopitProps = { x: 0, y: 0, r: 0 }
-  let origPptCols: (string | undefined)[] = []
-  let origPausePptCol: string | undefined
 
   let goTimer: Timer
   let fillTimer: Timer
 
+  let stop = false
+
+  let rounds = 0
+  let score = 0
+
   const ticFillTimer = () => {
     fillTimer = useTimer(() => {
       if (popits.length === activePpts.length) {
+        stop = true
         fillTimer.stop()
-        origPptCols = popits.map(p => p.c)
-        origPausePptCol = pausePopit.c
-        popits.forEach(p => {
-          p.c = TOMATE_COLOR
-        })
-        pausePopit.c = TOMATE_COLOR
-        setBackground(TOMATE_COLOR)
-        const index = rand(popits.length - 1)
-        repeatPpt = popits[index]
-        repeatPpt.p = false
-        instance.state = 'gameover'
         useTimer(() => {
-          popits.forEach(p => {
-            p.p = true
-          })
-          const index = rand(popits.length - 1)
-          repeatPpt = popits[index]
-          repeatPpt.p = false
+          navigate('gameover')
         })
         return
       }
@@ -68,7 +41,7 @@ export const useGameplay = (popits: PopitProps[], pausePopit: PopitProps, palett
       }
 
       ticFillTimer()
-    }, 700)
+    })
   }
 
   const onRound = (lastPopit?: PopitProps) => {
@@ -97,16 +70,13 @@ export const useGameplay = (popits: PopitProps[], pausePopit: PopitProps, palett
     
     goTimer?.stop()
     fillTimer?.stop()
-    goTimer = useTimer(ticFillTimer, activePpts.length * 300)
+    goTimer = useTimer(ticFillTimer, activePpts.length * 350)
 
     rounds = rounds > 0 ? rounds : rand(3, 5)
   }
 
   const onPopClick = (popit: PopitProps) => {
-    playAudio('tap')
-    // window?.navigator?.vibrate?.(10)
-
-    instance.score++
+    score++
 
     popit.p = true
     const i = activePpts.indexOf(popit)
@@ -116,65 +86,24 @@ export const useGameplay = (popits: PopitProps[], pausePopit: PopitProps, palett
       if (rounds > 0) {
         onRound(popit)
       } else {
-        goTimer?.stop()
-        fillTimer?.stop()
-        instance.state = 'results'
+        navigate('gamescore')
       }
     }
   }
 
-  const onGameClick = (x: number, y: number) => {
+  addEventClick((x, y) => {
+    if (stop) {
+      return
+    }
+
     for (const popit of activePpts) {
       if (intersect({ x, y }, popit)) {
         onPopClick(popit)
       }
-    }
-  }
-
-  const onGameOverClick = (x: number, y: number) => {
-    if (intersect({ x, y }, repeatPpt)) {
-      instance.state = 'game'
-      rounds = 0
-      instance.score = 0
-      repeatPpt.p = true
-      useTimer(() => {
-        useGradient(palette)
-        pausePopit.c = origPausePptCol
-        popits.forEach((p, i) => {
-          p.c = origPptCols[i]
-        })
-        useTimer(() => {
-          onRound(repeatPpt)
-        }, 1000)
-      })
-    }
-  }
-
-  const onResiltsClick = () => {
-    instance.state = 'game'
-    instance.score = 0
-    rounds = 0
-    useTimer(() => {
-      onRound()
-    })
-  }
-
-  addEventClick((x, y) => {
-    switch(instance.state) {
-      case 'game':
-        onGameClick(x, y)
-        break
-      case 'gameover':
-        onGameOverClick(x, y)
-        break
-      default:
-        onResiltsClick()
     }
   })
   
   useTimer(() => {
     onRound()
   })
-
-  return instance
 }

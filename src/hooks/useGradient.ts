@@ -1,13 +1,17 @@
 import { useWebcore } from '@/webcore'
 
-export const useGradient = (palette: string[]) => {
+type Gradient = string[]
+
+export const useGradient = (backoff = false): Gradient => {
+  const palette = ['#f86a9a', '#C69FEE', '#5bb2f7', '#92E6E6', '#7ceab2', '#bef181', '#EFCD74', '#fd8059']
+
   const {
     addEventResize,
     useMeasure,
     setBackground,
   } = useWebcore()
 
-  addEventResize(() => {
+  const onResizeEvent = () => {
     const { s } = useMeasure()
 
     const r = Math.round(s * 0.14)
@@ -39,5 +43,11 @@ export const useGradient = (palette: string[]) => {
     const direction = dirIsRght ? 'to right' : 'to bottom'
 
     setBackground(`linear-gradient(${direction}, ${colorStops.join(', ')})`, palette[0])
-  })
+  }
+
+  if (!backoff) {
+    addEventResize(onResizeEvent)
+  }
+
+  return palette
 }

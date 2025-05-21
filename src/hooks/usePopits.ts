@@ -6,16 +6,20 @@ import { Pause } from '@/shapes/pause'
 type Popits = {
   render: Render
   popits: PopitProps[]
-  pausePopit: PopitProps
 }
 
-export const usePopits = (palette: string[]): Popits => {
+type Props = {
+  palette: string[] | string
+  retry?: boolean
+}
+
+export const usePopits = ({ palette, retry }: Props): Popits => {
   const {
     navigate,
     addEventResize,
     addEventClick,
     useMeasure,
-    // rand,
+    rand,
     useTimer,
     intersect,
     useScreenMeta,
@@ -29,6 +33,15 @@ export const usePopits = (palette: string[]): Popits => {
   let pausePptProps: PopitProps = { x: 0, y: 0, r: 0}
   let pausePopit: Render
   let pause: Render
+  let retryPopit: PopitProps
+
+  const getFill = (i: number) => {
+    if (Array.isArray(palette)) {
+      return palette[i]
+    } else {
+      return palette
+    }
+  }
 
   addEventResize(() => {
     const { s } = useMeasure()
@@ -48,7 +61,7 @@ export const usePopits = (palette: string[]): Popits => {
 
     for (let i = 0; i < counth; i++) {
       for (let j = 0; j < countw; j++) {
-        if (!palette[pind]) {
+        if (!getFill(pind)) {
           pind = 0
         }
 
@@ -56,17 +69,19 @@ export const usePopits = (palette: string[]): Popits => {
           x: ws + r + j * r * 2 + ws * j,
           y: hs + r + i * r * 2 + hs * i,
           r,
-          c: palette[pind],
+          c: getFill(pind),
           p: true
         }
         
         if (i === 0 && j === countw - 1) {
-          // pausePptProps = { ...props, p: from === 'main' && !pausePptProps }
-          pausePptProps.x = props.x
-          pausePptProps.y = props.y
-          pausePptProps.r = props.r
-          pausePptProps.c = props.c
-          pausePptProps.p = from === 'main' && !pausePptProps
+          pausePptProps = {
+            ...props,
+            p: (
+              from === 'main' ||
+              from === 'gameover' ||
+              from === 'gamescore'
+            ) && !pausePptProps
+          }
           pausePopit = Popit(pausePptProps)
           pause = Pause(pausePptProps)
         } else {
@@ -78,6 +93,10 @@ export const usePopits = (palette: string[]): Popits => {
       pind = dirIsRght ? 0 : pind + 1
     }
 
+    if (retry) {
+      retryPopit = pptProps[rand(pptProps.length - 1)]
+    }
+
     popits = pptProps
       .map(p => Popit(p))
   })
@@ -85,6 +104,22 @@ export const usePopits = (palette: string[]): Popits => {
   useTimer(() => {
     pausePptProps.p = false
   })
+
+  if (retry) {
+    useTimer(() => {
+      retryPopit.p = false
+    })
+
+    addEventClick((x, y) => {
+      if (intersect({ x, y }, retryPopit)) {
+        playAudio('tap')
+        retryPopit.p = true
+        useTimer(() => {
+          navigate('game')
+        }, 100)
+      }
+    })
+  }
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, pausePptProps)) {
@@ -95,16 +130,6 @@ export const usePopits = (palette: string[]): Popits => {
       }, 100)
     }
   })
-
-  // const tic = () => {
-  //   useTimer(() => {
-  //     const i = rand(pptProps.length - 1)
-  //     pptProps[i].p = !pptProps[i].p
-  //     tic()
-  //   })
-  // }
-
-  // tic()
 
   const render = () => {
     popits.forEach(r => r())
@@ -117,6 +142,5 @@ export const usePopits = (palette: string[]): Popits => {
   return {
     render,
     popits: pptProps,
-    pausePopit: pausePptProps
   }
 }

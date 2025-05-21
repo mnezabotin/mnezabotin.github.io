@@ -63,7 +63,9 @@ export const useFond = (color = '#00dcfe'): Fond => {
   const tic = () => {
     useTimer(() => {
       const i = rand(pptProps.length - 1)
-      pptProps[i].p = !pptProps[i].p
+      if (pptProps[i]) {
+        pptProps[i].p = !pptProps[i].p
+      }
       tic()
     })
   }

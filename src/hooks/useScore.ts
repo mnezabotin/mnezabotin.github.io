@@ -4,14 +4,14 @@ import type { Rectangle, Render } from '@/webcore/types'
 
 const MAX_IMG_POINTS = 10000
 
-type Progress = {
+type Score = {
   up: () => void
   down: () => void
   render: Render
   rect: () => Rectangle
 }
 
-export const useScore = (): Progress => {
+export const useScore = (): Score => {
   const {
     addEventResize,
     useMeasure,
