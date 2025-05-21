@@ -42,7 +42,7 @@ export const useGameplay = (popits: PopitProps[]) => {
   }
 
   const ticFillTimer = () => {
-    addTic -= 50
+    addTic -= 20
     fillTimer = useTimer(() => {
       if (popits.length === activePpts.length) {
         stop = true
