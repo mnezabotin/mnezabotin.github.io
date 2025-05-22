@@ -60,7 +60,6 @@ export const useGameplay = (popits: PopitProps[]) => {
   }
 
   const onRound = (lastPopit?: PopitProps) => {
-    addTic = tickDelay
     activePpts = []
     const size = popits.length
     let count = rand(
@@ -83,9 +82,10 @@ export const useGameplay = (popits: PopitProps[]) => {
       pptsBox.splice(index, 1)
     }
 
+    addTic = tickDelay
     goTimer?.stop()
     fillTimer?.stop()
-    goTimer = useTimer(ticFillTimer, activePpts.length * Math.min(tickDelay, 550))
+    goTimer = useTimer(ticFillTimer, activePpts.length * Math.min(tickDelay, 500))
 
     rounds = rounds > 0 ? rounds : rand(3, 5)
   }

@@ -3,8 +3,16 @@ const APP_KEY = 'ylp'
 const SCORE_KEY = 'score'
 
 const DIFFICULTY_LVL_KEY = 'difficulty'
-const DIFFICULTY_LVL_TICS = [800, 750, 700, 650, 600, 550, 450, 400, 350]
-const DIFFICULTY_PPT_RAD = [0.15, 0.14, 0.11, 0.09, 0.075]
+const DIFFICULTY_PPT_RAD = [0.15, 0.14, 0.11, 0.09/*, 0.075*/]
+
+const TIC_MAX = 800
+const TIC_MIN = 350
+const TIC_STEP = 10
+const DIFFICULTY_LVL_TICS: number[] = []
+
+for (let i = 0; i * TIC_STEP <= TIC_MAX - TIC_MIN; i++) {
+  DIFFICULTY_LVL_TICS.push(TIC_MAX - i * TIC_STEP)
+}
 
 type Storage = {
   getScore: () => number
