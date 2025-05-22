@@ -38,7 +38,7 @@ export const Icon = (c: string, p = false) => {
     >
       <defs>
         <radialGradient id="popitGradient">
-          ${stops.join('')}
+          ${stops.join('\n')}
         </radialGradient>
       </defs>
       
