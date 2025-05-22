@@ -9,7 +9,15 @@ type Logo = {
 }
 
 export const useLogo = (): Logo => {
-  const { addEventResize, useMeasure, useTimer, useScreenMeta } = useWebcore()
+  const {
+    addEventResize,
+    useMeasure,
+    useTimer,
+    useScreenMeta,
+    addEventClick,
+    intersect,
+    navigate,
+  } = useWebcore()
   const { from } = useScreenMeta()
 
   let props: PopitProps //ba68c8
@@ -51,6 +59,15 @@ export const useLogo = (): Logo => {
   })
 
   useTimer(() => props.p = false)
+
+  addEventClick((x, y) => {
+    if (intersect({ x, y }, props)) {
+      props.p = true
+      useTimer(() => {
+        navigate('opening')
+      }, 100)
+    }
+  })
 
   const point = () => ({
     x: props.x,
