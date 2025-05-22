@@ -3,7 +3,6 @@ import { Opening, Main, Game, Gameover, GameScore, Score, Devs } from '@/screens
 import { initWebcore } from '@/webcore'
 
 import type { Route } from '@/webcore/types'
-// import { Icon } from './shapes/icon'
 
 const routes: Route[] = [
   {
@@ -39,5 +38,3 @@ const routes: Route[] = [
 initWebcore(routes)
 
 document.title = 'Your\'s last Popit'
-
-// console.log(Icon('#C69FEE'))
