@@ -12,5 +12,4 @@ body {
   cursor: url('./media/cursor.svg') 10 10, default; }
 
 canvas {
-  width: 100vw;
-  height: 100vh; }
+  position: fixed; }

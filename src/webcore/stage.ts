@@ -12,6 +12,9 @@ export const useStage = (): Stage => {
     canvas.width = innerWidth * devicePixelRatio
     canvas.height = innerHeight * devicePixelRatio
     ctx.scale(devicePixelRatio, devicePixelRatio)
+
+    canvas.style.width = `${innerWidth}px`
+    canvas.style.height = `${innerHeight}px`
   }
 
   const render = (draw: Render) => {
