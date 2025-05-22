@@ -40,4 +40,4 @@ initWebcore(routes)
 
 document.title = 'Your\'s last Popit'
 
-// console.log(Icon('#C69FEE', false))
+// console.log(Icon('#C69FEE'))
