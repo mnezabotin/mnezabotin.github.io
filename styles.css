@@ -10,3 +10,6 @@ body {
   font-family: Tijuf;
   background-color: #040404;
   cursor: url('./media/cursor.svg') 10 10, default; }
+
+canvas {
+  position: fixed; }
