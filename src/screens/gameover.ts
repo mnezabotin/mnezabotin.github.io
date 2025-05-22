@@ -8,10 +8,11 @@ export const Gameover = (): Render => {
   const { setBackground } = useWebcore()
   const { minusDifficulty } = useStorage()
 
-  minusDifficulty()
   const { render: popits } = usePopits({ palette, retry: true })
 
   setBackground(palette)
+
+  minusDifficulty()
 
   return () => {
     popits()

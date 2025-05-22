@@ -6,13 +6,14 @@ export const GameScore = (): Render => {
   const { addEventClick, navigate } = useWebcore()
   const { plusDifficulty } = useStorage()
 
-  plusDifficulty()
   useGradient()
   const { render: score } = useScore()
 
   addEventClick(() => {
     navigate('game')
   })
+
+  plusDifficulty()
 
   return () => {
     score()
