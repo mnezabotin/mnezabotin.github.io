@@ -3,7 +3,7 @@ const APP_KEY = 'ylp'
 const SCORE_KEY = 'score'
 
 const DIFFICULTY_LVL_KEY = 'difficulty'
-const DIFFICULTY_PPT_RAD = [0.15, 0.14, 0.11, 0.09/*, 0.075*/]
+const DIFFICULTY_PPT_RAD = [/*0.15, */0.14, 0.11, 0.09/*, 0.075*/]
 
 const TIC_MAX = 800
 const TIC_MIN = 350
