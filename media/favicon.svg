@@ -1,13 +1,74 @@
-
-    <svg
+<svg
       viewBox="0 0 512 512"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
     >
       <defs>
-        <radialGradient id="popitGradient">
-          <stop offset="0%" stop-color="#e0b9ff" /><stop offset="50%" stop-color="#d3acfb" /><stop offset="66%" stop-color="#c69fee" /><stop offset="70%" stop-color="#c19ae9" /><stop offset="74%" stop-color="#b28bda" /><stop offset="76%" stop-color="#a780cf" /><stop offset="78%" stop-color="#a079c8" /><stop offset="82%" stop-color="#b992e1" /><stop offset="85%" stop-color="#a079c8" /><stop offset="85%" stop-color="#c69fee" /><stop offset="92.5%" stop-color="#ddb6ff" /><stop offset="99%" stop-color="#c69fee" /><stop offset="100%" stop-color="#c69fee" />
-        </radialGradient>
+        
+      <radialGradient id="push">
+        <stop offset="0%" stop-color="#bc95e4" />
+<stop offset="40%" stop-color="#b790df" />
+<stop offset="66%" stop-color="#a780cf" />
+<stop offset="70%" stop-color="#b28bda" />
+<stop offset="76%" stop-color="#ad86d5" />
+<stop offset="78%" stop-color="#a079c8" />
+<stop offset="82%" stop-color="#b992e1" />
+<stop offset="85%" stop-color="#a079c8" />
+<stop offset="85%" stop-color="#c69fee" />
+<stop offset="92.5%" stop-color="#ddb6ff" />
+<stop offset="99%" stop-color="#c69fee" />
+<stop offset="100%" stop-color="#c69fee" />
+      </radialGradient>
+    
+
+      <radialGradient id="pop">
+        <stop offset="0%" stop-color="#e0b9ff" />
+<stop offset="50%" stop-color="#d3acfb" />
+<stop offset="66%" stop-color="#c69fee" />
+<stop offset="70%" stop-color="#c19ae9" />
+<stop offset="74%" stop-color="#b28bda" />
+<stop offset="76%" stop-color="#a780cf" />
+<stop offset="78%" stop-color="#a079c8" />
+<stop offset="82%" stop-color="#b992e1" />
+<stop offset="85%" stop-color="#a079c8" />
+<stop offset="85%" stop-color="#c69fee" />
+<stop offset="92.5%" stop-color="#ddb6ff" />
+<stop offset="99%" stop-color="#c69fee" />
+<stop offset="100%" stop-color="#c69fee" />
+      </radialGradient>
+    
       </defs>
-      <circle cx="256" cy="256" r="224" fill="url('#popitGradient')" />
+      
+      
+        <circle
+          cx="140"
+          cy="140"
+          r="108"
+          fill="url('#push')"
+        />
+      
+
+        <circle
+          cx="372"
+          cy="140"
+          r="108"
+          fill="url('#push')"
+        />
+      
+
+        <circle
+          cx="140"
+          cy="372"
+          r="108"
+          fill="url('#push')"
+        />
+      
+
+        <circle
+          cx="372"
+          cy="372"
+          r="108"
+          fill="url('#pop')"
+        />
+      
     </svg>
