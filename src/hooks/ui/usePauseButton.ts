@@ -37,7 +37,7 @@ export const usePauseButton = ({
 
     props = {
       c: '#fd8059',
-      r: Math.round(s * 0.1),
+      r: Math.round(s * 0.08),
       x: getX(cx, s, m),
       y: getY(cy, s, m),
       p: (from === 'game' || from === 'opening') && !props,
