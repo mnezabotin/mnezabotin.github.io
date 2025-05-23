@@ -1,7 +1,9 @@
 import { useGradient, usePlayButton, usePauseButton, useScore, useStorage } from "@/hooks"
+import { useWebcore } from "@/webcore"
 import { Render } from "@/webcore/types"
 
 export const GameScore = (): Render => {
+  const { translate } = useWebcore()
   const { plusDifficulty } = useStorage()
 
   useGradient()
@@ -29,7 +31,12 @@ export const GameScore = (): Render => {
   plusDifficulty()
 
   return () => {
-    score()
+    if (innerHeight > innerWidth) {
+      translate(score, 0, - Math.round(innerHeight * 0.07))
+    } else {
+      score()
+    }
+
     play()
     pause()
   }
