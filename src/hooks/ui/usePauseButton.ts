@@ -36,7 +36,7 @@ export const usePauseButton = ({
     const { cx, cy, s, m } = useMeasure()
 
     props = {
-      c: '#C69FEE',
+      c: '#fd8059',
       r: Math.round(s * 0.1),
       x: getX(cx, s, m),
       y: getY(cy, s, m),
