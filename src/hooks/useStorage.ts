@@ -40,7 +40,7 @@ export const useStorage = (): Storage => {
   }
 
   const getDifficulty = (): number => {
-    const value = getValue(DIFFICULTY_LVL_KEY) || DIFFICULTY_LVL_TICS.length
+    const value = getValue(DIFFICULTY_LVL_KEY) || 0 // DIFFICULTY_LVL_TICS.length
 
     return +value
   }

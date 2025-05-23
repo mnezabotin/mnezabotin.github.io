@@ -70,7 +70,7 @@ export const Progress = (props: Props): Render => {
     } else {
       ctx.fillStyle = c
       ctx.beginPath()
-      ctx.arc(x + r, y + r, r + 2, 0, Math.PI * 2)
+      ctx.arc(x + r, y + r, r + 1, 0, Math.PI * 2)
       ctx.closePath()
       ctx.fill()
     }

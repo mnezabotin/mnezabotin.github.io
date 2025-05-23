@@ -9,7 +9,10 @@ export const Main = (): Render => {
   const { render: fond, setIntersections } = useFond({})
 
   const { render: logo, point: useLogoPoint } = useLogo()
-  const { render: play, point: usePlayPoint } = usePlayButton()
+  const { render: play, point: usePlayPoint } = usePlayButton({
+    getX: (x, s, m) => x + Math.round(s * 0.25) + 2 * m,
+    getY: (y, s, m) => y + Math.round(s * 0.25) + 0 * m
+  })
   const { render: score, point: useScorePoint } = useScoreButton()
 
   addEventResize(() => {

@@ -1,9 +1,9 @@
-import { Play } from '@/shapes/play'
+import { Pause } from '@/shapes/pause'
 import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Point, Render } from '@/webcore/types'
 
-type PlayType = {
+type PauseType = {
   render: Render,
   point: () => Point
 }
@@ -13,10 +13,10 @@ type Props = {
   getY: (cy: number, r: number, m: number) => number
 }
 
-export const usePlayButton = ({
+export const usePauseButton = ({
   getX,
   getY,
-}: Props): PlayType => {
+}: Props): PauseType => {
   const {
     addEventResize,
     useMeasure,
@@ -29,23 +29,23 @@ export const usePlayButton = ({
   const { from } = useScreenMeta()
 
   let props: PopitProps
-  let popitPlay: Render
-  let play: Render
+  let popitPause: Render
+  let pause: Render
 
   addEventResize(() => {
     const { cx, cy, s, m } = useMeasure()
 
     props = {
-      c: '#bef181',
+      c: '#ff6347',
       r: Math.round(s * 0.1),
       x: getX(cx, s, m),
       y: getY(cy, s, m),
-      p: (from === 'gamescore' || from === 'game' || from === 'opening') && !props,
+      p: (from === 'game' || from === 'opening') && !props,
     }
 
-    popitPlay = Popit(props)
+    popitPause = Popit(props)
 
-    play = Play(props)
+    pause = Pause(props)
   })
 
   useTimer(() => {
@@ -56,15 +56,15 @@ export const usePlayButton = ({
     if (intersect({ x, y }, props)) {
       props.p = true
       useTimer(() => {
-        navigate('game')
+        navigate('main')
       }, 100)
     }
   })
 
   const render = () => {
-    popitPlay()
+    popitPause()
     if (!props.p) {
-      play()
+      pause()
     }
   }
 
