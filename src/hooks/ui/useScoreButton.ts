@@ -8,7 +8,7 @@ type Score = {
   point: () => Point
 }
 
-export const useScoreButton = (): Score => {
+export const useScoreButton = (color = '#ba68c8'): Score => {
   const {
     addEventResize,
     useMeasure,
@@ -30,7 +30,7 @@ export const useScoreButton = (): Score => {
     const r = Math.round(s * 0.25)
 
     props = {
-      c: '#ba68c8',
+      c: color,
       r: Math.round(s * 0.08),
       x: cx - r - 1 * m,
       y: cy - r + 1 * m,

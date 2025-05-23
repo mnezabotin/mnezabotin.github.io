@@ -8,7 +8,7 @@ type Back = {
   point: () => Point
 }
 
-export const useBackButton = (): Back => {
+export const useBackButton = (color = '#ff6347'): Back => {
   const {
     addEventResize,
     useMeasure,
@@ -30,7 +30,7 @@ export const useBackButton = (): Back => {
     const r = Math.round(s * 0.08)
 
     props = {
-      c: '#ff6347',
+      c: color,
       r,
       x: Math.round(1.6 * r),
       y: Math.round(1.6 * r),

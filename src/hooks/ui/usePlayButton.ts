@@ -11,11 +11,13 @@ type PlayType = {
 type Props = {
   getX: (cx: number, r: number, m: number) => number
   getY: (cy: number, r: number, m: number) => number
+  color?: string
 }
 
 export const usePlayButton = ({
   getX,
   getY,
+  color = '#bef181'
 }: Props): PlayType => {
   const {
     addEventResize,
@@ -36,7 +38,7 @@ export const usePlayButton = ({
     const { cx, cy, s, m } = useMeasure()
 
     props = {
-      c: '#bef181',
+      c: color,
       r: Math.round(s * 0.1),
       x: getX(cx, s, m),
       y: getY(cy, s, m),

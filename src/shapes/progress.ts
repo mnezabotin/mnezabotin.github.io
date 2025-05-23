@@ -2,7 +2,7 @@ import { useWebcore } from '@/webcore'
 import type { Render } from '@/webcore/types'
 
 const COUNT_PX = 100
-const PIXEL_OFFSET = 2
+const PIXEL_OFFSET = 0
 const DARK_COL = '#222'
 
 type PixelProps = {
@@ -41,7 +41,7 @@ export type Props = {
 }
 
 export const Progress = (props: Props): Render => {
-  const { ctx: mainCtx, shade, createImg, useRandChain } = useWebcore()
+  const { ctx: mainCtx, createImg, useRandChain } = useWebcore()
 
   let imageValue: ImageValue
 
@@ -60,20 +60,26 @@ export const Progress = (props: Props): Render => {
   }
 
   const drawPixel = (pxProps: PixelProps, ctx = mainCtx) => {
-    const { x, y, c, r, p } = pxProps
-    if (p) {
-      ctx.fillStyle = shade(c, 5)
-      ctx.beginPath()
-      ctx.arc(x + r, y + r, r, 0, Math.PI * 2)
-      ctx.closePath()
-      ctx.fill()
-    } else {
-      ctx.fillStyle = c
-      ctx.beginPath()
-      ctx.arc(x + r, y + r, r + 1, 0, Math.PI * 2)
-      ctx.closePath()
-      ctx.fill()
-    }
+    const { x, y, c, r } = pxProps
+    
+    ctx.fillStyle = c
+    ctx.beginPath()
+    ctx.arc(x + r, y + r, r, 0, Math.PI * 2)
+    ctx.closePath()
+    ctx.fill()
+    // if (p) {
+    //   ctx.fillStyle = shade(c, 5)
+    //   ctx.beginPath()
+    //   ctx.arc(x + r, y + r, r, 0, Math.PI * 2)
+    //   ctx.closePath()
+    //   ctx.fill()
+    // } else {
+    //   ctx.fillStyle = c
+    //   ctx.beginPath()
+    //   ctx.arc(x + r, y + r, r, 0, Math.PI * 2)
+    //   ctx.closePath()
+    //   ctx.fill()
+    // }
   }
 
   const getPixelProps = () => {
@@ -117,9 +123,15 @@ export const Progress = (props: Props): Render => {
     const pxsProps = getPixelProps()
 
     imageValue.drawImg = createImg((ctx = mainCtx) => {
+      ctx.fillStyle = DARK_COL
+      ctx.beginPath()
+      ctx.rect(0, 0, 2 * props.r, 2 * props.r)
+      ctx.closePath()
+      ctx.fill()
+
       pxsProps.filter(p => p.c === DARK_COL).forEach(p => drawPixel(p, ctx))
-      pxsProps.filter(p => p.c !== DARK_COL).forEach(p => drawPixel(p, ctx))
-      pxsProps.filter(p => p.c !== DARK_COL).forEach(p => drawPixel({ ...p, p: true }, ctx))
+      pxsProps.filter(p => p.c !== DARK_COL).forEach(p => drawPixel(p, ctx))      
+      // pxsProps.filter(p => p.c !== DARK_COL).forEach(p => drawPixel({ ...p, p: true }, ctx))
     }, 2 * props.r)
   }
 

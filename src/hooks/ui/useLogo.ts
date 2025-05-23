@@ -8,7 +8,7 @@ type Logo = {
   point: () => Point
 }
 
-export const useLogo = (): Logo => {
+export const useLogo = (color = '#f86a9a'): Logo => {
   const {
     addEventResize,
     useMeasure,
@@ -31,7 +31,7 @@ export const useLogo = (): Logo => {
     const r = Math.round(s * 0.25)
 
     props = {
-      c: '#f86a9a',
+      c: color,
       x: cx,
       y: cy,
       r,
