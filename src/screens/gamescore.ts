@@ -32,7 +32,7 @@ export const GameScore = (): Render => {
 
   return () => {
     if (innerHeight > innerWidth) {
-      translate(score, 0, - Math.round(innerHeight * 0.07))
+      translate(score, 0, -Math.round(innerHeight * 0.07))
     } else {
       score()
     }
