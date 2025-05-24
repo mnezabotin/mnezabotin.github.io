@@ -4,9 +4,12 @@ import { intersectArc, intersectRect } from '@/webcore/intersect'
 import type { Render } from '@/webcore/types'
 
 export const Score = (): Render => {
-  const { addEventResize } = useWebcore()
+  const { addEventResize, rand } = useWebcore()
 
-  const { render: fond, setIntersections } = useFond({ color: '#ffeb3b', frequency: 10 })
+  const palette = ['#ffeb3b', '#C69FEE', '#5bb2f7', '#92E6E6', '#7ceab2', '#bef181', '#EFCD74']
+  const color = palette[rand(palette.length - 1)]
+
+  const { render: fond, setIntersections } = useFond({ color, frequency: 10 })
 
   const {
     render: progress,

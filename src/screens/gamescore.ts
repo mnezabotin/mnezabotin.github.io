@@ -17,7 +17,7 @@ export const GameScore = (): Render => {
       Math.min(x + (s - 2 * s * 0.055 * 1.6) / 2 + 4 * m + Math.round(s * 0.1), innerWidth - 2 * m - Math.round(s * 0.1)) :
       x + (s - 2 * s * 0.055 * 1.6) / 8 + 0 *  Math.round(s * 0.1) + 2 * m,
     getY: (y, s, m) => innerWidth > innerHeight ?
-      y + (s - 2 * s * 0.055 * 1.6) / 2 + 0 * m - Math.round(s * 0.1) :
+      y + (s - 2 * s * 0.055 * 1.6) / 2 - 1 * m - Math.round(s * 0.1) :
       Math.min(y + (s - 2 * s * 0.055 * 1.6) / 2 + 4 * m + Math.round(s * 0.1), innerHeight - 2 * m - Math.round(s * 0.1))
   })
 
