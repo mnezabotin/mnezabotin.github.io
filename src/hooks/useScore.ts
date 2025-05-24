@@ -12,7 +12,7 @@ type Score = {
   rect: () => Rectangle
 }
 
-export const useScore = (): Score => {
+export const useScore = (winScore = 0): Score => {
   const {
     addEventResize,
     useMeasure,
@@ -49,7 +49,8 @@ export const useScore = (): Score => {
           y: cy + i * pgsRad * 2 + i * margin,
           r: pgsRad,
           score: score - i * MAX_IMG_POINTS < 0 ? 0 : score - i * MAX_IMG_POINTS,
-          imgSrc
+          imgSrc,
+          winScore,
         })
       )
     }

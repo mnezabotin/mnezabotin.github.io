@@ -103,7 +103,9 @@ export const useGameplay = (popits: PopitProps[]) => {
         onRound(popit)
       } else {
         addScore(score)
-        navigate('gamescore')
+        navigate('gamescore', {
+          winScore: score
+        })
       }
     }
   }

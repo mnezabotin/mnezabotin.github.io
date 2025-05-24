@@ -1,18 +1,10 @@
 import { useWebcore } from '@/webcore'
+import { Props as PptProps } from '@/shapes/popit'
 import type { Render } from '@/webcore/types'
 
 const COUNT_PX = 100
 const PIXEL_OFFSET = 0
 const DARK_COL = '#222'
-
-type PixelProps = {
-  x: number
-  y: number
-  r: number
-  c: string
-  p?: boolean
-}
-
 
 const rgbToHex = (orig: Uint8ClampedArray | undefined) => {
   const R = orig?.[0] || 0
@@ -38,12 +30,15 @@ export type Props = {
   x: number
   y: number
   r: number
+  winScore: number
 }
 
 export const Progress = (props: Props): Render => {
-  const { ctx: mainCtx, createImg, useRandChain } = useWebcore()
+  const { ctx: mainCtx, createImg, useRandChain, useTimer } = useWebcore()
 
   let imageValue: ImageValue
+  let showWinScore = false
+  let winPopits: PptProps[] = []
 
   if (!IMAGES[props.imgSrc]) {
     imageValue = IMAGES[props.imgSrc] = {
@@ -59,31 +54,23 @@ export const Progress = (props: Props): Render => {
     imageValue = IMAGES[props.imgSrc]
   }
 
-  const drawPixel = (pxProps: PixelProps, ctx = mainCtx) => {
+  const winScoreTic = () => useTimer(() => {
+    showWinScore = !showWinScore
+    winScoreTic()
+  }, 250)
+
+  const drawPixel = (pxProps: PptProps, ctx = mainCtx) => {
     const { x, y, c, r } = pxProps
     
-    ctx.fillStyle = c
+    ctx.fillStyle = c || 'red'
     ctx.beginPath()
     ctx.arc(x + r, y + r, r, 0, Math.PI * 2)
     ctx.closePath()
     ctx.fill()
-    // if (p) {
-    //   ctx.fillStyle = shade(c, 5)
-    //   ctx.beginPath()
-    //   ctx.arc(x + r, y + r, r, 0, Math.PI * 2)
-    //   ctx.closePath()
-    //   ctx.fill()
-    // } else {
-    //   ctx.fillStyle = c
-    //   ctx.beginPath()
-    //   ctx.arc(x + r, y + r, r, 0, Math.PI * 2)
-    //   ctx.closePath()
-    //   ctx.fill()
-    // }
   }
 
   const getPixelProps = () => {
-    const pxsProps = []
+    const pxsProps: PptProps[] = []
 
     const w = (props.r * 2 - 2 * PIXEL_OFFSET) / COUNT_PX
 
@@ -94,26 +81,42 @@ export const Progress = (props: Props): Render => {
           y: PIXEL_OFFSET + i * w,
           r: w / 2,
           c: DARK_COL,
-          // c: i * 100 + j >= props.score
-          //   ? DARK_COL
-          //   : imageValue.cols[j * COUNT_PX + i]
         }
         
         pxsProps.push(pxProps)
       }
     }
 
-    let score = props.score
+    let score = props.score - props.winScore
     const boxPxsProps = [...pxsProps]
     const rand = useRandChain(0)
-  
-    for (let i = score; i > 0; i--) {
+
+    const setPixel = (isWin = false) => {
       const randInd = rand(boxPxsProps.length - 1)
       const px = boxPxsProps[randInd]
       const origInd = pxsProps.indexOf(px)
-      px.c = imageValue.cols[origInd]
+      px.c = isWin ? DARK_COL : imageValue.cols[origInd]
 
       boxPxsProps.splice(randInd, 1)
+
+      if (isWin) {
+        winPopits.push({
+          ...px,
+          c: imageValue.cols[origInd]
+        })
+      }
+    }
+
+    for (let i = score; i > 0; i--) {
+      setPixel()
+    }
+
+    if (props.winScore) {
+      winPopits = []
+      for (let i = props.winScore; i > 0; i--) {
+        setPixel(true)
+      }
+      winScoreTic()
     }
 
     return pxsProps
@@ -129,9 +132,7 @@ export const Progress = (props: Props): Render => {
       ctx.closePath()
       ctx.fill()
 
-      pxsProps.filter(p => p.c === DARK_COL).forEach(p => drawPixel(p, ctx))
-      pxsProps.filter(p => p.c !== DARK_COL).forEach(p => drawPixel(p, ctx))      
-      // pxsProps.filter(p => p.c !== DARK_COL).forEach(p => drawPixel({ ...p, p: true }, ctx))
+      pxsProps.filter(p => p.c !== DARK_COL).forEach(p => drawPixel(p, ctx))
     }, 2 * props.r)
   }
 
@@ -163,10 +164,26 @@ export const Progress = (props: Props): Render => {
   }
 
   return (ctx = mainCtx) => {
-    const { x, y, r } = props
+    const { x, y, r, winScore } = props
 
     if (imageValue.drawImg) {
       ctx.drawImage(imageValue.drawImg, x - r, y - r, 2 * r, 2 * r)
+    }
+
+    if (showWinScore && winScore) {
+      for (const px of winPopits) {
+        ctx.fillStyle = px.c || 'red'
+        ctx.beginPath()
+        ctx.arc(
+          x - r + px.x + px.r,
+          y - r + px.y + px.r,
+          px.r,
+          0,
+          Math.PI * 2
+        )
+        ctx.closePath()
+        ctx.fill()
+      }
     }
   }
 }

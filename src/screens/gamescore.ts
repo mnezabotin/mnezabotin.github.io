@@ -3,12 +3,14 @@ import { useWebcore } from "@/webcore"
 import { Render } from "@/webcore/types"
 
 export const GameScore = (): Render => {
-  const { translate } = useWebcore()
+  const { translate, useScreenMeta } = useWebcore()
   const { plusDifficulty } = useStorage()
+
+  const { data } = useScreenMeta()
 
   useGradient()
 
-  const { render: score } = useScore()
+  const { render: score } = useScore(data?.winScore)
 
   const { render: play } = usePlayButton({
     getX: (x, s, m) => innerWidth > innerHeight ?
