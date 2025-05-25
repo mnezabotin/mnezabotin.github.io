@@ -5,7 +5,7 @@ import { useStorage } from './useStorage'
 
 type Props = {
   popits: PopitProps[]
-  popEffect?: (p: PopitProps) => void
+  popEffect?: (p: PopitProps, withoutRad?: boolean) => void
 }
 
 export const useGameplay = ({
@@ -39,8 +39,8 @@ export const useGameplay = ({
 
   const tickDelay = getDifficultyTic()
 
-  const addActivePopit = () => {
-    const unactivePpts = popits.filter(p => activePpts.indexOf(p) === -1)
+  const addActivePopit = (ppt?: PopitProps) => {
+    const unactivePpts = popits.filter(p => activePpts.indexOf(p) === -1 && p !== ppt)
     const index = rand(unactivePpts.length - 1)
     const popit = unactivePpts[index]
     if (popit) {
@@ -136,6 +136,14 @@ export const useGameplay = ({
     }
 
     if (!isMove) {
+      for (const popit of popits) {
+        if (intersect({ x, y }, popit)) {
+          popEffect(popit, true)
+          addActivePopit(popit)
+          return
+        }
+      }
+
       addActivePopit()
     }
   }

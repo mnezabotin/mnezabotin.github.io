@@ -12,15 +12,14 @@ type PopEffect = {
 export const usePopEffect = (): PopEffect => {
   const {
     loop,
-    // loopStop,
     ctx,
     shade
   } = useWebcore()
 
   const effects: Record<string, {
-    // loopEffect: () => void
-    tic: number,
-    dir: number,
+    withoutRad: boolean
+    tic: number
+    dir: number
     popit: PptProps
     origR: number
   }> = { }
@@ -39,24 +38,25 @@ export const usePopEffect = (): PopEffect => {
       if (e.tic >= RANGE) {
         e.dir = -1
       }
-      p.r = e.origR + (e.origR * 0.001 * (e.tic + (e.dir > 0 ? 0 : RANGE - e.tic)))
+
+      if (!e.withoutRad) {
+        p.r = e.origR + (e.origR * 0.001 * (e.tic + (e.dir > 0 ? 0 : RANGE - e.tic)))
+      }
 
       if (e.tic >= 2 * RANGE) {
-        // loopStop(e.loopEffect)
         delete effects[key]
         p.r = e.origR
       }
     }
   }
 
-  const popEffect = (p: PptProps) => {
+  const popEffect = (p: PptProps, withoutRad = false) => {
     const key = new Date().valueOf().toString()
 
-    // const lpEffect = () => loopEffect(key)
     const tic = 1
     const dir = 1
   
-    effects[key] = { /*loopEffect: lpEffect,*/ tic, dir, popit: p, origR: p.r }
+    effects[key] = { withoutRad, tic, dir, popit: p, origR: p.r }
 
     // loop(lpEffect)
   }
