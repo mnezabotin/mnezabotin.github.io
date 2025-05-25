@@ -2,7 +2,7 @@ import { Props as PptProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Render } from '@/webcore/types'
 
-const RANGE = 100
+const RANGE = 250 / 2
 
 type PopEffect = {
   popEffect: (p: PptProps) => void
@@ -50,7 +50,7 @@ export const usePopEffect = (): PopEffect => {
   }
 
   const render = () => {
-    ctx.globalAlpha = 0.1
+    ctx.globalAlpha = 0.25
     for (const k in effects) {
       const e = effects[k]
       const p = e.popit
