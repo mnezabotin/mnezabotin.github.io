@@ -12,51 +12,53 @@ type PopEffect = {
 export const usePopEffect = (): PopEffect => {
   const {
     loop,
-    loopStop,
+    // loopStop,
     ctx,
     shade
   } = useWebcore()
 
   const effects: Record<string, {
-    loopEffect: () => void
+    // loopEffect: () => void
     tic: number,
     dir: number,
     popit: PptProps
     origR: number
   }> = { }
 
-  const loopEffect = (key: string) => {
-    const e = effects[key]
-    if (!e) {
-      return
-    }
+  const loopEffects = () => {
+    for (const key in effects) {
+      const e = effects[key]
+      if (!e) {
+        return
+      }
 
-    const p = e.popit
+      const p = e.popit
 
-    e.tic += RANGE / 5
+      e.tic += RANGE / 5
 
-    if (e.tic >= RANGE) {
-      e.dir = -1
-    }
-    p.r = e.origR + (e.origR * 0.00075 * (e.tic + (e.dir > 0 ? 0 : RANGE - e.tic)))
+      if (e.tic >= RANGE) {
+        e.dir = -1
+      }
+      p.r = e.origR + (e.origR * 0.001 * (e.tic + (e.dir > 0 ? 0 : RANGE - e.tic)))
 
-    if (e.tic >= 2 * RANGE) {
-      loopStop(e.loopEffect)
-      delete effects[key]
-      p.r = e.origR
+      if (e.tic >= 2 * RANGE) {
+        // loopStop(e.loopEffect)
+        delete effects[key]
+        p.r = e.origR
+      }
     }
   }
 
   const popEffect = (p: PptProps) => {
     const key = new Date().valueOf().toString()
 
-    const lpEffect = () => loopEffect(key)
+    // const lpEffect = () => loopEffect(key)
     const tic = 1
     const dir = 1
   
-    effects[key] = { loopEffect: lpEffect, tic, dir, popit: p, origR: p.r }
+    effects[key] = { /*loopEffect: lpEffect,*/ tic, dir, popit: p, origR: p.r }
 
-    loop(lpEffect)
+    // loop(lpEffect)
   }
 
   const render = () => {
@@ -65,12 +67,12 @@ export const usePopEffect = (): PopEffect => {
       const e = effects[k]
       const p = e.popit
 
-      ctx.fillStyle = shade(p.c || 'red', -16)
+      ctx.fillStyle = shade(p.c || 'red', -20)
       ctx.beginPath()
       ctx.arc(
         p.x,
         p.y,
-        p.r + (e.origR * 0.001 * (e.tic + (e.dir > 0 ? 0 : RANGE - e.tic))),
+        p.r + (e.origR * 0.00125 * (e.tic + (e.dir > 0 ? 0 : RANGE - e.tic))),
         0,
         Math.PI * 2
       )
@@ -79,6 +81,8 @@ export const usePopEffect = (): PopEffect => {
     }
     ctx.globalAlpha = 1
   }
+
+  loop(loopEffects)
 
   return {
     popEffect,

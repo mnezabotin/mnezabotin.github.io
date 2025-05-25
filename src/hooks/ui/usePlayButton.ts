@@ -12,12 +12,14 @@ type Props = {
   getX: (cx: number, r: number, m: number) => number
   getY: (cy: number, r: number, m: number) => number
   color?: string
+  popEffect?: (p: PopitProps) => void
 }
 
 export const usePlayButton = ({
   getX,
   getY,
-  color = '#bef181'
+  color = '#bef181',
+  popEffect = () => {}
 }: Props): PlayType => {
   const {
     addEventResize,
@@ -56,6 +58,7 @@ export const usePlayButton = ({
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, props)) {
+      popEffect(props)
       props.p = true
       useTimer(() => {
         navigate('game')

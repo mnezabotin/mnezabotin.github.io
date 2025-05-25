@@ -111,10 +111,14 @@ export const useGameplay = ({
       if (rounds > 0) {
         onRound(popit)
       } else {
+        goTimer?.stop()
+        fillTimer?.stop()
         addScore(score)
-        navigate('gamescore', {
-          winScore: score
-        })
+        useTimer(() => {
+          navigate('gamescore', {
+            winScore: score
+          })
+        }, 100)
       }
     }
   }

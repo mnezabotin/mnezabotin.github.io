@@ -12,9 +12,14 @@ type Popits = {
 type Props = {
   palette: string[] | string
   retry?: boolean
+  popEffect?: (p: PopitProps) => void
 }
 
-export const usePopits = ({ palette, retry }: Props): Popits => {
+export const usePopits = ({
+  palette,
+  retry,
+  popEffect = () => {}
+}: Props): Popits => {
   const {
     addEventResize,
     useMeasure,
@@ -114,6 +119,7 @@ export const usePopits = ({ palette, retry }: Props): Popits => {
   if (retry) {
     addEventClick((x, y) => {
       if (intersect({ x, y }, retryPopit)) {
+        popEffect(retryPopit)
         retryPopit.p = true
         useTimer(() => {
           navigate('game')
@@ -124,6 +130,7 @@ export const usePopits = ({ palette, retry }: Props): Popits => {
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, pausePptProps)) {
+      popEffect(pausePptProps)
       pausePptProps.p = true
       useTimer(() => {
         navigate('main')

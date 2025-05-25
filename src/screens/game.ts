@@ -4,7 +4,7 @@ import type { Render } from '@/webcore/types'
 export const Game = (): Render => {
   const palette = useGradient()
   const { popEffect, render: renderPopEffects } = usePopEffect()
-  const { popits, render: renderPopits } = usePopits({ palette })
+  const { popits, render: renderPopits } = usePopits({ palette, popEffect })
   useGameplay({ popits, popEffect })
 
   return () => {
