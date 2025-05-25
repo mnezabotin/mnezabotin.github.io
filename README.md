@@ -1,5 +1,7 @@
-# yolapopit
+# Your's last Pop it
 
 TODO:
-1. Gameover page
-2. Progress page
+  - Refactor ui
+  - Splashes
+  - Sounds
+  - Devs
