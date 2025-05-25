@@ -51,7 +51,7 @@ export const useGameplay = ({
 
   const ticFillTimer = () => {
     fillTimer = useTimer(() => {
-      addTic -= 10
+      addTic = Math.max(addTic - 10, 50)
       if (popits.length === activePpts.length) {
         stop = true
         fillTimer.stop()
