@@ -40,7 +40,7 @@ export const usePopEffect = (): PopEffect => {
       }
 
       if (!e.withoutRad) {
-        p.r = e.origR + (e.origR * 0.001 * (e.tic + (e.dir > 0 ? 0 : RANGE - e.tic)))
+        p.r = e.origR + (e.origR * 0.00075 * (e.tic + (e.dir > 0 ? 0 : RANGE - e.tic)))
       }
 
       if (e.tic >= 2 * RANGE) {
@@ -57,8 +57,6 @@ export const usePopEffect = (): PopEffect => {
     const dir = 1
   
     effects[key] = { withoutRad, tic, dir, popit: p, origR: p.r }
-
-    // loop(lpEffect)
   }
 
   const render = () => {
@@ -72,7 +70,7 @@ export const usePopEffect = (): PopEffect => {
       ctx.arc(
         p.x,
         p.y,
-        p.r + (e.origR * 0.00125 * (e.tic + (e.dir > 0 ? 0 : RANGE - e.tic))),
+        p.r + (e.origR * 0.001 * (e.tic + (e.dir > 0 ? 0 : RANGE - e.tic))),
         0,
         Math.PI * 2
       )
