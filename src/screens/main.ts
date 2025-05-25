@@ -4,10 +4,12 @@ import { intersectArc } from '@/webcore/intersect'
 import type { Render } from '@/webcore/types'
 
 export const Main = (): Render => {
-  const { addEventResize, rand } = useWebcore()
+  const { addEventResize, rand, useScreenMeta } = useWebcore()
+  const { from } = useScreenMeta()
 
-  const palette = ['#00dcfe', '#C69FEE', '#5bb2f7', '#92E6E6', '#7ceab2', '#EFCD74', '#fd8059']
-  const color = palette[rand(palette.length - 1)]
+  // '#C69FEE', '#7ceab2', '#fd8059'
+  const palette = ['#00dcfe', '#5bb2f7', '#92E6E6', '#EFCD74']
+  const color = from === 'opening' ? palette[0] : palette[rand(palette.length - 1)]
 
   const { render: fond, setIntersections } = useFond({ color })
 

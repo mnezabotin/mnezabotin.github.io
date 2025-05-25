@@ -3,7 +3,6 @@ import { Props as PptProps } from '@/shapes/popit'
 import type { Render } from '@/webcore/types'
 
 const COUNT_PX = 100
-const PIXEL_OFFSET = 0
 const DARK_COL = '#222'
 
 const rgbToHex = (orig: Uint8ClampedArray | undefined) => {
@@ -40,6 +39,8 @@ export const Progress = (props: Props): Render => {
   let showWinScore = false
   let winPopits: PptProps[] = []
 
+  const popRad = (props.r * 2) / COUNT_PX / 2
+
   if (!IMAGES[props.imgSrc]) {
     imageValue = IMAGES[props.imgSrc] = {
       img: new Image(),
@@ -69,17 +70,23 @@ export const Progress = (props: Props): Render => {
     ctx.fill()
   }
 
+  const drawFond = (ctx = mainCtx, x = 0, y = 0) => {
+    ctx.fillStyle = DARK_COL
+    ctx.beginPath()
+    ctx.roundRect(x, y, 2 * props.r, 2 * props.r, popRad)
+    ctx.closePath()
+    ctx.fill()
+  }
+
   const getPixelProps = () => {
     const pxsProps: PptProps[] = []
-
-    const w = (props.r * 2 - 2 * PIXEL_OFFSET) / COUNT_PX
 
     for (let i = 0; i < COUNT_PX; i++) {
       for (let j = 0; j < COUNT_PX; j++) {
         const pxProps = {
-          x: PIXEL_OFFSET + j * w,
-          y: PIXEL_OFFSET + i * w,
-          r: w / 2,
+          x: j * popRad * 2,
+          y: i * popRad * 2,
+          r: popRad,
           c: DARK_COL,
         }
         
@@ -126,12 +133,7 @@ export const Progress = (props: Props): Render => {
     const pxsProps = getPixelProps()
 
     imageValue.drawImg = createImg((ctx = mainCtx) => {
-      ctx.fillStyle = DARK_COL
-      ctx.beginPath()
-      ctx.rect(0, 0, 2 * props.r, 2 * props.r)
-      ctx.closePath()
-      ctx.fill()
-
+      drawFond(ctx)
       pxsProps.filter(p => p.c !== DARK_COL).forEach(p => drawPixel(p, ctx))
     }, 2 * props.r)
   }
@@ -168,9 +170,11 @@ export const Progress = (props: Props): Render => {
 
     if (imageValue.drawImg) {
       ctx.drawImage(imageValue.drawImg, x - r, y - r, 2 * r, 2 * r)
+    } else {
+      drawFond(ctx, x - r, y - r)
     }
 
-    if (showWinScore && winScore) {
+    if (showWinScore && winScore && imageValue.drawImg) {
       for (const px of winPopits) {
         ctx.fillStyle = px.c || 'red'
         ctx.beginPath()

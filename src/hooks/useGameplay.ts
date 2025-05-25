@@ -3,7 +3,15 @@ import { useWebcore } from '@/webcore'
 import { Timer } from '@/webcore/types'
 import { useStorage } from './useStorage'
 
-export const useGameplay = (popits: PopitProps[]) => {
+type Props = {
+  popits: PopitProps[]
+  popEffect?: (p: PopitProps) => void
+}
+
+export const useGameplay = ({
+  popits,
+  popEffect = () => {}
+}: Props) => {
   const {
     useTimer,
     rand,
@@ -43,7 +51,7 @@ export const useGameplay = (popits: PopitProps[]) => {
 
   const ticFillTimer = () => {
     fillTimer = useTimer(() => {
-      addTic = Math.max(addTic - 10, 250)
+      addTic -= 10
       if (popits.length === activePpts.length) {
         stop = true
         fillTimer.stop()
@@ -91,6 +99,7 @@ export const useGameplay = (popits: PopitProps[]) => {
   }
 
   const onPopClick = (popit: PopitProps) => {
+    popEffect(popit)
     addTic = Math.min(addTic + 5, tickDelay)
     score++
 
