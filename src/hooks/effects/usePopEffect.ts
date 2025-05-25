@@ -65,7 +65,7 @@ export const usePopEffect = (): PopEffect => {
       const e = effects[k]
       const p = e.popit
 
-      ctx.fillStyle = shade(p.c || 'red', -20)
+      ctx.fillStyle = shade(p.c || 'red', -12)
       ctx.beginPath()
       ctx.arc(
         p.x,

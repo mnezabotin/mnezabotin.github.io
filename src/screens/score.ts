@@ -1,10 +1,12 @@
-import { useBackButton, useFond, useScore, useDownButton, useUpButton } from '@/hooks'
+import { useBackButton, useFond, useScore, useDownButton, useUpButton, usePopEffect } from '@/hooks'
 import { useWebcore } from '@/webcore'
 import { intersectArc, intersectRect } from '@/webcore/intersect'
 import type { Render } from '@/webcore/types'
 
 export const Score = (): Render => {
   const { addEventResize, rand } = useWebcore()
+
+  const { popEffect, render: renderPopEffects } = usePopEffect()
 
   const palette = ['#ffeb3b', '#C69FEE', '#5bb2f7', '#92E6E6', '#7ceab2', '#bef181', '#EFCD74']
   const color = palette[rand(palette.length - 1)]
@@ -20,7 +22,7 @@ export const Score = (): Render => {
   const {
     render: back,
     point: useBackPoint
-  } = useBackButton()
+  } = useBackButton({ popEffect })
   const {
     // render: down,
     point: useDownPoint
@@ -44,6 +46,7 @@ export const Score = (): Render => {
   })
 
   return () => {
+    renderPopEffects()
     fond()
     progress()
     back()

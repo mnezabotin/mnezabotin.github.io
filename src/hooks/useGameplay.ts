@@ -109,7 +109,9 @@ export const useGameplay = ({
     if (activePpts.length <= 0) {
       rounds--
       if (rounds > 0) {
-        onRound(popit)
+        useTimer(() => {
+          onRound(popit)
+        }, 100)
       } else {
         goTimer?.stop()
         fillTimer?.stop()

@@ -8,7 +8,16 @@ type Logo = {
   point: () => Point
 }
 
-export const useLogo = (color = '#f86a9a'): Logo => {
+
+type Props = {
+  color?: string
+  popEffect?: (p: PopitProps) => void
+}
+
+export const useLogo = ({
+  color = '#f86a9a',
+  popEffect = () => {}
+}: Props): Logo => {
   const {
     addEventResize,
     useMeasure,
@@ -62,6 +71,7 @@ export const useLogo = (color = '#f86a9a'): Logo => {
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, props)) {
+      popEffect(props)
       props.p = true
       useTimer(() => {
         navigate('opening')

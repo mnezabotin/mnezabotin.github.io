@@ -5,10 +5,19 @@ import { Point, Render } from '@/webcore/types'
 
 type Back = {
   render: Render
-  point: () => Point
+  point: () => Point,
+
 }
 
-export const useBackButton = (color = '#ff6347'): Back => {
+type Props = {
+  color?: string
+  popEffect?: (p: PopitProps) => void
+}
+
+export const useBackButton = ({
+  color = '#ff6347',
+  popEffect = () => {}
+}: Props): Back => {
   const {
     addEventResize,
     useMeasure,
@@ -54,6 +63,7 @@ export const useBackButton = (color = '#ff6347'): Back => {
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, props)) {
+      popEffect(props)
       props.p = true
       useTimer(() => {
         navigate('main')

@@ -11,11 +11,13 @@ type PauseType = {
 type Props = {
   getX: (cx: number, r: number, m: number) => number
   getY: (cy: number, r: number, m: number) => number
+  popEffect?: (p: PopitProps) => void
 }
 
 export const usePauseButton = ({
   getX,
   getY,
+  popEffect = () => {}
 }: Props): PauseType => {
   const {
     addEventResize,
@@ -54,6 +56,7 @@ export const usePauseButton = ({
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, props)) {
+      popEffect(props)
       props.p = true
       useTimer(() => {
         navigate('main')

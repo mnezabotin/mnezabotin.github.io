@@ -8,7 +8,15 @@ type Score = {
   point: () => Point
 }
 
-export const useScoreButton = (color = '#ba68c8'): Score => {
+type Props = {
+  color?: string
+  popEffect?: (p: PopitProps) => void
+}
+
+export const useScoreButton = ({
+  color = '#ba68c8',
+  popEffect = () => {}
+}: Props): Score => {
   const {
     addEventResize,
     useMeasure,
@@ -53,6 +61,7 @@ export const useScoreButton = (color = '#ba68c8'): Score => {
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, props)) {
+      popEffect(props)
       props.p = true
       useTimer(() => {
         navigate('score')
