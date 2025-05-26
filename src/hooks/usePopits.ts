@@ -12,7 +12,7 @@ type Popits = {
 type Props = {
   palette: string[] | string
   retry?: boolean
-  popEffect?: (p: PopitProps) => void
+  popEffect?: (p: PopitProps, witR?: boolean, shake?: boolean) => void
 }
 
 export const usePopits = ({
@@ -104,6 +104,7 @@ export const usePopits = ({
     if (retry) {
       retryPopit = pptProps[rand(pptProps.length - 1)]
       useTimer(() => {
+        popEffect(retryPopit, false, true)
         retryPopit.p = false
       })
     }
@@ -113,6 +114,7 @@ export const usePopits = ({
   })
 
   useTimer(() => {
+    popEffect(pausePptProps, false, true)
     pausePptProps.p = false
   })
 
