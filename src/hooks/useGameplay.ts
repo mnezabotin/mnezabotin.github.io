@@ -20,7 +20,8 @@ export const useGameplay = ({
     addEventClick,
     addEventMove,
     intersect,
-    navigate
+    navigate,
+    addEventResize
   } = useWebcore()
 
   const {
@@ -162,8 +163,11 @@ export const useGameplay = ({
 
   addEventClick(onClickEvent)
   addEventMove((x, y) => onClickEvent(x, y, true))
-  
-  useTimer(() => {
-    onRound()
+
+  addEventResize(() => {
+    useTimer(() => {
+      splashEffect('Let\'s Go')
+      onRound()
+    })
   })
 }
