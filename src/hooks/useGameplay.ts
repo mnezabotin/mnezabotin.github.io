@@ -5,7 +5,7 @@ import { useStorage } from './useStorage'
 
 type Props = {
   popits: PopitProps[]
-  popEffect?: (p: PopitProps, withoutRad?: boolean) => void
+  popEffect?: (p: PopitProps, withoutRad?: boolean, shake?: boolean) => void
   splashEffect?: (text: string) => void
 }
 
@@ -46,6 +46,7 @@ export const useGameplay = ({
     const index = rand(unactivePpts.length - 1)
     const popit = unactivePpts[index]
     if (popit) {
+      popEffect(popit, false, true)
       popit.p = false
       activePpts.push(unactivePpts[index])
     }
@@ -87,6 +88,7 @@ export const useGameplay = ({
       const index = rand(pptsBox.length - 1)
       const popit = pptsBox[index]
       popit.p = false
+      popEffect(popit, false, true)
       activePpts.push(popit)
 
       pptsBox.splice(index, 1)
