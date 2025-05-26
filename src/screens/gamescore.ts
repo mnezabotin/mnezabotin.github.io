@@ -1,4 +1,12 @@
-import { useGradient, usePlayButton, usePauseButton, useScore, useStorage, usePopEffect } from "@/hooks"
+import {
+  useGradient,
+  usePlayButton,
+  usePauseButton,
+  useScore,
+  useStorage,
+  usePopEffect,
+  useSplashEffect
+} from "@/hooks"
 import { useWebcore } from "@/webcore"
 import { Render } from "@/webcore/types"
 
@@ -9,6 +17,7 @@ export const GameScore = (): Render => {
   const { data } = useScreenMeta()
 
   const { popEffect, render: renderPopEffects } = usePopEffect()
+  const { splashEffect, render: renderSplashEffect } = useSplashEffect()
 
   useGradient()
 
@@ -36,6 +45,8 @@ export const GameScore = (): Render => {
 
   plusDifficulty()
 
+  splashEffect('You win')
+
   return () => {
     renderPopEffects()
   
@@ -47,5 +58,7 @@ export const GameScore = (): Render => {
 
     play()
     pause()
+
+    renderSplashEffect()
   }
 }

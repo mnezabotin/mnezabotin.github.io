@@ -6,11 +6,13 @@ import { useStorage } from './useStorage'
 type Props = {
   popits: PopitProps[]
   popEffect?: (p: PopitProps, withoutRad?: boolean) => void
+  splashEffect?: (text: string) => void
 }
 
 export const useGameplay = ({
   popits,
-  popEffect = () => {}
+  popEffect = () => {},
+  splashEffect = () => {}
 }: Props) => {
   const {
     useTimer,
@@ -93,7 +95,10 @@ export const useGameplay = ({
     addTic = tickDelay
     goTimer?.stop()
     fillTimer?.stop()
-    goTimer = useTimer(ticFillTimer, activePpts.length * tickDelay)
+    goTimer = useTimer(() => {
+      splashEffect('Too slow')
+      ticFillTimer()
+    }, activePpts.length * tickDelay)
 
     rounds = rounds > 0 ? rounds : rand(3, 5)
   }
@@ -110,6 +115,7 @@ export const useGameplay = ({
       rounds--
       if (rounds > 0) {
         useTimer(() => {
+          splashEffect('Round up')
           onRound(popit)
         }, 100)
       } else {
@@ -141,11 +147,13 @@ export const useGameplay = ({
       for (const popit of popits) {
         if (intersect({ x, y }, popit)) {
           popEffect(popit, true)
+          splashEffect('Popenalty')
           addActivePopit(popit)
           return
         }
       }
 
+      splashEffect('Popenalty')
       addActivePopit()
     }
   }

@@ -25,7 +25,6 @@ export const Text = (props: Props): Render => {
       mw,
     } = props
 
-
     ctx.textAlign = a
     ctx.fillStyle = c
     ctx.font = `${fs}px ${font}`
