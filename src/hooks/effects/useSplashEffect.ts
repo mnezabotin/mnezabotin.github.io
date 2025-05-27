@@ -21,7 +21,8 @@ export const useSplashEffect = (props?: Props): SplashEffect => {
     loop,
     ctx,
     useMeasure,
-    rand
+    rand,
+    font
   } = useWebcore()
 
   let effect: {
@@ -83,6 +84,12 @@ export const useSplashEffect = (props?: Props): SplashEffect => {
       return
     }
     ctx.globalAlpha = 0.01 * effect.tic
+    
+    ctx.textAlign = 'center'
+    ctx.fillStyle = '#000'
+    ctx.font = `${effect.props.fs + 0.5}px ${font}`
+    ctx.fillText(effect.props.text, effect.props.x, effect.props.y)
+
     effect.shape()
     ctx.globalAlpha = 1
   }

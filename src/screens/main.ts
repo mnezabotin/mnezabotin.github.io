@@ -9,8 +9,8 @@ export const Main = (): Render => {
 
   const { popEffect, render: renderPopEffects } = usePopEffect()
 
-  // '#C69FEE', '#7ceab2', '#fd8059'
-  const palette = ['#00dcfe', '#5bb2f7', '#92E6E6', '#EFCD74']
+  // '#C69FEE', '#7ceab2', '#fd8059', '#EFCD74'
+  const palette = ['#00dcfe', '#5bb2f7', '#92E6E6']
   const color = from === 'opening' ? palette[0] : palette[rand(palette.length - 1)]
 
   const { render: fond, setIntersections } = useFond({ color })

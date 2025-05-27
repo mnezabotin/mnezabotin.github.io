@@ -14,7 +14,7 @@ type Props = {
   frequency?: number
 }
 
-export const useFond = ({ color = '#00dcfe', frequency = 25 }: Props): Fond => {
+export const useFond = ({ color = '#00dcfe', frequency = 20 }: Props): Fond => {
   const {
     addEventResize,
     useRandChain,
@@ -72,7 +72,7 @@ export const useFond = ({ color = '#00dcfe', frequency = 25 }: Props): Fond => {
         pptProps[i].p = !pptProps[i].p
       }
       tic()
-    }, 750)
+    }, 250)
   }
 
   if (from === 'opening') {
