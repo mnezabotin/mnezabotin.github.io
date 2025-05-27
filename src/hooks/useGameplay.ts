@@ -25,6 +25,7 @@ export const useGameplay = ({
   } = useWebcore()
 
   const {
+    getScore,
     addScore,
     getDifficultyTic,
   } = useStorage()
@@ -39,6 +40,8 @@ export const useGameplay = ({
   let rounds = 0
   let score = 0
   let addTic = 0
+
+  const scoreNow = getScore()
 
   const tickDelay = getDifficultyTic()
 
@@ -98,10 +101,12 @@ export const useGameplay = ({
     addTic = tickDelay
     goTimer?.stop()
     fillTimer?.stop()
-    goTimer = useTimer(() => {
-      splashEffect('Too slow')
-      ticFillTimer()
-    }, activePpts.length * tickDelay)
+    if (!!scoreNow) {
+      goTimer = useTimer(() => {
+        splashEffect('SLOWLY')
+        ticFillTimer()
+      }, activePpts.length * tickDelay)
+    }
 
     rounds = rounds > 0 ? rounds : rand(3, 5)
   }

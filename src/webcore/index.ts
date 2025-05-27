@@ -107,20 +107,18 @@ export const initWebcore = (routes: Route[], audioPaths?: string[]) => {
     onResizeEvents()
   }
 
-  // document.ontouchstart = (e: TouchEvent) => {
-  //   const touches = e.touches || []
-  //   for (const t of touches) {
-  //     onClickEvents(t.clientX, t.clientY)
+  // if ('ontouchstart' in window) {
+  //   document.ontouchstart = (e: TouchEvent) => {
+  //     const touches = e.touches || []
+  //     for (const t of touches) {
+  //       onClickEvents(t.clientX, t.clientY)
+  //     }
   //   }
+  // } else {
+    document.onpointerdown = (e: MouseEvent) => {
+      onClickEvents(e.clientX, e.clientY)
+    }
   // }
-
-  // document.onpointerdown = (e: MouseEvent) => {
-  //   onClickEvents(e.clientX, e.clientY)
-  // }
-
-  document.onpointerdown = (e: PointerEvent) => {
-    onClickEvents(e.clientX, e.clientY)
-  }
 
   document.onmousemove = (e: MouseEvent) => {
     onMoveEvents(e.clientX, e.clientY)
