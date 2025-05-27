@@ -10,7 +10,7 @@ type Score = {
 
 type Props = {
   color?: string
-  popEffect?: (p: PopitProps) => void
+  popEffect?: (p: PopitProps, wr?: boolean, s?: boolean) => void
 }
 
 export const useScoreButton = ({
@@ -56,6 +56,9 @@ export const useScoreButton = ({
   })
 
   useTimer(() => {
+    if (props.p) {
+      popEffect(props, false, true)
+    }
     props.p = false
   })
 

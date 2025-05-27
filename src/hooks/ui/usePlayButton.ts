@@ -12,7 +12,7 @@ type Props = {
   getX: (cx: number, r: number, m: number) => number
   getY: (cy: number, r: number, m: number) => number
   color?: string
-  popEffect?: (p: PopitProps) => void
+  popEffect?: (p: PopitProps, wr?: boolean, s?: boolean) => void
 }
 
 export const usePlayButton = ({
@@ -53,6 +53,9 @@ export const usePlayButton = ({
   })
 
   useTimer(() => {
+    if (props.p) {
+      popEffect(props, false, true)
+    }
     props.p = false
   })
 

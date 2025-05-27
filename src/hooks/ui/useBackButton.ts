@@ -11,7 +11,7 @@ type Back = {
 
 type Props = {
   color?: string
-  popEffect?: (p: PopitProps) => void
+  popEffect?: (p: PopitProps, wr?: boolean, s?: boolean) => void
 }
 
 export const useBackButton = ({
@@ -58,6 +58,9 @@ export const useBackButton = ({
 
   
   useTimer(() => {
+    if (props.p) {
+      popEffect(props, false, true)
+    }
     props.p = false
   })
 

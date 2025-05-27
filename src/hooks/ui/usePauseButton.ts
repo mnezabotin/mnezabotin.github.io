@@ -11,7 +11,7 @@ type PauseType = {
 type Props = {
   getX: (cx: number, r: number, m: number) => number
   getY: (cy: number, r: number, m: number) => number
-  popEffect?: (p: PopitProps) => void
+  popEffect?: (p: PopitProps, wr?: boolean, s?: boolean) => void
 }
 
 export const usePauseButton = ({
@@ -51,6 +51,9 @@ export const usePauseButton = ({
   })
 
   useTimer(() => {
+    if (props.p) {
+      popEffect(props, false, true)
+    }
     props.p = false
   })
 

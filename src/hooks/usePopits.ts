@@ -114,7 +114,9 @@ export const usePopits = ({
   })
 
   useTimer(() => {
-    popEffect(pausePptProps, false, true)
+    if (pausePptProps.p) {
+      popEffect(pausePptProps, false, true)
+    }
     pausePptProps.p = false
   })
 

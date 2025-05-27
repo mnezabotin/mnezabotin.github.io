@@ -11,7 +11,7 @@ type Logo = {
 
 type Props = {
   color?: string
-  popEffect?: (p: PopitProps) => void
+  popEffect?: (p: PopitProps, wr?: boolean, s?: boolean) => void
 }
 
 export const useLogo = ({
@@ -67,7 +67,12 @@ export const useLogo = ({
     })
   })
 
-  useTimer(() => props.p = false)
+  useTimer(() => {
+    if (props.p) {
+      popEffect(props, false, true)
+    }
+    props.p = false
+  })
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, props)) {
