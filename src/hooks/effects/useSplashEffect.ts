@@ -20,13 +20,17 @@ export const useSplashEffect = (props?: Props): SplashEffect => {
   const {
     loop,
     ctx,
-    useMeasure
+    useMeasure,
+    rand
   } = useWebcore()
 
   let effect: {
     tic: number
     props: TextProps
     shape: Render
+    shake?: boolean
+    origX: number
+    origY: number
   } | null = null
 
   const loopEffect = () => {
@@ -38,6 +42,13 @@ export const useSplashEffect = (props?: Props): SplashEffect => {
 
     if (effect.tic <= RANGE) {
       effect.props.fs = (props?.mfs || 6) / RANGE * effect.tic * m
+    } else {
+      const dx = rand(1, 1)
+      const dy = rand(1, 1)
+
+      effect.props.x = effect.origX + (Math.random() * dx * (Math.random() > 0.5 ? 1 : -1))
+      effect.props.y = effect.origY + (Math.random() * dy * (Math.random() > 0.5 ? 1 : -1))
+      effect.shake = true
     }
     effect.tic += effect.tic > RANGE ? 1 : 10
     if (effect.tic > RANGE * 2) {
@@ -61,7 +72,9 @@ export const useSplashEffect = (props?: Props): SplashEffect => {
     effect = {
       props: textProps,
       shape,
-      tic
+      tic,
+      origX: textProps.x,
+      origY: textProps.y,
     }
   }
 
