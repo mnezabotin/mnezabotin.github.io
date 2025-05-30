@@ -50,7 +50,7 @@ export const GameScore = (): Render => {
   }
 
   if (innerHeight > innerWidth) {
-    splashEffect('You win')
+    splashEffect(isJump ? 'Picture filled' : 'You win')
   }
 
   return () => {
