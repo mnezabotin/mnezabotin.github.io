@@ -22,8 +22,11 @@ export const useScore = (winScore = 0): Score => {
   const { getScore } = useStorage()
 
   const origImgs = [
-    '/media/cat.png',
-    '/media/max.png',
+    '/media/levels/cat.png',
+    '/media/levels/city.png',
+    '/media/levels/donut.png',
+    '/media/levels/girl.png',
+    '/media/levels/max.png',
   ]
 
   const score = getScore()
@@ -32,10 +35,13 @@ export const useScore = (winScore = 0): Score => {
   let pgsRad = 0
   let margin = 0
 
-  let curInd = Math.floor(score / MAX_IMG_POINTS)
+  let curInd = Math.min(
+    Math.floor(score / MAX_IMG_POINTS),
+    origImgs.length - 1
+  )
 
   addEventResize(() => {
-    const { cx, cy, s } = useMeasure()
+    const { cx, cy, s, isL } = useMeasure()
 
     progressTabs = []
 
@@ -44,12 +50,20 @@ export const useScore = (winScore = 0): Score => {
 
     for (let i = 0; i < origImgs.length; i++) {
       const imgSrc = origImgs[i]
+
+      const x = isL
+        ? cx
+        : cx + i * pgsRad * 2 + i * margin
+      const y = isL
+        ? cy + i * pgsRad * 2 + i * margin
+        : cy
+
       progressTabs.push(
         Progress({
-          x: cx,
-          y: cy + i * pgsRad * 2 + i * margin,
+          x,
+          y,
           r: pgsRad,
-          score: score - i * MAX_IMG_POINTS < 0 ? 0 : score - i * MAX_IMG_POINTS,
+          score: Math.min(score - i * MAX_IMG_POINTS, 10000),
           imgSrc,
           winScore,
         })
@@ -58,9 +72,13 @@ export const useScore = (winScore = 0): Score => {
   })
 
   const render = () => {
+    const { isL } = useMeasure()
+    const x = isL ? 0 : -(curInd * pgsRad * 2 + curInd * margin)
+    const y = isL ? -(curInd * pgsRad * 2 + curInd * margin) : 0
+
     translate(() => {
       progressTabs?.forEach(p => p())
-    }, 0, -(curInd * pgsRad * 2 + curInd * margin))
+    }, x, y)
   }
 
   const rect = () => {

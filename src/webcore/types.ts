@@ -92,6 +92,7 @@ export type Webcore = {
     cy: number
     s: number
     m: number
+    isL: boolean
   }
 
   navigate: Router['navigate']

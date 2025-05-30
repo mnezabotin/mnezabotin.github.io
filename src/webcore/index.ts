@@ -46,8 +46,9 @@ export const initWebcore = (routes: Route[], audioPaths?: string[]) => {
       innerWidth * innerWidth + innerHeight * innerHeight
     ) / 144
   )
+  let isLandscape = innerWidth > innerHeight
 
-  const useMeasure = () => ({ cx, cy, s, m })
+  const useMeasure = () => ({ cx, cy, s, m, isL: isLandscape })
 
   const playAudio = useAudio(audioPaths || [])
 
@@ -102,6 +103,7 @@ export const initWebcore = (routes: Route[], audioPaths?: string[]) => {
         innerWidth * innerWidth + innerHeight * innerHeight
       ) / 144
     )
+    isLandscape = innerWidth > innerHeight
 
     stage.resize()
     onResizeEvents()
