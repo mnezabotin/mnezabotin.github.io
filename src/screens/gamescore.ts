@@ -45,7 +45,9 @@ export const GameScore = (): Render => {
 
   plusDifficulty()
 
-  splashEffect('You win')
+  if (innerHeight > innerWidth) {
+    splashEffect('You win')
+  }
 
   return () => {
     renderPopEffects()

@@ -171,7 +171,7 @@ export const useGameplay = ({
 
   addEventResize(() => {
     useTimer(() => {
-      splashEffect('Go')
+      splashEffect('Pop it')
       onRound()
     })
   })
