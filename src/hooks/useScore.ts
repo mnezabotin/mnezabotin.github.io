@@ -10,6 +10,7 @@ type Score = {
   down: () => void
   render: Render
   rect: () => Rectangle
+  isJump: boolean
 }
 
 export const useScore = (winScore = 0, isOne = false): Score => {
@@ -34,11 +35,19 @@ export const useScore = (winScore = 0, isOne = false): Score => {
   let progressTabs: Render[]
   let pgsRad = 0
   let margin = 0
+  let isJump = false
 
-  let curInd = Math.min(
-    Math.floor(score / MAX_IMG_POINTS),
+  const getCurIndex = (s: number) => Math.min(
+    Math.floor(s / MAX_IMG_POINTS),
     origImgs.length - 1
   )
+
+  let curInd = getCurIndex(score - winScore)
+
+  if (winScore) {
+    const winCurInd = getCurIndex(score)
+    isJump = winCurInd !== curInd
+  }
 
   addEventResize(() => {
     const { cx, cy, s, isL } = useMeasure()
@@ -111,6 +120,7 @@ export const useScore = (winScore = 0, isOne = false): Score => {
     up,
     down,
     render,
-    rect
+    rect,
+    isJump
   }
 }

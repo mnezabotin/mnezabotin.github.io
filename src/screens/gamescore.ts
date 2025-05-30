@@ -12,7 +12,7 @@ import { Render } from "@/webcore/types"
 
 export const GameScore = (): Render => {
   const { translate, useScreenMeta } = useWebcore()
-  const { plusDifficulty } = useStorage()
+  const { plusDifficulty, resetDifficulty } = useStorage()
 
   const { data } = useScreenMeta()
 
@@ -21,7 +21,7 @@ export const GameScore = (): Render => {
 
   useGradient()
 
-  const { render: score } = useScore(data?.winScore, true)
+  const { render: score, isJump } = useScore(data?.winScore, true)
 
   const { render: play } = usePlayButton({
     getX: (x, s, m) => innerWidth > innerHeight ?
@@ -43,7 +43,11 @@ export const GameScore = (): Render => {
     popEffect
   })
 
-  plusDifficulty()
+  if (isJump) {
+    resetDifficulty()
+  } else {
+    plusDifficulty()
+  }
 
   if (innerHeight > innerWidth) {
     splashEffect('You win')

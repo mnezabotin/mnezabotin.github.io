@@ -23,6 +23,8 @@ type Storage = {
 
   getDifficultyRad: () => number
   getDifficultyTic: () => number
+
+  resetDifficulty: () => void
 }
 
 export const useStorage = (): Storage => {
@@ -59,6 +61,7 @@ export const useStorage = (): Storage => {
 
   const plusDifficulty = () => setDifficulty(1)
   const minusDifficulty = () => setDifficulty(-5)
+  const resetDifficulty = () => setValue(DIFFICULTY_LVL_KEY, 0)
 
   const getDifficultyRad = (): number => {
     const d = getDifficulty()
@@ -86,5 +89,7 @@ export const useStorage = (): Storage => {
 
     getDifficultyRad,
     getDifficultyTic,
+
+    resetDifficulty,
   }
 }

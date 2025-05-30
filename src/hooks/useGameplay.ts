@@ -111,6 +111,22 @@ export const useGameplay = ({
     rounds = rounds > 0 ? rounds : rand(3, 5)
   }
 
+  const getFactorial = () => {
+    if (scoreNow < 10000) {
+      return 10
+    }
+
+    if (scoreNow < 20000) {
+      return 5
+    }
+
+    if (scoreNow < 30000) {
+      return 2
+    }
+
+    return 1
+  }
+
   const onPopClick = (popit: PopitProps) => {
     popEffect(popit)
     addTic = Math.min(addTic + 5, tickDelay)
@@ -129,10 +145,11 @@ export const useGameplay = ({
       } else {
         goTimer?.stop()
         fillTimer?.stop()
-        addScore(score)
+        const f = getFactorial()
+        addScore(score * f)
         useTimer(() => {
           navigate('gamescore', {
-            winScore: score
+            winScore: score * f
           })
         }, 100)
       }
