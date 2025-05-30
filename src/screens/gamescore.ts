@@ -17,7 +17,7 @@ export const GameScore = (): Render => {
   const { data } = useScreenMeta()
 
   const { popEffect, render: renderPopEffects } = usePopEffect()
-  const { splashEffect, render: renderSplashEffect } = useSplashEffect()
+  const { splashEffect, render: renderSplashEffect } = useSplashEffect({ infinity: true })
 
   useGradient()
 

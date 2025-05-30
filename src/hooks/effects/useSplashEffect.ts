@@ -12,6 +12,7 @@ type SplashEffect = {
 type Props = {
   color?: string
   maxSize?: number
+  infinity?: boolean
   dy?: number
   mfs?: number
 }
@@ -52,7 +53,7 @@ export const useSplashEffect = (props?: Props): SplashEffect => {
       effect.shake = true
     }
     effect.tic += effect.tic > RANGE ? 1 : 10
-    if (effect.tic > RANGE * 2) {
+    if (effect.tic > RANGE * 2 && !props?.infinity) {
       effect = null
     }
   }
