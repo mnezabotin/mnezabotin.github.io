@@ -113,18 +113,14 @@ export const useGameplay = ({
 
   const getFactorial = () => {
     if (scoreNow < 10000) {
-      return 20
-    }
-
-    if (scoreNow < 20000) {
       return 10
     }
 
-    if (scoreNow < 30000) {
+    if (scoreNow < 20000) {
       return 5
     }
 
-    if (scoreNow < 40000) {
+    if (scoreNow < 30000) {
       return 2
     }
 
