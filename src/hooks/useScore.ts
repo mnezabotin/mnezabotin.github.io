@@ -11,6 +11,7 @@ type Score = {
   render: Render
   rect: () => Rectangle
   isJump: boolean
+  isCompleted: boolean
 }
 
 export const useScore = (winScore = 0, isOne = false): Score => {
@@ -27,6 +28,9 @@ export const useScore = (winScore = 0, isOne = false): Score => {
     '/media/levels/city.png',
     '/media/levels/donut.png',
     '/media/levels/girl.png',
+    '/media/levels/home.png',
+    '/media/levels/iron.png',
+    '/media/levels/wolf.png',
     '/media/levels/max.png',
   ]
 
@@ -36,6 +40,7 @@ export const useScore = (winScore = 0, isOne = false): Score => {
   let pgsRad = 0
   let margin = 0
   let isJump = false
+  let isCompleted = false
 
   const getCurIndex = (s: number) => Math.min(
     Math.floor(s / MAX_IMG_POINTS),
@@ -47,6 +52,7 @@ export const useScore = (winScore = 0, isOne = false): Score => {
   if (winScore) {
     const winCurInd = getCurIndex(score)
     isJump = winCurInd !== curInd
+    isCompleted = winCurInd > origImgs.length - 1
   }
 
   addEventResize(() => {
@@ -121,6 +127,7 @@ export const useScore = (winScore = 0, isOne = false): Score => {
     down,
     render,
     rect,
-    isJump
+    isJump,
+    isCompleted
   }
 }
