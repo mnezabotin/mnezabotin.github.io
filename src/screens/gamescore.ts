@@ -52,11 +52,11 @@ export const GameScore = (): Render => {
   return () => {
     renderPopEffects()
   
-    if (innerHeight > innerWidth) {
-      translate(score, 0, -Math.round(innerHeight * 0.07))
-    } else {
+    // if (innerHeight > innerWidth) {
+    //   translate(score, 0, -Math.round(innerHeight * 0.07))
+    // } else {
       score()
-    }
+    // }
 
     play()
     pause()

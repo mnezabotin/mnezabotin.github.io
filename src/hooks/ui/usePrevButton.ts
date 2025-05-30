@@ -8,7 +8,7 @@ type Back = {
   point: () => Point
 }
 
-export const useUpButton = (onClick: () => void): Back => {
+export const usePrevButton = (onClick: () => void): Back => {
   const {
     addEventResize,
     useMeasure,
@@ -25,13 +25,21 @@ export const useUpButton = (onClick: () => void): Back => {
   addEventResize(() => {
     const { s } = useMeasure()
 
-    const r = Math.round(s * 0.055)
+    const r = Math.round(s * 0.08)
+
+    const x = innerWidth < innerHeight
+      ? Math.round(innerWidth - 1.6 * r - 2 * r - 0.3 * r)
+      : Math.round(innerWidth - 1.6 * r)
+    
+    const y = innerWidth < innerHeight
+      ? Math.round(innerHeight - 1.6 * r)
+      : Math.round(innerHeight - 1.6 * r - 2 * r - 0.3 * r)
 
     props = {
       c: '#ff6347',
       r,
-      x: Math.round(innerWidth - 1.6 * r),
-      y: Math.round(innerHeight - 1.6 * r - 2 * r - 0.3 * r),
+      x,
+      y,
       p: false
     }
 
@@ -60,7 +68,7 @@ export const useUpButton = (onClick: () => void): Back => {
     if (!props.p) {
       rotate(() => {
         back()
-      }, props.x, props.y, 0.5)
+      }, props.x, props.y, innerHeight > innerWidth ? 0 : 0.5)
     }
   }
 

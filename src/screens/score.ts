@@ -1,4 +1,4 @@
-import { useBackButton, useFond, useScore, useDownButton, useUpButton, usePopEffect } from '@/hooks'
+import { useBackButton, useFond, useScore, useNextButton, usePrevButton, usePopEffect } from '@/hooks'
 import { useWebcore } from '@/webcore'
 import { intersectArc, intersectRect } from '@/webcore/intersect'
 import type { Render } from '@/webcore/types'
@@ -24,13 +24,13 @@ export const Score = (): Render => {
     point: useBackPoint
   } = useBackButton({ popEffect })
   const {
-    // render: down,
+    render: next,
     point: useDownPoint
-  } = useDownButton(onUp)
+  } = useNextButton(onUp)
   const {
-    // render: up,
+    render: prev,
     point: useUpPoint
-  } = useUpButton(onDown)
+  } = usePrevButton(onDown)
 
   addEventResize(() => {
     const backPoint = useBackPoint()
@@ -50,7 +50,7 @@ export const Score = (): Render => {
     fond()
     progress()
     back()
-    // down()
-    // up()
+    next()
+    prev()
   }
 }

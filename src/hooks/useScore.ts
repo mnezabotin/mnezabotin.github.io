@@ -22,6 +22,7 @@ export const useScore = (winScore = 0): Score => {
   const { getScore } = useStorage()
 
   const origImgs = [
+    '/media/cat.png',
     '/media/max.png',
   ]
 

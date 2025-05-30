@@ -5,8 +5,7 @@ import { Point, Render } from '@/webcore/types'
 
 type Back = {
   render: Render
-  point: () => Point,
-
+  point: () => Point
 }
 
 type Props = {
