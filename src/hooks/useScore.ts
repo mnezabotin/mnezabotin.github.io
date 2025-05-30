@@ -82,6 +82,7 @@ export const useScore = (winScore = 0, isOne = false): Score => {
           score: Math.min(score - i * MAX_IMG_POINTS, 10000),
           imgSrc,
           winScore,
+          seed: i
         })
       )
     }

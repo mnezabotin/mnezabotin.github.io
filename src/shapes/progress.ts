@@ -30,6 +30,7 @@ export type Props = {
   y: number
   r: number
   winScore: number
+  seed: number
 }
 
 export const Progress = (props: Props): Render => {
@@ -96,7 +97,7 @@ export const Progress = (props: Props): Render => {
 
     let score = props.score - props.winScore
     const boxPxsProps = [...pxsProps]
-    const rand = useRandChain(0)
+    const rand = useRandChain(props.seed)
 
     const setPixel = (isWin = false) => {
       const randInd = rand(boxPxsProps.length - 1)
