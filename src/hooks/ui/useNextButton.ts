@@ -8,7 +8,12 @@ type Back = {
   point: () => Point
 }
 
-export const useNextButton = (onClick: () => void): Back => {
+type Props = {
+  onClick: () => void
+  popEffect?: (p: PopitProps, wr?: boolean, s?: boolean) => void
+}
+
+export const useNextButton = ({ onClick }: Props): Back => {
   const {
     addEventResize,
     useMeasure,
@@ -47,9 +52,15 @@ export const useNextButton = (onClick: () => void): Back => {
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, props)) {
+      // if (!props?.p) {
+      //   popEffect(props)
+      // }
       props.p = true
       onClick()
       useTimer(() => {
+        // if (props?.p) {
+        //   popEffect(props, false, true)
+        // }
         props.p = false
       }, 100)
     }

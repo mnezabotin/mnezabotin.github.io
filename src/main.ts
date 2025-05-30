@@ -6,10 +6,6 @@ import type { Route } from '@/webcore/types'
 
 const routes: Route[] = [
   {
-    name: 'score',
-    ctor: Score
-  },
-  {
     name: 'opening',
     ctor: Opening
   },
@@ -28,6 +24,10 @@ const routes: Route[] = [
   {
     name: 'gamescore',
     ctor: GameScore
+  },
+  {
+    name: 'score',
+    ctor: Score
   },
   {
     name: 'devs',

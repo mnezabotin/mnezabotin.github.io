@@ -26,11 +26,11 @@ export const Score = (): Render => {
   const {
     render: next,
     point: useDownPoint
-  } = useNextButton(onUp)
+  } = useNextButton({ onClick: onUp, popEffect })
   const {
     render: prev,
     point: useUpPoint
-  } = usePrevButton(onDown)
+  } = usePrevButton({ onClick: onDown, popEffect })
 
   addEventResize(() => {
     const backPoint = useBackPoint()

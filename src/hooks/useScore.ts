@@ -12,7 +12,7 @@ type Score = {
   rect: () => Rectangle
 }
 
-export const useScore = (winScore = 0): Score => {
+export const useScore = (winScore = 0, isOne = false): Score => {
   const {
     addEventResize,
     useMeasure,
@@ -48,7 +48,8 @@ export const useScore = (winScore = 0): Score => {
     pgsRad = (s - 2 * s * 0.055 * 1.6) / 2
     margin = s * 0.05
 
-    for (let i = 0; i < origImgs.length; i++) {
+    let i = isOne ? curInd : 0
+    for (i; i < (isOne ? curInd + 1 : origImgs.length); i++) {
       const imgSrc = origImgs[i]
 
       const x = isL
