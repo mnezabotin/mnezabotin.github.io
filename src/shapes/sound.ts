@@ -15,7 +15,7 @@ export const Sound = (props: Props): Render => {
   const lw = Math.round(props.r / 4)
   const line = Math.round(0.2 * props.r)
 
-  const gradient = shade(props.c || 'blue', -3)
+  const gradient = shade(props.c || 'blue', -5)
 
   return (ctx = mainCtx) => {
     const {
