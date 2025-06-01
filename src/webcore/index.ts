@@ -14,7 +14,7 @@ import type {
 
 let webcore: Webcore
 
-export const initWebcore = (routes: Route[]) => {
+export const initWebcore = (routes: Route[], sounds?: string[]) => {
   if (webcore) {
     throw new Error('Webcore already specified')
   }
@@ -50,7 +50,7 @@ export const initWebcore = (routes: Route[]) => {
 
   const useMeasure = () => ({ cx, cy, s, m, isL: isLandscape })
 
-  const playSound = useSound()
+  const playSound = useSound(sounds)
 
   webcore = {
     font: 'Tijuf',
