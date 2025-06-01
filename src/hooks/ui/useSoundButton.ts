@@ -15,7 +15,7 @@ type Props = {
 }
 
 export const useSoundButton = ({
-  color = '#f7e333',
+  color = '#f9f774',
   popEffect = () => {}
 }: Props): Sound => {
   const {
@@ -39,13 +39,15 @@ export const useSoundButton = ({
 
     const r = Math.round(s * 0.25)
 
+    const rad = Math.round(s * 0.065)
+
     const sooundOn = getSound()
 
     props = {
       c: color,
-      r: Math.round(s * 0.065),
-      x: cx - r - 6 * m,
-      y: cy - r + 14 * m,
+      r: rad,
+      x: cx - r - rad - m,
+      y: cy - r + 3 * rad,
       p: (from === 'opening') && !props,
       on: sooundOn
     }
