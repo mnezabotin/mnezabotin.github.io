@@ -2,6 +2,7 @@ import { Img } from '@/shapes/img'
 import { Popit, Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Point, Render } from '@/webcore/types'
+import { useSoundEffect } from '../effects/useSoundEffect'
 
 type Back = {
   render: Render
@@ -22,6 +23,8 @@ export const usePrevButton = ({ onClick }: Props): Back => {
     intersect,
     rotate,
   } = useWebcore()
+
+  const { playPop } = useSoundEffect()
 
   let props: PopitProps
   let popit: Render
@@ -60,6 +63,7 @@ export const usePrevButton = ({ onClick }: Props): Back => {
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, props)) {
+      playPop()
       // if (!props?.p) {
       //   popEffect(props)
       // }

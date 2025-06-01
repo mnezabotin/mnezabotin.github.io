@@ -26,7 +26,7 @@ export const useScore = (winScore = 0, isOne = false): Score => {
   const origImgs = [
     '/media/levels/cat.png',
     '/media/levels/city.png',
-    '/media/levels/donut.png',
+    // '/media/levels/donut.png',
     '/media/levels/girl.png',
     '/media/levels/home.png',
     '/media/levels/iron.png',

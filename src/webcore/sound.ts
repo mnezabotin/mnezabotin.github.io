@@ -1,9 +1,7 @@
 export const useSound = () => {
-  let context: AudioContext | null = null
+  let context: AudioContext | null = new AudioContext()
   let buffer: Record<string, AudioBuffer | null> = {}
   return async (url: string) => {
-    // if (context) context.close()
-    context = new AudioContext()
     const source = context.createBufferSource()
     if (!buffer[url]) {
       buffer[url] = await fetch(url)

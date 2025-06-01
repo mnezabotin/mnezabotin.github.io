@@ -1,6 +1,7 @@
 import { Props as PptProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Render } from '@/webcore/types'
+import { useSoundEffect } from './useSoundEffect'
 
 const RANGE = 100 / 2
 
@@ -18,6 +19,8 @@ export const usePopEffect = (): PopEffect => {
     shade,
     rand
   } = useWebcore()
+
+  const { playPop } = useSoundEffect()
 
   const effects: Record<string, {
     withoutRad: boolean
@@ -69,6 +72,10 @@ export const usePopEffect = (): PopEffect => {
   }
 
   const popEffect = (p: PptProps, withoutRad = false, shake = false) => {
+    if (!shake && !withoutRad) {
+      playPop()
+    }
+
     keyInd++
     const key = `${new Date().valueOf().toString()}_${keyInd}`
 
