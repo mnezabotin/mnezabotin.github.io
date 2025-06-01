@@ -1,4 +1,4 @@
-type Sound = (url: string) => Promise<void>
+type Sound = (url: string) => void
 
 export const useSound = (paths?: string[]): Sound => {
   const context: AudioContext | null = new AudioContext()
@@ -21,16 +21,18 @@ export const useSound = (paths?: string[]): Sound => {
     }
   }
 
-  const playSound = async (url: string) => {
-    const source = context.createBufferSource()
-    if (!buffer[url]) {
-      buffer[url] = await fetch(url)
-        .then(res => res.arrayBuffer())
-        .then(arrayBuffer => context?.decodeAudioData(arrayBuffer) || null)
-    }
-    source.buffer = buffer[url]
-    source.connect(context.destination)
-    source.start()
+  const playSound = (url: string) => {
+    setTimeout(async () => {
+      const source = context.createBufferSource()
+      if (!buffer[url]) {
+        buffer[url] = await fetch(url)
+          .then(res => res.arrayBuffer())
+          .then(arrayBuffer => context?.decodeAudioData(arrayBuffer) || null)
+      }
+      source.buffer = buffer[url]
+      source.connect(context.destination)
+      source.start()
+    }, 0)
   }
 
   return playSound

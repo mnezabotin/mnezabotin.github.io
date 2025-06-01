@@ -43,7 +43,7 @@ export const useSplashEffect = (props?: Props): SplashEffect => {
     const { m } = useMeasure()
 
     if (effect.tic <= RANGE) {
-      effect.props.fs = (props?.mfs || 6) / RANGE * effect.tic * m
+      effect.props.fs = (props?.mfs || 8) / RANGE * effect.tic * m
     } else {
       const dx = rand(1, 1)
       const dy = rand(1, 1)
