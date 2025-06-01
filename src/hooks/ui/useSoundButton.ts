@@ -66,12 +66,12 @@ export const useSoundButton = ({
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, props)) {
-      popEffect(props)
       let sooundOn = getSound()
       sooundOn = !sooundOn
       setSound(sooundOn)
       props.p = true
       props.on = sooundOn
+      popEffect(props)
       useTimer(() => {
         props.p = false
       }, 100)
