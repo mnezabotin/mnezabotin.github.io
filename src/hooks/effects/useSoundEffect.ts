@@ -1,4 +1,5 @@
 import { useWebcore } from '@/webcore'
+import { useStorage } from '../useStorage'
 
 const popEffects = [
   '/sounds/pop1.mp3',
@@ -30,7 +31,13 @@ type SoundEffect = {
 export const useSoundEffect = (): SoundEffect => {
   const { rand, playSound } = useWebcore()
 
+  const { getSound } = useStorage()
+
   const playPop = () => {
+    if (!getSound()) {
+      return
+    }
+
     const randInd = rand(activePopEffects.length - 1)
     const popEffect = activePopEffects[randInd]
 
@@ -54,18 +61,30 @@ export const useSoundEffect = (): SoundEffect => {
   }
 
   const playMissed = () => {
+    if (!getSound()) {
+      return
+    }
+
     const url = '/sounds/pop7.mp3'
 
     playSound(url)
   }
 
   const playFail = () => {
+    if (!getSound()) {
+      return
+    }
+
     const url = '/sounds/fail.mp3'
 
     playSound(url)
   }
 
   const playWin = () => {
+    if (!getSound()) {
+      return
+    }
+
     const url = '/sounds/win.mp3'
 
     playSound(url)

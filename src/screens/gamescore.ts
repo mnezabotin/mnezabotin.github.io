@@ -5,9 +5,9 @@ import {
   useScore,
   useStorage,
   usePopEffect,
-  useSplashEffect
+  useSplashEffect,
+  useSoundEffect
 } from "@/hooks"
-import { useSoundEffect } from "@/hooks/effects/useSoundEffect"
 import { useWebcore } from "@/webcore"
 import { Render } from "@/webcore/types"
 

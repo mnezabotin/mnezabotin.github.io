@@ -1,8 +1,9 @@
 const APP_KEY = 'ylp'
 
 const SCORE_KEY = 'score'
-
 const DIFFICULTY_LVL_KEY = 'difficulty'
+const SOUND_KEY = 'sound'
+
 const DIFFICULTY_PPT_RAD = [0.14, 0.11, 0.09, 0.075]
 
 const TIC_MAX = 750
@@ -13,6 +14,8 @@ const DIFFICULTY_LVL_TICS: number[] = []
 for (let i = 0; i * TIC_STEP <= TIC_MAX - TIC_MIN; i++) {
   DIFFICULTY_LVL_TICS.push(TIC_MAX - i * TIC_STEP)
 }
+
+let isSoundOn: boolean | null = null
 
 type Storage = {
   getScore: () => number
@@ -25,11 +28,14 @@ type Storage = {
   getDifficultyTic: () => number
 
   resetDifficulty: () => void
+
+  getSound: () => boolean
+  setSound: (value: boolean) => void
 }
 
 export const useStorage = (): Storage => {
   const getValue = (key: string) => localStorage.getItem(`${APP_KEY}_${key}`)
-  const setValue = (key: string, value: string | number) => localStorage.setItem(`${APP_KEY}_${key}`, value.toString())
+  const setValue = (key: string, value: string | number | boolean) => localStorage.setItem(`${APP_KEY}_${key}`, value.toString())
 
   const getScore = (): number => +(getValue(SCORE_KEY) || 0)
 
@@ -80,6 +86,26 @@ export const useStorage = (): Storage => {
       DIFFICULTY_LVL_TICS[0]
   }
 
+  const getSound = (): boolean => {
+    if (isSoundOn !== null) {
+      return isSoundOn
+    }
+
+    const value = getValue(SOUND_KEY)
+    if (value === 'true') {
+      isSoundOn = true
+      return true
+    } else {
+      isSoundOn = false
+      return false
+    }
+  }
+
+  const setSound = (state: boolean) => {
+    isSoundOn = state
+    setValue(SOUND_KEY, state)
+  }
+
   return {
     getScore,
     addScore,
@@ -91,5 +117,8 @@ export const useStorage = (): Storage => {
     getDifficultyTic,
 
     resetDifficulty,
+
+    getSound,
+    setSound,
   }
 }

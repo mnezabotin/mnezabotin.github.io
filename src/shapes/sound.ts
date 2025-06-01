@@ -6,13 +6,14 @@ export type Props = {
   y?: number,
   r: number
   c?: string
+  on?: boolean
 }
 
-export const Play = (props: Props): Render => {
+export const Sound = (props: Props): Render => {
   const { ctx: mainCtx, shade } = useWebcore()
 
-  const lw = Math.round(props.r / 2.2)
-  const line = Math.round(0.15 * props.r)
+  const lw = Math.round(props.r / 4)
+  const line = Math.round(0.2 * props.r)
 
   const gradient = shade(props.c || 'blue', -3)
 
@@ -29,19 +30,31 @@ export const Play = (props: Props): Render => {
     ctx.lineWidth = lw
 
     ctx.beginPath()
-    ctx.moveTo(x + line, y)
-    ctx.lineTo(x - line / 2, y - line)
-    ctx.lineTo(x - line / 2, y + line)
+    ctx.ellipse(
+      x - line,
+      y + line,
+      lw,
+      line,
+      10 * Math.PI / 180,
+      0,
+      2 * Math.PI
+    )
     ctx.closePath()
     ctx.fill()
 
     ctx.beginPath()
-    ctx.moveTo(x + line, y)
-    ctx.lineTo(x - line / 2, y - line)
-    ctx.moveTo(x - line / 2, y - line)
-    ctx.lineTo(x - line / 2, y + line)
     ctx.moveTo(x - line / 2, y + line)
-    ctx.lineTo(x + line, y)
+    ctx.lineTo(x, y - line)
+    ctx.lineTo(x + line, y - line)
     ctx.stroke()
+
+    if (!props.on) {
+      ctx.lineWidth = Math.round(lw / 3)
+      ctx.beginPath()
+      ctx.moveTo(x - r / 4, y - r / 4)
+      ctx.lineTo(x + r / 4, y + r / 4)
+      ctx.stroke()
+
+    }
   }
 }
