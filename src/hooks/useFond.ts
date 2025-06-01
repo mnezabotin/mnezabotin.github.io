@@ -23,6 +23,7 @@ export const useFond = ({ color = '#00dcfe', frequency = 20 }: Props): Fond => {
     useTimer,
     setBackground,
     useScreenMeta,
+    // ctx,
   } = useWebcore()
   const { from } = useScreenMeta()
 
@@ -85,7 +86,9 @@ export const useFond = ({ color = '#00dcfe', frequency = 20 }: Props): Fond => {
   }
 
   const render = () => {
+    // ctx.globalAlpha = 0.75
     popits.forEach(r => r())
+    // ctx.globalAlpha = 1
   }
 
   const setIntersections: FondIntersection = (condition) => {

@@ -20,7 +20,7 @@ export const usePopEffect = (): PopEffect => {
     rand
   } = useWebcore()
 
-  const { playPop } = useSoundEffect()
+  const { playPop, playMissed } = useSoundEffect()
 
   const effects: Record<string, {
     withoutRad: boolean
@@ -72,7 +72,9 @@ export const usePopEffect = (): PopEffect => {
   }
 
   const popEffect = (p: PptProps, withoutRad = false, shake = false) => {
-    if (!shake && !withoutRad) {
+    if (withoutRad) {
+      playMissed()
+    } else {
       playPop()
     }
 

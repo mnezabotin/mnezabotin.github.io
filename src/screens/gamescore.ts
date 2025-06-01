@@ -7,6 +7,7 @@ import {
   usePopEffect,
   useSplashEffect
 } from "@/hooks"
+import { useSoundEffect } from "@/hooks/effects/useSoundEffect"
 import { useWebcore } from "@/webcore"
 import { Render } from "@/webcore/types"
 
@@ -20,6 +21,8 @@ export const GameScore = (): Render => {
   const { splashEffect, render: renderSplashEffect } = useSplashEffect({ infinity: true })
 
   useGradient()
+
+  const { playWin } = useSoundEffect()
 
   const { render: score, isJump } = useScore(data?.winScore, true)
 
@@ -50,8 +53,10 @@ export const GameScore = (): Render => {
   }
 
   if (innerHeight > innerWidth) {
-    splashEffect(isJump ? 'Picture filled' : 'You win')
+    splashEffect(isJump ? 'Pic. Completed' : 'You win')
   }
+
+  playWin()
 
   return () => {
     renderPopEffects()

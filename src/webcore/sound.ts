@@ -31,7 +31,6 @@ export const useSound = (paths?: string[]): Sound => {
     source.buffer = buffer[url]
     source.connect(context.destination)
     source.start()
-
   }
 
   return playSound

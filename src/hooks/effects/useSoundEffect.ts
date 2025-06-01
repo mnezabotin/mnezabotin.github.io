@@ -7,7 +7,7 @@ const popEffects = [
   '/sounds/pop4.mp3',
   '/sounds/pop5.mp3',
   '/sounds/pop6.mp3',
-  '/sounds/pop7.mp3',
+  // '/sounds/pop7.mp3',
   '/sounds/pop8.mp3',
   '/sounds/pop9.mp3',
   '/sounds/pop10.mp3',
@@ -22,6 +22,9 @@ let activePopEffects: string[] = [...popEffects]
 
 type SoundEffect = {
   playPop: () => void
+  playMissed: () => void
+  playFail: () => void
+  playWin: () => void
 }
 
 export const useSoundEffect = (): SoundEffect => {
@@ -50,7 +53,28 @@ export const useSoundEffect = (): SoundEffect => {
     playSound(popEffect)
   }
 
+  const playMissed = () => {
+    const url = '/sounds/pop7.mp3'
+
+    playSound(url)
+  }
+
+  const playFail = () => {
+    const url = '/sounds/fail.mp3'
+
+    playSound(url)
+  }
+
+  const playWin = () => {
+    const url = '/sounds/win.mp3'
+
+    playSound(url)
+  }
+
   return {
-    playPop
+    playPop,
+    playMissed,
+    playFail,
+    playWin
   }
 }
