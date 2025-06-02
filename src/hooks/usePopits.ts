@@ -7,6 +7,7 @@ import { useStorage } from './useStorage'
 type Popits = {
   render: Render
   popits: PopitProps[]
+  pausePpt: PopitProps
 }
 
 type Props = {
@@ -39,7 +40,7 @@ export const usePopits = ({
   let pausePopit: Render
   let pause: Render
   let retryPopit: PopitProps
-  let pausePptProps: PopitProps
+  let pausePptProps: PopitProps = { x: 0, y: 0, r: 0 }
 
   const getFill = (i: number) => {
     if (Array.isArray(palette)) {
@@ -83,12 +84,15 @@ export const usePopits = ({
         
         if (i === 0 && j === countw - 1) {
           pausePptProps = {
-            ...props,
+            x: props.x,
+            y: props.y,
+            r: props.r,
+            c: props.c,
             p: (
               from === 'main' ||
               from === 'gameover' ||
               from === 'gamescore'
-            ) && !pausePptProps
+            ) && !pausePptProps.r
           }
           pausePopit = Popit(pausePptProps)
           pause = Pause(pausePptProps)
@@ -153,5 +157,6 @@ export const usePopits = ({
   return {
     render,
     popits: pptProps,
+    pausePpt: pausePptProps
   }
 }

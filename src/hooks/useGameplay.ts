@@ -6,12 +6,14 @@ import { useStorage } from './useStorage'
 
 type Props = {
   popits: PopitProps[]
+  pausePpt: PopitProps
   popEffect?: (p: PopitProps, withoutRad?: boolean, shake?: boolean) => void
   splashEffect?: (text: string) => void
 }
 
 export const useGameplay = ({
   popits,
+  pausePpt,
   popEffect = () => {},
   splashEffect = () => {}
 }: Props) => {
@@ -171,6 +173,10 @@ export const useGameplay = ({
         onPopClick(popit)
         return
       }
+    }
+
+    if (intersect({ x, y }, pausePpt)) {
+      return
     }
 
     if (!isMove) {
