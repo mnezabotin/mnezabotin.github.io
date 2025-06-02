@@ -73,7 +73,7 @@ export const useFond = ({ color = '#00dcfe', frequency = 20 }: Props): Fond => {
         pptProps[i].p = !pptProps[i].p
       }
       tic()
-    }, 250)
+    }, 750)
   }
 
   if (from === 'opening') {

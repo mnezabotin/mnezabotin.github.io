@@ -15,6 +15,7 @@ type Props = {
 }
 
 export const useSoundButton = ({
+  // color = '#a9d9b8',
   color = '#f9f774',
   popEffect = () => {}
 }: Props): Sound => {
