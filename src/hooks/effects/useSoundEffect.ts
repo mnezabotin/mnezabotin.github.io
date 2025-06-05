@@ -19,14 +19,13 @@ const popEffects = [
   '/sounds/new/pop15.mp3',
   '/sounds/new/pop16.mp3',
   '/sounds/new/pop17.mp3',
-  // '/sounds/new/pop18.mp3',
+  '/sounds/new/pop18.mp3',
   '/sounds/new/pop19.mp3',
   '/sounds/new/pop20.mp3',
   '/sounds/new/pop21.mp3',
   '/sounds/new/pop22.mp3',
   '/sounds/new/pop23.mp3',
   '/sounds/new/pop24.mp3',
-  '/sounds/new/pop25.mp3',
 ]
 
 let activePopEffects: string[] = [...popEffects]
@@ -76,7 +75,7 @@ export const useSoundEffect = (): SoundEffect => {
       return
     }
 
-    const url = '/sounds/new/pop18.mp3'
+    const url = '/sounds/new/wrong.mp3'
 
     playSound(url)
   }

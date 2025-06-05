@@ -77,9 +77,9 @@ const sounds = [
   '/sounds/new/pop22.mp3',
   '/sounds/new/pop23.mp3',
   '/sounds/new/pop24.mp3',
-  '/sounds/new/pop25.mp3',
 
   '/sounds/fail.mp3',
+  '/sounds/new/wrong.mp3',
   '/sounds/win.mp3',
 ]
 
