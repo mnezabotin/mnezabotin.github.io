@@ -21,7 +21,7 @@ export const useSound = (paths?: string[]): Sound => {
     }
   }
 
-  const playSound = (url: string) => {
+  const playSound = (url: string, rate?: number) => {
     setTimeout(async () => {
       const source = context.createBufferSource()
       if (!buffer[url]) {
@@ -31,6 +31,9 @@ export const useSound = (paths?: string[]): Sound => {
       }
       source.buffer = buffer[url]
       source.connect(context.destination)
+      if (rate) {
+        source.playbackRate.value = rate
+      }
       source.start()
     }, 0)
   }

@@ -111,7 +111,7 @@ export type Webcore = {
   addEventClick: Event['addEventClick']
   addEventMove: Event['addEventMove']
 
-  playSound: (name: string) => void
+  playSound: (name: string, rate?: number) => void
 
   font: string
 }

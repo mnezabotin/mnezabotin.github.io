@@ -5,7 +5,7 @@ import {
   useScore,
   useStorage,
   usePopEffect,
-  useSplashEffect,
+  // useSplashEffect,
   useSoundEffect
 } from "@/hooks"
 import { useWebcore } from "@/webcore"
@@ -18,7 +18,7 @@ export const GameScore = (): Render => {
   const { data } = useScreenMeta()
 
   const { popEffect, render: renderPopEffects } = usePopEffect()
-  const { splashEffect, render: renderSplashEffect } = useSplashEffect({ infinity: true })
+  // const { splashEffect, render: renderSplashEffect } = useSplashEffect({ infinity: true })
 
   useGradient()
 
@@ -52,9 +52,9 @@ export const GameScore = (): Render => {
     plusDifficulty()
   }
 
-  if (innerHeight > innerWidth) {
-    splashEffect(isJump ? 'Completed' : 'You win')
-  }
+  // if (innerHeight > innerWidth) {
+  //   splashEffect(isJump ? 'Completed' : 'You win')
+  // }
 
   playWin()
 
@@ -70,6 +70,6 @@ export const GameScore = (): Render => {
     play()
     pause()
 
-    renderSplashEffect()
+    // renderSplashEffect()
   }
 }
