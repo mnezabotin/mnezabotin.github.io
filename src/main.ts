@@ -42,7 +42,7 @@ const sounds = [
   // '/sounds/pop4.mp3',
   // '/sounds/pop5.mp3',
   // '/sounds/pop6.mp3',
-  '/sounds/pop7.mp3',
+  // '/sounds/pop7.mp3',
   // '/sounds/pop8.mp3',
   // '/sounds/pop9.mp3',
   // '/sounds/pop10.mp3',
