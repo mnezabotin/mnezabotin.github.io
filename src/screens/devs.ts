@@ -23,7 +23,7 @@ export const Devs = (): Render => {
   } = useWebcore()
   const { popEffect, render: renderPopEffects } = usePopEffect()
 
-  const { render: backRender } = useBackButton({ popEffect })
+  const { render: backRender } = useBackButton({ popEffect, color: '#bdbdbd' })
 
   const palette = useGradient(true)
 
@@ -39,6 +39,7 @@ export const Devs = (): Render => {
     'Animator',
     'Kitchener',
     'Cleaner',
+    'Psych',
   ]
 
   addEventResize(() => {
@@ -48,7 +49,7 @@ export const Devs = (): Render => {
 
     const fs = Math.round(m * 3.5)
 
-    const w = Math.round(s * 0.6)
+    const w = Math.round(s * 0.75)
     const x = Math.round((innerWidth - w) / 2)
 
     let start = cy
@@ -63,12 +64,12 @@ export const Devs = (): Render => {
         x: 0,
         y: fs,
         c: palette[pind],
-        fs: Math.round(fs * 0.7),
+        fs: Math.round(fs * 0.5),
         mw: w,
         a: 'left',
       })
       const employee = Text({
-        text: 'MAXIM NEZABOTIN',
+        text: 'Maxim Nezabotin',
         x: w,
         y: fs * 1.5,
         c: '#fff',
@@ -100,7 +101,7 @@ export const Devs = (): Render => {
 
   loop(() => {
     for (const o of objs) {
-      o.y -= 3
+      o.y -= 2
     }
 
     const last = objs[objs.length - 1]
