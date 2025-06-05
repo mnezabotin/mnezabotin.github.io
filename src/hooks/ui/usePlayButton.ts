@@ -44,7 +44,11 @@ export const usePlayButton = ({
       r: Math.round(s * 0.1),
       x: getX(cx, s, m),
       y: getY(cy, s, m),
-      p: (from === 'gamescore' || from === 'game' || from === 'opening') && !props,
+      p: (
+        from === 'gamescore' ||
+        from === 'game' ||
+        from === 'gameover' ||
+        from === 'opening') && !props,
     }
 
     popitPlay = Popit(props)
