@@ -35,8 +35,8 @@ export const Popit = (props: Props): Render => {
       gradient.addColorStop(0.24, shade(c, -10))
       gradient.addColorStop(0.3, shade(c, -8))
       gradient.addColorStop(0.34, shade(c, -12))
-      gradient.addColorStop(0.6, shade(c, -6))
-      gradient.addColorStop(1, shade(c, -4))
+      gradient.addColorStop(0.6, shade(c, -8))
+      gradient.addColorStop(1, shade(c, -6))
     } else {
       gradient.addColorStop(0.24, shade(c, -12))
       gradient.addColorStop(0.26, shade(c, -8))
@@ -44,7 +44,7 @@ export const Popit = (props: Props): Render => {
       gradient.addColorStop(0.34, shade(c, 0))
       gradient.addColorStop(0.5, shade(c, 5))
       // gradient.addColorStop(1, shade(c, 10))
-      gradient.addColorStop(1, shade(c, 12))
+      gradient.addColorStop(1, shade(c, 18))
     }
 
     return gradient

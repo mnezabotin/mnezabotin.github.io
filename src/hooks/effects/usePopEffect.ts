@@ -78,6 +78,8 @@ export const usePopEffect = (): PopEffect => {
       playPop()
     }
 
+    navigator?.vibrate?.(30)
+
     keyInd++
     const key = `${new Date().valueOf().toString()}_${keyInd}`
 

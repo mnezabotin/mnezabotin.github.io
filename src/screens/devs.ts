@@ -19,6 +19,7 @@ export const Devs = (): Render => {
     useMeasure,
     ctx: mainCtx,
     loop,
+    navigate,
   } = useWebcore()
   const { popEffect, render: renderPopEffects } = usePopEffect()
 
@@ -31,8 +32,13 @@ export const Devs = (): Render => {
   const positions = [
     'Director',
     'Producer',
-    'Designer',
+    'Author',
     'Developer',
+    'Designer',
+    'Tester',
+    'Animator',
+    'Kitchener',
+    'Cleaner',
   ]
 
   addEventResize(() => {
@@ -43,7 +49,7 @@ export const Devs = (): Render => {
     const fs = Math.round(m * 3.5)
 
     const w = Math.round(s * 0.6)
-    const x = Math.round((s - w) / 2)
+    const x = Math.round((innerWidth - w) / 2)
 
     let start = cy
     let pind = 0
@@ -64,9 +70,9 @@ export const Devs = (): Render => {
       const employee = Text({
         text: 'MAXIM NEZABOTIN',
         x: w,
-        y: fs * 2,
+        y: fs * 1.5,
         c: '#fff',
-        fs: Math.round(fs * 0.75),
+        fs: Math.round(fs * 0.6),
         mw: w,
         a: 'right',
         // f: 'Tahoma, sans-serif'
@@ -85,7 +91,7 @@ export const Devs = (): Render => {
         h: 5 * fs
       })
 
-      start += 7 * fs
+      start += 5 * fs
       pind++
     }
   })
@@ -94,7 +100,12 @@ export const Devs = (): Render => {
 
   loop(() => {
     for (const o of objs) {
-      o.y -= 1
+      o.y -= 3
+    }
+
+    const last = objs[objs.length - 1]
+    if (last.y + last.h < 0) {
+      navigate('main')
     }
   })
 

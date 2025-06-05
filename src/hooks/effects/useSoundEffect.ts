@@ -50,6 +50,25 @@ popEffects = [
   '/sounds/rinat/pop(12).wav',
 ]
 
+// popEffects = [
+//   '/sounds/old/pop1.mp3',
+//   '/sounds/old/pop2.mp3',
+//   '/sounds/old/pop3.mp3',
+//   '/sounds/old/pop4.mp3',
+//   '/sounds/old/pop5.mp3',
+//   '/sounds/old/pop6.mp3',
+//   '/sounds/old/pop7.mp3',
+//   '/sounds/old/pop8.mp3',
+//   '/sounds/old/pop9.mp3',
+//   '/sounds/old/pop10.mp3',
+//   '/sounds/old/pop11.mp3',
+//   '/sounds/old/pop12.mp3',
+//   '/sounds/old/pop13.mp3',
+//   '/sounds/old/pop14.mp3',
+//   '/sounds/old/pop15.mp3',
+
+// ]
+
 let activePopEffects: string[] = [...popEffects]
 
 type SoundEffect = {
