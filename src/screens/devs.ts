@@ -23,7 +23,7 @@ export const Devs = (): Render => {
   } = useWebcore()
   const { popEffect, render: renderPopEffects } = usePopEffect()
 
-  const { render: backRender } = useBackButton({ popEffect, color: '#bdbdbd' })
+  const { render: backRender } = useBackButton({ popEffect })
 
   const palette = useGradient(true)
 
@@ -34,12 +34,14 @@ export const Devs = (): Render => {
     'Producer',
     'Author',
     'Developer',
+    'Analyst',
     'Designer',
     'Tester',
     'Animator',
     'Kitchener',
     'Cleaner',
-    'Psych',
+    'Psychologist',
+    'Motivator'
   ]
 
   addEventResize(() => {
