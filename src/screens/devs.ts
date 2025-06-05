@@ -34,18 +34,23 @@ export const Devs = (): Render => {
     'Producer',
     'Author',
     'Developer',
+    'Lead',
+    'PM',
+    'Product',
     'Analyst',
     'Designer',
-    'Tester',
+    'QA',
     'Animator',
     'Kitchener',
     'Cleaner',
     'Psychologist',
-    'Motivator'
+    'Motivator',
+    'Mentor'
   ]
+  let start = innerHeight
 
   addEventResize(() => {
-    const { m, cy, s } = useMeasure()
+    const { m, s } = useMeasure()
 
     objs = []
 
@@ -54,7 +59,6 @@ export const Devs = (): Render => {
     const w = Math.round(s * 0.75)
     const x = Math.round((innerWidth - w) / 2)
 
-    let start = cy
     let pind = 0
 
     for (const p of positions) {
@@ -66,16 +70,19 @@ export const Devs = (): Render => {
         x: 0,
         y: fs,
         c: palette[pind],
-        fs: Math.round(fs * 0.5),
+        fs: Math.round(fs * 0.6),
+        // fs: s * 0.25 / 7,
         mw: w,
         a: 'left',
       })
       const employee = Text({
-        text: 'Maxim Nezabotin',
+        text: 'Maksim Nezabotin',
         x: w,
         y: fs * 1.5,
-        c: '#fff',
-        fs: Math.round(fs * 0.6),
+        c: '#f9f9f9',
+        // c: palette[pind + 1] || palette[0],
+        fs: Math.round(fs * 0.7),
+        // fs: s * 0.25 / 8,
         mw: w,
         a: 'right',
         // f: 'Tahoma, sans-serif'

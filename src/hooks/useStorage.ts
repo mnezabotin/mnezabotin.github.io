@@ -92,7 +92,7 @@ export const useStorage = (): Storage => {
     }
 
     const value = getValue(SOUND_KEY)
-    if (value === 'true') {
+    if (!value || value === 'true') {
       isSoundOn = true
       return true
     } else {
