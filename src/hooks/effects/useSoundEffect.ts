@@ -85,7 +85,7 @@ export const useSoundEffect = (): SoundEffect => {
       return
     }
 
-    const url = '/sounds/fail.mp3'
+    const url = '/sounds/fail-fast.mp3'
 
     playSound(url)
   }
