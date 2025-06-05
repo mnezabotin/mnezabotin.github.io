@@ -2,21 +2,31 @@ import { useWebcore } from '@/webcore'
 import { useStorage } from '../useStorage'
 
 const popEffects = [
-  '/sounds/pop1.mp3',
-  '/sounds/pop2.mp3',
-  '/sounds/pop3.mp3',
-  '/sounds/pop4.mp3',
-  '/sounds/pop5.mp3',
-  '/sounds/pop6.mp3',
-  // '/sounds/pop7.mp3',
-  '/sounds/pop8.mp3',
-  '/sounds/pop9.mp3',
-  '/sounds/pop10.mp3',
-  '/sounds/pop11.mp3',
-  '/sounds/pop12.mp3',
-  '/sounds/pop13.mp3',
-  '/sounds/pop14.mp3',
-  '/sounds/pop15.mp3',
+  '/sounds/new/pop1.mp3',
+  '/sounds/new/pop2.mp3',
+  '/sounds/new/pop3.mp3',
+  '/sounds/new/pop4.mp3',
+  '/sounds/new/pop5.mp3',
+  '/sounds/new/pop6.mp3',
+  '/sounds/new/pop7.mp3',
+  '/sounds/new/pop8.mp3',
+  '/sounds/new/pop9.mp3',
+  '/sounds/new/pop10.mp3',
+  '/sounds/new/pop11.mp3',
+  '/sounds/new/pop12.mp3',
+  '/sounds/new/pop13.mp3',
+  '/sounds/new/pop14.mp3',
+  '/sounds/new/pop15.mp3',
+  '/sounds/new/pop16.mp3',
+  '/sounds/new/pop17.mp3',
+  // '/sounds/new/pop18.mp3',
+  '/sounds/new/pop19.mp3',
+  '/sounds/new/pop20.mp3',
+  '/sounds/new/pop21.mp3',
+  '/sounds/new/pop22.mp3',
+  '/sounds/new/pop23.mp3',
+  '/sounds/new/pop24.mp3',
+  '/sounds/new/pop25.mp3',
 ]
 
 let activePopEffects: string[] = [...popEffects]
@@ -58,6 +68,7 @@ export const useSoundEffect = (): SoundEffect => {
     ]
 
     playSound(popEffect)
+    // console.log(popEffect)
   }
 
   const playMissed = () => {
@@ -65,7 +76,7 @@ export const useSoundEffect = (): SoundEffect => {
       return
     }
 
-    const url = '/sounds/pop7.mp3'
+    const url = '/sounds/new/pop18.mp3'
 
     playSound(url)
   }

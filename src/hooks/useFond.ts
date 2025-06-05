@@ -42,10 +42,10 @@ export const useFond = ({ color = '#00dcfe', frequency = 20 }: Props): Fond => {
 
     const r = Math.round(s * 0.04)
 
-    const countw = Math.round(innerWidth / r / 2) - 1
+    const countw = Math.round(innerWidth / r / 2) - 2
     const ws = Math.round((innerWidth - (2 * r * countw)) / (countw + 1))
 
-    const counth = Math.round(innerHeight / r / 2) - 1
+    const counth = Math.round(innerHeight / r / 2) - 2
     const hs = Math.round((innerHeight - (2 * r * counth)) / (counth + 1))
 
     for (let i = 0; i < counth; i++) {
