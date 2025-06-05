@@ -42,7 +42,7 @@ export const useScoreButton = ({
       r: Math.round(s * 0.08),
       x: cx - r - 1 * m,
       y: cy - r + 1 * m,
-      p: (from === 'score' || from === 'opening') && !props,
+      p: (from === 'score' || from === 'opening' || from === 'devs') && !props,
     }
 
     popit = Popit(props)

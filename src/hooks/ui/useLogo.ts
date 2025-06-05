@@ -44,7 +44,7 @@ export const useLogo = ({
       x: cx,
       y: cy,
       r,
-      p: from === 'opening' && !props,
+      p: (from === 'opening' || from === 'devs') && !props,
     }
     logo = Popit(props)
 
@@ -79,7 +79,7 @@ export const useLogo = ({
       popEffect(props)
       props.p = true
       useTimer(() => {
-        navigate('opening')
+        navigate('devs')
       }, 100)
     }
   })

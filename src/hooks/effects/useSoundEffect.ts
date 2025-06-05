@@ -1,7 +1,7 @@
 import { useWebcore } from '@/webcore'
 import { useStorage } from '../useStorage'
 
-const popEffects = [
+let popEffects = [
   '/sounds/new/pop1.mp3',
   '/sounds/new/pop2.mp3',
   '/sounds/new/pop3.mp3',
@@ -26,6 +26,28 @@ const popEffects = [
   '/sounds/new/pop22.mp3',
   '/sounds/new/pop23.mp3',
   '/sounds/new/pop24.mp3',
+  // '/sounds/new/pop25.mp3',
+  // '/sounds/new/pop26.mp3',
+  // '/sounds/new/pop27.mp3',
+  // '/sounds/new/pop28.mp3',
+  // '/sounds/new/pop29.mp3',
+  // '/sounds/new/pop30.mp3',
+  // '/sounds/new/pop31.mp3',
+]
+
+popEffects = [
+  '/sounds/rinat/pop(1).wav',
+  '/sounds/rinat/pop(2).wav',
+  '/sounds/rinat/pop(3).wav',
+  '/sounds/rinat/pop(4).wav',
+  '/sounds/rinat/pop(5).wav',
+  '/sounds/rinat/pop(6).wav',
+  '/sounds/rinat/pop(7).wav',
+  '/sounds/rinat/pop(8).wav',
+  '/sounds/rinat/pop(9).wav',
+  '/sounds/rinat/pop(10).wav',
+  '/sounds/rinat/pop(11).wav',
+  '/sounds/rinat/pop(12).wav',
 ]
 
 let activePopEffects: string[] = [...popEffects]

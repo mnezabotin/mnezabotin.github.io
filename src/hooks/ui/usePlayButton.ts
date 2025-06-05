@@ -48,7 +48,8 @@ export const usePlayButton = ({
         from === 'gamescore' ||
         from === 'game' ||
         from === 'gameover' ||
-        from === 'opening') && !props,
+        from === 'opening' ||
+        from === 'devs') && !props,
     }
 
     popitPlay = Popit(props)

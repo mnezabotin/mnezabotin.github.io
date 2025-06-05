@@ -21,12 +21,12 @@ export const useBackButton = ({
     addEventResize,
     useMeasure,
     useTimer,
-    useScreenMeta,
+    // useScreenMeta,
     navigate,
     addEventClick,
     intersect,
   } = useWebcore()
-  const { from } = useScreenMeta()
+  // const { from } = useScreenMeta()
 
   let props: PopitProps
   let popit: Render
@@ -42,7 +42,7 @@ export const useBackButton = ({
       r,
       x: Math.round(1.6 * r),
       y: Math.round(1.6 * r),
-      p: from === 'main' && !props
+      p: !props
     }
 
     popit = Popit(props)

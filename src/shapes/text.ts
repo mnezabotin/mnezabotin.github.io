@@ -9,6 +9,7 @@ export type Props = {
   a?: CanvasTextAlign
   fs: number
   mw?: number
+  f?: string
 }
 
 export const Text = (props: Props): Render => {
@@ -23,11 +24,12 @@ export const Text = (props: Props): Render => {
       fs,
       a = 'center',
       mw,
+      f
     } = props
 
     ctx.textAlign = a
     ctx.fillStyle = c
-    ctx.font = `${fs}px ${font}`
+    ctx.font = `${fs}px ${f || font}`
     ctx.fillText(text, x, y, mw)
   }
 }

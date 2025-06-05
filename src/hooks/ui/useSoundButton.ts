@@ -49,7 +49,7 @@ export const useSoundButton = ({
       r: rad,
       x: cx - r - rad - m,
       y: cy - r + 3 * rad,
-      p: (from === 'opening') && !props,
+      p: (from === 'opening' || from === 'devs') && !props,
       on: sooundOn
     }
 
