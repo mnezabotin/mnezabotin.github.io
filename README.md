@@ -8,3 +8,4 @@ TODO:
   - The end
   - Infinity game
   - Add Confetty
+  - Score Combo
