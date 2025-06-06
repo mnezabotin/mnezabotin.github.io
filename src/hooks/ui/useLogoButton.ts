@@ -14,7 +14,7 @@ type Props = {
   popEffect?: (p: PopitProps, wr?: boolean, s?: boolean) => void
 }
 
-export const useLogo = ({
+export const useLogoButton = ({
   color = '#f86a9a',
   popEffect = () => {}
 }: Props): Logo => {
