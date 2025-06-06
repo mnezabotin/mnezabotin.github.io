@@ -105,7 +105,7 @@ export const useSoundEffect = (): SoundEffect => {
       ...activePopEffects
     ]
 
-    playSound(popEffect, 1.5)
+    playSound(popEffect)
   }
 
   const playMissed = () => {
