@@ -77,13 +77,13 @@ const sounds = [
   '/sounds/new/pop22.mp3',
   '/sounds/new/pop23.mp3',
   '/sounds/new/pop24.mp3',
-  // '/sounds/new/pop25.mp3',
-  // '/sounds/new/pop26.mp3',
-  // '/sounds/new/pop27.mp3',
-  // '/sounds/new/pop28.mp3',
-  // '/sounds/new/pop29.mp3',
-  // '/sounds/new/pop30.mp3',
-  // '/sounds/new/pop31.mp3',
+  '/sounds/new/pop25.mp3',
+  '/sounds/new/pop26.mp3',
+  '/sounds/new/pop27.mp3',
+  '/sounds/new/pop28.mp3',
+  '/sounds/new/pop29.mp3',
+  '/sounds/new/pop30.mp3',
+  '/sounds/new/pop31.mp3',
 
   
   '/sounds/rinat/pop(1).wav',
@@ -106,4 +106,4 @@ const sounds = [
 
 initWebcore(routes, sounds)
 
-document.title = 'Your\'s last Pop it'
+document.title = 'Yo last Pop it'
