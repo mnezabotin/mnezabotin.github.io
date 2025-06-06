@@ -33,20 +33,20 @@ let popEffects = [
   '/sounds/new/pop31.mp3',
 ]
 
-popEffects = [
-  '/sounds/rinat/pop(1).wav',
-  '/sounds/rinat/pop(2).wav',
-  '/sounds/rinat/pop(3).wav',
-  '/sounds/rinat/pop(4).wav',
-  '/sounds/rinat/pop(5).wav',
-  '/sounds/rinat/pop(6).wav',
-  '/sounds/rinat/pop(7).wav',
-  '/sounds/rinat/pop(8).wav',
-  '/sounds/rinat/pop(9).wav',
-  '/sounds/rinat/pop(10).wav',
-  '/sounds/rinat/pop(11).wav',
-  '/sounds/rinat/pop(12).wav',
-]
+// popEffects = [
+//   '/sounds/rinat/pop(1).wav',
+//   '/sounds/rinat/pop(2).wav',
+//   '/sounds/rinat/pop(3).wav',
+//   '/sounds/rinat/pop(4).wav',
+//   '/sounds/rinat/pop(5).wav',
+//   '/sounds/rinat/pop(6).wav',
+//   '/sounds/rinat/pop(7).wav',
+//   '/sounds/rinat/pop(8).wav',
+//   '/sounds/rinat/pop(9).wav',
+//   '/sounds/rinat/pop(10).wav',
+//   '/sounds/rinat/pop(11).wav',
+//   '/sounds/rinat/pop(12).wav',
+// ]
 
 // popEffects = [
 //   '/sounds/old/pop1.mp3',
@@ -105,7 +105,7 @@ export const useSoundEffect = (): SoundEffect => {
       ...activePopEffects
     ]
 
-    playSound(popEffect)
+    playSound(popEffect, 1.5)
   }
 
   const playMissed = () => {
