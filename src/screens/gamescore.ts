@@ -5,20 +5,19 @@ import {
   useScore,
   useStorage,
   usePopEffect,
-  // useSplashEffect,
-  useSoundEffect
+  useSoundEffect,
+  useWinText,
 } from "@/hooks"
 import { useWebcore } from "@/webcore"
 import { Render } from "@/webcore/types"
 
 export const GameScore = (): Render => {
-  const { translate, useScreenMeta } = useWebcore()
+  const { useScreenMeta } = useWebcore()
   const { plusDifficulty, resetDifficulty } = useStorage()
 
   const { data } = useScreenMeta()
 
   const { popEffect, render: renderPopEffects } = usePopEffect()
-  // const { splashEffect, render: renderSplashEffect } = useSplashEffect({ infinity: true })
 
   useGradient()
 
@@ -46,29 +45,29 @@ export const GameScore = (): Render => {
     popEffect
   })
 
+  const win = useWinText(isJump ? 'Completed' : 'You win')
+
   if (isJump) {
     resetDifficulty()
   } else {
     plusDifficulty()
   }
 
-  // if (innerHeight > innerWidth) {
-  //   splashEffect(isJump ? 'Completed' : 'You win')
-  // }
-
   playWin()
 
   return () => {
     renderPopEffects()
   
-    if (innerHeight > innerWidth) {
-      translate(score, 0, -Math.round(innerHeight * 0.05))
-    } else {
+    // if (innerHeight > innerWidth) {
+    //   translate(score, 0, -Math.round(innerHeight * 0.05))
+    // } else {
       score()
-    }
+    // }
 
     play()
     pause()
+
+    win()
 
     // renderSplashEffect()
   }

@@ -81,7 +81,7 @@ export const useScore = (winScore = 0, isOne = false): Score => {
           r: pgsRad,
           score: Math.min(score - i * MAX_IMG_POINTS, 10000),
           imgSrc,
-          winScore,
+          winScore: isJump ? 0 : winScore,
           seed: i
         })
       )
