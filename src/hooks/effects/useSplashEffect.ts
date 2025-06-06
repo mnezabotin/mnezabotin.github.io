@@ -26,7 +26,7 @@ export const useSplashEffect = (props?: Props): SplashEffect => {
     // font
   } = useWebcore()
 
-  let effect: {
+  let splash: {
     tic: number
     props: TextProps
     shape: Render
@@ -36,25 +36,25 @@ export const useSplashEffect = (props?: Props): SplashEffect => {
   } | null = null
 
   const loopEffect = () => {
-    if (!effect) {
+    if (!splash) {
       return
     }
 
     const { m } = useMeasure()
 
-    if (effect.tic <= RANGE) {
-      effect.props.fs = (props?.mfs || 8) / RANGE * effect.tic * m
+    if (splash.tic <= RANGE) {
+      splash.props.fs = (props?.mfs || 8) / RANGE * splash.tic * m
     } else {
       const dx = rand(1, 1)
       const dy = rand(1, 1)
 
-      effect.props.x = effect.origX + (Math.random() * dx * (Math.random() > 0.5 ? 1 : -1))
-      effect.props.y = effect.origY + (Math.random() * dy * (Math.random() > 0.5 ? 1 : -1))
-      effect.shake = true
+      splash.props.x = splash.origX + (Math.random() * dx * (Math.random() > 0.5 ? 1 : -1))
+      splash.props.y = splash.origY + (Math.random() * dy * (Math.random() > 0.5 ? 1 : -1))
+      splash.shake = true
     }
-    effect.tic += effect.tic > RANGE ? 1 : 10
-    if (effect.tic > RANGE * 2 && !props?.infinity) {
-      effect = null
+    splash.tic += splash.tic > RANGE ? 1 : 10
+    if (splash.tic > RANGE * 2 && !props?.infinity) {
+      splash = null
     }
   }
 
@@ -71,7 +71,7 @@ export const useSplashEffect = (props?: Props): SplashEffect => {
     }
     const shape = Text(textProps)
 
-    effect = {
+    splash = {
       props: textProps,
       shape,
       tic,
@@ -81,17 +81,17 @@ export const useSplashEffect = (props?: Props): SplashEffect => {
   }
 
   const render = () => {
-    if (!effect) {
+    if (!splash) {
       return
     }
-    ctx.globalAlpha = 0.01 * effect.tic
+    ctx.globalAlpha = 0.01 * splash.tic
     
     // ctx.textAlign = 'center'
     // ctx.fillStyle = '#000'
-    // ctx.font = `${effect.props.fs + 0.5}px ${font}`
-    // ctx.fillText(effect.props.text, effect.props.x, effect.props.y)
+    // ctx.font = `${splash.props.fs + 0.5}px ${font}`
+    // ctx.fillText(splash.props.text, splash.props.x, splash.props.y)
 
-    effect.shape()
+    splash.shape()
     ctx.globalAlpha = 1
   }
 

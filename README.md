@@ -1,7 +1,8 @@
 # Yo last Pop it
 
 TODO:
-  - Refactor ui
   - Splashes
-  - Sounds
   - Devs
+  - Jump words
+  - The end
+  - Infinity game
