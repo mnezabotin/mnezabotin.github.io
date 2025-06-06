@@ -23,9 +23,9 @@ export const useLogo = ({
     useMeasure,
     useTimer,
     useScreenMeta,
-    addEventClick,
-    intersect,
-    navigate,
+    // addEventClick,
+    // intersect,
+    // navigate,
   } = useWebcore()
   const { from } = useScreenMeta()
 
@@ -74,15 +74,15 @@ export const useLogo = ({
     props.p = false
   })
 
-  addEventClick((x, y) => {
-    if (intersect({ x, y }, props)) {
-      popEffect(props)
-      props.p = true
-      useTimer(() => {
-        navigate('devs')
-      }, 100)
-    }
-  })
+  // addEventClick((x, y) => {
+  //   if (intersect({ x, y }, props)) {
+  //     popEffect(props)
+  //     props.p = true
+  //     useTimer(() => {
+  //       navigate('devs')
+  //     }, 100)
+  //   }
+  // })
 
   const point = () => ({
     x: props.x,
