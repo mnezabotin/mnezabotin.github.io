@@ -2,7 +2,6 @@ import { type Props as PopitProps } from '@/shapes/popit'
 import { useWebcore } from '@/webcore'
 import { Timer } from '@/webcore/types'
 import { useStorage } from './useStorage'
-// import { useSoundEffect } from './effects/useSoundEffect'
 
 type Props = {
   popits: PopitProps[]
@@ -26,8 +25,6 @@ export const useGameplay = ({
     navigate,
     addEventResize,
   } = useWebcore()
-
-  // const { playPop } = useSoundEffect()
 
   const {
     getScore,
@@ -160,7 +157,6 @@ export const useGameplay = ({
         }, 100)
       }
     }
-    // playPop()
   }
 
   const onClickEvent = (x: number, y: number, isMove = false) => {
@@ -185,6 +181,8 @@ export const useGameplay = ({
           popEffect(popit, true)
           splashEffect('Popenalty')
           addActivePopit(popit)
+          fillTimer?.stop()
+          ticFillTimer()
           return
         }
       }
