@@ -23,9 +23,9 @@ export const useLogoButton = ({
     useMeasure,
     useTimer,
     useScreenMeta,
-    // addEventClick,
-    // intersect,
-    // navigate,
+    addEventClick,
+    intersect,
+    navigate,
   } = useWebcore()
   const { from } = useScreenMeta()
 
@@ -33,6 +33,8 @@ export const useLogoButton = ({
   let logo: Render
   let yola: Render
   let popit: Render
+
+  let counter = 0
 
   addEventResize(() => {
     const { cx, cy, s } = useMeasure()
@@ -74,15 +76,21 @@ export const useLogoButton = ({
     props.p = false
   })
 
-  // addEventClick((x, y) => {
-  //   if (intersect({ x, y }, props)) {
-  //     popEffect(props)
-  //     props.p = true
-  //     useTimer(() => {
-  //       navigate('devs')
-  //     }, 100)
-  //   }
-  // })
+  addEventClick((x, y) => {
+    if (intersect({ x, y }, props)) {
+      counter++
+      popEffect(props)
+      props.p = true
+      useTimer(() => {
+        if (counter > 10) {
+          navigate('devs')
+        } else {
+          props.p = false
+          popEffect(props, false, true)
+        }
+      }, 100)
+    }
+  })
 
   const point = () => ({
     x: props.x,

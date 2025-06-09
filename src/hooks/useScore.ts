@@ -52,7 +52,7 @@ export const useScore = (winScore = 0, isOne = false): Score => {
   if (winScore) {
     const winCurInd = getCurIndex(score)
     isJump = winCurInd !== curInd
-    isCompleted = winCurInd > origImgs.length - 1
+    isCompleted = Math.floor(score / MAX_IMG_POINTS) > origImgs.length - 1
   }
 
   addEventResize(() => {
@@ -81,7 +81,7 @@ export const useScore = (winScore = 0, isOne = false): Score => {
           r: pgsRad,
           score: Math.min(score - i * MAX_IMG_POINTS, 10000),
           imgSrc,
-          winScore: isJump ? 0 : winScore,
+          winScore: isJump || isCompleted ? 0 : winScore,
           seed: i
         })
       )

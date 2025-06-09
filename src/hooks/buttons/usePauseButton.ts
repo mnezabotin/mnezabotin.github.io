@@ -70,7 +70,7 @@ export const usePauseButton = ({
       popEffect(props, false, true)
     }
     props.p = false
-  }, 600)
+  }, 500)
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, props)) {

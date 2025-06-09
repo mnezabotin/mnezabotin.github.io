@@ -85,15 +85,28 @@ export const usePopEffect = (): PopEffect => {
 
     const tic = 1
     const dir = 1
+
+    let origR = p.r
+    let origX = p.x
+    let origY = p.y
+
+    for (const efkey in effects) {
+      const efc = effects[efkey]
+      if (p === efc.popit) {
+        origR = efc.origR
+        origX = efc.origX
+        origY = efc.origY
+      }
+    }
   
     effects[key] = {
       withoutRad,
       tic,
       dir,
       popit: p,
-      origR: p.r,
-      origX: p.x,
-      origY: p.y,
+      origR,
+      origX,
+      origY,
       shake
     }
   }

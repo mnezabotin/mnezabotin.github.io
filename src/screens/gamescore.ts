@@ -14,6 +14,8 @@ import { Render } from "@/webcore/types"
 export const GameScore = (): Render => {
   const {
     useScreenMeta,
+    useTimer,
+    navigate,
     // translate
   } = useWebcore()
   const { plusDifficulty, resetDifficulty } = useStorage()
@@ -26,12 +28,24 @@ export const GameScore = (): Render => {
 
   const { playWin } = useSoundEffect()
 
-  const { render: score, isJump } = useScore(data?.winScore, true)
+  const { render: score, isJump, isCompleted } = useScore(data?.winScore, true)
 
-  const { render: play } = usePlayButton({ popEffect })
-  const { render: pause } = usePauseButton({ popEffect })
+  let play: Render
+  let pause: Render
+  if (!isCompleted) {
+    const { render: playRender } = usePlayButton({ popEffect })
+    const { render: pauseRender } = usePauseButton({ popEffect })
+    play = playRender
+    pause = pauseRender
+  }
 
-  const win = useWinText(isJump ? 'Complete' : 'You win')
+  const win = useWinText(
+    isCompleted
+      ? 'The end'
+      : isJump
+        ? 'Complete'
+        : 'You win'
+  )
 
   if (isJump) {
     resetDifficulty()
@@ -40,6 +54,12 @@ export const GameScore = (): Render => {
   }
 
   playWin()
+
+  if (isCompleted) {
+    useTimer(() => {
+      navigate('devs')
+    }, 5000)
+  }
 
   return () => {
     renderPopEffects()
@@ -50,8 +70,10 @@ export const GameScore = (): Render => {
       score()
     // }
 
-    play()
-    pause()
+    if (!isCompleted) {
+      play()
+      pause()
+    }
 
     win()
   }

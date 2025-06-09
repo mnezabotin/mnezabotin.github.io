@@ -14,7 +14,7 @@ type Props = {
   popEffect?: (p: PopitProps, wr?: boolean, s?: boolean) => void
 }
 
-export const usePrevButton = ({ onClick }: Props): Back => {
+export const usePrevButton = ({ onClick, popEffect = () => {} }: Props): Back => {
   const {
     addEventResize,
     useMeasure,
@@ -64,15 +64,15 @@ export const usePrevButton = ({ onClick }: Props): Back => {
   addEventClick((x, y) => {
     if (intersect({ x, y }, props)) {
       playPop()
-      // if (!props?.p) {
-      //   popEffect(props)
-      // }
+      if (!props?.p) {
+        popEffect(props)
+      }
       props.p = true
       onClick()
       useTimer(() => {
-        // if (props?.p) {
-        //   popEffect(props, false, true)
-        // }
+        if (props?.p) {
+          popEffect(props, false, true)
+        }
         props.p = false
       }, 100)
     }

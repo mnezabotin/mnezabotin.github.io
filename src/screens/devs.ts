@@ -74,6 +74,7 @@ export const Devs = (): Render => {
         // fs: s * 0.25 / 7,
         mw: w,
         a: 'left',
+        f: 'Slackey'
       })
       const employee = Text({
         text: 'Maksim Nezabotin',
@@ -85,6 +86,7 @@ export const Devs = (): Render => {
         // fs: s * 0.25 / 8,
         mw: w,
         a: 'right',
+        f: 'Slackey'
         // f: 'Tahoma, sans-serif'
       })
 

@@ -2,6 +2,10 @@
   font-family: 'Tijuf';
   src: local('Tijuf'), url('./Tijuf.otf') format('opentype'); }
 
+@font-face {
+  font-family: 'Slackey';
+  src: local('Slackey'), url('./Slackey.ttf'); }
+
 body {
   margin: 0;
   width: 100vw;
