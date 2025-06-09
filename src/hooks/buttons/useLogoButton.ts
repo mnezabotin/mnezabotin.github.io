@@ -77,7 +77,7 @@ export const useLogoButton = ({
   })
 
   addEventClick((x, y) => {
-    if (intersect({ x, y }, props)) {
+    if (intersect({ x, y }, props) && !props?.p) {
       counter++
       popEffect(props)
       props.p = true
@@ -85,10 +85,12 @@ export const useLogoButton = ({
         if (counter > 50) {
           navigate('devs')
         } else {
+          if (props?.p) {
+            popEffect(props, false, true)
+          }
           props.p = false
-          popEffect(props, false, true)
         }
-      }, 100)
+      }, 200)
     }
   })
 

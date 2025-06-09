@@ -1,4 +1,4 @@
-import { usePopits, useGradient, useGameplay, usePopEffect } from '@/hooks'
+import { usePopits, useGradient, useGameplay, usePopEffect, useSplashEffect } from '@/hooks'
 import { useWebcore } from '@/webcore'
 import type { Render } from '@/webcore/types'
 
@@ -10,8 +10,8 @@ export const Game = (): Render => {
 
   const splashPorps = { mfs: 0, dy: 0 }
 
-  // const { splashEffect, render: renderSplashEffects } = useSplashEffect(splashPorps)
-  useGameplay({ popits, popEffect, pausePpt })
+  const { splashEffect, render: renderSplashEffects } = useSplashEffect(splashPorps)
+  useGameplay({ popits, popEffect, pausePpt, splashEffect })
 
   addEventResize(() => {
     const pt = (popits[0].y - popits[0].r) / useMeasure().m
@@ -22,6 +22,6 @@ export const Game = (): Render => {
   return () => {
     renderPopEffects()
     renderPopits()
-    // renderSplashEffects()
+    renderSplashEffects()
   }
 }

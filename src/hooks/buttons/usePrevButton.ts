@@ -74,7 +74,7 @@ export const usePrevButton = ({ onClick, popEffect = () => {} }: Props): Back =>
           popEffect(props, false, true)
         }
         props.p = false
-      }, 100)
+      }, 200)
     }
   })
 

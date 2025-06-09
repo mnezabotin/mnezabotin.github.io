@@ -145,7 +145,7 @@ export const useGameplay = ({
       rounds--
       if (rounds > 0) {
         useTimer(() => {
-          splashEffect('Round')
+          splashEffect(rounds > 1 ? 'Round' : 'Last')
           onRound(popit)
         }, 100)
       } else {

@@ -80,22 +80,16 @@ export const useSplashEffect = (props?: Props): SplashEffect => {
     }
   }
 
+  loop(loopEffect)
+
   const render = () => {
     if (!splash) {
       return
     }
     ctx.globalAlpha = 0.01 * splash.tic
-    
-    // ctx.textAlign = 'center'
-    // ctx.fillStyle = '#000'
-    // ctx.font = `${splash.props.fs + 0.5}px ${font}`
-    // ctx.fillText(splash.props.text, splash.props.x, splash.props.y)
-
     splash.shape()
     ctx.globalAlpha = 1
   }
-
-  loop(loopEffect)
 
   return {
     splashEffect,
