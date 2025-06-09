@@ -12,7 +12,10 @@ import { useWebcore } from "@/webcore"
 import { Render } from "@/webcore/types"
 
 export const GameScore = (): Render => {
-  const { useScreenMeta } = useWebcore()
+  const {
+    useScreenMeta,
+    // translate
+  } = useWebcore()
   const { plusDifficulty, resetDifficulty } = useStorage()
 
   const { data } = useScreenMeta()
@@ -25,27 +28,10 @@ export const GameScore = (): Render => {
 
   const { render: score, isJump } = useScore(data?.winScore, true)
 
-  const { render: play } = usePlayButton({
-    getX: (x, s, m) => innerWidth > innerHeight ?
-      Math.min(x + (s - 2 * s * 0.055 * 1.6) / 2 + 4 * m + Math.round(s * 0.1), innerWidth - 2 * m - Math.round(s * 0.1)) :
-      x + (s - 2 * s * 0.055 * 1.6) / 8 + 0 *  Math.round(s * 0.1) + 2 * m,
-    getY: (y, s, m) => innerWidth > innerHeight ?
-      y + (s - 2 * s * 0.055 * 1.6) / 2 - 1 * m - Math.round(s * 0.1) :
-      Math.min(y + (s - 2 * s * 0.055 * 1.6) / 2 + 4 * m + Math.round(s * 0.1), innerHeight - 2 * m - Math.round(s * 0.1)),
-    popEffect
-  })
+  const { render: play } = usePlayButton({ popEffect })
+  const { render: pause } = usePauseButton({ popEffect })
 
-  const { render: pause } = usePauseButton({
-    getX: (x, s, m) => innerWidth > innerHeight ?
-      Math.max(x - (s - 2 * s * 0.055 * 1.6) / 2 - 4 * m - Math.round(s * 0.1), 2 * m + Math.round(s * 0.1)) :
-      x + (s - 2 * s * 0.055 * 1.6) / 8 - 2 * Math.round(s * 0.1) - 2 * m,
-    getY: (y, s, m) => innerWidth > innerHeight ?
-      y - (s - 2 * s * 0.055 * 1.6) / 2 + 0 * m + Math.round(s * 0.1) :
-      Math.min(y + (s - 2 * s * 0.055 * 1.6) / 2 + 4 * m + Math.round(s * 0.1), innerHeight - 2 * m - Math.round(s * 0.1)),
-    popEffect
-  })
-
-  const win = useWinText(isJump ? 'Completed' : 'You win')
+  const win = useWinText(isJump ? 'Complete' : 'You win')
 
   if (isJump) {
     resetDifficulty()
@@ -68,7 +54,5 @@ export const GameScore = (): Render => {
     pause()
 
     win()
-
-    // renderSplashEffect()
   }
 }

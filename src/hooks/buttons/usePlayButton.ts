@@ -9,15 +9,11 @@ type PlayType = {
 }
 
 type Props = {
-  getX: (cx: number, r: number, m: number) => number
-  getY: (cy: number, r: number, m: number) => number
   color?: string
   popEffect?: (p: PopitProps, wr?: boolean, s?: boolean) => void
 }
 
 export const usePlayButton = ({
-  getX,
-  getY,
   color = '#bef181',
   popEffect = () => {}
 }: Props): PlayType => {
@@ -30,20 +26,55 @@ export const usePlayButton = ({
     addEventClick,
     intersect,
   } = useWebcore()
-  const { from } = useScreenMeta()
+  const { from, to } = useScreenMeta()
 
   let props: PopitProps
   let popitPlay: Render
   let play: Render
 
-  addEventResize(() => {
+  const getMainCoords = (): { x: number, y: number } => {
     const { cx, cy, s, m } = useMeasure()
+
+    const x = cx + Math.round(s * 0.25) + 2 * m
+    const y = cy + Math.round(s * 0.25)
+
+    return { x, y }
+  }
+
+  const getGamescoreCoords = (): { x: number, y: number } => {
+    const { cx, cy, s, isL, m } = useMeasure()
+    const r = Math.round(s * 0.1)
+
+    if (isL) {
+      let x = Math.round(cx + s / 2) + m * 2
+      const y = Math.round(cy + s / 2 - r * 2)
+      x = Math.min(x, Math.round(innerWidth - r * 1.5))
+
+      return { x, y }
+    } else {
+      const x = Math.round(cx + s * 0.12)
+      let y = Math.round(cy + s / 2 + r * 1.5)
+      y = Math.min(y, innerHeight - Math.round(r * 1.5))
+
+      return { x, y }
+    }
+  }
+
+  const getCoords = (): { x: number, y: number } => {
+    if (to === 'main') {
+      return getMainCoords()
+    } else {
+      return getGamescoreCoords()
+    }
+  }
+
+  addEventResize(() => {
+    const { s } = useMeasure()
 
     props = {
       c: color,
       r: Math.round(s * 0.1),
-      x: getX(cx, s, m),
-      y: getY(cy, s, m),
+      ...getCoords(),
       p: (
         from === 'gamescore' ||
         from === 'game' ||

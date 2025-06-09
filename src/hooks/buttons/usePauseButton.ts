@@ -9,14 +9,10 @@ type PauseType = {
 }
 
 type Props = {
-  getX: (cx: number, r: number, m: number) => number
-  getY: (cy: number, r: number, m: number) => number
   popEffect?: (p: PopitProps, wr?: boolean, s?: boolean) => void
 }
 
 export const usePauseButton = ({
-  getX,
-  getY,
   popEffect = () => {}
 }: Props): PauseType => {
   const {
@@ -34,14 +30,33 @@ export const usePauseButton = ({
   let popitPause: Render
   let pause: Render
 
-  addEventResize(() => {
-    const { cx, cy, s, m } = useMeasure()
+  const getCoords = (): { x: number, y: number } => {
+    const { cx, cy, s, isL, m } = useMeasure()
+    const r = Math.round(s * 0.1)
 
+    if (isL) {
+      let x = Math.round(cx - s / 2) - m
+      const y = Math.round(cy - s / 2 + r * 2)
+      x = Math.max(x, Math.round(r * 1.5))
+
+      return { x, y }
+    } else {
+      const x = Math.round(cx - s * 0.12)
+      let y = Math.round(cy + s / 2 + r * 1.5)
+      y = Math.min(y, innerHeight - Math.round(r * 1.5))
+
+      return { x, y }
+    }
+  }
+
+  addEventResize(() => {
+    const { s } = useMeasure()
+
+    const r = Math.round(s * 0.08) 
     props = {
       c: '#fd8059',
-      r: Math.round(s * 0.08),
-      x: getX(cx, s, m),
-      y: getY(cy, s, m),
+      r,
+      ...getCoords(),
       p: (from === 'game' || from === 'opening') && !props,
     }
 
@@ -55,7 +70,7 @@ export const usePauseButton = ({
       popEffect(props, false, true)
     }
     props.p = false
-  }, 500)
+  }, 600)
 
   addEventClick((x, y) => {
     if (intersect({ x, y }, props)) {

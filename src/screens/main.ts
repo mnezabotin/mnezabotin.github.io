@@ -16,11 +16,7 @@ export const Main = (): Render => {
   const { render: fond, setIntersections } = useFond({ color })
 
   const { render: logo, point: useLogoPoint } = useLogoButton({ popEffect })
-  const { render: play, point: usePlayPoint } = usePlayButton({
-    getX: (x, s, m) => x + Math.round(s * 0.25) + 2 * m,
-    getY: (y, s, m) => y + Math.round(s * 0.25) + 0 * m,
-    popEffect
-  })
+  const { render: play, point: usePlayPoint } = usePlayButton({ popEffect })
   const { render: score, point: useScorePoint } = useScoreButton({ popEffect })
   const { render: sound, point: useSoundPoint } = useSoundButton({ popEffect })
 
