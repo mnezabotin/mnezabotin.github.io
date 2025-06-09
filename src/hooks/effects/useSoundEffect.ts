@@ -74,6 +74,7 @@ type SoundEffect = {
   playMissed: () => void
   playFail: () => void
   playWin: () => void
+  playComplete: () => void
 }
 
 export const useSoundEffect = (): SoundEffect => {
@@ -138,10 +139,21 @@ export const useSoundEffect = (): SoundEffect => {
     playSound(url)
   }
 
+  const playComplete = () => {
+    if (!getSound()) {
+      return
+    }
+
+    const url = '/sounds/complete.mp3'
+
+    playSound(url)
+  }
+
   return {
     playPop,
     playMissed,
     playFail,
-    playWin
+    playWin,
+    playComplete,
   }
 }

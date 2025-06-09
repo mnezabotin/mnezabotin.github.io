@@ -26,7 +26,7 @@ export const GameScore = (): Render => {
 
   useGradient()
 
-  const { playWin } = useSoundEffect()
+  const { playWin, playComplete } = useSoundEffect()
 
   const { render: score, isJump, isCompleted } = useScore(data?.winScore, true)
 
@@ -47,13 +47,13 @@ export const GameScore = (): Render => {
         : 'You win'
   )
 
-  if (isJump) {
+  if (isJump || isCompleted) {
     resetDifficulty()
+    playComplete()
   } else {
     plusDifficulty()
+    playWin()
   }
-
-  playWin()
 
   if (isCompleted) {
     useTimer(() => {

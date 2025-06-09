@@ -100,6 +100,7 @@ const sounds = [
   '/sounds/fail-fast.mp3',
   '/sounds/new/wrong.mp3',
   '/sounds/win.mp3',
+  '/sounds/complete.mp3',
 ]
 
 initWebcore(routes, sounds)

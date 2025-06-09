@@ -47,9 +47,11 @@ export const Devs = (): Render => {
     'Motivator',
     'Mentor'
   ]
-  let start = innerHeight
+  let start = 0
 
-  addEventResize(() => {
+  let isFontLoaded = false
+
+  const onResize = () => {
     const { m, s } = useMeasure()
 
     objs = []
@@ -106,11 +108,13 @@ export const Devs = (): Render => {
       start += 5 * fs
       pind++
     }
-  })
+  }
+
+  addEventResize(onResize)
 
   setBackground('#040404')
 
-  loop(() => {
+  const move = () => {
     for (const o of objs) {
       o.y -= 2
     }
@@ -119,19 +123,32 @@ export const Devs = (): Render => {
     if (last.y + last.h < 0) {
       navigate('main')
     }
-  })
+  }
+
+  const onFontLoaded = () => {
+    start = innerHeight
+    onResize()
+
+    loop(move)
+    isFontLoaded = true
+  }
+
+  if (document?.fonts?.ready) {
+    document?.fonts?.ready.then(onFontLoaded)
+  } else {
+    onFontLoaded()
+  }
 
   return () => {
+    mainCtx.globalAlpha = isFontLoaded ? 1 : 0
+
     objs.forEach(({ img, x, y, w, h }) => {
-      // mainCtx.fillStyle = 'red'
-      // mainCtx.beginPath()
-      // mainCtx.rect(x, y, w, h)
-      // mainCtx.closePath()
-      // mainCtx.fill()
       mainCtx.drawImage(img, x, y, w, h)
     })
 
     renderPopEffects()
     backRender()
+
+    mainCtx.globalAlpha = 1
   }
 }
