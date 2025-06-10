@@ -181,6 +181,7 @@ export const useGameplay = ({
           popEffect(popit, true)
           splashEffect('Popenalty')
           addActivePopit(popit)
+          goTimer?.stop()
           fillTimer?.stop()
           ticFillTimer()
           return
