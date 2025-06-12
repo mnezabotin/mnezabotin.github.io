@@ -8,7 +8,6 @@ type Logo = {
   point: () => Point
 }
 
-
 type Props = {
   color?: string
   popEffect?: (p: PopitProps, wr?: boolean, s?: boolean) => void
@@ -82,7 +81,7 @@ export const useLogoButton = ({
       popEffect(props)
       props.p = true
       useTimer(() => {
-        if (counter > 100) {
+        if (counter > 12) {
           navigate('devs')
         } else {
           if (props?.p) {

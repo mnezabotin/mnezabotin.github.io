@@ -1,6 +1,7 @@
 import { Popit, type Props as PopitProps } from '@/shapes/popit'
 import { Img } from '@/shapes/img'
 import { TextCircle } from '@/shapes/textCircle'
+import { Text } from '@/shapes/text'
 import { useWebcore } from '@/webcore'
 import type { Render } from '@/webcore/types'
 
@@ -14,6 +15,7 @@ export const Opening = (): Render => {
     addEventClick,
     addEventResize,
     setBackground,
+    useTimer,
   } = useWebcore()
 
   setBackground('#040404')
@@ -26,9 +28,12 @@ export const Opening = (): Render => {
   let sloth: Render
   let nezabotin: Render
   let production: Render
+  let tapcontinue: Render
 
   let tic = -0.2
   let rAnglText = 0
+
+  let showTapContinue = false
 
   addEventResize(() => {
     const { cx, cy, s } = useMeasure()
@@ -65,6 +70,15 @@ export const Opening = (): Render => {
       y: cy,
       r: Math.round(r * 1.1),
       s: Math.PI * 2.6,
+    })
+
+    tapcontinue = Text({
+      text: 'tab to skip',
+      c: '#f1f1f1',
+      y: innerHeight - Math.round(r / 5),
+      x: cx,
+      fs: Math.round(r / 6),
+      f: 'Slackey'
     })
   })
 
@@ -103,6 +117,13 @@ export const Opening = (): Render => {
     onFontLoaded()
   }
 
+  const tapContinueTic = () => useTimer(() => {
+    showTapContinue = !showTapContinue
+    tapContinueTic()
+  }, 250)
+
+  tapContinueTic()
+
   return () => {
     const { cx, cy } = useMeasure()
 
@@ -119,6 +140,10 @@ export const Opening = (): Render => {
         nezabotin()
         production()
       }, cx, cy, rAnglText)
+    }
+
+    if (showTapContinue) {
+      tapcontinue()
     }
 
     ctx.globalAlpha = 1

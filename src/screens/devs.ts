@@ -42,9 +42,9 @@ export const Devs = (): Render => {
     'Designer',
     'QA',
     'Animator',
-    'Kitchener',
-    'Cleaner',
-    'Psychologist',
+    // 'Kitchener',
+    // 'Cleaner',
+    // 'Psychologist',
     'Motivator',
     'Mentor'
   ]
@@ -116,7 +116,7 @@ export const Devs = (): Render => {
         // f: 'Slackey'
       })
       const employee = Text({
-        text: 'Maksim Nezabotin',
+        text: 'Maxim Nezabotin',
         x: w,
         y: fs * 1.5,
         c: '#f9f9f9',

@@ -3,6 +3,5 @@
 TODO:
   - Refactor Splashes
   - Refactor Popit effects
-  - Devs
   - Infinity game
   - Add Confetty
