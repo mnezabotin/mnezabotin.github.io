@@ -24,14 +24,22 @@ export const useScore = (winScore = 0, isOne = false): Score => {
   const { getScore } = useStorage()
 
   const origImgs = [
-    '/media/levels/cat.png',
-    '/media/levels/city.png',
-    // '/media/levels/donut.png',
+    '/media/levels/sloth.png',
+    '/media/levels/fish.png',
+    '/media/levels/lion.png',
+    '/media/levels/elephant.png',
+    '/media/levels/tiger.png',
+    '/media/levels/crocodile.png',
+    '/media/levels/giraffe.png',
+    '/media/levels/penguin.png',
+    '/media/levels/dog.png',
     '/media/levels/girl.png',
-    '/media/levels/home.png',
-    '/media/levels/iron.png',
-    '/media/levels/wolf.png',
-    '/media/levels/max.png',
+    '/media/levels/cat.png',
+    // '/media/levels/city.png',
+    // '/media/levels/home.png',
+    // '/media/levels/iron.png',
+    // '/media/levels/wolf.png',
+    // '/media/levels/max.png',
   ]
 
   const score = getScore()

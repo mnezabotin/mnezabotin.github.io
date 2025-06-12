@@ -6,4 +6,3 @@ TODO:
   - Devs
   - Infinity game
   - Add Confetty
-  - Score Combo

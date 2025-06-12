@@ -43,9 +43,27 @@ export const useGameplay = ({
   let score = 0
   let addTic = 0
 
+  let startRound: Date
+  let roundPopits: number
+  let missClick = false
+
   const scoreNow = getScore()
 
   const tickDelay = getDifficultyTic()
+
+  const comboScore = () => {
+    if (startRound && roundPopits && score && !missClick) {
+      const now = new Date()
+      const diff = now.getTime() - startRound.getTime()
+      if (diff <= roundPopits * 350) {
+        score = score * 2
+      }
+    }
+
+    startRound = new Date()
+    roundPopits = activePpts.length
+    missClick = false
+  }
 
   const addActivePopit = (ppt?: PopitProps) => {
     const unactivePpts = popits.filter(p => activePpts.indexOf(p) === -1 && p !== ppt)
@@ -56,6 +74,7 @@ export const useGameplay = ({
       popit.p = false
       activePpts.push(unactivePpts[index])
     }
+    missClick = true
   }
 
   const ticFillTimer = () => {
@@ -111,23 +130,7 @@ export const useGameplay = ({
     }
 
     rounds = rounds > 0 ? rounds : rand(3, 5)
-  }
-
-  const getFactorial = () => {
-    return 1
-    if (scoreNow < 10000) {
-      return 10
-    }
-
-    if (scoreNow < 20000) {
-      return 5
-    }
-
-    if (scoreNow < 30000) {
-      return 2
-    }
-
-    return 1
+    comboScore()
   }
 
   const onPopClick = (popit: PopitProps) => {
@@ -146,13 +149,13 @@ export const useGameplay = ({
           onRound(popit)
         }, 100)
       } else {
+        comboScore()
         goTimer?.stop()
         fillTimer?.stop()
-        const f = getFactorial()
-        addScore(score * f)
+        addScore(score)
         useTimer(() => {
           navigate('gamescore', {
-            winScore: score * f
+            winScore: score
           })
         }, 100)
       }
@@ -181,9 +184,9 @@ export const useGameplay = ({
           popEffect(popit, true)
           splashEffect('Popenalty')
           addActivePopit(popit)
-          goTimer?.stop()
-          fillTimer?.stop()
-          ticFillTimer()
+          // goTimer?.stop()
+          // fillTimer?.stop()
+          // ticFillTimer()
           return
         }
       }
