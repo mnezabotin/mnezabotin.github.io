@@ -64,7 +64,6 @@ let popEffects = [
 //   '/sounds/old/pop13.mp3',
 //   '/sounds/old/pop14.mp3',
 //   '/sounds/old/pop15.mp3',
-
 // ]
 
 let activePopEffects: string[] = [...popEffects]

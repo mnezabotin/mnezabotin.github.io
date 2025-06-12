@@ -8,7 +8,7 @@ const DIFFICULTY_PPT_RAD = [0.14, 0.11, 0.09, 0.075]
 
 const TIC_MAX = 750
 const TIC_MIN = 350
-const TIC_STEP = 5
+const TIC_STEP = 10
 const DIFFICULTY_LVL_TICS: number[] = []
 
 for (let i = 0; i * TIC_STEP <= TIC_MAX - TIC_MIN; i++) {

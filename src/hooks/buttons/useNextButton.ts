@@ -62,9 +62,9 @@ export const useNextButton = ({ onClick, popEffect = () => {} }: Props): Back =>
       props.p = true
       onClick()
       useTimer(() => {
-        if (props?.p) {
-          popEffect(props, false, true)
-        }
+        // if (props?.p) {
+        //   popEffect(props, false, true)
+        // }
         props.p = false
       }, 200)
     }

@@ -25,14 +25,17 @@ export const useWinText = (text: string): Render => {
   const gravity = 0.1
 
   addEventResize(() => {
-    const { s, m } = useMeasure()
+    const { s, m, cy } = useMeasure()
 
     // fs = Math.round(s * 0.15)
     fs = Math.round(s * 0.16)
     w = s
     h = Math.round(fs * 1.5)
     x = 0
-    y = Math.round((innerHeight - innerHeight / 2 - s / 2) / 2 - fs / 2) + m * 2
+    y = Math.max(
+      Math.round((innerHeight - innerHeight / 2 - s / 2) / 2 - fs / 2) + m * 2,
+      Math.round(cy - s / 2 - fs - m)
+    )
     top = y
 
     isShow = y - fs / 2 > -(fs / 2) + m * 2

@@ -35,7 +35,7 @@ export const useGameplay = ({
   let activePpts: PopitProps[] = []
 
   let goTimer: Timer
-  let fillTimer: Timer
+  let fillTimer: Timer | null
 
   let stop = false
 
@@ -74,7 +74,6 @@ export const useGameplay = ({
       popit.p = false
       activePpts.push(unactivePpts[index])
     }
-    missClick = true
   }
 
   const ticFillTimer = () => {
@@ -82,7 +81,7 @@ export const useGameplay = ({
       addTic = Math.max(addTic - 10, 50)
       if (popits.length === activePpts.length) {
         stop = true
-        fillTimer.stop()
+        fillTimer?.stop()
         useTimer(() => {
           navigate('gameover')
         })
@@ -122,6 +121,7 @@ export const useGameplay = ({
     addTic = tickDelay
     goTimer?.stop()
     fillTimer?.stop()
+    fillTimer = null
     if (!!scoreNow) {
       goTimer = useTimer(() => {
         splashEffect('SLOWLY')
@@ -182,16 +182,19 @@ export const useGameplay = ({
       for (const popit of popits) {
         if (intersect({ x, y }, popit)) {
           popEffect(popit, true)
-          splashEffect('Popenalty')
+          splashEffect('Popenalty')    
+          missClick = true
           addActivePopit(popit)
-          // goTimer?.stop()
-          // fillTimer?.stop()
-          // ticFillTimer()
+          if (fillTimer === null) {
+            goTimer?.stop()
+            ticFillTimer()
+          }
           return
         }
       }
 
       splashEffect('Popenalty')
+      missClick = true
       addActivePopit()
     }
   }
