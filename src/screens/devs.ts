@@ -20,10 +20,11 @@ export const Devs = (): Render => {
     ctx: mainCtx,
     loop,
     navigate,
+    useTimer
   } = useWebcore()
   const { popEffect, render: renderPopEffects } = usePopEffect()
 
-  const { render: backRender } = useBackButton({ popEffect })
+  let backRender: Render | null = null
 
   const palette = useGradient(true)
 
@@ -56,19 +57,55 @@ export const Devs = (): Render => {
 
     objs = []
 
-    const fs = Math.round(m * 3.5)
 
     const w = Math.round(s * 0.75)
     const x = Math.round((innerWidth - w) / 2)
 
     let pind = 0
 
+    let fs = Math.round(m * 7)
+
+    const yola = Text({
+      text: 'Yo last',
+      c: '#f1f1f1',
+      x: w / 2,
+      y: fs,
+      fs,
+    })
+
+    const popit = Text({
+      text: 'Pop it',
+      c: '#ffeb3b',
+      x: w / 2,
+      y: fs * 2,
+      fs,
+    })
+
+    const img = createImg((ctx = mainCtx) => {
+      yola(ctx)
+      popit(ctx)
+    }, w, 3 * fs)
+
+    
+    objs.push({
+      img,
+      x,
+      y: start,
+      w,
+      h: 5 * fs
+    })
+
+    start += 7 * fs
+
+    fs = Math.round(m * 3.5)
+
     for (const p of positions) {
       if (!palette[pind]) {
         pind = 0
       }
+
       const position = Text({
-        text: p,
+        text: p.toLocaleUpperCase(),
         x: 0,
         y: fs,
         c: palette[pind],
@@ -76,7 +113,7 @@ export const Devs = (): Render => {
         // fs: s * 0.25 / 7,
         mw: w,
         a: 'left',
-        f: 'Slackey'
+        // f: 'Slackey'
       })
       const employee = Text({
         text: 'Maksim Nezabotin',
@@ -84,7 +121,7 @@ export const Devs = (): Render => {
         y: fs * 1.5,
         c: '#f9f9f9',
         // c: palette[pind + 1] || palette[0],
-        fs: Math.round(fs * 0.7),
+        fs: Math.round(fs * 0.6),
         // fs: s * 0.25 / 8,
         mw: w,
         a: 'right',
@@ -139,15 +176,22 @@ export const Devs = (): Render => {
     onFontLoaded()
   }
 
+  useTimer(() => {
+    const { render } = useBackButton({ popEffect })
+    backRender = render
+  }, 7500)
+
   return () => {
     mainCtx.globalAlpha = isFontLoaded ? 1 : 0
 
     objs.forEach(({ img, x, y, w, h }) => {
-      mainCtx.drawImage(img, x, y, w, h)
+      if (y + h >= 0 && y <= innerHeight) {
+        mainCtx.drawImage(img, x, y, w, h)
+      }
     })
 
     renderPopEffects()
-    backRender()
+    backRender?.()
 
     mainCtx.globalAlpha = 1
   }

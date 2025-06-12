@@ -82,7 +82,7 @@ export const useLogoButton = ({
       popEffect(props)
       props.p = true
       useTimer(() => {
-        if (counter > 50) {
+        if (counter > 100) {
           navigate('devs')
         } else {
           if (props?.p) {
