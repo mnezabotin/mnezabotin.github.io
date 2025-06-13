@@ -1,9 +1,13 @@
-const CACHE = 'network-or-cache-v1.0.0'
+const CACHE = 'yolapopit-v1.0.0'
 
-// При установке воркера мы должны закешировать часть данных (статику).
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE).then((cache) => cache.addAll([
+    caches.open(CACHE).then((cache) =>
+      cache.addAll([
+        '/media/icons/favicon.ico',
+        '/media/icons/favicon.png',
+        '/media/icons/favicon.svg',
+
         '/media/levels/sloth.png',
         '/media/levels/rabbit.png',
         '/media/levels/bear.png',
@@ -69,19 +73,22 @@ self.addEventListener('install', (event) => {
   )
 })
 
-// при событии fetch, мы используем кэш, и только потом обновляем его данным с сервера
-self.addEventListener('fetch', function(event) {
-  // Мы используем `respondWith()`, чтобы мгновенно ответить без ожидания ответа с сервера.
+self.addEventListener('fetch', (event) => {
   event.respondWith(fromCache(event.request))
-  // `waitUntil()` нужен, чтобы предотвратить прекращение работы worker'a до того как кэш обновиться.
   event.waitUntil(update(event.request))
 })
 
 function fromCache(request) {
   return caches.open(CACHE).then((cache) =>
-    cache.match(request).then((matching) =>
-      matching || Promise.reject('no-match')
-    ))
+    cache.match(request).then((matching) => {
+      if (matching) {
+        return matching
+      } else {
+        console.log(request)
+        return fetch(request)
+      }
+    })
+  )
 }
 
 function update(request) {
