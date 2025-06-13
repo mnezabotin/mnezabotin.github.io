@@ -72,12 +72,12 @@ self.addEventListener('install', (event) => {
 
 // при событии fetch, мы и делаем запрос, но используем кэш, только после истечения timeout.
 self.addEventListener('fetch', (event) => {
-  // event.respondWith(fromCache(event.request))
-  event.respondWith(fromNetwork(event.request, timeout)
-    .catch((err) => {
-      console.log(`Error: ${err.message()}`)
-      return fromCache(event.request)
-    }))
+  event.respondWith(fromCache(event.request))
+  // event.respondWith(fromNetwork(event.request, timeout)
+  //   .catch((err) => {
+  //     console.log(`Error: ${err.message()}`)
+  //     return fromCache(event.request)
+  //   }))
 })
 
 // Временно-ограниченный запрос.
