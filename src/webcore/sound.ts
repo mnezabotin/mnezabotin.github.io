@@ -21,7 +21,13 @@ export const useSound = (paths?: string[]): Sound => {
     }
   }
 
+  let isSoundOn = true
+
   const playSound = (url: string, rate?: number) => {
+    if (!isSoundOn) {
+      return
+    }
+
     setTimeout(async () => {
       const source = context.createBufferSource()
       if (!buffer[url]) {
@@ -37,6 +43,9 @@ export const useSound = (paths?: string[]): Sound => {
       source.start()
     }, 0)
   }
+  
+  window.onfocus = () => { isSoundOn = true }
+  window.onblur =  () => { isSoundOn = false }
 
   return playSound
 }
