@@ -26,6 +26,11 @@ self.addEventListener('install', (event) => {
         '/media/levels/deer.png',
         '/media/levels/donkey.png',
 
+        '/media/back.svg',
+        '/media/cursor.svg',
+        '/media/sloth.svg',
+        '/media/star.svg',
+
         '/sounds/pop/pop1.mp3',
         '/sounds/pop/pop2.mp3',
         '/sounds/pop/pop3.mp3',
