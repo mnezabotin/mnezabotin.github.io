@@ -63,10 +63,11 @@ self.addEventListener('install', (event) => {
         '/sounds/win.mp3',
         '/sounds/complete.mp3',
 
+        '/index.html',
         '/manifest.json',
         '/Slackey.ttf',
         '/styles.css',
-        // '/sw.js',
+        '/sw.js',
         '/Tijuf.otf',
       ])
     )
@@ -84,7 +85,7 @@ function fromCache(request) {
       if (matching) {
         return matching
       } else {
-        console.log(request)
+        console.log(request.url)
         return fetch(request)
       }
     })
