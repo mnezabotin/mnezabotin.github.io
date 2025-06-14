@@ -5,3 +5,6 @@ TODO:
   - Refactor Popit effects
   - Infinity game
   - Add Confetty
+  - Lang supports
+  - SDK
+  - Service Worker

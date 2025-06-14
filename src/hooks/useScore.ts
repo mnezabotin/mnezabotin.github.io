@@ -44,7 +44,7 @@ export const useScore = (winScore = 0, isOne = false): Score => {
     '/media/levels/cow.png',
     '/media/levels/deer.png',
     '/media/levels/donkey.png',
-    '/media/levels/cat.png',
+    // '/media/levels/cat.png',
   ]
 
   const score = getScore()

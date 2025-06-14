@@ -60,19 +60,20 @@ const sounds = [
   '/sounds/pop/pop22.mp3',
   '/sounds/pop/pop23.mp3',
   '/sounds/pop/pop24.mp3',
-  // '/sounds/pop/pop25.mp3',
-  // '/sounds/pop/pop26.mp3',
-  // '/sounds/pop/pop27.mp3',
-  // '/sounds/pop/pop28.mp3',
-  // '/sounds/pop/pop29.mp3',
-  // '/sounds/pop/pop30.mp3',
-  // '/sounds/pop/pop31.mp3',
   '/sounds/fail.mp3',
   '/sounds/wrong.mp3',
   '/sounds/win.mp3',
   '/sounds/complete.mp3',
 ]
 
-initWebcore(routes, sounds)
-
 document.title = 'Yo last Pop it'
+
+const initApp = async () => {
+  if ('serviceWorker' in navigator) {
+    await navigator.serviceWorker.register('./sw.js')
+  }
+
+  initWebcore(routes, sounds)
+}
+
+initApp()
