@@ -30,6 +30,7 @@ self.addEventListener('install', (event) => {
         '/media/levels/donkey.png',
         '/media/levels/panda.png',
         '/media/levels/dinosaur.png',
+        '/media/levels/rat.png',
 
         '/media/back.svg',
         '/media/cursor.svg',
