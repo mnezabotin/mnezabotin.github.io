@@ -73,12 +73,13 @@ self.addEventListener('install', (event) => {
         '/sounds/win.mp3',
         '/sounds/complete.mp3',
 
+        '/fonts/PressStart2P.ttf',
+        '/fonts/Tijuf.otf',
+
         '/index.html',
         '/manifest.json',
-        '/Slackey.ttf',
         '/styles.css',
         '/sw.js',
-        '/Tijuf.otf',
       ])
     )
   )
