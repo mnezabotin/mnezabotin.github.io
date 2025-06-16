@@ -33,7 +33,7 @@ export const useWinText = (text: string): Render => {
     h = Math.round(fs * 1.5)
     x = 0
     y = Math.max(
-      Math.round((innerHeight - innerHeight / 2 - s / 2) / 2 - fs / 2) + m * 2,
+      Math.round((innerHeight - cy - s / 2) / 2 - fs / 2) + m * 4,
       Math.round(cy - s / 2 - fs * 2)
     )
     top = y
