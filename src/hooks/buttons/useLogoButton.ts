@@ -56,6 +56,7 @@ export const useLogoButton = ({
       y: cy - r + Math.round(r * 0.9),
       fs: Math.round(r / 2.6),
       mw: r * 2,
+      f: 'Tijuf'
     })
 
     popit = Text({
@@ -65,6 +66,7 @@ export const useLogoButton = ({
       y: cy - r + Math.round(r * 1.3),
       fs: Math.round(r / 2.3),
       mw: r * 2,
+      f: 'Tijuf'
     })
   })
 

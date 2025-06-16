@@ -4,6 +4,7 @@ import { TextCircle } from '@/shapes/textCircle'
 import { Text } from '@/shapes/text'
 import { useWebcore } from '@/webcore'
 import type { Render } from '@/webcore/types'
+import { useLang } from '@/lang'
 
 export const Opening = (): Render => {
   const {
@@ -17,6 +18,8 @@ export const Opening = (): Render => {
     setBackground,
     useTimer,
   } = useWebcore()
+
+  const lang = useLang()
 
   setBackground('#040404')
 
@@ -73,12 +76,13 @@ export const Opening = (): Render => {
     })
 
     tapcontinue = Text({
-      text: 'tab to skip',
+      text: lang.tapToSkip,
       c: '#f1f1f1',
       y: innerHeight - Math.round(r / 5),
       x: cx,
-      fs: Math.round(r / 6),
-      f: 'Slackey'
+      fs: Math.round(r / 10),
+      mw: s,
+      f: 'PressStart2P'
     })
   })
 

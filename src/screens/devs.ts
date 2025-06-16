@@ -113,19 +113,19 @@ export const Devs = (): Render => {
         // fs: s * 0.25 / 7,
         mw: w,
         a: 'left',
-        // f: 'Slackey'
+        // f: 'PressStart2P'
       })
       const employee = Text({
         text: 'Maxim Nezabotin',
         x: w,
-        y: fs * 1.5,
+        y: fs * 1.9,
         c: '#f9f9f9',
         // c: palette[pind + 1] || palette[0],
-        fs: Math.round(fs * 0.6),
+        fs: Math.round(fs * 0.5),
         // fs: s * 0.25 / 8,
         mw: w,
         a: 'right',
-        f: 'Slackey'
+        f: 'PressStart2P'
         // f: 'Tahoma, sans-serif'
       })
 

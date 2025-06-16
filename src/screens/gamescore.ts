@@ -8,6 +8,7 @@ import {
   useSoundEffect,
   useWinText,
 } from "@/hooks"
+import { useLang } from "@/lang"
 import { useWebcore } from "@/webcore"
 import { Render } from "@/webcore/types"
 
@@ -19,6 +20,8 @@ export const GameScore = (): Render => {
     // translate
   } = useWebcore()
   const { plusDifficulty, resetDifficulty } = useStorage()
+
+  const lang = useLang()
 
   const { data } = useScreenMeta()
 
@@ -41,10 +44,10 @@ export const GameScore = (): Render => {
 
   const win = useWinText(
     isCompleted
-      ? 'The end'
+      ? lang.theEnd
       : isJump
-        ? 'Complete'
-        : 'You win'
+        ? lang.complete
+        : lang.youWin
   )
 
   if (isJump || isCompleted) {

@@ -46,7 +46,8 @@ export const useWinText = (text: string): Render => {
       x: Math.round(s / 2),
       y: fs,
       c: '#f9f9f9',
-      mw: Math.round(s * 0.8)
+      mw: Math.round(s * 0.8),
+      f: 'PressStart2P'
     }
     const win = Text(textProps)
 
