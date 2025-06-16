@@ -44,6 +44,14 @@ export const useScore = (winScore = 0, isOne = false): Score => {
     '/media/levels/cow.png',
     '/media/levels/deer.png',
     '/media/levels/donkey.png',
+    '/media/levels/panda.png',
+    '/media/levels/dinosaur.png',
+    '/media/levels/rat.png',
+    '/media/levels/turtle.png',
+    '/media/levels/cockroach.png',
+    '/media/levels/parrot.png',
+    '/media/levels/kangaroo.png',
+    '/media/levels/spider.png',
     // '/media/levels/cat.png',
   ]
 
@@ -107,7 +115,14 @@ export const useScore = (winScore = 0, isOne = false): Score => {
     const y = isL ? -(curInd * pgsRad * 2 + curInd * margin) : 0
 
     translate(() => {
-      progressTabs?.forEach(p => p())
+      progressTabs?.forEach((p, i) => {
+        if (
+          (i <= curInd + 1 && i >= curInd - 1) ||
+          isOne
+        ) {
+          p()
+        }
+      })
     }, x, y)
   }
 
