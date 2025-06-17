@@ -38,6 +38,7 @@ self.addEventListener('install', (event) => {
         '/media/levels/spider.png',
         '/media/levels/squirrel.png',
         '/media/levels/stork.png',
+        '/media/levels/whale.png',
 
         '/media/back.svg',
         '/media/cursor.svg',
@@ -75,6 +76,8 @@ self.addEventListener('install', (event) => {
 
         '/fonts/PressStart2P.ttf',
         '/fonts/Tijuf.otf',
+
+        'https://sdk.games.s3.yandex.net/sdk.js',
 
         '/index.html',
         '/manifest.json',

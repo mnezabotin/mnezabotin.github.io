@@ -3,7 +3,8 @@ import { useWebcore } from '@/webcore'
 import type { Render } from '@/webcore/types'
 
 export const Game = (): Render => {
-  const { useMeasure, addEventResize } = useWebcore()
+  const { useMeasure, addEventResize, sdk } = useWebcore()
+  sdk.gameplayStart()
   const palette = useGradient()
   const { popEffect, render: renderPopEffects } = usePopEffect()
   const { popits, render: renderPopits, pausePpt } = usePopits({ palette, popEffect })

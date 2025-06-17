@@ -4,8 +4,15 @@ import { intersectArc } from '@/webcore/intersect'
 import type { Render } from '@/webcore/types'
 
 export const Main = (): Render => {
-  const { addEventResize, rand, useScreenMeta } = useWebcore()
+  const { addEventResize, rand, useScreenMeta, sdk } = useWebcore()
   const { from } = useScreenMeta()
+
+  if (from === 'opening') {
+    sdk.ready()
+  } else if (from === 'game') {
+    sdk.gameplayStop()
+    sdk.showFullscreenAdv()
+  }
 
   const { popEffect, render: renderPopEffects } = usePopEffect()
 

@@ -1,8 +1,10 @@
 import { Opening, Main, Game, Gameover, GameScore, Score, Devs } from '@/screens'
+import { useYaSdk } from '@/yasdk'
 
 import { initWebcore } from '@/webcore'
+import { useSdk } from '@/webcore/sdk'
 
-import type { Route } from '@/webcore/types'
+import type { Route, Sdk } from '@/webcore/types'
 
 const routes: Route[] = [
   {
@@ -69,11 +71,17 @@ const sounds = [
 document.title = 'Yo last Pop it'
 
 const initApp = async () => {
-  if ('serviceWorker' in navigator) {
+  let sdk: Sdk = useSdk()
+
+  if (
+    'serviceWorker' in navigator
+    && import.meta.env.MODE !== 'development'
+  ) {
     await navigator.serviceWorker.register('./sw.js')
+    sdk = await useYaSdk()
   }
 
-  initWebcore(routes, sounds)
+  initWebcore(routes, sounds, sdk)
 }
 
 initApp()

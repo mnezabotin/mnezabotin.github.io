@@ -10,11 +10,12 @@ import { useSound } from '@/webcore/sound'
 import type {
   Route,
   Webcore,
+  Sdk,
 } from '@/webcore/types'
 
 let webcore: Webcore
 
-export const initWebcore = (routes: Route[], sounds?: string[]) => {
+export const initWebcore = (routes: Route[], sounds: string[] = [], sdk: Sdk) => {
   if (webcore) {
     throw new Error('Webcore already specified')
   }
@@ -54,6 +55,7 @@ export const initWebcore = (routes: Route[], sounds?: string[]) => {
 
   webcore = {
     font: 'Tijuf',
+    sdk,
 
     ctx: stage.ctx,
     shade: stage.shade,

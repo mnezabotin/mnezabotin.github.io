@@ -1,7 +1,7 @@
 {
   "name": "yolapopit",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.9.0",
   "type": "module",
   "scripts": {
     "start": "vite",
@@ -10,8 +10,9 @@
     "deploy": "npm run build && gh-pages --dist dist --branch gh-pages"
   },
   "devDependencies": {
+    "@types/ysdk": "^1.0.8",
+    "gh-pages": "^6.3.0",
     "typescript": "^5.2.2",
-    "vite": "^5.2.0",
-    "gh-pages": "^6.3.0"
+    "vite": "^6.3.5"
   }
 }

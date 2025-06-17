@@ -54,6 +54,7 @@ export const useScore = (winScore = 0, isOne = false): Score => {
     '/media/levels/spider.png',
     '/media/levels/squirrel.png',
     '/media/levels/stork.png',
+    '/media/levels/whale.png',
     // '/media/levels/cat.png',
   ]
 

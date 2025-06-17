@@ -79,6 +79,13 @@ export type Event = {
   removeAllEvents: Function
 }
 
+export type Sdk = {
+  showFullscreenAdv: () => void
+  ready: () => void
+  gameplayStart: () => void
+  gameplayStop: () => void
+}
+
 export type Webcore = {
   ctx: CanvasRenderingContext2D
   shade: Stage['shade']
@@ -114,4 +121,5 @@ export type Webcore = {
   playSound: (name: string, rate?: number) => void
 
   font: string
+  sdk: Sdk
 }

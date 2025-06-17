@@ -17,8 +17,12 @@ export const GameScore = (): Render => {
     useScreenMeta,
     useTimer,
     navigate,
+    sdk,
     // translate
   } = useWebcore()
+
+  sdk.gameplayStop()
+
   const { plusDifficulty, resetDifficulty } = useStorage()
 
   const lang = useLang()

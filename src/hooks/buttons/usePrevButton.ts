@@ -31,15 +31,15 @@ export const usePrevButton = ({ onClick, popEffect = () => {} }: Props): Back =>
   let back: Render
 
   addEventResize(() => {
-    const { s } = useMeasure()
+    const { s, isL } = useMeasure()
 
     const r = Math.round(s * 0.08)
 
-    const x = innerWidth < innerHeight
+    const x = !isL
       ? Math.round(innerWidth - 1.6 * r - 2 * r - 0.3 * r)
       : Math.round(innerWidth - 1.6 * r)
     
-    const y = innerWidth < innerHeight
+    const y = !isL
       ? Math.round(innerHeight - 1.6 * r)
       : Math.round(innerHeight - 1.6 * r - 2 * r - 0.3 * r)
 
