@@ -1,7 +1,7 @@
 {
-  "short_name": "Pop It",
+  "short_name": "Pop it",
   "name": "Yo last Pop it",
-  "description": "Popit arcade",
+  "description": "Pop it arcade",
   "display": "fullscreen",
   "start_url": "/",
   "icons": [{
