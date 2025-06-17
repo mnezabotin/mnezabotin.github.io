@@ -15,8 +15,7 @@ export const Icon = (c: string) => {
       stops.push(getStop(0.3, shade(c, -8)))
       stops.push(getStop(0.24, shade(c, -10)))
     } else {
-      // stops.push(getStop(1, shade(c, 10)))
-      stops.push(getStop(1, shade(c, 12)))
+      stops.push(getStop(1, shade(c, 18)))
       stops.push(getStop(0.5, shade(c, 5)))
       stops.push(getStop(0.34, shade(c, 0)))
       stops.push(getStop(0.3, shade(c, -2)))

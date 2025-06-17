@@ -1,4 +1,4 @@
-<svg
+    <svg
       viewBox="0 0 512 512"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -6,40 +6,40 @@
       <defs>
         
       <radialGradient id="push">
-        <stop offset="0%" stop-color="#bc95e4" />
-<stop offset="40%" stop-color="#b790df" />
-<stop offset="66%" stop-color="#a780cf" />
-<stop offset="70%" stop-color="#b28bda" />
-<stop offset="76%" stop-color="#ad86d5" />
-<stop offset="78%" stop-color="#a079c8" />
-<stop offset="82%" stop-color="#b992e1" />
-<stop offset="85%" stop-color="#a079c8" />
-<stop offset="85%" stop-color="#c69fee" />
-<stop offset="92.5%" stop-color="#ddb6ff" />
-<stop offset="99%" stop-color="#c69fee" />
-<stop offset="100%" stop-color="#c69fee" />
+        <stop offset="0%" stop-color="#b4e777" />
+<stop offset="40%" stop-color="#afe272" />
+<stop offset="66%" stop-color="#9fd262" />
+<stop offset="70%" stop-color="#aadd6d" />
+<stop offset="76%" stop-color="#a5d868" />
+<stop offset="78%" stop-color="#98cb5b" />
+<stop offset="82%" stop-color="#b1e474" />
+<stop offset="85%" stop-color="#98cb5b" />
+<stop offset="85%" stop-color="#bef181" />
+<stop offset="92.5%" stop-color="#d5ff98" />
+<stop offset="99%" stop-color="#bef181" />
+<stop offset="100%" stop-color="#bef181" />
       </radialGradient>
     
 
       <radialGradient id="pop">
-        <stop offset="0%" stop-color="#e0b9ff" />
-<stop offset="50%" stop-color="#d3acfb" />
-<stop offset="66%" stop-color="#c69fee" />
-<stop offset="70%" stop-color="#c19ae9" />
-<stop offset="74%" stop-color="#b28bda" />
-<stop offset="76%" stop-color="#a780cf" />
-<stop offset="78%" stop-color="#a079c8" />
-<stop offset="82%" stop-color="#b992e1" />
-<stop offset="85%" stop-color="#a079c8" />
-<stop offset="85%" stop-color="#c69fee" />
-<stop offset="92.5%" stop-color="#ddb6ff" />
-<stop offset="99%" stop-color="#c69fee" />
-<stop offset="100%" stop-color="#c69fee" />
+        <stop offset="0%" stop-color="#ecffaf" />
+<stop offset="50%" stop-color="#cbfe8e" />
+<stop offset="66%" stop-color="#bef181" />
+<stop offset="70%" stop-color="#b9ec7c" />
+<stop offset="74%" stop-color="#aadd6d" />
+<stop offset="76%" stop-color="#9fd262" />
+<stop offset="78%" stop-color="#98cb5b" />
+<stop offset="82%" stop-color="#b1e474" />
+<stop offset="85%" stop-color="#98cb5b" />
+<stop offset="85%" stop-color="#bef181" />
+<stop offset="92.5%" stop-color="#d5ff98" />
+<stop offset="99%" stop-color="#bef181" />
+<stop offset="100%" stop-color="#bef181" />
       </radialGradient>
     
       </defs>
       
-      <rect width="100%" height="100%" fill="#be97e6" rx="32" ry="32" />
+      <rect width="100%" height="100%" fill="#b6e979" />
       
         <circle
           cx="140"

@@ -2,7 +2,7 @@ import { en } from './en'
 import { ru } from './ru'
 import type { Language } from './types'
 
-let lang: Language = ru
+let lang: Language = en
 
 export const setLang = (l: string) => {
   switch (l) {

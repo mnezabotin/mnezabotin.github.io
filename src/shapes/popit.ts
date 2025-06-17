@@ -43,7 +43,6 @@ export const Popit = (props: Props): Render => {
       gradient.addColorStop(0.3, shade(c, -2))
       gradient.addColorStop(0.34, shade(c, 0))
       gradient.addColorStop(0.5, shade(c, 5))
-      // gradient.addColorStop(1, shade(c, 10))
       gradient.addColorStop(1, shade(c, 18))
     }
 

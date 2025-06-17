@@ -1,11 +1,13 @@
+import { setLang } from '@/lang';
 import { Sdk } from '@/webcore/types'
-import type { SDK as YaSDK } from 'ysdk';
+import type { SDK as YaSDK } from 'ysdk'
 
 export const useYaSdk = async (): Promise<Sdk> => new Promise((resolve) => {
   let ysdk: YaSDK | null = null
 
   const ready = () => {
     ysdk?.features?.LoadingAPI?.ready()
+    ysdk?.adv?.showBannerAdv()
   }
 
   const showFullscreenAdv = () => {
@@ -19,12 +21,13 @@ export const useYaSdk = async (): Promise<Sdk> => new Promise((resolve) => {
 
   const gameplayStop = () => {
     ysdk?.features?.GameplayAPI?.stop()
-    ysdk?.adv?.showBannerAdv()
+    // ysdk?.adv?.showBannerAdv()
   }
 
   const initSDK = async () => {
     try {
       ysdk = await YaGames?.init?.()
+      setLang(ysdk?.environment?.i18n?.lang || '')
     } catch (e) {
       console.error(e)
     }
