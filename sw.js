@@ -78,8 +78,6 @@ self.addEventListener('install', (event) => {
         '/fonts/PressStart2P.ttf',
         '/fonts/Tijuf.otf',
 
-        'https://sdk.games.s3.yandex.net/sdk.js',
-
         '/index.html',
         '/manifest.json',
         '/styles.css',
