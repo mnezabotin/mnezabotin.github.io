@@ -1,1 +1,1 @@
-{"name":"Yo last Pop it","short_name":"Pop it","description":"Pop it arcade","start_url":"/","display":"fullscreen","background_color":"#040404","theme_color":"#42b883","lang":"en","scope":"/","icons":[{"src":"./public/media/icons/favicon.svg","sizes":"any","type":"image/svg+xml"}]}
+{"name":"Yo last Pop it","short_name":"Pop it","description":"Pop it arcade","start_url":"/","display":"fullscreen","background_color":"#040404","theme_color":"#42b883","lang":"en","scope":"./","icons":[{"src":"./public/media/icons/favicon.svg","sizes":"any","type":"image/svg+xml"}]}
