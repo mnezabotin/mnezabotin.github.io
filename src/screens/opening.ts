@@ -56,7 +56,7 @@ export const Opening = (): Render => {
       x: cx - r + Math.round(r * 0.35),
       y: cy - r + Math.round(r * 0.35),
       w: r * 2 - Math.round(r * 0.7),
-      src: '/media/sloth.svg'
+      src: './media/sloth.svg'
     })
 
     nezabotin = TextCircle({

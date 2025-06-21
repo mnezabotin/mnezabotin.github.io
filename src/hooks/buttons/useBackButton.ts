@@ -51,7 +51,7 @@ export const useBackButton = ({
       x: Number(props.x) - r + Math.round(r * 0.4),
       y: Number(props.y) - r + Math.round(r * 0.4),
       w: r * 2 - Math.round(r * 0.8),
-      src: '/media/back.svg'
+      src: './media/back.svg'
     })
   })
 

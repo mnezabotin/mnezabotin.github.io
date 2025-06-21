@@ -24,14 +24,7 @@ export const useYaSdk = async (): Promise<Sdk> => new Promise((resolve) => {
     // ysdk?.adv?.showBannerAdv()
   }
 
-  const initSDK = async () => {
-    try {
-      ysdk = await YaGames?.init?.()
-      setLang(ysdk?.environment?.i18n?.lang || '')
-    } catch (e) {
-      console.error(e)
-    }
-
+  const result = () => {
     resolve({
       ready,
       showFullscreenAdv,
@@ -40,8 +33,23 @@ export const useYaSdk = async (): Promise<Sdk> => new Promise((resolve) => {
     })
   }
 
-  const s = document.createElement('script')
-  s.src = 'https://sdk.games.s3.yandex.net/sdk.js'
-  s.onload = initSDK
-  document.body.append(s)
+  const initSDK = async () => {
+    try {
+      ysdk = await YaGames?.init?.()
+      setLang(ysdk?.environment?.i18n?.lang || '')
+    } catch (e) {
+      console.error(e)
+    }
+    result()
+  }
+
+  try {
+    const s = document.createElement('script')
+    s.src = '/sdk.js'
+    s.onload = initSDK
+    document.body.append(s)
+  } catch (e) {
+    console.error(e)
+    result()
+  }
 })
