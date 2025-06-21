@@ -102,6 +102,10 @@ export const useGameplay = ({
       Math.round(size * 0.6)
     )
 
+    for (const p of popits) {
+      p.p = true
+    }
+
     const pptsBox = [...popits]
     if (lastPopit) {
       const lastPptInd = pptsBox.indexOf(lastPopit)

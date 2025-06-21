@@ -79,18 +79,6 @@ const initApp = async () => {
     sdk = useSdk()
   }
 
-  // if (
-  //   'serviceWorker' in navigator
-    // && import.meta.env.MODE !== 'development'
-  // ) {
-    // await navigator.serviceWorker.register('./sw.js')
-    // try {
-      // sdk = await useYaSdk()
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // }
-
   initWebcore(routes, sounds, sdk)
 }
 
