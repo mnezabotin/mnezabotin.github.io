@@ -73,7 +73,7 @@ document.title = 'Yo last Pop it'
 const initApp = async () => {
   let sdk: Sdk
 
-  if (true) {
+  if (import.meta.env.MODE === 'yandex') {
     sdk = await useYaSdk()
   } else {
     sdk = useSdk()

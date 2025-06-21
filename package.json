@@ -6,6 +6,7 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
+    "build:yandex": "tsc && vite build --mode yandex",
     "preview": "tsc && vite build && vite preview",
     "deploy": "npm run build && gh-pages --dist dist --branch gh-pages"
   },
