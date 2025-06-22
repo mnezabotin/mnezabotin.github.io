@@ -4,6 +4,7 @@
   "description": "Pop it arcade",
   "display": "fullscreen",
   "start_url": "/",
+  "background_color": "#040404",
   "icons": [{
     "src": "media/icons/favicon.svg",
     "sizes": "any"
