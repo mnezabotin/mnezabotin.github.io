@@ -69,14 +69,20 @@ const sounds = [
 ]
 
 document.title = 'Yo last Pop it'
+document.body.oncontextmenu = () => false
 
 const initApp = async () => {
+  const mode = import.meta.env.MODE
   let sdk: Sdk
 
-  if (import.meta.env.MODE === 'yandex') {
+  if (mode === 'yandex') {
     sdk = await useYaSdk()
   } else {
     sdk = useSdk()
+  }
+
+  if ('serviceWorker' in navigator && mode !== 'development') {
+    navigator.serviceWorker.register('./sw.js', { scope: './' })
   }
 
   initWebcore(routes, sounds, sdk)
