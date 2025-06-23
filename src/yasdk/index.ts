@@ -24,12 +24,17 @@ export const useYaSdk = async (): Promise<Sdk> => new Promise((resolve) => {
     // ysdk?.adv?.showBannerAdv()
   }
 
+  const showBannerAdv = () => {
+    ysdk?.adv?.showBannerAdv()
+  }
+
   const result = () => {
     resolve({
       ready,
       showFullscreenAdv,
       gameplayStart,
       gameplayStop,
+      showBannerAdv,
     })
   }
 

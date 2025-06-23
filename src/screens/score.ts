@@ -4,7 +4,7 @@ import { intersectArc, intersectRect } from '@/webcore/intersect'
 import type { Render } from '@/webcore/types'
 
 export const Score = (): Render => {
-  const { addEventResize, rand } = useWebcore()
+  const { addEventResize, rand, sdk } = useWebcore()
 
   const { popEffect, render: renderPopEffects } = usePopEffect()
   // '#92E6E6', '#5bb2f7'
@@ -12,6 +12,8 @@ export const Score = (): Render => {
   const color = palette[rand(palette.length - 1)]
 
   const { render: fond, setIntersections } = useFond({ color, frequency: 10 })
+
+  sdk.showBannerAdv()
 
   const {
     render: progress,

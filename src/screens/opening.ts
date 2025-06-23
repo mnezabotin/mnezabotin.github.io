@@ -60,19 +60,21 @@ export const Opening = (): Render => {
     })
 
     nezabotin = TextCircle({
-      text: 'nezabotin',
+      text: lang.nezabotin,
       x: cx,
       y: cy,
       r: Math.round(r * 1.1),
       s: Math.PI * 1.6,
+      f: 'PressStart2P'
     })
 
     production = TextCircle({
-      text: 'production',
+      text: lang.production,
       x: cx,
       y: cy,
       r: Math.round(r * 1.1),
       s: Math.PI * 2.6,
+      f: 'PressStart2P'
     })
 
     tapcontinue = Text({

@@ -208,6 +208,9 @@ export const useGameplay = ({
 
   addEventResize(() => {
     useTimer(() => {
+      rounds = 0
+      score = 0
+
       splashEffect('Pop it')
       onRound()
     })

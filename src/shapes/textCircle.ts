@@ -8,6 +8,7 @@ export type Props = {
   r: number
   s?: number
   fs?: number
+  f?: string
   c?: string
 }
 
@@ -16,7 +17,7 @@ export const TextCircle = (props: Props): Render => {
 
   const text = props.text
   const textLen = props.text.length
-  const numRadsPerLetter = 2 * Math.PI / textLen / 4
+  const numRadsPerLetter = 1.2 * Math.PI / textLen / 2
 
   return (ctx = mainCtx) => {
     const {
@@ -25,13 +26,14 @@ export const TextCircle = (props: Props): Render => {
       r,
       s = 0,
       fs,
+      f,
     } = props
 
     
     const fontSize = fs || Math.round(r / 4);
     ctx.textAlign = 'center';
     ctx.fillStyle = '#f9f9f9';
-    ctx.font = `${fontSize}px ${font}`;
+    ctx.font = `${fontSize}px ${f || font}`;
 
     ctx.save();
     ctx.translate(x, y);

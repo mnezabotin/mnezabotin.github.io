@@ -84,6 +84,7 @@ export type Sdk = {
   ready: () => void
   gameplayStart: () => void
   gameplayStop: () => void
+  showBannerAdv: () => void
 }
 
 export type Webcore = {

@@ -2,6 +2,7 @@ import { useBackButton, useGradient, usePopEffect } from '@/hooks'
 import { useWebcore } from '@/webcore'
 import { Text } from '@/shapes/text'
 import type { Render } from '@/webcore/types'
+import { useLang } from '@/lang'
 
 type Obj = {
   img: HTMLCanvasElement
@@ -27,27 +28,11 @@ export const Devs = (): Render => {
   let backRender: Render | null = null
 
   const palette = useGradient(true)
+  const lang = useLang()
 
   let objs: Obj[] = []
 
-  const positions = [
-    'Director',
-    'Producer',
-    'Author',
-    'Developer',
-    'Lead',
-    'PM',
-    'Product',
-    'Analyst',
-    'Designer',
-    'QA',
-    'Animator',
-    // 'Kitchener',
-    // 'Cleaner',
-    // 'Psychologist',
-    'Motivator',
-    'Mentor'
-  ]
+  const positions = lang.positions
   let start = 0
 
   let isFontLoaded = false
@@ -66,7 +51,7 @@ export const Devs = (): Render => {
     let fs = Math.round(m * 7)
 
     const yola = Text({
-      text: 'Yo last',
+      text: 'Yola',
       c: '#f1f1f1',
       x: w / 2,
       y: fs,
@@ -74,7 +59,7 @@ export const Devs = (): Render => {
     })
 
     const popit = Text({
-      text: 'Pop it',
+      text: 'PopiT',
       c: '#ffeb3b',
       x: w / 2,
       y: fs * 2,
@@ -113,10 +98,10 @@ export const Devs = (): Render => {
         // fs: s * 0.25 / 7,
         mw: w,
         a: 'left',
-        // f: 'PressStart2P'
+        f: 'PressStart2P'
       })
       const employee = Text({
-        text: 'Maxim Nezabotin',
+        text: lang.dev,
         x: w,
         y: fs * 1.9,
         c: '#f9f9f9',
