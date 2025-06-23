@@ -10,6 +10,7 @@ export type Props = {
   fs?: number
   f?: string
   c?: string
+  l?: number
 }
 
 export const TextCircle = (props: Props): Render => {
@@ -17,7 +18,8 @@ export const TextCircle = (props: Props): Render => {
 
   const text = props.text
   const textLen = props.text.length
-  const numRadsPerLetter = 1.2 * Math.PI / textLen / 2
+  const l = props.l || 1
+  const numRadsPerLetter = l * Math.PI / textLen / 2
 
   return (ctx = mainCtx) => {
     const {

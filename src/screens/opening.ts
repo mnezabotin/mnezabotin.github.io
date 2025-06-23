@@ -65,7 +65,8 @@ export const Opening = (): Render => {
       y: cy,
       r: Math.round(r * 1.1),
       s: Math.PI * 1.6,
-      f: 'PressStart2P'
+      f: 'PressStart2P',
+      l: 1.2
     })
 
     production = TextCircle({
@@ -74,7 +75,8 @@ export const Opening = (): Render => {
       y: cy,
       r: Math.round(r * 1.1),
       s: Math.PI * 2.6,
-      f: 'PressStart2P'
+      f: 'PressStart2P',
+      l: 1.7
     })
 
     tapcontinue = Text({
