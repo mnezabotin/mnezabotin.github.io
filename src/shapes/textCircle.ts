@@ -32,7 +32,7 @@ export const TextCircle = (props: Props): Render => {
     } = props
 
     
-    const fontSize = fs || Math.round(r / 4);
+    const fontSize = fs || Math.round(r / 7);
     ctx.textAlign = 'center';
     ctx.fillStyle = '#f9f9f9';
     ctx.font = `${fontSize}px ${f || font}`;

@@ -32,6 +32,7 @@ export const Opening = (): Render => {
   let nezabotin: Render
   let production: Render
   let tapcontinue: Render
+  let empty: Render
 
   let tic = -0.2
   let rAnglText = 0
@@ -76,7 +77,7 @@ export const Opening = (): Render => {
       r: Math.round(r * 1.1),
       s: Math.PI * 2.6,
       f: 'PressStart2P',
-      l: 1.7
+      l: 1.4
     })
 
     tapcontinue = Text({
@@ -87,6 +88,14 @@ export const Opening = (): Render => {
       fs: Math.round(r / 10),
       mw: s,
       f: 'PressStart2P'
+    })
+
+    empty = Text({
+      text: 'a',
+      c: '#fff',
+      y: - innerHeight,
+      x: -innerWidth,
+      fs: 0.00001,
     })
   })
 
@@ -136,6 +145,8 @@ export const Opening = (): Render => {
     const { cx, cy } = useMeasure()
 
     ctx.globalAlpha = isFontLoaded ? 1 : 0
+
+    empty()
 
     popit()
     
