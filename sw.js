@@ -81,6 +81,10 @@ self.addEventListener('install', (event) => {
         './index.html',
         './manifest.json',
         './styles.css',
+
+        './js/gl-matrix-min.js',
+        './js/litegl.min.js',
+        './js/Canvas2DtoWebGL.js',
         './sw.js',
       ])
     )
