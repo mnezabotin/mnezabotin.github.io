@@ -1,4 +1,4 @@
-import { Props as PptProps } from '@/shapes/popit'
+import { Props as PptProps } from '@/shapes/removepopit'
 import { useWebcore } from '@/webcore'
 import { Render } from '@/webcore/types'
 import { useSoundEffect } from './useSoundEffect'

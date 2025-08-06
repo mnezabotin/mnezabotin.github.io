@@ -1,4 +1,4 @@
-import { useFond, useLogoButton, usePlayButton, usePopEffect, useScoreButton, useSoundButton } from '@/hooks'
+import { useFond, useLogoButton, usePlayButton, usePopEffect, useScoreButton, useSoundButton } from '@/wremovehooks'
 import { useWebcore } from '@/webcore'
 import { intersectArc } from '@/webcore/intersect'
 import type { Render } from '@/webcore/types'

@@ -1,4 +1,4 @@
-import { useBackButton, useGradient, usePopEffect } from '@/hooks'
+import { useBackButton, useGradient, usePopEffect } from '@/wremovehooks'
 import { useWebcore } from '@/webcore'
 import { Text } from '@/shapes/text'
 import type { Render } from '@/webcore/types'

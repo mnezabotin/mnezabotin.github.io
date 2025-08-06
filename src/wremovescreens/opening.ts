@@ -1,4 +1,4 @@
-import { Popit, type Props as PopitProps } from '@/shapes/popit'
+import { Popit, type Props as PopitProps } from '@/shapes/removepopit'
 import { Img } from '@/shapes/img'
 import { TextCircle } from '@/shapes/textCircle'
 import { Text } from '@/shapes/text'
@@ -11,7 +11,7 @@ export const Opening = (): Render => {
     ctx,
     loop,
     rotate,
-    navigate,
+    // navigate,
     useMeasure,
     addEventClick,
     addEventResize,
@@ -110,7 +110,7 @@ export const Opening = (): Render => {
     }
 
     if (tic >= 2.6) {
-      navigate('main')
+      // navigate('main')
     }
   }
 

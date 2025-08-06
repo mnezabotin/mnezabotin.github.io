@@ -1,3 +1,4 @@
+import { Application } from 'pixi.js'
 import { useStage } from '@/webcore/stage'
 import { useRouter } from '@/webcore/router'
 import { useInterval } from '@/webcore/interval'
@@ -15,14 +16,18 @@ import type {
 
 let webcore: Webcore
 
-export const initWebcore = (routes: Route[], sounds: string[] = [], sdk: Sdk) => {
+export const initWebcore = async (routes: Route[], sounds: string[] = [], sdk: Sdk) => {
   if (webcore) {
     throw new Error('Webcore already specified')
   }
 
-  const stage = useStage()
+  const core = new Application()
+  await core.init({ background: '#040404', resizeTo: window, antialias: true })
+  document.body.appendChild(core.canvas)
 
-  const router = useRouter(routes)
+  const { shade, clearStage } = useStage(core.stage)
+
+  const router = useRouter(routes, clearStage)
 
   const { loop, stop, stopAll } = useInterval()
 
@@ -48,34 +53,28 @@ export const initWebcore = (routes: Route[], sounds: string[] = [], sdk: Sdk) =>
     ) / 144
   )
   let isLandscape = innerWidth > innerHeight
+  let w = innerWidth
+  let h = innerHeight
 
-  const useMeasure = () => ({ cx, cy, s, m, isL: isLandscape })
+  const useMeasure = () => ({ w, h, cx, cy, s, m, isL: isLandscape })
 
   const playSound = useSound(sounds)
 
   webcore = {
     font: 'Tijuf',
     sdk,
+    core,
 
-    ctx: stage.ctx,
-    shade: stage.shade,
-    rotate: stage.rotate,
-    translate: stage.translate,
-    setBackground: stage.setBackground,
-    createImg: stage.createImg,
+    shade,
 
     useMeasure,
 
     useScreenMeta: router.useScreenMeta,
-    navigate: (name?: string, data?: any) => {
-      if (!routes.some(r => r.name === name)) {
-        throw new Error(`Screen ${name} not specified`)
-      }
-
+    navigate: (name?: string | string[], data?: any) => {
       stopAll()
       stopTimers()
       removeAllEvents()
-      new Promise(() => router.navigate(name, data))
+      setTimeout(() => router.navigate(name, data))
     },
 
     loop,
@@ -94,7 +93,7 @@ export const initWebcore = (routes: Route[], sounds: string[] = [], sdk: Sdk) =>
     playSound,
   }
 
-  loop(() => stage.render(router.render), 'draw')
+  // loop(() => stage.render(router.render), 'draw')
 
   window.onresize = () => {
     cx = innerWidth / 2
@@ -106,8 +105,10 @@ export const initWebcore = (routes: Route[], sounds: string[] = [], sdk: Sdk) =>
       ) / 144
     )
     isLandscape = innerWidth > innerHeight
+    w = innerWidth
+    h = innerHeight
 
-    stage.resize()
+    clearStage()
     onResizeEvents()
   }
 

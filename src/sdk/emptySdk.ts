@@ -1,6 +1,6 @@
-import { Sdk } from './types'
+import type { Sdk } from '@/webcore/types'
 
-export const useSdk = (): Sdk => ({
+export const useEmptySdk = (): Sdk => ({
   ready: () => {},
   showFullscreenAdv: () => {},
   gameplayStart: () => {},

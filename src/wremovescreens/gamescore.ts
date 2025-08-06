@@ -7,7 +7,7 @@ import {
   usePopEffect,
   useSoundEffect,
   useWinText,
-} from "@/hooks"
+} from "@/wremovehooks"
 import { useLang } from "@/lang"
 import { useWebcore } from "@/webcore"
 import { Render } from "@/webcore/types"

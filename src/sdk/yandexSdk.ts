@@ -2,7 +2,7 @@ import { setLang } from '@/lang';
 import { Sdk } from '@/webcore/types'
 import type { SDK as YaSDK } from 'ysdk'
 
-export const useYaSdk = async (): Promise<Sdk> => new Promise((resolve) => {
+export const useYandexSdk = async (): Promise<Sdk> => new Promise((resolve) => {
   let ysdk: YaSDK | null = null
 
   const ready = () => {
@@ -21,7 +21,7 @@ export const useYaSdk = async (): Promise<Sdk> => new Promise((resolve) => {
 
   const gameplayStop = () => {
     ysdk?.features?.GameplayAPI?.stop()
-    // ysdk?.adv?.showBannerAdv()
+    ysdk?.adv?.showFullscreenAdv()
   }
 
   const showBannerAdv = () => {

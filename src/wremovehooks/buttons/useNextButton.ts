@@ -1,5 +1,5 @@
 import { Img } from '@/shapes/img'
-import { Popit, Props as PopitProps } from '@/shapes/popit'
+import { Popit, Props as PopitProps } from '@/shapes/removepopit'
 import { useWebcore } from '@/webcore'
 import { Point, Render } from '@/webcore/types'
 import { useSoundEffect } from '../effects/useSoundEffect'
@@ -14,7 +14,7 @@ type Props = {
   popEffect?: (p: PopitProps, wr?: boolean, s?: boolean) => void
 }
 
-export const usePrevButton = ({ onClick, popEffect = () => {} }: Props): Back => {
+export const useNextButton = ({ onClick, popEffect = () => {} }: Props): Back => {
   const {
     addEventResize,
     useMeasure,
@@ -31,23 +31,15 @@ export const usePrevButton = ({ onClick, popEffect = () => {} }: Props): Back =>
   let back: Render
 
   addEventResize(() => {
-    const { s, isL } = useMeasure()
+    const { s } = useMeasure()
 
     const r = Math.round(s * 0.08)
-
-    const x = !isL
-      ? Math.round(innerWidth - 1.6 * r - 2 * r - 0.3 * r)
-      : Math.round(innerWidth - 1.6 * r)
-    
-    const y = !isL
-      ? Math.round(innerHeight - 1.6 * r)
-      : Math.round(innerHeight - 1.6 * r - 2 * r - 0.3 * r)
 
     props = {
       c: '#ff6347',
       r,
-      x,
-      y,
+      x: Math.round(innerWidth - 1.6 * r),
+      y: Math.round(innerHeight - 1.6 * r),
       p: false
     }
 
@@ -83,7 +75,7 @@ export const usePrevButton = ({ onClick, popEffect = () => {} }: Props): Back =>
     if (!props.p) {
       rotate(() => {
         back()
-      }, props.x, props.y, innerHeight > innerWidth ? 0 : 0.5)
+      }, props.x, props.y, innerHeight > innerWidth ? -1 : -0.5)
     }
   }
 

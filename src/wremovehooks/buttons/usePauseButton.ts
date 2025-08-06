@@ -1,5 +1,5 @@
 import { Pause } from '@/shapes/pause'
-import { Popit, Props as PopitProps } from '@/shapes/popit'
+import { Popit, Props as PopitProps } from '@/shapes/removepopit'
 import { useWebcore } from '@/webcore'
 import { Point, Render } from '@/webcore/types'
 

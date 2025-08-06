@@ -1,4 +1,4 @@
-import { Popit, type Props as PopitProps } from '@/shapes/popit'
+import { Popit, type Props as PopitProps } from '@/shapes/removepopit'
 import { Text } from '@/shapes/text'
 import { useWebcore } from '@/webcore'
 import { Point, Render } from '@/webcore/types'

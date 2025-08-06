@@ -1,4 +1,4 @@
-import { usePopEffect, usePopits, useStorage, useSoundEffect } from '@/hooks'
+import { usePopEffect, usePopits, useStorage, useSoundEffect } from '@/wremovehooks'
 import { useWebcore } from '@/webcore'
 import { Render } from '@/webcore/types'
 

@@ -1,5 +1,5 @@
 import { useWebcore } from '@/webcore'
-import { Props as PptProps } from '@/shapes/popit'
+import { Props as PptProps } from '@/shapes/removepopit'
 import type { Render } from '@/webcore/types'
 
 const COUNT_PX = 100

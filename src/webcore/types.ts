@@ -1,3 +1,5 @@
+import { Application } from 'pixi.js'
+
 export type Interval = {
   loop: (func: Function, key?: string) => void
   stop: (key: string | Function) => void
@@ -35,32 +37,24 @@ export type Rectangle = {
 }
 
 export type Stage = {
-  ctx: CanvasRenderingContext2D
-  render: (draw: Render) => void
-  resize: Function
-
   shade: (color: string, percent: number) => string
-  rotate: (draw: Render, x: number, y: number, angle: number) => void
-  translate: (draw: Render, x: number, y: number) => void
-  setBackground: (color: string, pureColor?: string) => void
-  createImg: (draw: Render, w: number, h?: number) => HTMLCanvasElement
+  clearStage: Function
 }
 
 export type Route = {
   name: string
-  ctor: () => Render
+  ctor: () => void
   meta?: object
 }
 
 export type ScreenMeta = {
-  from: string
-  to: string
+  from: string[]
+  to: string[]
   data: any
 }
 
 export type Router = {
-  render: Render
-  navigate: (name?: string, data?: any) => void
+  navigate: (name?: string | string[], data?: any) => void
   useScreenMeta: () => ScreenMeta
 }
 
@@ -88,12 +82,7 @@ export type Sdk = {
 }
 
 export type Webcore = {
-  ctx: CanvasRenderingContext2D
   shade: Stage['shade']
-  rotate: Stage['rotate']
-  translate: Stage['translate']
-  setBackground: Stage['setBackground']
-  createImg: Stage['createImg']
 
   useMeasure: () => {
     cx: number
@@ -123,4 +112,5 @@ export type Webcore = {
 
   font: string
   sdk: Sdk
+  core: Application
 }

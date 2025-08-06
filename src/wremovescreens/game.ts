@@ -1,4 +1,4 @@
-import { usePopits, useGradient, useGameplay, usePopEffect } from '@/hooks'
+import { usePopits, useGradient, useGameplay, usePopEffect } from '@/wremovehooks'
 import { useWebcore } from '@/webcore'
 import type { Render } from '@/webcore/types'
 

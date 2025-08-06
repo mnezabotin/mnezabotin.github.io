@@ -1,4 +1,4 @@
-import { useBackButton, useFond, useScore, useNextButton, usePrevButton, usePopEffect } from '@/hooks'
+import { useBackButton, useFond, useScore, useNextButton, usePrevButton, usePopEffect } from '@/wremovehooks'
 import { useWebcore } from '@/webcore'
 import { intersectArc, intersectRect } from '@/webcore/intersect'
 import type { Render } from '@/webcore/types'
