@@ -3,10 +3,6 @@
   src: local('Tijuf'), url('./fonts/Tijuf.otf') format('opentype'); }
 
 @font-face {
-  font-family: 'Slackey';
-  src: local('Slackey'), url('./fonts/Slackey.ttf'); }
-
-@font-face {
   font-family: 'PressStart2P';
   src: local('PressStart2P'), url('./fonts/PressStart2P.ttf'); }
 

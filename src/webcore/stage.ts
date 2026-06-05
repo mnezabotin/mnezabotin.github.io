@@ -1,7 +1,7 @@
-import { Container } from 'pixi.js'
+import { Application, Color } from 'pixi.js'
 import { Stage } from './types'
 
-export const useStage = (stage: Container): Stage => {
+export const useStage = (core: Application): Stage => {
   const shade = (color: string, percent: number): string => {
     color = color.substring(1)
     const num = parseInt(color, 16),
@@ -14,13 +14,24 @@ export const useStage = (stage: Container): Stage => {
   }
 
   const clearStage = () => {
-    while (stage.children.length > 0) {
-      stage.removeChild(stage.getChildAt(0))
+    while (core.stage.children.length > 0) {
+      core.stage.removeChild(core.stage.getChildAt(0))
+    }
+  }
+
+  const setBackground = (color: string, pureColor?: string) => {
+    core.renderer.background.color = new Color(color)
+    // document.body.style.background = color
+    if (pureColor) {
+      document.body.style.backgroundColor = pureColor
+      document.querySelector('meta[name="theme-color"]')
+        ?.setAttribute('content', pureColor)
     }
   }
 
   return {
     shade,
     clearStage,
+    setBackground,
   }
 }

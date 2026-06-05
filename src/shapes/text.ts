@@ -1,35 +1,41 @@
+import {
+  Container,
+  Color,
+  BitmapText,
+  TextStyleAlign,
+} from 'pixi.js'
 import { useWebcore } from '@/webcore'
-import { Render } from '@/webcore/types'
 
 export type Props = {
   text: string
   c: string
   x: number
   y: number
-  a?: CanvasTextAlign
+  a?: TextStyleAlign
   fs: number
-  mw?: number
+  w?: number
   f?: string
 }
 
-export const Text = (props: Props): Render => {
-  const { font, ctx: mainCtx } = useWebcore()
+export const Text = (props: Props): Container => {
+  const { core, font } = useWebcore()
+  const container = new Container()
 
-  return (ctx = mainCtx) => {
-    const {
-      text,
-      x,
-      c,
-      y,
-      fs,
-      a = 'center',
-      mw,
-      f
-    } = props
+  const text = new BitmapText({
+    text: props.text,
+    style: {
+      fontFamily: props.f || font,
+      fontSize: props.fs,
+      fill: new  Color(props.c),
+      align: props.a || 'center',
+    }
+  })
 
-    ctx.textAlign = a
-    ctx.fillStyle = c
-    ctx.font = `${fs}px ${f || font}`
-    ctx.fillText(text, x, y, mw)
-  }
+  container.x = props.x - text.width / 2
+  container.y = props.y
+
+  container.addChild(text)
+  core.stage.addChild(container)
+
+  return container
 }

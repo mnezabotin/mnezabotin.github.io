@@ -1,8 +1,7 @@
 import { Application } from 'pixi.js'
 
 export type Interval = {
-  loop: (func: Function, key?: string) => void
-  stop: (key: string | Function) => void
+  useLoop: (func: Function, minFPS?: number, maxFPS?: number) => void
   stopAll: Function
 }
 
@@ -39,6 +38,7 @@ export type Rectangle = {
 export type Stage = {
   shade: (color: string, percent: number) => string
   clearStage: Function
+  setBackground: (color: string, pureColor?: string) => void
 }
 
 export type Route = {
@@ -83,6 +83,7 @@ export type Sdk = {
 
 export type Webcore = {
   shade: Stage['shade']
+  setBackground: Stage['setBackground']
 
   useMeasure: () => {
     cx: number
@@ -95,8 +96,7 @@ export type Webcore = {
   navigate: Router['navigate']
   useScreenMeta: Router['useScreenMeta'] 
 
-  loop: Interval['loop']
-  loopStop: Interval['stop']
+  useLoop: Interval['useLoop']
   useTimer: (callback: Function, delay?: number) => Timer
 
   rand: Random

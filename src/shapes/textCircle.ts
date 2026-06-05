@@ -13,7 +13,7 @@ export type Props = {
   l?: number
 }
 
-export const TextCircle = (props: Props): Render => {
+/*export const TextCircle = (props: Props): Render => {
   const { font, ctx: mainCtx } = useWebcore()
 
   const text = props.text
@@ -49,4 +49,39 @@ export const TextCircle = (props: Props): Render => {
     }
     ctx.restore();
   }
+}*/
+
+
+/*
+const container = new PIXI.Container();
+app.stage.addChild(container);
+
+const textStyle = new PIXI.TextStyle({
+    fontSize: 24,
+    fill: 0xFFFFFF,
+});
+
+const characterSpacing = 10; // Adjust for spacing between characters
+let currentAngle = 0;
+
+for (let i = 0; i < textString.length; i++) {
+    const char = textString[i];
+    const charText = new PIXI.Text(char, textStyle);
+    charText.anchor.set(0.5); // Center the anchor for rotation
+
+    // Calculate position on the circle
+    const x = circleX + circleRadius * Math.cos(currentAngle);
+    const y = circleY + circleRadius * Math.sin(currentAngle);
+
+    charText.x = x;
+    charText.y = y;
+
+    // Calculate rotation to align with the tangent
+    charText.rotation = currentAngle + Math.PI / 2; // Add PI/2 to point "outwards"
+
+    container.addChild(charText);
+
+    // Increment angle based on character width and desired spacing
+    currentAngle += (charText.width + characterSpacing) / circleRadius;
 }
+*/

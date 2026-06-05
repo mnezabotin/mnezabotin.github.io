@@ -1,3 +1,5 @@
+import { Assets } from 'pixi.js'
+
 import { routes } from '@/routes'
 import { sounds } from '@/hooks'
 import { useSdk } from '@/sdk'
@@ -14,6 +16,11 @@ const initApp = async () => {
   ) {
     navigator.serviceWorker.register('./sw.js', { scope: './' })
   }
+
+  await Assets.load([
+    './fonts/PressStart2P.ttf',
+    './fonts/Tijuf.otf',
+  ])
 
   const sdk = await useSdk()
 

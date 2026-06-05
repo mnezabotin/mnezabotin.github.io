@@ -1,38 +1,27 @@
 import { useWebcore } from '@/webcore'
-import type { Render } from '@/webcore/types'
-
-const IMAGES: Record<string, HTMLImageElement> = {}
+import { Assets, Container, Sprite } from 'pixi.js'
 
 export type Props = {
-  x?: number
-  y?: number
+  x: number
+  y: number
   w: number
   h?: number
   src: string
 }
 
-export const Img = (props: Props): Render => {
-  const { ctx: mainCtx } = useWebcore()
+export const Img = (props: Props): Container => {
+  const { core } = useWebcore()
+  const container = new Container()
 
-  let img: HTMLImageElement
-  if (IMAGES[props.src]) {
-    img = IMAGES[props.src]
-  } else {
-    img = new Image
-    img.src = props.src
-    IMAGES[props.src] = img
-  }
+  Assets.load(props.src).then((texture) => {
+    const sprite = new Sprite(texture)
+    container.x = props.x
+    container.y = props.y
+    sprite.width = props.w
+    sprite.height = props.h || props.w
+    container.addChild(sprite)
+  })
+  core.stage.addChild(container)
 
-  return (ctx = mainCtx) => {
-    const {
-      w,
-      h = w,
-      x = 0,
-      y = 0,
-    } = props
-
-    if (img.complete) {
-      ctx.drawImage(img, x, y, w, h)
-    }
-  }
+  return container
 }

@@ -41,14 +41,13 @@ export const Popit = (props: Props): Container => {
     { offset: 0, color: shade(c, 18) },
   ]
 
-  // (r, r, r, r, r, r / 5)
   const container = new Container()
   container.x = x - r
   container.y = y - r
   const gradient = new FillGradient({
     type: 'radial',
     center: { x: 0.5, y: 0.5 },
-    innerRadius: 0.12,
+    innerRadius: 0.1,
     outerCenter: { x: 0.5, y: 0.5 },
     outerRadius: 0.5,
     colorStops: [

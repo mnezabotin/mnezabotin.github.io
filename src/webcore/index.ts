@@ -1,7 +1,7 @@
 import { Application } from 'pixi.js'
 import { useStage } from '@/webcore/stage'
 import { useRouter } from '@/webcore/router'
-import { useInterval } from '@/webcore/interval'
+import { useTicker } from '@/webcore/ticker'
 import { stopTimers, useTimer } from '@/webcore/timer'
 import { rand, useRandChain } from '@/webcore/random'
 import { useEvent } from '@/webcore/event'
@@ -25,11 +25,11 @@ export const initWebcore = async (routes: Route[], sounds: string[] = [], sdk: S
   await core.init({ background: '#040404', resizeTo: window, antialias: true })
   document.body.appendChild(core.canvas)
 
-  const { shade, clearStage } = useStage(core.stage)
+  const { shade, clearStage, setBackground } = useStage(core)
 
   const router = useRouter(routes, clearStage)
 
-  const { loop, stop, stopAll } = useInterval()
+  const { useLoop, stopAll } = useTicker()
 
   const {
     addEventResize,
@@ -61,11 +61,12 @@ export const initWebcore = async (routes: Route[], sounds: string[] = [], sdk: S
   const playSound = useSound(sounds)
 
   webcore = {
-    font: 'Tijuf',
+    font: 'PressStart2P',
     sdk,
     core,
 
     shade,
+    setBackground,
 
     useMeasure,
 
@@ -77,8 +78,7 @@ export const initWebcore = async (routes: Route[], sounds: string[] = [], sdk: S
       setTimeout(() => router.navigate(name, data))
     },
 
-    loop,
-    loopStop: stop,
+    useLoop,
     useTimer,
 
     rand,
@@ -92,8 +92,6 @@ export const initWebcore = async (routes: Route[], sounds: string[] = [], sdk: S
 
     playSound,
   }
-
-  // loop(() => stage.render(router.render), 'draw')
 
   window.onresize = () => {
     cx = innerWidth / 2
