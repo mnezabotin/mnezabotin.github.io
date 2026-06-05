@@ -3,6 +3,7 @@ const APP_KEY = 'ylp'
 const SCORE_KEY = 'score'
 const DIFFICULTY_LVL_KEY = 'difficulty'
 const SOUND_KEY = 'sound'
+const BABY_KEY = 'baby'
 
 const DIFFICULTY_PPT_RAD = [0.14, 0.11, 0.09, 0.075]
 
@@ -16,6 +17,7 @@ for (let i = 0; i * TIC_STEP <= TIC_MAX - TIC_MIN; i++) {
 }
 
 let isSoundOn: boolean | null = null
+let isBaby: boolean | null = null
 
 type Storage = {
   getScore: () => number
@@ -31,6 +33,9 @@ type Storage = {
 
   getSound: () => boolean
   setSound: (value: boolean) => void
+
+  getBaby: () => boolean
+  setBaby: (value: boolean) => void
 }
 
 export const useStorage = (): Storage => {
@@ -106,7 +111,30 @@ export const useStorage = (): Storage => {
     setValue(SOUND_KEY, state)
   }
 
+  const getBaby = (): boolean => {
+    if (isBaby !== null) {
+      return isBaby
+    }
+
+    const value = getValue(BABY_KEY)
+    if (value && value === 'true') {
+      isBaby = true
+      return true
+    } else {
+      isBaby = false
+      return false
+    }
+  }
+
+  const setBaby = (state: boolean) => {
+    isBaby = state
+    setValue(BABY_KEY, state)
+  }
+
   return {
+    getBaby,
+    setBaby,
+
     getScore,
     addScore,
 

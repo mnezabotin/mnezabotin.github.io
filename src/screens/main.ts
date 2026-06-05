@@ -1,4 +1,4 @@
-import { useFond, useLogoButton, usePlayButton, usePopEffect, useScoreButton, useSoundButton } from '@/hooks'
+import { useBabyButton, useFond, useLogoButton, usePlayButton, usePopEffect, useScoreButton, useSoundButton } from '@/hooks'
 import { useWebcore } from '@/webcore'
 import { intersectArc } from '@/webcore/intersect'
 import type { Render } from '@/webcore/types'
@@ -26,18 +26,21 @@ export const Main = (): Render => {
   const { render: play, point: usePlayPoint } = usePlayButton({ popEffect })
   const { render: score, point: useScorePoint } = useScoreButton({ popEffect })
   const { render: sound, point: useSoundPoint } = useSoundButton({ popEffect })
+  const { render: baby, point: useBabyPoint } = useBabyButton({ popEffect });
 
   addEventResize(() => {
     const scorePoint = useScorePoint()
     const logoPoint = useLogoPoint()
     const playPoint = usePlayPoint()
     const soundPoint = useSoundPoint()
+    const babyPoint = useBabyPoint()
 
     setIntersections((x, y, r) =>
       !intersectArc({ x, y, r }, scorePoint) &&
       !intersectArc({ x, y, r }, logoPoint) &&
       !intersectArc({ x, y, r }, playPoint) &&
-      !intersectArc({ x, y, r }, soundPoint)
+      !intersectArc({ x, y, r }, soundPoint) &&
+      !intersectArc({ x, y, r}, babyPoint)
     )
   })
 
@@ -48,5 +51,6 @@ export const Main = (): Render => {
     play()
     score()
     sound()
+    baby()
   }
 }

@@ -30,7 +30,10 @@ export const useGameplay = ({
     getScore,
     addScore,
     getDifficultyTic,
+    getBaby,
   } = useStorage()
+
+  let babyOn = getBaby()
 
   let activePpts: PopitProps[] = []
 
@@ -52,12 +55,16 @@ export const useGameplay = ({
   const tickDelay = getDifficultyTic()
 
   const comboScore = () => {
-    if (startRound && roundPopits && score && !missClick) {
+    if (startRound && roundPopits && score && !missClick && !babyOn) {
       const now = new Date()
       const diff = now.getTime() - startRound.getTime()
       if (diff <= roundPopits * 350) {
         score = score * 2
       }
+    }
+
+    if (babyOn) {
+      score = score * 200;
     }
 
     startRound = new Date()
@@ -122,6 +129,10 @@ export const useGameplay = ({
       pptsBox.splice(index, 1)
     }
 
+    if (babyOn) {
+      return;
+    }
+
     addTic = tickDelay
     goTimer?.stop()
     fillTimer?.stop()
@@ -133,7 +144,7 @@ export const useGameplay = ({
       }, activePpts.length * tickDelay)
     }
 
-    rounds = rounds > 0 ? rounds : rand(3, 5)
+    rounds = rounds > 0 ? rounds : (babyOn ? 1 : rand(3, 5))
     comboScore()
   }
 
@@ -182,7 +193,7 @@ export const useGameplay = ({
       return
     }
 
-    if (!isMove) {
+    if (!isMove && !babyOn) {
       for (const popit of popits) {
         if (intersect({ x, y }, popit)) {
           popEffect(popit, true)
@@ -197,9 +208,11 @@ export const useGameplay = ({
         }
       }
 
-      splashEffect('Popenalty')
-      missClick = true
-      addActivePopit()
+      if (!babyOn) {
+        splashEffect('Popenalty')
+        missClick = true
+        addActivePopit()
+      }
     }
   }
 

@@ -45,6 +45,8 @@ self.addEventListener('install', (event) => {
         './media/cursor.svg',
         './media/sloth.svg',
         './media/star.svg',
+        './media/baby.svg',
+        './media/babyoff.svg',
 
         './sounds/pop/pop1.mp3',
         './sounds/pop/pop2.mp3',
